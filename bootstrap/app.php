@@ -196,8 +196,8 @@ $router->get('/reels', [\App\Controllers\HomeController::class, 'reels']);
 // -----------------------------------------------------------------------------
 $router->get('/lounge', [\App\Controllers\LoungeController::class, 'index'], ['auth']);
 $router->post('/lounge/store', [\App\Controllers\LoungeController::class, 'store'], ['auth']);
-$router->post('/lounge/{id}/like', [\App\Controllers\LoungeController::class, 'like'], ['no-csrf']);
-$router->post('/lounge/{id}/react', [\App\Controllers\LoungeController::class, 'react'], ['no-csrf']);
+$router->post('/lounge/{id}/like', [\App\Controllers\LoungeController::class, 'like'], ['auth']);
+$router->post('/lounge/{id}/react', [\App\Controllers\LoungeController::class, 'react'], ['auth']);
 $router->post('/lounge/{id}/comments', [\App\Controllers\LoungeController::class, 'storeComment'], ['auth']);
 $router->get('/lounge/preview-link', [\App\Controllers\LoungeController::class, 'previewLink'], ['auth']);
 
@@ -206,9 +206,9 @@ $router->get('/lounge/preview-link', [\App\Controllers\LoungeController::class, 
 // -----------------------------------------------------------------------------
 $router->get('/api/search', [\App\Controllers\ApiController::class, 'search']);
 $router->get('/api/projects/{id}/preview', [\App\Controllers\ProjectController::class, 'previewApi'], ['auth']);
-$router->post('/api/projects/{id}/copilot', [\App\Controllers\ProjectController::class, 'copilotApi'], ['auth', 'no-csrf']);
+$router->post('/api/projects/{id}/copilot', [\App\Controllers\ProjectController::class, 'copilotApi'], ['auth']);
 $router->get('/api/link-preview', [\App\Controllers\LinkPreviewController::class, 'preview'], ['auth']);
-$router->post('/api/bot', [\App\Controllers\ApiController::class, 'bot'], ['no-csrf']);
+$router->post('/api/bot', [\App\Controllers\ApiController::class, 'bot']);
 
 // -----------------------------------------------------------------------------
 // Bitrix24 Suite: Chat Directo 1 a 1, Interconexión/Llamadas y Notificaciones
@@ -216,11 +216,11 @@ $router->post('/api/bot', [\App\Controllers\ApiController::class, 'bot'], ['no-c
 $router->get('/chat', [\App\Controllers\ChatController::class, 'index'], ['auth']);
 $router->get('/online', [\App\Controllers\ChatController::class, 'index'], ['auth']);
 $router->get('/api/chat/conversation', [\App\Controllers\ChatController::class, 'conversation'], ['auth']);
-$router->post('/api/chat/send', [\App\Controllers\ChatController::class, 'send'], ['auth', 'no-csrf']);
-$router->post('/api/chat/request-call', [\App\Controllers\ChatController::class, 'requestCall'], ['auth', 'no-csrf']);
+$router->post('/api/chat/send', [\App\Controllers\ChatController::class, 'send'], ['auth']);
+$router->post('/api/chat/request-call', [\App\Controllers\ChatController::class, 'requestCall'], ['auth']);
 $router->get('/api/chat/stream', [\App\Controllers\ChatController::class, 'stream'], ['auth']);
 $router->get('/api/notifications', [\App\Controllers\ChatController::class, 'notifications'], ['auth']);
-$router->post('/api/notifications/mark-read', [\App\Controllers\ChatController::class, 'markRead'], ['auth', 'no-csrf']);
+$router->post('/api/notifications/mark-read', [\App\Controllers\ChatController::class, 'markRead'], ['auth']);
 
 return $router;
 
