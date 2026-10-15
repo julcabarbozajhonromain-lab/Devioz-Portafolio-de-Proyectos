@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#042f2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="150" cy="120" r="160" fill="#0284c7" opacity="0.12"/>
+  <circle cx="680" cy="350" r="180" fill="#10b981" opacity="0.1"/>
+
+  <!-- Phone / PWA Mockup Frame -->
+  <g transform="translate(315, 45)">
+    <!-- Phone Outer -->
+    <rect width="170" height="320" rx="24" fill="#18181b" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+    <!-- Speaker / Notch -->
+    <rect x="60" y="8" width="50" height="5" rx="2.5" fill="#3f3f46"/>
+
+    <!-- Screen -->
+    <rect x="8" y="24" width="154" height="280" rx="16" fill="#09090b"/>
+
+    <!-- App Header -->
+    <rect x="16" y="36" width="138" height="24" rx="6" fill="#0284c7"/>
+    <circle cx="28" cy="48" r="5" fill="#fff"/>
+    <rect x="42" y="45" width="60" height="6" rx="3" fill="#fff"/>
+
+    <!-- App Products Cards -->
+    <rect x="16" y="70" width="138" height="45" rx="6" fill="#1e293b"/>
+    <circle cx="34" cy="92" r="10" fill="#10b981"/>
+    <rect x="52" y="86" width="60" height="6" rx="3" fill="#f4f4f5"/>
+    <rect x="52" y="96" width="40" height="5" rx="2.5" fill="#94a3b8"/>
+    <rect x="122" y="86" width="24" height="14" rx="4" fill="#10b981"/>
+
+    <rect x="16" y="125" width="138" height="45" rx="6" fill="#1e293b"/>
+    <circle cx="34" cy="147" r="10" fill="#0284c7"/>
+    <rect x="52" y="141" width="60" height="6" rx="3" fill="#f4f4f5"/>
+    <rect x="52" y="151" width="40" height="5" rx="2.5" fill="#94a3b8"/>
+    <rect x="122" y="141" width="24" height="14" rx="4" fill="#0284c7"/>
+
+    <rect x="16" y="180" width="138" height="45" rx="6" fill="#1e293b"/>
+    <circle cx="34" cy="202" r="10" fill="#f59e0b"/>
+    <rect x="52" y="196" width="60" height="6" rx="3" fill="#f4f4f5"/>
+    <rect x="52" y="206" width="40" height="5" rx="2.5" fill="#94a3b8"/>
+    <rect x="122" y="196" width="24" height="14" rx="4" fill="#f59e0b"/>
+
+    <!-- Offline Sync Banner -->
+    <rect x="16" y="240" width="138" height="28" rx="6" fill="#10b981" opacity="0.2"/>
+    <text x="85" y="258" text-anchor="middle" fill="#10b981" font-family="system-ui" font-size="9" font-weight="bold">⚡ Offline Cache Activo</text>
+  </g>
+
+  <text x="400" y="400" text-anchor="middle" fill="#f4f4f5" font-family="system-ui, sans-serif" font-weight="700" font-size="20">APP MÓVIL DE VENTAS &amp; PWA</text>
+  <text x="400" y="420" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="13">Service Workers &bull; Pedidos Offline &bull; Sincronización Automática</text>
+</svg>

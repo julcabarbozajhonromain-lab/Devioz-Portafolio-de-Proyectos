@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="50%" stop-color="#2e1065"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="680" cy="120" r="160" fill="#a855f7" opacity="0.1"/>
+  <circle cx="120" cy="350" r="160" fill="#10b981" opacity="0.08"/>
+
+  <!-- Portal Frame -->
+  <g transform="translate(170, 65)">
+    <rect width="460" height="290" rx="14" fill="#18181b" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+    <rect width="460" height="38" rx="14" fill="#222226"/>
+    <circle cx="22" cy="19" r="5" fill="#ef4444"/>
+    <circle cx="38" cy="19" r="5" fill="#f59e0b"/>
+    <circle cx="54" cy="19" r="5" fill="#10b981"/>
+
+    <!-- Sidebar Mini -->
+    <rect x="15" y="55" width="90" height="220" rx="8" fill="#121215"/>
+    <rect x="25" y="70" width="70" height="12" rx="4" fill="#a855f7" opacity="0.6"/>
+    <rect x="25" y="95" width="70" height="8" rx="4" fill="#71717a"/>
+    <rect x="25" y="115" width="70" height="8" rx="4" fill="#71717a"/>
+
+    <!-- Content Area -->
+    <rect x="120" y="55" width="325" height="45" rx="8" fill="#1f1f23"/>
+    <circle cx="140" cy="77" r="10" fill="#10b981" opacity="0.5"/>
+    <rect x="160" y="73" width="120" height="8" rx="4" fill="#f4f4f5"/>
+    <rect x="360" y="70" width="70" height="16" rx="8" fill="#10b981" opacity="0.3"/>
+
+    <rect x="120" y="115" width="325" height="160" rx="8" fill="#1f1f23"/>
+    <rect x="140" y="135" width="100" height="10" rx="5" fill="#a855f7"/>
+    <rect x="140" y="160" width="280" height="6" rx="3" fill="#71717a"/>
+    <rect x="140" y="175" width="240" height="6" rx="3" fill="#71717a"/>
+    <rect x="140" y="190" width="260" height="6" rx="3" fill="#71717a"/>
+    
+    <rect x="140" y="225" width="90" height="30" rx="6" fill="#a855f7"/>
+    <rect x="240" y="225" width="90" height="30" rx="6" fill="#27272a"/>
+  </g>
+
+  <text x="400" y="400" text-anchor="middle" fill="#f4f4f5" font-family="system-ui, sans-serif" font-weight="700" font-size="20">PORTAL DE CLIENTES</text>
+  <text x="400" y="420" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="13">Autoservicio &bull; Tickets &bull; Descargas Seguras</text>
+</svg>

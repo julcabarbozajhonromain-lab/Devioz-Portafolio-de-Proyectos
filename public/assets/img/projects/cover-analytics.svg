@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="50%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="680" cy="80" r="180" fill="#10b981" opacity="0.12"/>
+  <circle cx="120" cy="380" r="150" fill="#f59e0b" opacity="0.08"/>
+
+  <!-- Analytics Chart Frame -->
+  <g transform="translate(160, 65)">
+    <rect width="480" height="290" rx="14" fill="#18181b" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+    <rect width="480" height="38" rx="14" fill="#222226"/>
+    <circle cx="22" cy="19" r="5" fill="#ef4444"/>
+    <circle cx="38" cy="19" r="5" fill="#f59e0b"/>
+    <circle cx="54" cy="19" r="5" fill="#10b981"/>
+
+    <!-- Stat Boxes -->
+    <rect x="25" y="55" width="135" height="55" rx="8" fill="#1f1f23"/>
+    <rect x="37" y="67" width="50" height="8" rx="4" fill="#a1a1aa"/>
+    <rect x="37" y="85" width="75" height="14" rx="4" fill="#10b981"/>
+
+    <rect x="172" y="55" width="135" height="55" rx="8" fill="#1f1f23"/>
+    <rect x="184" y="67" width="50" height="8" rx="4" fill="#a1a1aa"/>
+    <rect x="184" y="85" width="75" height="14" rx="4" fill="#f59e0b"/>
+
+    <rect x="320" y="55" width="135" height="55" rx="8" fill="#1f1f23"/>
+    <rect x="332" y="67" width="50" height="8" rx="4" fill="#a1a1aa"/>
+    <rect x="332" y="85" width="75" height="14" rx="4" fill="#3b82f6"/>
+
+    <!-- Bar Chart -->
+    <rect x="25" y="125" width="430" height="145" rx="8" fill="#141417"/>
+    <!-- Bars -->
+    <rect x="55" y="195" width="30" height="60" rx="4" fill="#10b981" opacity="0.7"/>
+    <rect x="105" y="165" width="30" height="90" rx="4" fill="#10b981"/>
+    <rect x="155" y="180" width="30" height="75" rx="4" fill="#10b981" opacity="0.8"/>
+    <rect x="205" y="145" width="30" height="110" rx="4" fill="#10b981"/>
+    <rect x="255" y="170" width="30" height="85" rx="4" fill="#10b981" opacity="0.85"/>
+    <rect x="305" y="150" width="30" height="105" rx="4" fill="#10b981"/>
+    <rect x="355" y="135" width="30" height="120" rx="4" fill="#10b981"/>
+    <rect x="405" y="160" width="30" height="95" rx="4" fill="#10b981" opacity="0.8"/>
+  </g>
+
+  <text x="400" y="400" text-anchor="middle" fill="#f4f4f5" font-family="system-ui, sans-serif" font-weight="700" font-size="20">DASHBOARD ANALYTICS &amp; BI</text>
+  <text x="400" y="420" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="13">Reportería &bull; Chart.js &bull; Indicadores Clave</text>
+</svg>

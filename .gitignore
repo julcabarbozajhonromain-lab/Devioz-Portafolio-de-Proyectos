@@ -1,0 +1,30 @@
+# Environment Variables
+.env
+.env.backup
+.env.production
+
+# Storage and Logs
+storage/logs/*
+!storage/logs/.gitkeep
+storage/framework/cache/*
+!storage/framework/cache/.gitkeep
+*.log
+
+# Composer Dependencies
+vendor/
+
+# User Uploads
+public/uploads/*
+!public/uploads/.gitkeep
+
+# IDE and OS Files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+.phpunit.cache
