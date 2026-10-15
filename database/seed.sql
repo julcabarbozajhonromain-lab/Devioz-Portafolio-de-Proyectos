@@ -1,8 +1,7 @@
 -- ==============================================================================
 -- DEVIOZ CLASSIC — Datos Iniciales y Semilla de Pruebas (Seed Data)
 -- Users: 2 Admins + 34 Developers reales distribuidos por sedes
--- Password de todos los usuarios: Devioz2026!
--- Hash BCRYPT: $2y$10$AP3GTpq0a0gZiSOv2rYQcOmWbVDP2Vg6aHfPWb.RIxbYCfxB5rgWa
+-- Local development seed only; never use sample accounts in production.
 -- ==============================================================================
 
 USE `devioz_classic`;
