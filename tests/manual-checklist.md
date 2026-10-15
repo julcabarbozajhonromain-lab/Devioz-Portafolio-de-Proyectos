@@ -17,10 +17,10 @@ Este documento describe la suite de pruebas funcionales, de seguridad y de exper
 ## 🔐 2. Autenticación y Seguridad de Sesión
 
 - [ ] **Login con Administrador / Docente:**
-  - Email: `elena.rostova@devioz.io` | Clave: `Devioz2026!`
+  - Usar una cuenta administrativa creada para el entorno local de pruebas; no documentar ni reutilizar contraseñas compartidas.
   - Resultado: Inicio de sesión exitoso, redirección automática a `/dashboard` con vista de métricas globales de jefatura.
 - [ ] **Login con Practicante:**
-  - Email: `jhon.julca@devioz.io` | Clave: `Devioz2026!`
+  - Usar una cuenta de practicante creada para el entorno local de pruebas; no documentar ni reutilizar contraseñas compartidas.
   - Resultado: Redirección a `/dashboard` con vista personalizada de su proyecto activo (`DEV-2026-001`).
 - [ ] **Credenciales Incorrectas:**
   - Ingresar clave errónea.
