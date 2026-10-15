@@ -40,25 +40,9 @@ El proyecto original concebido en Laravel + Inertia/Vue presentaba fricciones se
 
 ---
 
-## 🔑 Credenciales de Acceso por Defecto
+## 🔑 Cuentas de demostración
 
-Todas las cuentas sembradas en la base de datos comparten la contraseña predeterminada:
-👉 **`Devioz2026!`**
-
-### 1. Administradores (Docentes / Jefes de Práctica)
-- **Elena Rostova (Docente Principal):** `elena.rostova@devioz.io`
-- **Admin Backup (Infraestructura):** `admin@devioz.io`
-
-### 2. Practicantes de Muestra (Developers)
-- **Jhon Julca (Sede Cercado - Proyecto `DEV-2026-001`):** `jhon.julca@devioz.io`
-- **Marcial Salvatierra (Sede Villa - Proyecto `DEV-2026-002`):** `marcial.salvatierra@devioz.io`
-- **André Miguel Núñez (Sede Cercado - Proyecto `DEV-2026-003`):** `andre.miguel@devioz.io`
-- **Alejandra Trujillo (Sede Cercado - Proyecto `DEV-2026-004`):** `alejandra.trujillo@devioz.io`
-- **Richar Lopez (Sede Lima Norte - Proyecto `DEV-2026-005`):** `richar.lopez@devioz.io`
-
-*(El sistema incluye a los 34 practicantes reales distribuidos en las 3 sedes).*
-
----
+La semilla `database/seed.sql` contiene cuentas de muestra para desarrollo local. No uses estos datos de prueba en producción; crea cuentas y contraseñas nuevas en cada entorno antes de desplegar.
 
 ## 💻 Guía de Instalación en XAMPP (Local - Windows)
 
