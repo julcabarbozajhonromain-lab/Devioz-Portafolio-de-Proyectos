@@ -163,7 +163,7 @@ $router->get('/projects/create', [\App\Controllers\ProjectController::class, 'cr
 $router->post('/projects', [\App\Controllers\ProjectController::class, 'store'], ['auth', 'admin']);
 $router->get('/projects/{id}', [\App\Controllers\ProjectController::class, 'show'], ['auth']);
 $router->get('/projects/{id}/edit', [\App\Controllers\ProjectController::class, 'edit'], ['auth', 'admin']);
-$router->post('/projects/{id}/update', [\App\Controllers\ProjectController::class, 'update'], ['auth']);
+$router->post('/projects/{id}/update', [\App\Controllers\ProjectController::class, 'update'], ['auth', 'admin']);
 $router->post('/projects/{id}/submit', [\App\Controllers\ProjectController::class, 'submit'], ['auth']);
 $router->get('/projects/{id}/wizard', [\App\Controllers\ProjectController::class, 'wizard'], ['auth']);
 $router->post('/projects/{id}/delete', [\App\Controllers\ProjectController::class, 'destroy'], ['auth', 'admin']);
