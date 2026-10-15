@@ -216,9 +216,39 @@ if (!function_exists('getYoutubeId')) {
      */
     function getYoutubeId(string $url): ?string
     {
-        if (preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/', $url, $m)) {
-            return $m[1];
+        try {
+            $parts = parse_url(trim($url));
+        } catch (\ValueError) {
+            return null;
         }
+
+        if (!is_array($parts) || !in_array(strtolower($parts['scheme'] ?? ''), ['http', 'https'], true)) {
+            return null;
+        }
+
+        $host = strtolower($parts['host'] ?? '');
+        $path = $parts['path'] ?? '';
+
+        if (in_array($host, ['youtu.be', 'www.youtu.be'], true)
+            && preg_match('~^/([A-Za-z0-9_-]{11})/?$~', $path, $match)) {
+            return $match[1];
+        }
+
+        if (!in_array($host, ['youtube.com', 'www.youtube.com', 'm.youtube.com'], true)) {
+            return null;
+        }
+
+        if ($path === '/watch') {
+            parse_str($parts['query'] ?? '', $query);
+            return isset($query['v']) && is_string($query['v']) && preg_match('/^[A-Za-z0-9_-]{11}$/', $query['v'])
+                ? $query['v']
+                : null;
+        }
+
+        if (preg_match('~^/(?:embed|v|shorts)/([A-Za-z0-9_-]{11})/?$~', $path, $match)) {
+            return $match[1];
+        }
+
         return null;
     }
 }
@@ -234,15 +264,34 @@ if (!function_exists('getEmbedUrl')) {
             $auto = $autoplay ? '&autoplay=1' : '';
             return "https://www.youtube-nocookie.com/embed/{$ytId}?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1{$auto}";
         }
-        if (preg_match('/loom\.com\/(?:share|embed)\/([a-zA-Z0-9]+)/', $url, $m)) {
+        try {
+            $parts = parse_url(trim($url));
+        } catch (\ValueError) {
+            return '';
+        }
+
+        if (!is_array($parts) || !in_array(strtolower($parts['scheme'] ?? ''), ['http', 'https'], true)) {
+            return '';
+        }
+
+        $host = strtolower($parts['host'] ?? '');
+        $path = trim($parts['path'] ?? '', '/');
+
+        if (in_array($host, ['loom.com', 'www.loom.com'], true)
+            && preg_match('~^(?:share|embed)/([A-Za-z0-9]+)$~', $path, $m)) {
             $auto = $autoplay ? '?autoplay=1' : '';
             return "https://www.loom.com/embed/{$m[1]}{$auto}";
         }
-        if (preg_match('/vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)/', $url, $m)) {
+
+        $isVimeoHost = in_array($host, ['vimeo.com', 'www.vimeo.com'], true);
+        $isVimeoPlayerHost = $host === 'player.vimeo.com';
+        if (($isVimeoHost && preg_match('~^(?:channels/(?:[^/]+/)?|groups/[^/]+/videos/|album/[0-9]+/video/)?([0-9]+)/?$~', $path, $m))
+            || ($isVimeoPlayerHost && preg_match('~^video/([0-9]+)/?$~', $path, $m))) {
             $auto = $autoplay ? '?autoplay=1' : '';
-            return "https://player.vimeo.com/video/{$m[3]}{$auto}";
+            return "https://player.vimeo.com/video/{$m[1]}{$auto}";
         }
-        return $url;
+
+        return '';
     }
 }
 
