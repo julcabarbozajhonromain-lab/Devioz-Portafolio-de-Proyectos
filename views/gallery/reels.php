@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Construcción de la Playlist Lateral en el Modal
     function buildPlaylist(activeIndex) {
         if (!playlistContainer) return;
-        playlistContainer.innerHTML = '';
+        playlistContainer.replaceChildren();
 
         cards.forEach((card, idx) => {
             if (card.style.display === 'none') return; // no incluir ocultos
@@ -359,17 +359,24 @@ document.addEventListener('DOMContentLoaded', () => {
             item.className = 'bili-playlist-item' + (idx === activeIndex ? ' active' : '');
             item.setAttribute('data-index', idx);
             item.innerHTML = `
-                <img src="${thumb}" alt="${title}" class="bili-playlist-thumb" loading="lazy">
+                <img class="bili-playlist-thumb" loading="lazy">
                 <div class="overflow-hidden" style="flex: 1;">
-                    <h6 class="small fw-bold mb-1 text-truncate" style="font-size: 0.78rem; color: #FFFFFF !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9) !important;" title="${title}">
-                        ${title}
-                    </h6>
+                    <h6 class="small fw-bold mb-1 text-truncate" style="font-size: 0.78rem; color: #FFFFFF !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9) !important;"></h6>
                     <div class="d-flex align-items-center justify-content-between" style="font-size: 0.70rem; color: rgba(255, 255, 255, 0.75) !important;">
-                        <span class="text-truncate" style="max-width: 120px; color: rgba(255, 255, 255, 0.85) !important;">${lead}</span>
-                        <span class="badge bg-success bg-opacity-75 text-white" style="font-size: 0.65rem;">★ ${score}</span>
+                        <span class="text-truncate" style="max-width: 120px; color: rgba(255, 255, 255, 0.85) !important;"></span>
+                        <span class="badge bg-success bg-opacity-75 text-white" style="font-size: 0.65rem;"></span>
                     </div>
                 </div>
             `;
+            const thumbnail = item.querySelector('.bili-playlist-thumb');
+            thumbnail.src = thumb;
+            thumbnail.alt = title;
+            thumbnail.onerror = () => { thumbnail.removeAttribute('src'); };
+            const titleElement = item.querySelector('h6');
+            titleElement.title = title;
+            titleElement.textContent = title;
+            item.querySelector('.text-truncate').textContent = lead;
+            item.querySelector('.badge').textContent = `★ ${score}`;
 
             item.addEventListener('click', () => {
                 openCinemaAtIndex(idx);
@@ -398,10 +405,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const stackRaw = card.getAttribute('data-stack') || '[]';
 
         if (titleEl) titleEl.textContent = title;
-        if (clientEl) clientEl.innerHTML = '<i class="fa-solid fa-building me-1"></i> ' + client;
+        if (clientEl) {
+            const clientIcon = document.createElement('i');
+            clientIcon.className = 'fa-solid fa-building me-1';
+            clientEl.replaceChildren(clientIcon, document.createTextNode(' ' + client));
+        }
         if (scoreEl) scoreEl.textContent = 'QA Score ' + score + ' / 10';
         if (sedeEl) sedeEl.textContent = sede;
-        if (devNameEl) devNameEl.innerHTML = lead + ' <i class="fa-solid fa-circle-check text-info" style="font-size: 0.8rem;"></i>';
+        if (devNameEl) {
+            const verifiedIcon = document.createElement('i');
+            verifiedIcon.className = 'fa-solid fa-circle-check text-info';
+            verifiedIcon.style.fontSize = '0.8rem';
+            verifiedIcon.title = 'Ingeniero Certificado';
+            devNameEl.replaceChildren(document.createTextNode(lead + ' '), verifiedIcon);
+        }
         if (devAvatarEl) devAvatarEl.src = avatar;
         if (descEl) descEl.textContent = desc;
         if (likeCountEl) likeCountEl.textContent = likes;
@@ -409,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Inyectar Tech Stack Chips
         if (stackEl) {
-            stackEl.innerHTML = '';
+            stackEl.replaceChildren();
             try {
                 const stack = JSON.parse(stackRaw);
                 if (Array.isArray(stack)) {
