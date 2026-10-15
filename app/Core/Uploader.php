@@ -25,7 +25,6 @@ final class Uploader
         'png'  => 'image/png',
         'webp' => 'image/webp',
         'gif'  => 'image/gif',
-        'svg'  => 'image/svg+xml',
     ];
 
     /**
@@ -81,7 +80,7 @@ final class Uploader
             : ($mimeType === $expectedMime);
 
         // Fallback permisivo para archivos office en ciertos entornos de SO
-        if (!$isMimeValid && !str_starts_with($mimeType, 'application/')) {
+        if (!$isMimeValid) {
             throw new RuntimeException("El contenido del archivo no coincide con su extensión reportada ({$mimeType}).");
         }
 
