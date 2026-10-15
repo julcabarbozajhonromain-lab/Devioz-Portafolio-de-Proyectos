@@ -129,7 +129,6 @@ $router->post('/register', [\App\Controllers\AuthController::class, 'register'],
 $router->get('/auth/google', [\App\Controllers\AuthController::class, 'oauthGoogle'], ['guest']);
 $router->get('/auth/github', [\App\Controllers\AuthController::class, 'oauthGithub'], ['guest']);
 $router->post('/logout', [\App\Controllers\AuthController::class, 'logout'], ['auth']);
-$router->get('/logout', [\App\Controllers\AuthController::class, 'logout']);
 
 // -----------------------------------------------------------------------------
 // Dashboard y API Stats
