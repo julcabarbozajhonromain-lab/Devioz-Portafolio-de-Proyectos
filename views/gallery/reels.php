@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const titleElement = item.querySelector('h6');
             titleElement.title = title;
             titleElement.textContent = title;
-            item.querySelector('.text-truncate').textContent = lead;
+            item.querySelector('span.text-truncate').textContent = lead;
             item.querySelector('.badge').textContent = `★ ${score}`;
 
             item.addEventListener('click', () => {
