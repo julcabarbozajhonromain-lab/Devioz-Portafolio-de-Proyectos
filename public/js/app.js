@@ -3593,7 +3593,10 @@ function initBitrixMessenger() {
 
                     fetch(appUrl('/api/projects/1/copilot'), {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                        },
                         body: JSON.stringify({ prompt: text })
                     })
                     .then(r => r.json())
@@ -3651,7 +3654,10 @@ function initBitrixMessenger() {
                 appendDirectBubble(text, true, timeStr);
                 fetch(appUrl('/api/chat/send'), {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                    },
                     body: JSON.stringify({
                         receiver_id: activeContactId,
                         body: text
