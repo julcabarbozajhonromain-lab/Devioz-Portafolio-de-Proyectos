@@ -245,18 +245,25 @@ def build_diagrams(tmp: Path) -> dict[str, Path]:
     out["logical"] = save_img(im, tmp, "logical")
 
     # Process sequence
-    im, d = diagram_canvas("Vista de procesos: entrega y aceptación de un hito", "Interacciones principales; las transacciones críticas deben ser atómicas e idempotentes.")
+    im, d = diagram_canvas("Vista de procesos: entrega y aceptación de un hito", "Interacciones principales; las transacciones críticas deben ser atómicas e idempotentes.", height=920)
     lanes = [(50,"PM / Admin"),(355,"Dev"),(660,"Sistema"),(965,"QA"),(1270,"Cliente")]
     for x, name in lanes:
         d.rectangle((x,180,x+210,240),fill=f"#{NAVY}")
         d.text((x+18,197),name,font=font(20,True),fill="white")
-        d.line((x+105,240,x+105,670),fill="#CAD5DF",width=3)
-    steps=[(155,280,50,355,"Define alcance del hito"),(355,355,355,430,"Registra avance y entrega"),(555,660,660,730,"Guarda entrega / emite evento"),(755,965,965,820,"Revisa con criterios"),(955,965,1270,900,"Solicita aceptación"),(1155,1270,660,990,"Acepta o devuelve con causa"),(1355,660,355,1060,"Actualiza estado y notifica")]
-    # Compact lifelines with event labels and sequence arrows
-    for y, x1, x2, labx, label in steps:
-        arrow(d,(x1+105,y),(x2+105,y),color=TEAL if x2>x1 else ORANGE,width=4)
-        d.text((min(x1,x2)+105,y-32),label,font=font(16,True),fill=f"#{INK}")
-    d.text((60,700),"Alternativas: rechazo → corrección → nueva versión; expiración → alerta; aceptación → habilita siguiente hito según política.",font=font(18),fill=f"#{MUTED}")
+        d.line((x+105,240,x+105,815),fill="#CAD5DF",width=3)
+    centers = [155,460,765,1070,1375]
+    steps = [
+        (300,0,1,"Define alcance"),
+        (380,1,2,"Entrega + evidencia"),
+        (460,2,3,"En cola de QA"),
+        (540,3,2,"Resultado QA"),
+        (620,2,4,"Paquete al cliente"),
+        (700,4,2,"Acepta / devuelve"),
+        (780,2,0,"Actualiza y notifica"),
+    ]
+    for y, source, target, label in steps:
+        arrow(d,(centers[source],y),(centers[target],y),color=TEAL if target>source else ORANGE,width=4,label=label)
+    d.text((60,850),"Alternativas: rechazo → corrección → nueva versión; vencimiento → alerta; aceptación → siguiente hito según contrato.",font=font(18),fill=f"#{MUTED}")
     out["process"] = save_img(im, tmp, "process")
 
     # Development/package view
@@ -317,7 +324,7 @@ def make_styles() -> str:
  <w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="260" w:after="120"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:color w:val="{TEAL}"/><w:sz w:val="25"/></w:rPr></w:style>
  <w:style w:type="paragraph" w:styleId="Heading3"><w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="170" w:after="80"/><w:outlineLvl w:val="2"/></w:pPr><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:color w:val="{INK}"/><w:sz w:val="22"/></w:rPr></w:style>
  <w:style w:type="paragraph" w:styleId="Caption"><w:name w:val="caption"/><w:basedOn w:val="Normal"/><w:rPr><w:i/><w:color w:val="{MUTED}"/><w:sz w:val="18"/></w:rPr></w:style>
- <w:style w:type="paragraph" w:styleId="CodeBlock"><w:name w:val="Code Block"/><w:basedOn w:val="Normal"/><w:pPr><w:shd w:fill="F1F5F9"/><w:ind w:left="180"/><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:sz w:val="18"/></w:rPr></w:pPr></w:style>
+ <w:style w:type="paragraph" w:styleId="CodeBlock"><w:name w:val="Code Block"/><w:basedOn w:val="Normal"/><w:pPr><w:shd w:fill="F1F5F9"/><w:ind w:left="180"/></w:pPr><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:sz w:val="18"/></w:rPr></w:style>
 </w:styles>'''
 
 
