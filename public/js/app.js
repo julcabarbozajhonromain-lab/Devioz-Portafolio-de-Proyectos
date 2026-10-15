@@ -2152,7 +2152,10 @@ function initBitrixSuite() {
 
         fetch(`${baseUrl}/api/chat/send`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+            },
             body: JSON.stringify({
                 receiver_id: activeContactId,
                 project_id: activeProjectId,
@@ -2305,7 +2308,10 @@ function initBitrixSuite() {
 
             fetch(`${baseUrl}/api/chat/request-call`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                },
                 body: JSON.stringify({
                     receiver_id: activeContactId,
                     project_id: activeProjectId,
@@ -2420,7 +2426,12 @@ function initBitrixSuite() {
     if (notifMarkReadBtn) {
         notifMarkReadBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            fetch(`${baseUrl}/api/notifications/mark-read`, { method: 'POST' })
+            fetch(`${baseUrl}/api/notifications/mark-read`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                }
+            })
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
