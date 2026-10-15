@@ -68,9 +68,13 @@ final class Uploader
 
         $originalName = pathinfo($file['name'], PATHINFO_FILENAME);
         $originalExt = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $configuredTypes = config('app.upload.allowed_types', array_keys(self::$allowedMimes));
+        $configuredTypes = is_array($configuredTypes)
+            ? array_map(static fn($type): string => strtolower(trim((string)$type)), $configuredTypes)
+            : [];
 
         // Validar extensión y mime permitido
-        if (!isset(self::$allowedMimes[$originalExt])) {
+        if (!isset(self::$allowedMimes[$originalExt]) || !in_array($originalExt, $configuredTypes, true)) {
             throw new RuntimeException("La extensión de archivo .{$originalExt} no está permitida.");
         }
 
@@ -79,7 +83,7 @@ final class Uploader
             ? in_array($mimeType, $expectedMime, true)
             : ($mimeType === $expectedMime);
 
-        // Fallback permisivo para archivos office en ciertos entornos de SO
+        // Rechazar cualquier discrepancia entre el MIME real y la extensiÃ³n.
         if (!$isMimeValid) {
             throw new RuntimeException("El contenido del archivo no coincide con su extensión reportada ({$mimeType}).");
         }
