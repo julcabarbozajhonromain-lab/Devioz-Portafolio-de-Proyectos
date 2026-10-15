@@ -9,7 +9,7 @@ declare(strict_types=1);
 return [
     'name' => getenv('APP_NAME') ?: 'Devioz OS',
     'env' => getenv('APP_ENV') ?: 'local',
-    'debug' => (bool)(getenv('APP_DEBUG') ?: true),
+    'debug' => filter_var(getenv('APP_DEBUG') ?: 'false', FILTER_VALIDATE_BOOL),
     'url' => getenv('APP_URL') ?: 'http://localhost/Devioz-Portafolio-de-Proyectos/public',
     'timezone' => getenv('APP_TIMEZONE') ?: 'America/Lima',
     
