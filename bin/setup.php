@@ -80,6 +80,5 @@ echo "=======================================================\n";
 echo "  INSTALACIÓN FINALIZADA CON ÉXITO\n";
 echo "=======================================================\n";
 echo "  Acceso Local: http://localhost/Devioz-Portafolio-de-Proyectos/\n";
-echo "  Administrador: elena.rostova@devioz.io / Devioz2026!\n";
-echo "  Desarrollador: jhon.julca@devioz.io / Devioz2026!\n";
+echo "  Cambia las contraseñas de las cuentas de muestra antes de usar otro entorno.\n";
 echo "=======================================================\n\n";
