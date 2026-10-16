@@ -16,6 +16,9 @@ vendor/
 # User Uploads
 public/uploads/*
 !public/uploads/.gitkeep
+!public/uploads/deliveries/
+public/uploads/deliveries/*
+!public/uploads/deliveries/.htaccess
 
 # IDE and OS Files
 .idea/

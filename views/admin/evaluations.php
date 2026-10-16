@@ -65,7 +65,9 @@ declare(strict_types=1);
                                 </button>
                             <?php endif; ?>
                             <?php if (!empty($del['files'])): ?>
-                                <span class="badge bg-secondary-subtle text-secondary whitespace-nowrap">Adjuntos</span>
+                                <?php foreach ((json_decode((string)$del['files'], true) ?: []) as $fileIndex => $file): ?>
+                                    <a class="d-block small" href="<?= url("/deliveries/{$del['id']}/files/{$fileIndex}") ?>"><i class="fa-solid fa-paperclip" aria-hidden="true"></i> <?= e(is_array($file) ? ($file['original_name'] ?? $file['name'] ?? 'Descargar adjunto') : 'Descargar adjunto') ?></a>
+                                <?php endforeach; ?>
                             <?php endif; ?>
                         </td>
                         <td class="text-end">

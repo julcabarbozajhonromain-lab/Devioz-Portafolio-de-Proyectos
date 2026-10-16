@@ -154,6 +154,7 @@ $router->post('/my-project/milestone/{id}/complete', [\App\Controllers\MyProject
 $router->post('/my-project/delivery/{milestoneId}', [\App\Controllers\MyProjectController::class, 'submitDelivery'], ['auth', 'developer']);
 $router->post('/my-project/check-in', [\App\Controllers\MyProjectController::class, 'checkIn'], ['auth', 'developer']);
 $router->post('/my-project/comment', [\App\Controllers\MyProjectController::class, 'addComment'], ['auth']);
+$router->get('/deliveries/{deliveryId}/files/{fileIndex}', [\App\Controllers\DeliveryFileController::class, 'download'], ['auth']);
 
 // -----------------------------------------------------------------------------
 // Gestión de Proyectos

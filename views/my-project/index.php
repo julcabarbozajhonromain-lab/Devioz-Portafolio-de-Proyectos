@@ -301,6 +301,9 @@ declare(strict_types=1);
                                     <?php if (!empty($del->video_url)): ?>
                                         <button type="button" class="btn btn-link p-0 small text-info text-decoration-none border-0" data-video-url="<?= e($del->video_url) ?>" data-video-title="<?= e($del->title) ?>"><i class="fa-solid fa-play" aria-hidden="true"></i> Ver Video</button>
                                     <?php endif; ?>
+                                    <?php foreach (($del->files ?? []) as $fileIndex => $file): ?>
+                                        <a class="d-block small" href="<?= url("/deliveries/{$del->id}/files/{$fileIndex}") ?>"><i class="fa-solid fa-paperclip" aria-hidden="true"></i> <?= e(is_array($file) ? ($file['original_name'] ?? $file['name'] ?? 'Descargar adjunto') : 'Descargar adjunto') ?></a>
+                                    <?php endforeach; ?>
                                 </td>
                                 <td class="small text-secondary"><?= e($del->milestone() ? $del->milestone()->name : 'General') ?></td>
                                 <td>
