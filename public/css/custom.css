@@ -1,49 +1,49 @@
 /* ==============================================================================
  * DEVIOZ OS — Hoja de Estilos Corporativa (Estándar Devioz Enterprise)
  * Tipografía: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
- * Paleta: Fondo #EEF2F4, Sidebar #172B4D, Acentos #00ACE3 / #7BD500
- * Bordes: #DBE2E8 | Sombras: 0 1px 3px rgba(23, 43, 77, 0.05)
+ * Paleta: Esmeralda #10B981, pizarra #1F2937 y superficies #F3F4F6
+ * Bordes: #E5E7EB | Sombras: 0 1px 3px rgba(31, 41, 55, 0.05)
  * ============================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root, [data-theme="light"], [data-theme="dark"], [data-ui-mode="devioz"] {
     color-scheme: light;
-    --brand-primary: #00ACE3;
-    --brand-hover: #0095C6;
-    --brand-rgb: 0, 172, 227;
-    --brand-subtle: rgba(0, 172, 227, 0.10);
-    --brand-secondary: #7BD500;
-    --brand-secondary-hover: #6CB800;
+    --brand-primary: #10B981;
+    --brand-hover: #059669;
+    --brand-rgb: 16, 185, 129;
+    --brand-subtle: rgba(16, 185, 129, 0.10);
+    --brand-secondary: #34D399;
+    --brand-secondary-hover: #10B981;
 
-    --bg-main: #EEF2F4;
+    --bg-main: #F3F4F6;
     --bg-card: #FFFFFF;
     --bg-card-hover: #F8FAFB;
-    --bg-sidebar: #172B4D;
-    --bg-sidebar-hover: #24385A;
+    --bg-sidebar: #1F2937;
+    --bg-sidebar-hover: #374151;
     --bg-input: #FFFFFF;
 
-    --border-color: #DBE2E8;
-    --border-hover: #C5D0D9;
-    --border-input: #DBE2E8;
+    --border-color: #E5E7EB;
+    --border-hover: #D1D5DB;
+    --border-input: #E5E7EB;
 
-    --text-primary: #172B4D;
-    --text-secondary: #5E6C84;
-    --text-muted: #7A869A;
-    --text-sidebar: #DEEBFF;
-    --text-sidebar-muted: #8993A4;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --text-muted: #6B7280;
+    --text-sidebar: #F9FAFB;
+    --text-sidebar-muted: #9CA3AF;
 
-    --success: #7BD500;
+    --success: #16A34A;
     --warning: #f59e0b;
     --danger: #ef4444;
-    --info: #00ACE3;
+    --info: #059669;
 
     --sidebar-width: 240px;
     --sidebar-collapsed-width: 64px;
     --header-height: 60px;
 
-    --shadow-card: 0 1px 3px rgba(23, 43, 77, 0.05);
-    --shadow-lift: 0 4px 12px rgba(23, 43, 77, 0.08);
+    --shadow-card: 0 1px 3px rgba(31, 41, 55, 0.05);
+    --shadow-lift: 0 4px 12px rgba(31, 41, 55, 0.08);
 }
 
 /* ------------------------------------------------------------------------------
@@ -221,13 +221,13 @@ a:hover {
 
 .sidebar-group-toggle:hover {
     color: #FFFFFF;
-    background-color: #24385A;
+    background-color: #374151;
 }
 
 .sidebar-group-toggle.active,
 .sidebar-group-toggle[aria-expanded="true"] {
-    color: #00ACE3;
-    background-color: rgba(0, 172, 227, 0.12);
+    color: #10B981;
+    background-color: rgba(16, 185, 129, 0.12);
 }
 
 .sidebar-chevron {
@@ -245,7 +245,7 @@ a:hover {
 
 .sidebar-group-toggle[aria-expanded="true"] .sidebar-chevron {
     transform: rotate(90deg);
-    color: #00ACE3;
+    color: #10B981;
 }
 
 .sidebar-submenu {
@@ -272,12 +272,12 @@ a:hover {
 
 .nav-link-custom:hover {
     color: #FFFFFF;
-    background-color: #24385A;
+    background-color: #374151;
 }
 
 .nav-link-custom.active {
     color: #FFFFFF;
-    background-color: #00ACE3;
+    background-color: #10B981;
     font-weight: 600;
     border-left: none;
 }
@@ -313,13 +313,13 @@ a:hover {
 
 .nav-link-sub:hover {
     color: #FFFFFF;
-    background-color: #24385A;
+    background-color: #374151;
     transform: translateX(2px);
 }
 
 .nav-link-sub.active {
     color: #FFFFFF;
-    background-color: #00ACE3;
+    background-color: #10B981;
     font-weight: 600;
     border-left: none;
 }
@@ -365,7 +365,7 @@ a:hover {
 .sidebar-footer {
     padding: 0.75rem 0.65rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background-color: #172B4D !important;
+    background-color: #1F2937 !important;
 }
 
 .gl-sidebar-collapse-link {
@@ -867,16 +867,16 @@ a:hover {
 }
 
 .bili-filter-btn:hover {
-    background: rgba(0, 172, 227, 0.2);
-    border-color: #00ACE3;
+    background: rgba(16, 185, 129, 0.2);
+    border-color: #10B981;
     color: #FFFFFF;
 }
 
 .bili-filter-btn.active {
-    background: linear-gradient(135deg, #00ACE3 0%, #0087b3 100%);
-    border-color: #00ACE3;
+    background: linear-gradient(135deg, #10B981 0%, #047857 100%);
+    border-color: #10B981;
     color: #FFFFFF;
-    box-shadow: 0 2px 10px rgba(0, 172, 227, 0.4);
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
 }
 
 .bili-search-box {
@@ -898,8 +898,8 @@ a:hover {
 
 .bili-search-input:focus {
     background: rgba(255, 255, 255, 0.14) !important;
-    border-color: #00ACE3 !important;
-    box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.25) !important;
+    border-color: #10B981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
     outline: none !important;
 }
 
@@ -965,8 +965,8 @@ a:hover {
 .bili-card:hover {
     transform: translateY(-5px);
     background: rgba(18, 30, 60, 0.82) !important;
-    border-color: rgba(0, 172, 227, 0.55) !important;
-    box-shadow: 0 16px 36px rgba(0, 172, 227, 0.25), 0 0 20px rgba(0, 172, 227, 0.15) !important;
+    border-color: rgba(16, 185, 129, 0.55) !important;
+    box-shadow: 0 16px 36px rgba(16, 185, 129, 0.25), 0 0 20px rgba(16, 185, 129, 0.15) !important;
 }
 
 /* 5. Caja del Poster con Proporción Vertical (~3:4) */
@@ -983,8 +983,8 @@ a:hover {
 }
 
 .bili-card:hover .bili-poster-box {
-    border-color: rgba(0, 172, 227, 0.7);
-    box-shadow: 0 16px 36px rgba(0, 172, 227, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    border-color: rgba(16, 185, 129, 0.7);
+    box-shadow: 0 16px 36px rgba(16, 185, 129, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 .bili-poster-img {
@@ -1026,7 +1026,7 @@ a:hover {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #00ACE3;
+    color: #10B981;
     font-size: 0.65rem;
     font-weight: 700;
     padding: 2px 6px;
@@ -1087,7 +1087,7 @@ a:hover {
 /* 7. El Famoso Botón Azul de Play de Bilibili */
 .bili-play-btn {
     width: 100%;
-    background: linear-gradient(135deg, #00ACE3 0%, #0093c4 100%) !important;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
     color: #FFFFFF !important;
     border: none !important;
     border-radius: 8px !important;
@@ -1099,14 +1099,14 @@ a:hover {
     justify-content: center !important;
     gap: 6px !important;
     letter-spacing: 0.02em !important;
-    box-shadow: 0 4px 16px rgba(0, 172, 227, 0.5) !important;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.5) !important;
     transition: all 0.2s ease !important;
     cursor: pointer !important;
 }
 
 .bili-play-btn:hover {
-    background: linear-gradient(135deg, #0ec4fd 0%, #009ace 100%) !important;
-    box-shadow: 0 6px 22px rgba(0, 172, 227, 0.75) !important;
+    background: linear-gradient(135deg, #34D399 0%, #10B981 100%) !important;
+    box-shadow: 0 6px 22px rgba(16, 185, 129, 0.75) !important;
     transform: scale(1.02);
 }
 
@@ -1138,7 +1138,7 @@ a:hover {
 .ui-reel-card:hover .bili-card-title,
 [data-theme="light"] .bili-card:hover .bili-card-title,
 [data-theme="light"] .ui-reel-card:hover .bili-card-title {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
 }
 
 .bili-dev-line,
@@ -1204,7 +1204,7 @@ a:hover {
     -webkit-backdrop-filter: blur(25px) saturate(190%);
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 20px;
-    box-shadow: 0 25px 65px rgba(0, 0, 0, 0.8), 0 0 45px rgba(0, 172, 227, 0.25);
+    box-shadow: 0 25px 65px rgba(0, 0, 0, 0.8), 0 0 45px rgba(16, 185, 129, 0.25);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1307,8 +1307,8 @@ a:hover {
 
 .bili-playlist-item:hover,
 .bili-playlist-item.active {
-    background: rgba(0, 172, 227, 0.14);
-    border-color: rgba(0, 172, 227, 0.5);
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(16, 185, 129, 0.5);
     transform: translateX(3px);
 }
 
@@ -2275,7 +2275,7 @@ a:hover {
     background: transparent !important;
     border: none !important;
     padding: 0.25rem 0.5rem;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-size: 1.05rem;
     outline: none !important;
 }
@@ -2303,11 +2303,11 @@ a:hover {
 }
 
 [data-theme="light"] .command-item {
-    color: #172B4D;
+    color: #1F2937;
 }
 
 [data-theme="light"] .command-item .text-white {
-    color: #172B4D !important;
+    color: #1F2937 !important;
 }
 
 [data-theme="light"] .command-palette-results {
@@ -2351,7 +2351,7 @@ a:hover {
 /* Anillo de aura exterior */
 .labva-aura {
     fill: none;
-    stroke: rgba(0, 172, 227, 0.45);
+    stroke: rgba(16, 185, 129, 0.45);
     stroke-width: 2.2;
     stroke-dasharray: 6 3;
     opacity: 0.55;
@@ -2361,8 +2361,8 @@ a:hover {
 
 /* Esfera obsidiana oscura y brillante en azul noche corporativo */
 .labva-sphere {
-    fill: #172B4D;
-    stroke: rgba(0, 172, 227, 0.4);
+    fill: #1F2937;
+    stroke: rgba(16, 185, 129, 0.4);
     stroke-width: 1.5;
 }
 
@@ -2422,20 +2422,20 @@ a:hover {
 /* Keyframes: Aura pulsante en búsqueda */
 @keyframes labvaAuraPulse {
     0% {
-        stroke: rgba(0, 172, 227, 0.4);
+        stroke: rgba(16, 185, 129, 0.4);
         stroke-width: 2;
         transform: rotate(0deg) scale(0.97);
         opacity: 0.5;
     }
     50% {
-        stroke: rgba(0, 172, 227, 0.95);
+        stroke: rgba(16, 185, 129, 0.95);
         stroke-width: 3.5;
         transform: rotate(180deg) scale(1.04);
         opacity: 1;
-        filter: drop-shadow(0 0 6px rgba(0, 172, 227, 0.7));
+        filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.7));
     }
     100% {
-        stroke: rgba(0, 172, 227, 0.4);
+        stroke: rgba(16, 185, 129, 0.4);
         stroke-width: 2;
         transform: rotate(360deg) scale(0.97);
         opacity: 0.5;
@@ -2465,7 +2465,7 @@ a:hover {
     transform: translate(-5px, 5px) rotate(-6deg);
 }
 .labva-orb-container.state-typing .labva-aura {
-    stroke: rgba(0, 172, 227, 0.85);
+    stroke: rgba(16, 185, 129, 0.85);
     opacity: 0.8;
 }
 .labva-orb-container.state-typing .labva-orb-svg {
@@ -2489,7 +2489,7 @@ a:hover {
     animation: labvaPerkUp 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 1;
 }
 .labva-orb-container.state-happy .labva-aura {
-    stroke: rgba(123, 213, 0, 0.9);
+    stroke: rgba(22, 163, 74, 0.9);
     opacity: 0.9;
 }
 
@@ -2513,11 +2513,11 @@ a:hover {
     display: inline-flex;
     align-items: center;
     background: #ffffff;
-    color: #172B4D;
+    color: #1F2937;
     border: 1px solid #DBE2E8;
     border-radius: 9999px;
     padding: 4px;
-    box-shadow: 0 4px 18px rgba(23, 43, 77, 0.14), 0 1px 3px rgba(23, 43, 77, 0.08);
+    box-shadow: 0 4px 18px rgba(31, 41, 55, 0.14), 0 1px 3px rgba(31, 41, 55, 0.08);
     cursor: pointer;
     font-size: 0.82rem;
     font-weight: 700;
@@ -2529,9 +2529,9 @@ a:hover {
 
 .bot-single-launcher-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 172, 227, 0.22);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.22);
     background: #ffffff;
-    border-color: #00ACE3;
+    border-color: #10B981;
 }
 
 .bot-single-launcher-btn:active {
@@ -2554,7 +2554,7 @@ a:hover {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #00ACE3;
+    border: 2px solid #10B981;
 }
 
 /* Indicador de estado en línea verde Devioz */
@@ -2564,10 +2564,10 @@ a:hover {
     right: 1px;
     width: 12px;
     height: 12px;
-    background-color: #7BD500;
+    background-color: #16A34A;
     border: 2px solid #ffffff;
     border-radius: 50%;
-    box-shadow: 0 0 6px rgba(123, 213, 0, 0.7);
+    box-shadow: 0 0 6px rgba(22, 163, 74, 0.7);
 }
 
 /* Texto colapsado por defecto: en reposo solo se ve el personaje/orbe */
@@ -2582,7 +2582,7 @@ a:hover {
     margin: 0;
     transform: translateX(12px);
     transition: max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.22s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    color: #172B4D;
+    color: #1F2937;
     font-size: 0.82rem;
     font-weight: 700;
 }
@@ -2609,7 +2609,7 @@ a:hover {
     background: #FFFFFF !important;
     border: 1px solid #DBE2E8 !important;
     border-radius: 14px !important;
-    box-shadow: 0 16px 40px -6px rgba(23, 43, 77, 0.18), 0 4px 12px rgba(23, 43, 77, 0.08) !important;
+    box-shadow: 0 16px 40px -6px rgba(31, 41, 55, 0.18), 0 4px 12px rgba(31, 41, 55, 0.08) !important;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -2634,13 +2634,13 @@ a:hover {
 /* Cabecera Corporativa Azul Noche Devioz OS */
 .bot-window-header {
     padding: 0.85rem 1.15rem;
-    background: #172B4D !important;
+    background: #1F2937 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: #ffffff;
-    box-shadow: 0 2px 8px rgba(23, 43, 77, 0.1) !important;
+    box-shadow: 0 2px 8px rgba(31, 41, 55, 0.1) !important;
 }
 
 .bot-header-avatar {
@@ -2648,8 +2648,8 @@ a:hover {
     height: 36px;
     border-radius: 50%;
     object-fit: cover;
-    background: #172B4D;
-    border: 2px solid rgba(0, 172, 227, 0.4);
+    background: #1F2937;
+    border: 2px solid rgba(16, 185, 129, 0.4);
 }
 
 .bot-header-status {
@@ -2662,7 +2662,7 @@ a:hover {
 
 .bot-status-dot-inline {
     font-size: 0.7rem;
-    color: #7BD500 !important;
+    color: #16A34A !important;
 }
 
 .btn-close-bot {
@@ -2720,21 +2720,21 @@ a:hover {
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 1px solid rgba(0, 172, 227, 0.4);
-    background: #172B4D;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    background: #1F2937;
     margin-top: 2px;
 }
 
 /* Burbujas del Asistente (Tarjetas Limpias Blancas con Sombra Suave) */
 .bot-speech-bubble {
     background: #FFFFFF !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     padding: 0.85rem 1.1rem;
     border-radius: 1.1rem 1.1rem 1.1rem 0.25rem;
     border: 1px solid #DBE2E8 !important;
     font-size: 0.875rem;
     line-height: 1.5;
-    box-shadow: 0 1px 3px rgba(23, 43, 77, 0.05) !important;
+    box-shadow: 0 1px 3px rgba(31, 41, 55, 0.05) !important;
     max-width: 90%;
     word-break: break-word;
 }
@@ -2747,10 +2747,10 @@ a:hover {
 
 .bot-speech-bubble a,
 .bot-link {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
     text-decoration: none !important;
     font-weight: 600;
-    border-bottom: 1px dashed rgba(0, 172, 227, 0.5);
+    border-bottom: 1px dashed rgba(16, 185, 129, 0.5);
     transition: all 0.15s ease;
     display: inline-flex;
     align-items: center;
@@ -2759,9 +2759,9 @@ a:hover {
 
 .bot-speech-bubble a:hover,
 .bot-link:hover {
-    color: #0095C6 !important;
+    color: #059669 !important;
     border-bottom-style: solid;
-    border-bottom-color: #0095C6;
+    border-bottom-color: #059669;
 }
 
 .bot-inline-code {
@@ -2783,7 +2783,7 @@ a:hover {
 }
 
 .bot-bullet {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
     font-size: 0.65rem;
     margin-top: 0.28rem;
     flex-shrink: 0;
@@ -2791,7 +2791,7 @@ a:hover {
 
 /* Burbujas del Usuario (Azul Devioz Primario) */
 .bot-msg-user-bubble {
-    background: #00ACE3 !important;
+    background: #10B981 !important;
     color: #ffffff !important;
     padding: 0.8rem 1.1rem;
     border-radius: 1.1rem 1.1rem 0.25rem 1.1rem;
@@ -2800,7 +2800,7 @@ a:hover {
     line-height: 1.45;
     max-width: 88%;
     align-self: flex-end;
-    box-shadow: 0 2px 8px rgba(0, 172, 227, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
 }
 
 /* Botones de Sugerencia Rápida (Chips Limpios) */
@@ -2819,7 +2819,7 @@ a:hover {
     background: #FFFFFF !important;
     color: #263238 !important;
     border: 1px solid #DBE2E8 !important;
-    box-shadow: 0 1px 3px rgba(23, 43, 77, 0.04) !important;
+    box-shadow: 0 1px 3px rgba(31, 41, 55, 0.04) !important;
     transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     white-space: nowrap;
@@ -2832,9 +2832,9 @@ a:hover {
 .bot-chip-btn:hover {
     background: #EAF6FC !important;
     color: #0077A3 !important;
-    border-color: #00ACE3 !important;
+    border-color: #10B981 !important;
     transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(0, 172, 227, 0.18) !important;
+    box-shadow: 0 3px 8px rgba(16, 185, 129, 0.18) !important;
 }
 
 .bot-suggestions button:active,
@@ -2861,15 +2861,15 @@ a:hover {
 
 .bot-input-pill-wrapper:focus-within {
     background: #FFFFFF !important;
-    border-color: #00ACE3 !important;
-    box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.15) !important;
+    border-color: #10B981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
 }
 
 .bot-input-field {
     background: transparent !important;
     border: none !important;
     outline: none !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-size: 0.875rem;
     flex: 1;
 }
@@ -2882,7 +2882,7 @@ a:hover {
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: #00ACE3 !important;
+    background: #10B981 !important;
     color: #ffffff !important;
     border: none;
     display: grid;
@@ -2890,13 +2890,13 @@ a:hover {
     cursor: pointer;
     flex-shrink: 0;
     transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-    box-shadow: 0 2px 6px rgba(0, 172, 227, 0.3) !important;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3) !important;
 }
 
 .bot-send-btn:hover {
-    background: #0095C6 !important;
+    background: #059669 !important;
     transform: scale(1.05);
-    box-shadow: 0 3px 10px rgba(0, 172, 227, 0.4) !important;
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.4) !important;
 }
 
 .bot-send-btn:active {
@@ -3279,11 +3279,11 @@ a:hover {
     background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
 }
 
-.ui-chevron-cyan {
-    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+.ui-chevron-emerald {
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
 }
 
-.ui-chevron-emerald {
+.ui-chevron-primary {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
 
@@ -3451,7 +3451,7 @@ body,
     background-color: #0b112c !important;
     background-image:
         radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.28) 0px, transparent 55%),
-        radial-gradient(at 0% 100%, rgba(0, 172, 227, 0.24) 0px, transparent 55%),
+        radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.24) 0px, transparent 55%),
         radial-gradient(at 70% 60%, rgba(139, 92, 246, 0.22) 0px, transparent 50%),
         url('../images/devioz-bg-hd.webp'),
         linear-gradient(135deg, #090e24 0%, #0d1538 45%, #141a3d 100%) !important;
@@ -3504,14 +3504,14 @@ body,
 
 .topbar-nav-pill.active {
     background-color: #FFFFFF !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-weight: 700;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 .topbar-nav-pill.active span,
 .topbar-nav-pill.active i {
-    color: #172B4D !important;
+    color: #1F2937 !important;
 }
 
 /* Botón Verde Acción Devioz (+ Nuevo Proyecto) */
@@ -3650,8 +3650,8 @@ body,
 .sidebar .nav-link-custom.active,
 [data-ui-mode="devioz"] .sidebar .nav-link-custom.active {
     color: #FFFFFF !important;
-    background-color: rgba(0, 172, 227, 0.35) !important;
-    border: 1px solid rgba(0, 172, 227, 0.5) !important;
+    background-color: rgba(16, 185, 129, 0.35) !important;
+    border: 1px solid rgba(16, 185, 129, 0.5) !important;
     font-weight: 600 !important;
 }
 
@@ -3681,15 +3681,15 @@ body,
 .sidebar .sidebar-group-toggle:hover,
 [data-ui-mode="devioz"] .sidebar .sidebar-group-toggle:hover {
     color: #FFFFFF !important;
-    background-color: #24385A !important;
+    background-color: #374151 !important;
 }
 
 .sidebar .sidebar-group-toggle.active,
 .sidebar .sidebar-group-toggle[aria-expanded="true"],
 [data-ui-mode="devioz"] .sidebar .sidebar-group-toggle.active,
 [data-ui-mode="devioz"] .sidebar .sidebar-group-toggle[aria-expanded="true"] {
-    color: #00ACE3 !important;
-    background-color: rgba(0, 172, 227, 0.12) !important;
+    color: #10B981 !important;
+    background-color: rgba(16, 185, 129, 0.12) !important;
 }
 
 .sidebar .sidebar-group-toggle .icon-wrapper,
@@ -3706,7 +3706,7 @@ body,
 .sidebar .sidebar-group-toggle[aria-expanded="true"] .icon-wrapper,
 [data-ui-mode="devioz"] .sidebar .sidebar-group-toggle.active .icon-wrapper,
 [data-ui-mode="devioz"] .sidebar .sidebar-group-toggle[aria-expanded="true"] .icon-wrapper {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
 }
 
 .sidebar .sidebar-chevron,
@@ -3724,7 +3724,7 @@ body,
 .sidebar .sidebar-group-toggle[aria-expanded="true"] .sidebar-chevron,
 [data-ui-mode="devioz"] .sidebar .sidebar-group-toggle.active .sidebar-chevron,
 [data-ui-mode="devioz"] .sidebar .sidebar-group-toggle[aria-expanded="true"] .sidebar-chevron {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
 }
 
 .sidebar .sidebar-submenu,
@@ -3747,13 +3747,13 @@ body,
 .sidebar .nav-link-sub:hover,
 [data-ui-mode="devioz"] .sidebar .nav-link-sub:hover {
     color: #FFFFFF !important;
-    background-color: #24385A !important;
+    background-color: #374151 !important;
 }
 
 .sidebar .nav-link-sub.active,
 [data-ui-mode="devioz"] .sidebar .nav-link-sub.active {
     color: #FFFFFF !important;
-    background-color: #00ACE3 !important;
+    background-color: #10B981 !important;
     font-weight: 600 !important;
 }
 
@@ -3767,7 +3767,7 @@ body,
 
 .sidebar .user-profile-badge:hover,
 [data-ui-mode="devioz"] .sidebar .user-profile-badge:hover {
-    background-color: #24385A !important;
+    background-color: #374151 !important;
 }
 
 .sidebar .sidebar-user-name,
@@ -3868,8 +3868,8 @@ body,
 }
 
 .ui-tab-link.active {
-    color: #00ACE3 !important;
-    border-bottom: 3px solid #00ACE3 !important;
+    color: #10B981 !important;
+    border-bottom: 3px solid #10B981 !important;
     background: transparent !important;
 }
 
@@ -3880,10 +3880,10 @@ body,
 
 .ui-tab-link.active i {
     opacity: 1;
-    color: #00ACE3 !important;
+    color: #10B981 !important;
 }
 
-/* Formularios Devioz: Inputs con Fondo #FFFFFF, Borde #D0D7DD, Focus Ring #00ACE3 */
+/* Formularios Devioz: Inputs con Fondo #FFFFFF, Borde #D0D7DD, Focus Ring #10B981 */
 [data-ui-mode="devioz"] .form-control,
 [data-ui-mode="devioz"] .form-select,
 [data-ui-mode="devioz"] .form-control-custom,
@@ -3902,8 +3902,8 @@ body,
 [data-ui-mode="devioz"] .form-select:focus,
 [data-ui-mode="devioz"] .form-control-custom:focus,
 .ui-form-input:focus {
-    border-color: #00ACE3 !important;
-    box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.20) !important;
+    border-color: #10B981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.20) !important;
     background-color: #FFFFFF !important;
     color: #263238 !important;
     outline: none !important;
@@ -3936,7 +3936,7 @@ body,
 
 [data-ui-mode="devioz"] .input-group-text:hover,
 .ui-input-group-btn:hover {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
     background-color: #F4F7F9 !important;
 }
 
@@ -3944,8 +3944,8 @@ body,
 .btn-devioz-primary,
 [data-ui-mode="devioz"] .btn-brand,
 [data-ui-mode="devioz"] .btn-primary {
-    background-color: #00ACE3 !important;
-    border: 1px solid #00ACE3 !important;
+    background-color: #10B981 !important;
+    border: 1px solid #10B981 !important;
     color: #FFFFFF !important;
     border-radius: 7px !important;
     font-weight: 600 !important;
@@ -3959,18 +3959,18 @@ body,
 .btn-devioz-primary:hover,
 [data-ui-mode="devioz"] .btn-brand:hover,
 [data-ui-mode="devioz"] .btn-primary:hover {
-    background-color: #0095C6 !important;
-    border-color: #0095C6 !important;
+    background-color: #059669 !important;
+    border-color: #059669 !important;
     color: #FFFFFF !important;
-    box-shadow: 0 3px 10px rgba(0, 172, 227, 0.35) !important;
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.35) !important;
     transform: translateY(-1px) !important;
 }
 
 .btn-devioz-secondary,
 .btn-devioz-success,
 [data-ui-mode="devioz"] .btn-success {
-    background-color: #7BD500 !important;
-    border: 1px solid #7BD500 !important;
+    background-color: #16A34A !important;
+    border: 1px solid #16A34A !important;
     color: #FFFFFF !important;
     border-radius: 7px !important;
     font-weight: 600 !important;
@@ -3982,10 +3982,10 @@ body,
 .btn-devioz-secondary:hover,
 .btn-devioz-success:hover,
 [data-ui-mode="devioz"] .btn-success:hover {
-    background-color: #6CB800 !important;
-    border-color: #6CB800 !important;
+    background-color: #15803D !important;
+    border-color: #15803D !important;
     color: #FFFFFF !important;
-    box-shadow: 0 3px 10px rgba(123, 213, 0, 0.35) !important;
+    box-shadow: 0 3px 10px rgba(22, 163, 74, 0.35) !important;
     transform: translateY(-1px) !important;
 }
 
@@ -4035,7 +4035,7 @@ body,
     right: 5px;
     width: 18px;
     height: 18px;
-    background-color: #7BD500;
+    background-color: #16A34A;
     border: 3px solid #FFFFFF;
     border-radius: 50%;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
@@ -4048,28 +4048,28 @@ body,
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background-color: #00ACE3;
+    background-color: #10B981;
     color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid #FFFFFF;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 172, 227, 0.45);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.45);
     transition: all 0.18s ease;
 }
 
 .ui-avatar-cam-btn:hover {
-    background-color: #0095C6;
+    background-color: #059669;
     transform: scale(1.08);
     color: #FFFFFF;
 }
 
 /* Badges y Tiles de Métricas Devioz */
 .ui-role-badge-admin {
-    background: rgba(0, 172, 227, 0.1) !important;
+    background: rgba(16, 185, 129, 0.1) !important;
     color: #008cb9 !important;
-    border: 1px solid rgba(0, 172, 227, 0.25) !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     padding: 0.25rem 0.65rem !important;
@@ -4077,9 +4077,9 @@ body,
 }
 
 .ui-role-badge-dev {
-    background: rgba(123, 213, 0, 0.12) !important;
+    background: rgba(22, 163, 74, 0.12) !important;
     color: #5ea300 !important;
-    border: 1px solid rgba(123, 213, 0, 0.25) !important;
+    border: 1px solid rgba(22, 163, 74, 0.25) !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     padding: 0.25rem 0.65rem !important;
@@ -4087,9 +4087,9 @@ body,
 }
 
 .ui-status-active {
-    background: rgba(123, 213, 0, 0.12) !important;
+    background: rgba(22, 163, 74, 0.12) !important;
     color: #5ea300 !important;
-    border: 1px solid rgba(123, 213, 0, 0.25) !important;
+    border: 1px solid rgba(22, 163, 74, 0.25) !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     padding: 0.25rem 0.65rem !important;
@@ -4337,7 +4337,7 @@ body,
     border: 1px solid rgba(249, 115, 22, 0.3);
 }
 
-.gl-label-cyan {
+.gl-label-emerald {
     background-color: rgba(6, 182, 212, 0.14);
     color: #22d3ee;
     border: 1px solid rgba(6, 182, 212, 0.3);
@@ -4548,7 +4548,7 @@ body,
 
 .sidebar-collapse-btn:hover {
     color: #FFFFFF;
-    background-color: #24385A;
+    background-color: #374151;
 }
 
 /* ==============================================================================
@@ -4612,7 +4612,7 @@ body,
 
 .sidebar-collapse-btn:hover {
     color: #FFFFFF !important;
-    background: #24385A !important;
+    background: #374151 !important;
     border-color: rgba(255, 255, 255, 0.28) !important;
 }
 
@@ -5219,12 +5219,12 @@ body,
 [data-ui-mode="devioz"] .devioz-bot-window {
     background-color: #FFFFFF !important;
     border-color: #DBE2E8 !important;
-    box-shadow: 0 16px 40px -6px rgba(23, 43, 77, 0.18), 0 4px 12px rgba(23, 43, 77, 0.08) !important;
+    box-shadow: 0 16px 40px -6px rgba(31, 41, 55, 0.18), 0 4px 12px rgba(31, 41, 55, 0.08) !important;
 }
 
 [data-theme="light"] .bot-window-header,
 [data-ui-mode="devioz"] .bot-window-header {
-    background-color: #172B4D !important;
+    background-color: #1F2937 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -5238,9 +5238,9 @@ body,
 [data-ui-mode="devioz"] .bot-speech-bubble,
 [data-ui-mode="devioz"] .bot-msg-bot {
     background-color: #FFFFFF !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     border: 1px solid #DBE2E8 !important;
-    box-shadow: 0 1px 3px rgba(23, 43, 77, 0.05) !important;
+    box-shadow: 0 1px 3px rgba(31, 41, 55, 0.05) !important;
 }
 
 [data-theme="light"] .bot-suggestions button,
@@ -5258,7 +5258,7 @@ body,
 [data-ui-mode="devioz"] .bot-chip-btn:hover {
     background-color: #EAF6FC !important;
     color: #0077A3 !important;
-    border-color: #00ACE3 !important;
+    border-color: #10B981 !important;
 }
 
 [data-theme="light"] .bot-window-footer,
@@ -5286,7 +5286,7 @@ body,
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: #00ACE3;
+    background: #10B981;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -5294,7 +5294,7 @@ body,
 }
 
 [data-theme="light"] .landing-navbar {
-    background: #00ACE3;
+    background: #10B981;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -5600,14 +5600,14 @@ body,
 
 /* Glassmorphism Navbar with Scroll blur */
 .landing-navbar.nav-scrolled {
-    background: #00ACE3 !important;
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(0, 172, 227, 0.25) !important;
+    background: #10B981 !important;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(16, 185, 129, 0.25) !important;
     padding-top: 0.55rem !important;
     padding-bottom: 0.55rem !important;
 }
 
 [data-theme="light"] .landing-navbar.nav-scrolled {
-    background: #00ACE3 !important;
+    background: #10B981 !important;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -6609,10 +6609,10 @@ body,
 
 .nav-pills .nav-link.active {
     color: #ffffff !important;
-    background: #00ACE3 !important;
-    background: linear-gradient(135deg, #00ACE3 0%, #0095C6 100%) !important;
-    border: 1px solid #00ACE3 !important;
-    box-shadow: 0 4px 14px rgba(0, 172, 227, 0.4) !important;
+    background: #10B981 !important;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+    border: 1px solid #10B981 !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
     transform: translateY(-1px) !important;
 }
 
@@ -6656,11 +6656,11 @@ body,
 [data-theme="light"] .nav-pills .nav-link.active,
 [data-ui-mode="devioz"] .nav-pills .nav-link.active,
 #projectTabs .nav-link.active {
-    background: #00ACE3 !important;
-    background: linear-gradient(135deg, #00ACE3 0%, #0095C6 100%) !important;
-    border: 1px solid #00ACE3 !important;
+    background: #10B981 !important;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+    border: 1px solid #10B981 !important;
     color: #ffffff !important;
-    box-shadow: 0 4px 14px rgba(0, 172, 227, 0.35) !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
     text-shadow: none !important;
 }
 
@@ -6769,18 +6769,18 @@ body,
 
 .sidebar .sidebar-group-toggle:hover {
     color: #FFFFFF !important;
-    background-color: #24385A !important;
+    background-color: #374151 !important;
 }
 
 .sidebar .sidebar-group-toggle.active,
 .sidebar .sidebar-group-toggle[aria-expanded="true"] {
-    color: #00ACE3 !important;
-    background-color: rgba(0, 172, 227, 0.12) !important;
+    color: #10B981 !important;
+    background-color: rgba(16, 185, 129, 0.12) !important;
 }
 
 .sidebar .sidebar-group-toggle.active .icon-wrapper,
 .sidebar .sidebar-group-toggle[aria-expanded="true"] .icon-wrapper {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
 }
 
 .sidebar .sidebar-chevron {
@@ -6793,7 +6793,7 @@ body,
 
 .sidebar .sidebar-group-toggle.active .sidebar-chevron,
 .sidebar .sidebar-group-toggle[aria-expanded="true"] .sidebar-chevron {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
 }
 
 .sidebar .nav-link-custom {
@@ -6804,12 +6804,12 @@ body,
 
 .sidebar .nav-link-custom:hover {
     color: #FFFFFF !important;
-    background-color: #24385A !important;
+    background-color: #374151 !important;
 }
 
 .sidebar .nav-link-custom.active {
     color: #FFFFFF !important;
-    background-color: #00ACE3 !important;
+    background-color: #10B981 !important;
     font-weight: 600 !important;
     border-left: none !important;
 }
@@ -6835,17 +6835,17 @@ body,
 
 .sidebar .nav-link-sub:hover {
     color: #FFFFFF !important;
-    background-color: #24385A !important;
+    background-color: #374151 !important;
 }
 
 .sidebar .nav-link-sub.active {
     color: #FFFFFF !important;
-    background-color: #00ACE3 !important;
+    background-color: #10B981 !important;
     font-weight: 600 !important;
 }
 
 .sidebar .sidebar-footer {
-    background-color: #172B4D !important;
+    background-color: #1F2937 !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -6854,7 +6854,7 @@ body,
 }
 
 .sidebar .user-profile-badge:hover {
-    background-color: #24385A !important;
+    background-color: #374151 !important;
 }
 
 .sidebar .sidebar-user-name {
@@ -6869,19 +6869,19 @@ body,
     background-color: #FFFFFF !important;
     border: 1px solid #DBE2E8 !important;
     border-radius: 8px !important;
-    box-shadow: 0 1px 3px rgba(23, 43, 77, 0.05) !important;
+    box-shadow: 0 1px 3px rgba(31, 41, 55, 0.05) !important;
 }
 
 .topbar {
     background-color: #FFFFFF !important;
     border-bottom: 1px solid #DBE2E8 !important;
-    box-shadow: 0 1px 3px rgba(23, 43, 77, 0.03) !important;
+    box-shadow: 0 1px 3px rgba(31, 41, 55, 0.03) !important;
 }
 
 /* Tablas Corporativas */
 .table {
     --bs-table-bg: transparent;
-    color: #172B4D !important;
+    color: #1F2937 !important;
 }
 
 .table > :not(caption) > * > * {
@@ -6915,9 +6915,9 @@ body,
     flex-direction: column;
     gap: 8px;
     padding: 8px 6px;
-    background: #172B4D;
+    background: #1F2937;
     border-radius: 12px 0 0 12px;
-    box-shadow: -4px 0 20px rgba(23, 43, 77, 0.18);
+    box-shadow: -4px 0 20px rgba(31, 41, 55, 0.18);
     z-index: 1045;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-right: none;
@@ -6942,11 +6942,11 @@ body,
 }
 
 .devioz-dock-btn:hover {
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
-    border-color: #00ACE3;
+    border-color: #10B981;
     transform: scale(1.08) translateX(-3px);
-    box-shadow: 0 4px 12px rgba(0, 172, 227, 0.4);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
 .devioz-dock-btn-video:hover {
@@ -6965,7 +6965,7 @@ body,
     font-weight: 700;
     border-radius: 999px;
     padding: 1px 5px;
-    border: 2px solid #172B4D;
+    border: 2px solid #1F2937;
     line-height: 1;
 }
 
@@ -7102,10 +7102,10 @@ body,
 }
 
 .devioz-chat-bubble-wrap.mine .devioz-chat-bubble {
-    background: linear-gradient(135deg, #00ACE3 0%, #0095C6 100%);
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
     color: #FFFFFF;
     border-radius: 14px 14px 3px 14px;
-    box-shadow: 0 2px 8px rgba(0, 172, 227, 0.25);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
 }
 
 .devioz-chat-bubble-wrap.theirs .devioz-chat-bubble {
@@ -7158,9 +7158,9 @@ body,
 }
 
 .devioz-chip-btn:hover {
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
-    border-color: #00ACE3;
+    border-color: #10B981;
 }
 
 .devioz-chat-footer {
@@ -7181,8 +7181,8 @@ body,
 }
 
 .devioz-chat-input-form:focus-within {
-    border-color: #00ACE3;
-    box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.15);
+    border-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
     background: #FFFFFF;
 }
 
@@ -7201,7 +7201,7 @@ body,
 
 .devioz-chat-send-btn {
     border: none;
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
     width: 32px;
     height: 32px;
@@ -7215,7 +7215,7 @@ body,
 }
 
 .devioz-chat-send-btn:hover {
-    background: #0095C6;
+    background: #059669;
     transform: scale(1.05);
 }
 
@@ -7229,7 +7229,7 @@ body,
 }
 
 .devioz-video-header {
-    background: #172B4D !important;
+    background: #1F2937 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -7252,13 +7252,13 @@ body,
     background: #F4F7F9 !important;
     border: 1px solid #E0E8ED !important;
     border-radius: 999px !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-size: 0.80rem !important;
     transition: all 0.2s ease !important;
 }
 
 .devioz-tracker-btn:hover {
-    border-color: #00ACE3 !important;
+    border-color: #10B981 !important;
     background: #FFFFFF !important;
 }
 
@@ -7315,9 +7315,9 @@ body,
 
 /* 6. Selector de Vistas y Diagrama de Gantt */
 .devioz-view-switcher .btn.active {
-    background: #00ACE3 !important;
+    background: #10B981 !important;
     color: #FFFFFF !important;
-    box-shadow: 0 2px 6px rgba(0, 172, 227, 0.3) !important;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3) !important;
 }
 
 .devioz-gantt-chart .devioz-gantt-row:hover {
@@ -7344,8 +7344,8 @@ input[type="search"],
    Búsqueda Predictiva: Selección Automática y Destacado Visual
    ============================================================ */
 .is-auto-selected {
-    border-color: #00ACE3 !important;
-    box-shadow: 0 0 0 2px #00ACE3, 0 8px 24px rgba(0, 172, 227, 0.18) !important;
+    border-color: #10B981 !important;
+    box-shadow: 0 0 0 2px #10B981, 0 8px 24px rgba(16, 185, 129, 0.18) !important;
     position: relative;
     transform: translateY(-2px);
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -7356,14 +7356,14 @@ input[type="search"],
     position: absolute;
     top: -10px;
     right: 12px;
-    background: #00ACE3;
+    background: #10B981;
     color: #ffffff;
     font-size: 0.65rem;
     font-weight: 700;
     padding: 2px 8px;
     border-radius: 12px;
     letter-spacing: 0.02em;
-    box-shadow: 0 2px 6px rgba(0, 172, 227, 0.4);
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
     z-index: 5;
     pointer-events: none;
 }
@@ -7392,8 +7392,8 @@ input[type="search"],
 }
 
 .link-preview-card:hover {
-    border-color: #00ACE3;
-    box-shadow: 0 4px 14px rgba(0, 172, 227, 0.12);
+    border-color: #10B981;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);
     transform: translateY(-1px);
 }
 
@@ -7418,7 +7418,7 @@ input[type="search"],
     font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: #00ACE3;
+    color: #10B981;
     letter-spacing: 0.04em;
     display: flex;
     align-items: center;
@@ -7428,7 +7428,7 @@ input[type="search"],
 .link-preview-title {
     font-size: 0.88rem;
     font-weight: 600;
-    color: #172B4D;
+    color: #1F2937;
     line-height: 1.3;
     margin: 2px 0 4px 0;
 }
@@ -7453,7 +7453,7 @@ input[type="search"],
 }
 
 .markdown-content h1, .markdown-content h2, .markdown-content h3 {
-    color: #172B4D;
+    color: #1F2937;
     font-weight: 700;
     margin-top: 1.25rem;
     margin-bottom: 0.6rem;
@@ -7509,7 +7509,7 @@ input[type="search"],
 }
 
 .markdown-content blockquote {
-    border-left: 3px solid #00ACE3;
+    border-left: 3px solid #10B981;
     padding-left: 0.85rem;
     margin: 0.85rem 0;
     color: #5A6A85;
@@ -7560,7 +7560,7 @@ input[type="search"],
 [data-theme="light"] .card-enterprise h4,
 [data-theme="light"] .card-enterprise h5,
 [data-theme="light"] .card-enterprise h6 {
-    color: #172B4D !important;
+    color: #1F2937 !important;
 }
 
 /* Evitar que botones se desborden de contenedores flex */
@@ -7586,7 +7586,7 @@ input[type="search"],
 @media print {
     body {
         background: #ffffff !important;
-        color: #172B4D !important;
+        color: #1F2937 !important;
         font-size: 12pt;
     }
 
@@ -7639,10 +7639,10 @@ input[type="search"],
         display: block;
         font-size: 10pt;
         font-weight: 700;
-        color: #00ACE3;
+        color: #10B981;
         letter-spacing: 0.05em;
         margin-bottom: 15px;
-        border-bottom: 2px solid #00ACE3;
+        border-bottom: 2px solid #10B981;
         padding-bottom: 6px;
     }
 }
@@ -7650,9 +7650,9 @@ input[type="search"],
 
 /* Micro-interacción: Tarjetas de Dimensiones ISO 25010 en hover */
 .iso-dimension-card:hover {
-    border-color: #00ACE3 !important;
+    border-color: #10B981 !important;
     background: #FFFFFF !important;
-    box-shadow: 0 4px 12px rgba(0, 172, 227, 0.12);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.12);
     cursor: crosshair;
 }
 
@@ -7670,7 +7670,7 @@ input[type="search"],
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    box-shadow: 0 1px 3px rgba(23, 43, 77, 0.04);
+    box-shadow: 0 1px 3px rgba(31, 41, 55, 0.04);
 }
 
 .devioz-subnav-tabs {
@@ -7699,13 +7699,13 @@ input[type="search"],
     white-space: nowrap;
 }
 .devioz-subnav-tab:hover {
-    color: #172B4D;
+    color: #1F2937;
     background: #F4F5F7;
 }
 .devioz-subnav-tab.active {
-    color: #00ACE3;
-    background: rgba(0, 172, 227, 0.08);
-    border-color: rgba(0, 172, 227, 0.25);
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.25);
 }
 
 /* Devioz UI Counter Pill */
@@ -7725,7 +7725,7 @@ input[type="search"],
     transition: all 0.2s ease;
 }
 .devioz-subnav-tab.active .ui-counter {
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
 }
 
@@ -7753,12 +7753,12 @@ input[type="search"],
     cursor: pointer;
 }
 .devioz-view-switcher .btn-view-toggle:hover {
-    color: #172B4D;
+    color: #1F2937;
 }
 .devioz-view-switcher .btn-view-toggle.active {
     background: #FFFFFF !important;
-    color: #00ACE3 !important;
-    box-shadow: 0 1px 4px rgba(23, 43, 77, 0.12) !important;
+    color: #10B981 !important;
+    box-shadow: 0 1px 4px rgba(31, 41, 55, 0.12) !important;
 }
 
 /* Devioz Kanban Board */
@@ -7804,14 +7804,14 @@ input[type="search"],
     border: 1px solid #DBE2E8;
     border-radius: 8px;
     padding: 12px;
-    box-shadow: 0 1px 2px rgba(23, 43, 77, 0.05);
+    box-shadow: 0 1px 2px rgba(31, 41, 55, 0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
 .devioz-kanban-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(23, 43, 77, 0.1);
-    border-color: #00ACE3;
+    box-shadow: 0 4px 12px rgba(31, 41, 55, 0.1);
+    border-color: #10B981;
 }
 
 
@@ -7819,7 +7819,7 @@ input[type="search"],
  * POPOVER DE CONTROL DE JORNADA LABORAL (Devioz WORKDAY DROPDOWN)
  * ============================================================================== */
 .devioz-workday-popover {
-    box-shadow: 0 10px 30px rgba(23, 43, 77, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(31, 41, 55, 0.15) !important;
     border: 1px solid #DBE2E8 !important;
     animation: fadeInDropdown 0.2s ease-out;
 }
@@ -7923,15 +7923,15 @@ input[type="search"],
 
 .sidepanel-milestone-item:hover {
     background: #FFFFFF;
-    border-color: #00ACE3;
+    border-color: #10B981;
 }
 
 .sidepanel-milestone-item.completed {
-    border-left: 3px solid #7BD500;
+    border-left: 3px solid #16A34A;
 }
 
 .sidepanel-milestone-item.in_progress {
-    border-left: 3px solid #00ACE3;
+    border-left: 3px solid #10B981;
 }
 
 .sidepanel-milestone-item.pending {
@@ -7944,7 +7944,7 @@ input[type="search"],
 .copilot-chip-btn {
     background: #F8FAFB;
     border: 1px solid #DBE2E8;
-    color: #172B4D;
+    color: #1F2937;
     font-size: 0.78rem;
     font-weight: 500;
     padding: 0.38rem 0.75rem;
@@ -7958,17 +7958,17 @@ input[type="search"],
 
 .copilot-chip-btn:hover {
     background: #FFFFFF;
-    border-color: #00ACE3;
-    color: #00ACE3;
-    box-shadow: 0 2px 8px rgba(0, 172, 227, 0.15);
+    border-color: #10B981;
+    color: #10B981;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
     transform: translateY(-1px);
 }
 
 .copilot-chip-btn.active {
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
-    border-color: #00ACE3;
-    box-shadow: 0 2px 8px rgba(0, 172, 227, 0.3);
+    border-color: #10B981;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 .copilot-chip-btn.active i {
@@ -7978,7 +7978,7 @@ input[type="search"],
 .copilot-markdown-content {
     font-size: 0.85rem;
     line-height: 1.65;
-    color: #172B4D;
+    color: #1F2937;
 }
 
 .copilot-markdown-content h1,
@@ -7987,7 +7987,7 @@ input[type="search"],
 .copilot-markdown-content h4,
 .copilot-markdown-content h5,
 .copilot-markdown-content h6 {
-    color: #172B4D;
+    color: #1F2937;
     font-weight: 700;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
@@ -8004,8 +8004,8 @@ input[type="search"],
 }
 
 .copilot-markdown-content code {
-    background: rgba(23, 43, 77, 0.06);
-    color: #00ACE3;
+    background: rgba(31, 41, 55, 0.06);
+    color: #10B981;
     padding: 0.15rem 0.35rem;
     border-radius: 4px;
     font-family: var(--font-mono, monospace);
@@ -8013,7 +8013,7 @@ input[type="search"],
 }
 
 .copilot-markdown-content pre {
-    background: #172B4D;
+    background: #1F2937;
     color: #F8FAFB;
     padding: 0.85rem 1rem;
     border-radius: 8px;
@@ -8084,7 +8084,7 @@ input[type="search"],
 
 .btn-icon-devioz:hover {
     background: #F1F5F9;
-    color: #172B4D;
+    color: #1F2937;
 }
 
 .devioz-chat-search-box {
@@ -8108,15 +8108,15 @@ input[type="search"],
     border: 1px solid #E2E8F0;
     background: #F8FAFC;
     font-size: 0.80rem;
-    color: #172B4D;
+    color: #1F2937;
     outline: none;
     transition: all 0.2s ease;
 }
 
 .devioz-chat-search-box input:focus {
-    border-color: #00ACE3;
+    border-color: #10B981;
     background: #FFFFFF;
-    box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.15);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
 }
 
 .clear-search-btn {
@@ -8152,7 +8152,7 @@ input[type="search"],
 
 .devioz-chat-item.active {
     background: #E8F2FA;
-    border-left: 3px solid #00ACE3;
+    border-left: 3px solid #10B981;
 }
 
 .devioz-chat-avatar {
@@ -8209,14 +8209,14 @@ input[type="search"],
     color: #10B981;
 }
 
-.bg-cyan-box {
-    background: rgba(0, 172, 227, 0.14);
-    color: #00ACE3;
+.bg-emerald-box {
+    background: rgba(16, 185, 129, 0.14);
+    color: #10B981;
 }
 
 .bg-blue-box {
     background: rgba(0, 117, 255, 0.14);
-    color: #0075FF;
+    color: #059669;
 }
 
 .devioz-chat-info {
@@ -8226,11 +8226,11 @@ input[type="search"],
 
 .chat-title {
     font-size: 0.85rem;
-    color: #172B4D;
+    color: #1F2937;
 }
 
 .badge-devioz-bot {
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
     font-size: 0.58rem;
     font-weight: 800;
@@ -8291,7 +8291,7 @@ input[type="search"],
 
 .btn-devioz-videocall {
     background: #EBF5FB;
-    color: #0075FF;
+    color: #059669;
     border: 1px solid rgba(0, 117, 255, 0.25);
     border-radius: 20px;
     font-weight: 600;
@@ -8301,7 +8301,7 @@ input[type="search"],
 }
 
 .btn-devioz-videocall:hover {
-    background: #0075FF;
+    background: #059669;
     color: #FFFFFF;
 }
 
@@ -8366,7 +8366,7 @@ input[type="search"],
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     border: 1px solid #E2E8F0;
     font-size: 0.85rem;
-    color: #172B4D;
+    color: #1F2937;
     line-height: 1.5;
 }
 
@@ -8378,7 +8378,7 @@ input[type="search"],
 
 .msg-author {
     font-size: 0.78rem;
-    color: #0075FF;
+    color: #059669;
     margin-bottom: 0.4rem;
 }
 
@@ -8398,7 +8398,7 @@ input[type="search"],
 
 .devioz-link-attachment-card .attachment-border-line {
     width: 4px;
-    background: #00ACE3;
+    background: #10B981;
 }
 
 .devioz-link-attachment-card .attachment-body {
@@ -8442,8 +8442,8 @@ input[type="search"],
 
 .devioz-composer-box:focus-within {
     background: #FFFFFF;
-    border-color: #00ACE3;
-    box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.15);
+    border-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
 }
 
 .composer-icon-btn {
@@ -8462,7 +8462,7 @@ input[type="search"],
 }
 
 .composer-icon-btn:hover {
-    color: #172B4D;
+    color: #1F2937;
     background: rgba(0, 0, 0, 0.05);
 }
 
@@ -8473,13 +8473,13 @@ input[type="search"],
     outline: none;
     resize: none;
     font-size: 0.85rem;
-    color: #172B4D;
+    color: #1F2937;
     line-height: 1.4;
     max-height: 120px;
 }
 
 .composer-send-btn {
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
     border: none;
     width: 34px;
@@ -8491,7 +8491,7 @@ input[type="search"],
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.85rem;
-    box-shadow: 0 2px 6px rgba(0, 172, 227, 0.35);
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
 }
 
 .composer-send-btn:hover {
@@ -8536,10 +8536,10 @@ input[type="search"],
 .topbar .topbar-icon-btn:hover,
 .topbar-icon-btn:hover {
     background-color: rgba(255, 255, 255, 0.25) !important;
-    border-color: rgba(0, 172, 227, 0.5) !important;
+    border-color: rgba(16, 185, 129, 0.5) !important;
     color: #FFFFFF !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 0 10px rgba(0, 172, 227, 0.25) !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.25) !important;
 }
 
 .topbar .topbar-icon-btn i {
@@ -8562,7 +8562,7 @@ input[type="search"],
 .topbar .btn-user-pill:hover,
 [data-ui-mode="devioz"] .topbar .btn-user-pill:hover {
     background-color: rgba(255, 255, 255, 0.24) !important;
-    border-color: rgba(0, 172, 227, 0.4) !important;
+    border-color: rgba(16, 185, 129, 0.4) !important;
     transform: translateY(-1px) !important;
 }
 
@@ -8593,13 +8593,13 @@ input[type="search"],
 .gl-topbar-search:hover,
 [data-ui-mode="devioz"] .topbar .gl-topbar-search:hover {
     background-color: rgba(255, 255, 255, 0.22) !important;
-    border-color: #00ACE3 !important;
-    box-shadow: 0 0 14px rgba(0, 172, 227, 0.35) !important;
+    border-color: #10B981 !important;
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.35) !important;
     transform: translateY(-1px) !important;
 }
 
 .gl-topbar-search .search-icon-lupa {
-    color: #00ACE3 !important;
+    color: #10B981 !important;
     font-size: 0.85rem !important;
 }
 
@@ -8610,9 +8610,9 @@ input[type="search"],
 }
 
 .gl-topbar-kbd {
-    background: rgba(0, 172, 227, 0.25) !important;
+    background: rgba(16, 185, 129, 0.25) !important;
     color: #FFFFFF !important;
-    border: 1px solid rgba(0, 172, 227, 0.45) !important;
+    border: 1px solid rgba(16, 185, 129, 0.45) !important;
     border-radius: 4px !important;
     font-size: 0.65rem !important;
     padding: 0.15rem 0.35rem !important;
@@ -8645,14 +8645,14 @@ input[type="search"],
     padding: 0.48rem 1rem !important;
     font-size: 0.82rem !important;
     font-weight: 500 !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     text-decoration: none !important;
     transition: all 0.15s ease !important;
 }
 
 .devioz-more-item:hover {
     background-color: #F4F7F9 !important;
-    color: #0075FF !important;
+    color: #059669 !important;
 }
 
 .devioz-more-item i {
@@ -8663,7 +8663,7 @@ input[type="search"],
 }
 
 .devioz-more-item:hover i {
-    color: #0075FF !important;
+    color: #059669 !important;
 }
 
 .devioz-more-text-muted {
@@ -8679,7 +8679,7 @@ body.theme-vibecode {
     background-color: #0b112c !important;
     background-image:
         radial-gradient(at 90% 10%, rgba(99, 102, 241, 0.45) 0px, transparent 50%),
-        radial-gradient(at 10% 90%, rgba(0, 172, 227, 0.40) 0px, transparent 55%),
+        radial-gradient(at 10% 90%, rgba(16, 185, 129, 0.40) 0px, transparent 55%),
         radial-gradient(at 60% 50%, rgba(139, 92, 246, 0.35) 0px, transparent 50%),
         linear-gradient(135deg, #090e24 0%, #0d1538 45%, #141a3d 100%) !important;
     background-attachment: fixed !important;
@@ -8906,15 +8906,15 @@ body.theme-light {
 }
 
 .devioz-theme-card.active {
-    border-color: #00ACE3 !important;
-    box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.35) !important;
+    border-color: #10B981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35) !important;
 }
 
 .devioz-theme-badge-default {
     position: absolute;
     top: 6px;
     left: 8px;
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
     font-size: 0.68rem;
     font-weight: 700;
@@ -8968,7 +8968,7 @@ body.theme-light {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
     display: none;
     align-items: center;
@@ -8993,8 +8993,8 @@ body.theme-light {
     gap: 12px;
 }
 
-.btn-devioz-save-lime {
-    background: #9dcf00 !important;
+.btn-devioz-save {
+    background: #34D399 !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
     font-size: 0.82rem !important;
@@ -9003,16 +9003,16 @@ body.theme-light {
     padding: 7px 24px !important;
     border-radius: 4px !important;
     border: none !important;
-    box-shadow: 0 2px 6px rgba(157, 207, 0, 0.3) !important;
+    box-shadow: 0 2px 6px rgba(52, 211, 153, 0.3) !important;
     transition: all 0.15s ease !important;
 }
 
-.btn-devioz-save-lime:hover {
+.btn-devioz-save:hover {
     background: #8bbb00 !important;
-    box-shadow: 0 4px 10px rgba(157, 207, 0, 0.4) !important;
+    box-shadow: 0 4px 10px rgba(52, 211, 153, 0.4) !important;
 }
 
-.btn-devioz-save-lime:active {
+.btn-devioz-save:active {
     background: #7ca800 !important;
 }
 
@@ -9047,13 +9047,13 @@ body.theme-light {
 
 .theme-preview-card:hover {
     transform: translateY(-3px);
-    border-color: #00ACE3;
-    box-shadow: 0 8px 24px rgba(0, 172, 227, 0.2);
+    border-color: #10B981;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
 }
 
 .theme-preview-card.active {
-    border-color: #00ACE3;
-    box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.3);
+    border-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
 }
 
 .theme-preview-thumb {
@@ -9077,7 +9077,7 @@ body.theme-light {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: #00ACE3;
+    background: #10B981;
     color: #FFFFFF;
     align-items: center;
     justify-content: center;
@@ -9088,7 +9088,7 @@ body.theme-light {
 /* ==============================================================================
  * DEVIOZ OS — TIPOGRAFÍA DE ALTO CONTRASTE (ESTÁNDAR Devioz WALLPAPER)
  * Fuera de las tarjetas: Texto blanco puro (#FFFFFF) con sombra sutil contra el fondo.
- * Dentro de las tarjetas: Texto oscuro (#172B4D) de máxima legibilidad corporativa.
+ * Dentro de las tarjetas: Texto oscuro (#1F2937) de máxima legibilidad corporativa.
  * ============================================================================== */
 
 /* 1. Títulos y Encabezados Fuera de Tarjetas (Directos sobre el wallpaper) */
@@ -9141,7 +9141,7 @@ body.theme-light {
     border-color: rgba(255, 255, 255, 0.45) !important;
 }
 
-/* 3.1 Botones Ghost / Secundarios DENTRO de Tarjetas (Fondo blanco, borde sutil, texto azul marino oscuro #172B4D) */
+/* 3.1 Botones Ghost / Secundarios DENTRO de Tarjetas (Fondo blanco, borde sutil, texto azul marino oscuro #1F2937) */
 .card-custom .btn-ghost,
 .card .btn-ghost,
 .project-header-card .btn-ghost,
@@ -9149,7 +9149,7 @@ body.theme-light {
 .card .btn-outline-secondary {
     background-color: #FFFFFF !important;
     border: 1px solid #D0D7DE !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     text-shadow: none !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
     border-radius: 8px !important;
@@ -9167,7 +9167,7 @@ body.theme-light {
 .card-custom .btn-ghost span,
 .card .btn-ghost span,
 .project-header-card .btn-ghost span {
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-weight: 600 !important;
 }
 
@@ -9183,21 +9183,21 @@ body.theme-light {
 .card-custom .btn-outline-secondary:hover,
 .card .btn-outline-secondary:hover {
     background-color: #F6F8FA !important;
-    border-color: #0075FF !important;
-    color: #0075FF !important;
+    border-color: #059669 !important;
+    color: #059669 !important;
     box-shadow: 0 2px 8px rgba(0, 117, 255, 0.15) !important;
 }
 
 .card-custom .btn-ghost:hover span,
 .card .btn-ghost:hover span,
 .project-header-card .btn-ghost:hover span {
-    color: #0075FF !important;
+    color: #059669 !important;
 }
 
 .card-custom .btn-ghost:hover i:not(.text-danger),
 .card .btn-ghost:hover i:not(.text-danger),
 .project-header-card .btn-ghost:hover i:not(.text-danger) {
-    color: #0075FF !important;
+    color: #059669 !important;
 }
 
 /* 4. DENTRO DE LAS TARJETAS (Máxima Legibilidad y Cero Sombras en Texto) */
@@ -9221,7 +9221,7 @@ body.theme-light {
 .devioz-feed-card h1, .devioz-feed-card h2, .devioz-feed-card h3, .devioz-feed-card h4, .devioz-feed-card h5, .devioz-feed-card h6,
 .devioz-sidepanel h1, .devioz-sidepanel h2, .devioz-sidepanel h3, .devioz-sidepanel h4, .devioz-sidepanel h5, .devioz-sidepanel h6,
 .modal-content h1, .modal-content h2, .modal-content h3, .modal-content h4, .modal-content h5, .modal-content h6 {
-    color: #172B4D !important;
+    color: #1F2937 !important;
 }
 
 .card-custom p,
@@ -9260,7 +9260,7 @@ body.theme-light {
 
 .devioz-subnav-tab.active {
     background: #FFFFFF !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-weight: 700 !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18) !important;
     text-shadow: none !important;
@@ -9273,7 +9273,7 @@ body.theme-light {
 }
 
 .devioz-subnav-tab.active .ui-counter {
-    background: #00ACE3 !important;
+    background: #10B981 !important;
     color: #FFFFFF !important;
     border: none !important;
 }
@@ -9299,7 +9299,7 @@ body.theme-light {
 
 .btn-view-toggle.active {
     background: #FFFFFF !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-weight: 700 !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
     text-shadow: none !important;
@@ -9334,7 +9334,7 @@ body.theme-light {
 
 .category-filter-chip.active {
     background: #FFFFFF !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-weight: 700 !important;
     border-color: #FFFFFF !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18) !important;
@@ -9351,7 +9351,7 @@ body.theme-light {
 }
 
 .category-filter-chip.active .badge {
-    background: #00ACE3 !important;
+    background: #10B981 !important;
     color: #FFFFFF !important;
     border: none !important;
 }
@@ -9530,25 +9530,25 @@ body.theme-light {
 #topbarMoreNavBtn.active {
     background: #FFFFFF !important;
     border-color: #FFFFFF !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
     font-weight: 700 !important;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
 }
 
 #topbarMoreNavBtn.active span,
 #topbarMoreNavBtn.active i {
-    color: #172B4D !important;
+    color: #1F2937 !important;
 }
 
 #topbarMoreNavBtn.active:hover {
     background: #F4F7F9 !important;
     border-color: #F4F7F9 !important;
-    color: #172B4D !important;
+    color: #1F2937 !important;
 }
 
 #topbarMoreNavBtn.active:hover span,
 #topbarMoreNavBtn.active:hover i {
-    color: #172B4D !important;
+    color: #1F2937 !important;
 }
 
 #topbarMoreNavBtn::after,
@@ -9755,8 +9755,8 @@ input.ps-5,
 
 .gl-column.kanban-column:hover,
 .devioz-kanban-col:hover {
-    border-color: rgba(0, 172, 227, 0.65) !important;
-    box-shadow: 0 12px 36px 0 rgba(0, 172, 227, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+    border-color: rgba(16, 185, 129, 0.65) !important;
+    box-shadow: 0 12px 36px 0 rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
 }
 
 /* Cabeceras Chevron Devioz con Borde Redondeado Superior */
@@ -9794,11 +9794,11 @@ input.ps-5,
 
 /* Colores de Etapa estilo Devioz para headers */
 .ui-chevron-blue, .devioz-kanban-col:nth-child(1) .devioz-kanban-col-header {
-    background: linear-gradient(135deg, #00AEEF 0%, #0084B4 100%) !important;
+    background: linear-gradient(135deg, #10B981 0%, #047857 100%) !important;
     color: #FFFFFF !important;
 }
-.ui-chevron-cyan, .devioz-kanban-col:nth-child(2) .devioz-kanban-col-header {
-    background: linear-gradient(135deg, #00C4D4 0%, #00A5B5 100%) !important;
+.ui-chevron-primary, .devioz-kanban-col:nth-child(2) .devioz-kanban-col-header {
+    background: linear-gradient(135deg, #34D399 0%, #059669 100%) !important;
     color: #FFFFFF !important;
 }
 .ui-chevron-emerald, .devioz-kanban-col:nth-child(3) .devioz-kanban-col-header {
@@ -9843,7 +9843,7 @@ input.ps-5,
 .devioz-kanban-card:hover {
     transform: translateY(-3px) scale(1.01) !important;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06) !important;
-    border-color: #00ACE3 !important;
+    border-color: #10B981 !important;
 }
 
 /* Estado Vacío de Columna (Placeholder Traslúcido donde se ve el wallpaper) */
@@ -9936,7 +9936,7 @@ input.ps-5,
     transition: background 0.18s ease, color 0.18s ease;
 }
 .ui-rail-btn:hover { background: #E9F1F5; }
-.ui-rail-btn.active { background: #FFFFFF; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08); color: #0B66C3; }
+.ui-rail-btn.active { background: #FFFFFF; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08); color: #047857; }
 .ui-rail-icon {
     width: 34px;
     height: 34px;
@@ -9945,11 +9945,11 @@ input.ps-5,
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    color: #2FC6F6;
+    color: #34D399;
 }
-.ui-rail-btn.active .ui-rail-icon { color: #0B66C3; }
+.ui-rail-btn.active .ui-rail-icon { color: #047857; }
 .ui-rail-icon-copilot {
-    background: linear-gradient(135deg, #8E52EC 0%, #2FC6F6 100%);
+    background: linear-gradient(135deg, #8E52EC 0%, #34D399 100%);
     color: #FFFFFF !important;
     font-size: 0.9rem;
 }
@@ -9962,7 +9962,7 @@ input.ps-5,
     height: 18px;
     padding: 0 5px;
     border-radius: 9px;
-    background: #0B66C3;
+    background: #047857;
     color: #FFFFFF;
     font-size: 0.62rem;
     font-weight: 700;
@@ -9994,8 +9994,8 @@ input.ps-5,
     gap: 0.35rem;
     transition: all 0.15s ease;
 }
-.ui-msg-chip:hover { border-color: #2FC6F6; }
-.ui-msg-chip.active { background: #E5F7FE; border-color: #2FC6F6; color: #0B66C3; }
+.ui-msg-chip:hover { border-color: #34D399; }
+.ui-msg-chip.active { background: #ECFDF5; border-color: #34D399; color: #047857; }
 .ui-chip-count {
     background: #B8C2CC;
     color: #FFFFFF;
@@ -10028,7 +10028,7 @@ input.ps-5,
 .ui-empty-card {
     position: absolute;
     border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(11, 102, 195, 0.18);
+    box-shadow: 0 10px 30px rgba(4, 120, 87, 0.18);
 }
 .ui-empty-card-back {
     left: 20px; top: 10px; width: 150px; height: 110px;
@@ -10042,7 +10042,7 @@ input.ps-5,
     display: flex; flex-direction: column; gap: 8px; padding: 16px;
 }
 .ui-empty-card-front span { display: block; height: 8px; border-radius: 4px; background: #E0E8ED; }
-.ui-empty-card-front span:nth-child(1) { width: 70%; background: #2FC6F6; }
+.ui-empty-card-front span:nth-child(1) { width: 70%; background: #34D399; }
 .ui-empty-card-front span:nth-child(2) { width: 90%; }
 .ui-empty-card-front span:nth-child(3) { width: 55%; }
 .ui-empty-bubble {
@@ -10054,8 +10054,8 @@ input.ps-5,
     animation: uiFloat 3.2s ease-in-out infinite;
 }
 .ui-empty-bubble-copilot { right: 0; top: 0; background: linear-gradient(135deg, #8E52EC, #F06FA8); }
-.ui-empty-bubble-chat { left: 0; bottom: 0; background: #2FC6F6; animation-delay: 0.6s; }
-.ui-empty-bubble-video { right: 30px; bottom: -6px; background: #9DCF00; animation-delay: 1.2s; }
+.ui-empty-bubble-chat { left: 0; bottom: 0; background: #34D399; animation-delay: 0.6s; }
+.ui-empty-bubble-video { right: 30px; bottom: -6px; background: #34D399; animation-delay: 1.2s; }
 @keyframes uiFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
 .ui-empty-title { font-size: 1.05rem; font-weight: 600; color: #333D47; margin-bottom: 0.35rem; }
@@ -10063,14 +10063,14 @@ input.ps-5,
 .ui-empty-btn {
     border: 1px solid #C3D3DD;
     background: rgba(255, 255, 255, 0.85);
-    color: #0B66C3;
+    color: #047857;
     border-radius: 20px;
     padding: 0.45rem 1.1rem;
     font-size: 0.82rem;
     font-weight: 600;
     transition: all 0.15s ease;
 }
-.ui-empty-btn:hover { background: #FFFFFF; border-color: #2FC6F6; box-shadow: 0 4px 12px rgba(47, 198, 246, 0.25); }
+.ui-empty-btn:hover { background: #FFFFFF; border-color: #34D399; box-shadow: 0 4px 12px rgba(52, 211, 153, 0.25); }
 
 @media (max-width: 991.98px) {
     .ui-msg-rail { width: 58px; min-width: 58px; }

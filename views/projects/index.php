@@ -158,7 +158,7 @@ foreach ($projects as $p) {
                 <div class="card-custom h-100 hover-lift d-flex flex-column overflow-hidden" style="border: 1px solid #DBE2E8;">
                     <div style="height: 140px; position: relative; overflow: hidden; cursor: pointer;" class="p-3 d-flex justify-content-between align-items-start" data-sidepanel-project="<?= $p->id ?>" title="Clic para inspección rápida (SidePanel)">
                         <img src="<?= e($p->coverUrl()) ?>" alt="<?= e($p->name) ?>" class="position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover;" loading="lazy">
-                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, rgba(23, 43, 77, 0.45) 0%, rgba(23, 43, 77, 0.82) 100%);"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, rgba(31, 41, 55, 0.45) 0%, rgba(31, 41, 55, 0.82) 100%);"></div>
                         <span class="badge bg-dark border border-secondary text-white fw-bold position-relative font-monospace" style="z-index: 2;"><?= e($p->code) ?></span>
                         <div class="position-relative d-flex gap-1 align-items-center" style="z-index: 2;">
                             <?= $p->statusBadge() ?>
@@ -180,7 +180,7 @@ foreach ($projects as $p) {
                                     <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size: 0.65rem;">En Galería</span>
                                 <?php endif; ?>
                             </div>
-                            <h5 class="fw-bold mb-2" style="color: #172B4D; font-size: 1.05rem; cursor: pointer;" data-sidepanel-project="<?= $p->id ?>"><?= e($p->name) ?></h5>
+                            <h5 class="fw-bold mb-2" style="color: #1F2937; font-size: 1.05rem; cursor: pointer;" data-sidepanel-project="<?= $p->id ?>"><?= e($p->name) ?></h5>
                             <p class="text-secondary small mb-3 text-truncate-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.82rem;">
                                 <?= e($p->description ?: 'Proyecto de consultoría de software enterprise.') ?>
                             </p>
@@ -191,7 +191,7 @@ foreach ($projects as $p) {
                             <div class="d-flex align-items-center gap-2 p-2 rounded-2 my-2" style="background: #F8FAFB; border: 1px solid #E0E8ED;">
                                 <img src="<?= e($dev ? $dev->avatarUrl() : '') ?>" class="rounded-circle" width="28" height="28" loading="lazy" alt="Avatar" style="object-fit: cover;">
                                 <div class="overflow-hidden min-w-0">
-                                    <div class="fw-semibold small text-truncate" style="color: #172B4D; font-size: 0.78rem;"><?= e($dev ? $dev->name : 'No asignado') ?></div>
+                                    <div class="fw-semibold small text-truncate" style="color: #1F2937; font-size: 0.78rem;"><?= e($dev ? $dev->name : 'No asignado') ?></div>
                                     <div class="text-muted text-truncate" style="font-size: 0.68rem;"><?= e($dev ? $dev->email : '') ?></div>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@ foreach ($projects as $p) {
                                     Avance: <strong class="text-emerald"><?= $p->progressPercentage() ?>%</strong>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <button type="button" class="btn btn-ghost btn-sm border" data-sidepanel-project="<?= $p->id ?>" title="Inspección Rápida (SidePanel)" style="color: #00ACE3;">
+                                    <button type="button" class="btn btn-ghost btn-sm border" data-sidepanel-project="<?= $p->id ?>" title="Inspección Rápida (SidePanel)" style="color: #10B981;">
                                         <i class="fa-solid fa-table-columns"></i>
                                     </button>
                                     <a href="<?= url("/projects/{$p->id}") ?>" class="btn btn-brand btn-sm">Ver Proyecto</a>
@@ -225,8 +225,8 @@ foreach ($projects as $p) {
     <div class="devioz-kanban-board">
         <!-- Columna 1: Asignación Inicial -->
         <div class="devioz-kanban-col">
-            <div class="devioz-kanban-col-header" style="border-top: 3px solid #00ACE3;">
-                <span style="color: #172B4D;">Asignación & Inicio</span>
+            <div class="devioz-kanban-col-header" style="border-top: 3px solid #10B981;">
+                <span style="color: #1F2937;">Asignación & Inicio</span>
                 <span class="ui-counter bg-primary text-white"><?= count($kanbanAssigned) ?></span>
             </div>
             <div class="devioz-kanban-col-body">
@@ -327,7 +327,7 @@ foreach ($projects as $p) {
 
         <!-- Columna 4: Aprobado & Release Certificado -->
         <div class="devioz-kanban-col">
-            <div class="devioz-kanban-col-header" style="border-top: 3px solid #7BD500;">
+            <div class="devioz-kanban-col-header" style="border-top: 3px solid #16A34A;">
                 <span style="color: #FFFFFF;">Certificado & Release</span>
                 <span class="ui-counter bg-success text-white"><?= count($kanbanApproved) ?></span>
             </div>
@@ -386,7 +386,7 @@ foreach ($projects as $p) {
                         ?>
                         <tr class="project-item-card border-bottom" data-search="<?= $searchIndex ?>" style="border-color: #DBE2E8 !important;">
                             <td class="ps-3">
-                                <span class="font-monospace fw-bold" style="color: #00ACE3; font-size: 0.82rem;"><?= e($p->code) ?></span>
+                                <span class="font-monospace fw-bold" style="color: #10B981; font-size: 0.82rem;"><?= e($p->code) ?></span>
                             </td>
                             <td>
                                 <div class="fw-bold text-dark text-truncate" style="max-width: 260px; font-size: 0.85rem;"><?= e($p->name) ?></div>
@@ -427,7 +427,7 @@ foreach ($projects as $p) {
                             </td>
                             <td class="text-end pe-3">
                                 <div class="d-inline-flex gap-1">
-                                    <button type="button" class="btn btn-ghost btn-sm py-1 px-2 border" data-sidepanel-project="<?= $p->id ?>" title="Inspección Rápida (SidePanel)" style="font-size: 0.75rem; color: #00ACE3;">
+                                    <button type="button" class="btn btn-ghost btn-sm py-1 px-2 border" data-sidepanel-project="<?= $p->id ?>" title="Inspección Rápida (SidePanel)" style="font-size: 0.75rem; color: #10B981;">
                                         <i class="fa-solid fa-table-columns"></i>
                                     </button>
                                     <a href="<?= url("/projects/{$p->id}") ?>" class="btn btn-devioz-primary btn-sm py-1 px-2" style="font-size: 0.75rem;">Ver</a>

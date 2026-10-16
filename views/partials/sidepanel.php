@@ -18,7 +18,7 @@ if (!$currentUser) return;
     <!-- Cabecera del SidePanel -->
     <div class="devioz-sidepanel-header">
         <div class="d-flex align-items-center gap-2 flex-wrap min-w-0">
-            <span class="badge font-monospace fw-bold" id="spProjectCode" style="background: rgba(23, 43, 77, 0.08); color: #172B4D; border: 1px solid #DBE2E8; font-size: 0.82rem;">#DEV-000</span>
+            <span class="badge font-monospace fw-bold" id="spProjectCode" style="background: rgba(31, 41, 55, 0.08); color: #1F2937; border: 1px solid #DBE2E8; font-size: 0.82rem;">#DEV-000</span>
             <span id="spProjectStatusBadge"></span>
             <span class="ui-client-badge py-1 px-2" style="font-size: 0.75rem;" id="spProjectClient">
                 <i class="fa-solid fa-briefcase me-1"></i>
@@ -26,7 +26,7 @@ if (!$currentUser) return;
             </span>
         </div>
         <div class="d-flex align-items-center gap-2 ms-auto flex-shrink-0">
-            <a href="#" id="spFullPageLink" class="btn btn-sm btn-ghost p-1 px-2 rounded d-flex align-items-center gap-1" style="font-size: 0.75rem; border: 1px solid #DBE2E8; color: #172B4D;" title="Abrir ficha completa del proyecto">
+            <a href="#" id="spFullPageLink" class="btn btn-sm btn-ghost p-1 px-2 rounded d-flex align-items-center gap-1" style="font-size: 0.75rem; border: 1px solid #DBE2E8; color: #1F2937;" title="Abrir ficha completa del proyecto">
                 <i class="fa-solid fa-up-right-from-square"></i>
                 <span class="d-none d-sm-inline">Página Completa</span>
             </a>
@@ -40,14 +40,14 @@ if (!$currentUser) return;
     <div class="devioz-sidepanel-body" id="deviozSidepanelBody">
         <!-- Estado Cargando (Spinner) -->
         <div id="spLoadingState" class="text-center py-5">
-            <div class="spinner-border text-primary mb-2" role="status" style="width: 2rem; height: 2rem; color: #00ACE3 !important;"></div>
+            <div class="spinner-border text-primary mb-2" role="status" style="width: 2rem; height: 2rem; color: #10B981 !important;"></div>
             <div class="text-secondary small">Cargando inspección de proyecto...</div>
         </div>
 
         <!-- Contenido Dinámico del Proyecto -->
         <div id="spContentState" class="d-none">
             <!-- Título del Proyecto -->
-            <h4 class="fw-bold mb-2" id="spProjectTitle" style="color: #172B4D; font-size: 1.35rem; letter-spacing: -0.01em;"></h4>
+            <h4 class="fw-bold mb-2" id="spProjectTitle" style="color: #1F2937; font-size: 1.35rem; letter-spacing: -0.01em;"></h4>
 
             <!-- Stack Tecnológico -->
             <div class="d-flex flex-wrap gap-1 mb-3" id="spTechStack"></div>
@@ -57,7 +57,7 @@ if (!$currentUser) return;
                 <div class="col-sm-4">
                     <div class="p-2 rounded text-center" style="background: #F8FAFB; border: 1px solid #E0E8ED;">
                         <div class="text-secondary small" style="font-size: 0.68rem;">Avance SDLC</div>
-                        <div class="fw-bold font-monospace" style="color: #00ACE3; font-size: 1.1rem;" id="spProgressText">0%</div>
+                        <div class="fw-bold font-monospace" style="color: #10B981; font-size: 1.1rem;" id="spProgressText">0%</div>
                         <div class="progress mt-1" style="height: 4px; background: #E2E8F0;">
                             <div class="progress-bar bg-emerald rounded" id="spProgressBar" style="width: 0%;"></div>
                         </div>
@@ -66,7 +66,7 @@ if (!$currentUser) return;
                 <div class="col-sm-4">
                     <div class="p-2 rounded text-center" style="background: #F8FAFB; border: 1px solid #E0E8ED;">
                         <div class="text-secondary small" style="font-size: 0.68rem;">Dictamen QA</div>
-                        <div class="fw-bold" style="color: #7BD500; font-size: 1.1rem;" id="spScoreText">—</div>
+                        <div class="fw-bold" style="color: #16A34A; font-size: 1.1rem;" id="spScoreText">—</div>
                         <span class="badge bg-success-subtle text-success p-0 px-1 font-monospace" style="font-size: 0.62rem;" id="spScoreBadge">ISO 25010</span>
                     </div>
                 </div>
@@ -126,10 +126,10 @@ if (!$currentUser) return;
     <!-- Pie del SidePanel con Acciones Rápidas -->
     <div class="devioz-sidepanel-footer">
         <div class="d-flex align-items-center gap-2" id="spExternalLinks">
-            <a href="#" target="_blank" class="btn btn-sm btn-ghost p-1 px-2 border d-none" id="spRepoLink" style="font-size: 0.75rem; color: #172B4D;">
+            <a href="#" target="_blank" class="btn btn-sm btn-ghost p-1 px-2 border d-none" id="spRepoLink" style="font-size: 0.75rem; color: #1F2937;">
                 <i class="fa-brands fa-github me-1"></i> Repositorio
             </a>
-            <a href="#" target="_blank" class="btn btn-sm btn-ghost p-1 px-2 border d-none" id="spDemoLink" style="font-size: 0.75rem; color: #172B4D;">
+            <a href="#" target="_blank" class="btn btn-sm btn-ghost p-1 px-2 border d-none" id="spDemoLink" style="font-size: 0.75rem; color: #1F2937;">
                 <i class="fa-solid fa-arrow-up-right-from-square me-1 text-emerald"></i> Demo
             </a>
         </div>

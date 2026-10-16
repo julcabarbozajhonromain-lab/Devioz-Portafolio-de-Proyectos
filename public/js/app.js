@@ -943,13 +943,13 @@ function initDeviozBot() {
         const statusEl = document.getElementById('labvaStatusText');
         if (statusEl) {
             if (state === 'searching') {
-                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #00ACE3;">●</span> Analizando consulta...';
+                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #10B981;">●</span> Analizando consulta...';
             } else if (state === 'typing') {
-                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #00ACE3;">●</span> Escuchando...';
+                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #10B981;">●</span> Escuchando...';
             } else if (state === 'happy') {
-                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #7BD500;">●</span> Respuesta lista';
+                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #16A34A;">●</span> Respuesta lista';
             } else {
-                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #7BD500;">●</span> En línea &bull; Asistente Devioz OS';
+                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #16A34A;">●</span> En línea &bull; Asistente Devioz OS';
             }
         }
     }
@@ -1076,7 +1076,7 @@ function initDeviozBot() {
                     </svg>
                 </div>
                 <div class="bot-speech-bubble d-flex align-items-center gap-2">
-                    <span class="spinner-border spinner-border-sm" style="width: 12px; height: 12px; color: #00ACE3;" role="status"></span>
+                    <span class="spinner-border spinner-border-sm" style="width: 12px; height: 12px; color: #10B981;" role="status"></span>
                     <span style="font-size: 0.85rem; color: #5E6C84;">LABVA está analizando la consulta...</span>
                 </div>
             </div>
@@ -1902,13 +1902,13 @@ function initStatsChart() {
                     {
                         label: 'Horas Trabajadas Reportadas',
                         data: (hours && hours.length) ? hours : [4, 6, 7.5, 5, 8, 3, 2],
-                        borderColor: '#00ACE3',
-                        backgroundColor: 'rgba(0, 172, 227, 0.12)',
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.12)',
                         fill: true,
                         tension: 0.35,
                         borderWidth: 2.5,
                         pointRadius: 4,
-                        pointBackgroundColor: '#00ACE3',
+                        pointBackgroundColor: '#10B981',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 2,
                     },
@@ -1928,7 +1928,7 @@ function initStatsChart() {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        grid: { color: 'rgba(23, 43, 77, 0.08)' },
+                        grid: { color: 'rgba(31, 41, 55, 0.08)' },
                         ticks: { color: '#78909C' },
                     },
                     x: {
@@ -2678,7 +2678,7 @@ function initDeviozSuite() {
                     profileWorkdayDot.style.boxShadow = 'none';
                 }
                 if (popoverQuickWorkdayBtn) {
-                    popoverQuickWorkdayBtn.style.background = '#0075FF';
+                    popoverQuickWorkdayBtn.style.background = '#059669';
                     popoverQuickWorkdayBtn.title = 'Continuar jornada';
                 }
                 if (popoverQuickWorkdayLabel) {
@@ -2699,7 +2699,7 @@ function initDeviozSuite() {
                     profileWorkdayDot.style.boxShadow = 'none';
                 }
                 if (popoverQuickWorkdayBtn) {
-                    popoverQuickWorkdayBtn.style.background = '#0075FF';
+                    popoverQuickWorkdayBtn.style.background = '#059669';
                     popoverQuickWorkdayBtn.title = 'Iniciar jornada';
                 }
                 if (popoverQuickWorkdayLabel) {

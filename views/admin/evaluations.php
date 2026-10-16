@@ -49,7 +49,7 @@ declare(strict_types=1);
                 <?php foreach ($pendingDeliveries as $del): ?>
                     <tr class="border-bottom" style="border-color: #E0E8ED !important;">
                         <td>
-                            <span class="fw-bold font-monospace text-primary" style="color: #00ACE3 !important;">#<?= e($del['project_code']) ?></span>
+                            <span class="fw-bold font-monospace text-primary" style="color: #10B981 !important;">#<?= e($del['project_code']) ?></span>
                             <div class="small text-secondary text-truncate" style="max-width: 160px;"><?= e($del['project_name']) ?></div>
                         </td>
                         <td class="fw-medium text-dark whitespace-nowrap"><?= e($del['developer_name']) ?></td>
@@ -61,7 +61,7 @@ declare(strict_types=1);
                         <td>
                             <?php if (!empty($del['video_url'])): ?>
                                 <button type="button" class="btn btn-devioz-ghost btn-sm py-0 px-2 whitespace-nowrap" data-video-url="<?= e($del['video_url']) ?>" data-video-title="Entrega: <?= e($del['title']) ?> (<?= e($del['developer_name']) ?>)">
-                                    <i class="fa-solid fa-play text-primary me-1" style="color: #00ACE3 !important;"></i> Reel
+                                    <i class="fa-solid fa-play text-primary me-1" style="color: #10B981 !important;"></i> Reel
                                 </button>
                             <?php endif; ?>
                             <?php if (!empty($del['files'])): ?>
@@ -86,7 +86,7 @@ declare(strict_types=1);
                 <?php if (empty($pendingDeliveries)): ?>
                     <tr>
                         <td colspan="6" class="text-center py-4 text-secondary small">
-                            <i class="fa-solid fa-circle-check text-success me-1" style="color: #7BD500 !important;"></i> ¡Al día! No hay entregables pendientes de auditoría en este momento.
+                            <i class="fa-solid fa-circle-check text-success me-1" style="color: #16A34A !important;"></i> ¡Al día! No hay entregables pendientes de auditoría en este momento.
                         </td>
                     </tr>
                 <?php endif; ?>
@@ -99,7 +99,7 @@ declare(strict_types=1);
 <div class="card-enterprise">
     <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom" style="border-color: #E0E8ED !important;">
         <div class="fw-bold text-dark" style="font-size: 16px;">Historial de Dictámenes de Calidad & QA</div>
-        <span class="badge bg-primary-subtle text-primary whitespace-nowrap" style="color: #00ACE3 !important; font-weight: 600;">Checklist Certificado</span>
+        <span class="badge bg-primary-subtle text-primary whitespace-nowrap" style="color: #10B981 !important; font-weight: 600;">Checklist Certificado</span>
     </div>
 
     <div class="table-responsive">
@@ -117,13 +117,13 @@ declare(strict_types=1);
             <tbody>
                 <?php foreach ($evaluations as $ev): ?>
                     <tr class="border-bottom" style="border-color: #E0E8ED !important;">
-                        <td class="fw-bold font-monospace text-primary" style="color: #00ACE3 !important;">#<?= e($ev['project_code']) ?></td>
+                        <td class="fw-bold font-monospace text-primary" style="color: #10B981 !important;">#<?= e($ev['project_code']) ?></td>
                         <td class="fw-medium text-dark whitespace-nowrap"><?= e($ev['developer_name']) ?></td>
                         <td class="small text-secondary whitespace-nowrap">
-                            <i class="fa-solid fa-user-shield me-1 text-primary" style="color: #00ACE3 !important;"></i> <?= e($ev['evaluator_name']) ?>
+                            <i class="fa-solid fa-user-shield me-1 text-primary" style="color: #10B981 !important;"></i> <?= e($ev['evaluator_name']) ?>
                         </td>
                         <td>
-                            <span class="badge whitespace-nowrap" style="background: rgba(123, 213, 0, 0.15); color: #5ea300; font-size: 13px; font-weight: 700; border: 1px solid rgba(123, 213, 0, 0.25);">
+                            <span class="badge whitespace-nowrap" style="background: rgba(22, 163, 74, 0.15); color: #5ea300; font-size: 13px; font-weight: 700; border: 1px solid rgba(22, 163, 74, 0.25);">
                                 QA: <?= number_format((float)$ev['score'], 1) ?>
                             </span>
                         </td>
@@ -147,7 +147,7 @@ declare(strict_types=1);
         <div class="modal-content card-enterprise p-0 overflow-hidden" style="border-radius: 12px;">
             <div class="modal-header p-3 px-4" style="border-bottom: 1px solid #E0E8ED;">
                 <h5 class="modal-title fw-bold text-dark d-flex align-items-center gap-2" id="gradeModalTitle" style="font-size: 18px;">
-                    <i class="fa-solid fa-clipboard-check text-primary" style="color: #00ACE3 !important;"></i>
+                    <i class="fa-solid fa-clipboard-check text-primary" style="color: #10B981 !important;"></i>
                     <span>Dictaminar Entrega & QA Score</span>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>

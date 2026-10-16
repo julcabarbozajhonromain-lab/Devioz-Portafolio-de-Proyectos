@@ -174,7 +174,7 @@ declare(strict_types=1);
                                 <img src="<?= e($author ? $author->avatarUrl() : '') ?>" alt="<?= e($author ? $author->name : 'Dev') ?>" class="rounded-circle border border-secondary" width="44" height="44" style="object-fit: cover;" loading="lazy">
                                 <div>
                                     <div class="d-flex align-items-center gap-2">
-                                        <span class="fw-bold small" style="color: #172B4D;"><?= e($author ? $author->name : 'Consultor Devioz') ?></span>
+                                        <span class="fw-bold small" style="color: #1F2937;"><?= e($author ? $author->name : 'Consultor Devioz') ?></span>
                                         <span class="badge <?= ($author && $author->isAdmin()) ? 'bg-danger' : 'bg-emerald' ?>" style="font-size: 0.65rem; padding: 2px 6px;">
                                             <?= ($author && $author->isAdmin()) ? 'Administrador' : 'Desarrollador' ?>
                                         </span>
@@ -342,7 +342,7 @@ declare(strict_types=1);
                                                 <div class="comment-bubble">
                                                     <div class="d-flex justify-content-between align-items-center mb-1 gap-2">
                                                         <div class="d-flex align-items-center gap-1 flex-wrap">
-                                                            <span class="fw-bold small" style="color: #172B4D;"><?= e($cUser ? $cUser->name : 'Usuario') ?></span>
+                                                            <span class="fw-bold small" style="color: #1F2937;"><?= e($cUser ? $cUser->name : 'Usuario') ?></span>
                                                             <span class="badge <?= ($cUser && $cUser->isAdmin()) ? 'bg-danger' : 'bg-emerald' ?> p-1" style="font-size: 0.6rem;">
                                                                 <?= ($cUser && $cUser->isAdmin()) ? 'Administrador' : 'Desarrollador' ?>
                                                             </span>

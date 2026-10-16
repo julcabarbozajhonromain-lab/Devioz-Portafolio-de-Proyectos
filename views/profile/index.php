@@ -27,7 +27,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
         <div>
             <h2 class="fw-bold mb-0 page-header-title d-flex align-items-center gap-2 text-white" style="font-size: 22px; color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 2px 8px rgba(0, 0, 0, 0.35) !important;">
-                <i class="fa-solid fa-user-gear" style="color: #00ACE3;"></i>
+                <i class="fa-solid fa-user-gear" style="color: #10B981;"></i>
                 <span>Configuración de Cuenta y Perfil</span>
             </h2>
         </div>
@@ -157,7 +157,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
         <!-- COLUMNA DERECHA: PESTAÑAS Y PANELES DEVIOZ                               -->
         <!-- ========================================================================= -->
         <div class="col-lg-8 col-xl-9">
-            <!-- Pestañas Horizontales Estilo Devioz (Borde Inferior Azul #00ACE3) -->
+            <!-- Pestañas Horizontales Estilo Devioz (Borde Inferior Azul #10B981) -->
             <ul class="ui-tabs-nav nav" id="profileTabsNav" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="ui-tab-link active" id="tab-personal-btn" data-bs-toggle="tab" data-bs-target="#tab-personal" type="button" role="tab" aria-controls="tab-personal" aria-selected="true">
@@ -203,7 +203,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                                 <h3 class="ui-panel-title">Información Personal y Profesional</h3>
                                 <p class="ui-panel-subtitle">Actualiza tus nombres, correo y detalles visibles para supervisores y compañeros de proyecto.</p>
                             </div>
-                            <span class="badge" style="background: rgba(0, 172, 227, 0.1); color: #00ACE3; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;">
+                            <span class="badge" style="background: rgba(16, 185, 129, 0.1); color: #10B981; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;">
                                 <i class="fa-solid fa-pen-to-square me-1"></i> Editable
                             </span>
                         </div>
@@ -339,7 +339,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
 
                                 <div class="col-12">
                                     <div class="ui-alert-box">
-                                        <i class="fa-solid fa-circle-info" style="color: #00ACE3; font-size: 1rem;"></i>
+                                        <i class="fa-solid fa-circle-info" style="color: #10B981; font-size: 1rem;"></i>
                                         <span>Recomendación: Usa una combinación de letras mayúsculas, minúsculas, números y caracteres especiales para máxima solidez.</span>
                                     </div>
                                 </div>
@@ -495,7 +495,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                             </div>
 
                             <!-- 5. Flor Cósmica (Por defecto) -->
-                            <div class="devioz-theme-card active" data-theme-key="vibecode" title="Flor Cósmica de Cristal" style="background: radial-gradient(at 85% 15%, #6366f1 0px, transparent 55%), radial-gradient(at 15% 85%, #00ace3 0px, transparent 55%), linear-gradient(135deg, #090e24 0%, #151b45 50%, #201a4e 100%);">
+                            <div class="devioz-theme-card active" data-theme-key="vibecode" title="Flor Cósmica de Cristal" style="background: radial-gradient(at 85% 15%, #6366f1 0px, transparent 55%), radial-gradient(at 15% 85%, #10B981 0px, transparent 55%), linear-gradient(135deg, #090e24 0%, #151b45 50%, #201a4e 100%);">
                                 <span class="devioz-theme-badge-default">Por defecto</span>
                                 <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
@@ -522,7 +522,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                                 <i class="fa-solid fa-circle-info text-info fs-5"></i>
                                 <span class="small text-secondary" style="font-size: 13px;">Haz clic en cualquier miniatura para aplicar el tema en vivo. También puedes subir tu propio fondo personalizado desde la galería.</span>
                             </div>
-                            <button type="button" class="btn btn-devioz-save-lime btn-sm px-4" data-theme-modal-trigger>
+                            <button type="button" class="btn btn-devioz-save btn-sm px-4" data-theme-modal-trigger>
                                 <i class="fa-solid fa-images me-1"></i> Ver Todos (16 Fondos)
                             </button>
                         </div>

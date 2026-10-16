@@ -109,7 +109,7 @@ class User extends Model
         // Paleta de gradientes refinados acorde a Devioz
         $palette = [
             ['#10b981', '#059669'], // Esmeralda
-            ['#06b6d4', '#0891b2'], // Cyan
+            ['#10b981', '#047857'], // Verde esmeralda
             ['#6366f1', '#4f46e5'], // Índigo
             ['#8b5cf6', '#7c3aed'], // Violeta
             ['#3b82f6', '#2563eb'], // Azul Royal

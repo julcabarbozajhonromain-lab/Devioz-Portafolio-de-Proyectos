@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h3 class="fw-bold mb-1" style="color: #172B4D;">Asistente de Proyecto (Wizard)</h3>
+        <h3 class="fw-bold mb-1" style="color: #1F2937;">Asistente de Proyecto (Wizard)</h3>
         <p class="text-secondary small mb-0">Configura paso a paso los 5 modulos clave de <?= e($project->code) ?></p>
     </div>
     <a href="<?= url("/projects/{$project->id}") ?>" class="btn btn-ghost">&larr; Volver al Proyecto</a>
@@ -43,7 +43,7 @@ declare(strict_types=1);
 
                 <!-- PASO 1: GENERAL -->
                 <div class="wizard-pane active" id="wizardStep1">
-                    <h5 class="fw-bold mb-3" style="color: #172B4D;">Paso 1: Informacion General</h5>
+                    <h5 class="fw-bold mb-3" style="color: #1F2937;">Paso 1: Informacion General</h5>
                     <div class="mb-3">
                         <label class="form-label-custom">Nombre del Proyecto</label>
                         <input type="text" name="name" class="form-control form-control-custom" value="<?= e($project->name) ?>" required>
@@ -56,7 +56,7 @@ declare(strict_types=1);
 
                 <!-- Paso 2: Cronograma -->
                 <div class="wizard-pane d-none" id="wizardStep2">
-                    <h5 class="fw-bold mb-3" style="color: #172B4D;">Paso 2: Cronograma de Hitos</h5>
+                    <h5 class="fw-bold mb-3" style="color: #1F2937;">Paso 2: Cronograma de Hitos</h5>
                     <p class="text-secondary small">Revisa el estado de los hitos asociados al proyecto:</p>
                     <ul class="list-group list-group-flush mb-3" style="--bs-list-group-bg: transparent;">
                         <?php foreach ($project->milestones() as $m): ?>
@@ -70,7 +70,7 @@ declare(strict_types=1);
 
                 <!-- PASO 3: MULTIMEDIA -->
                 <div class="wizard-pane d-none" id="wizardStep3">
-                    <h5 class="fw-bold mb-3" style="color: #172B4D;">Paso 3: Enlaces y Multimedia</h5>
+                    <h5 class="fw-bold mb-3" style="color: #1F2937;">Paso 3: Enlaces y Multimedia</h5>
                     <div class="mb-3">
                         <label class="form-label-custom">URL del Repositorio de Codigo</label>
                         <input type="url" name="repository_url" class="form-control form-control-custom" value="<?= e($project->repository_url) ?>">
@@ -87,7 +87,7 @@ declare(strict_types=1);
 
                 <!-- PASO 4: DOCUMENTACION -->
                 <div class="wizard-pane d-none" id="wizardStep4">
-                    <h5 class="fw-bold mb-3" style="color: #172B4D;">Paso 4: Documentacion Tecnica</h5>
+                    <h5 class="fw-bold mb-3" style="color: #1F2937;">Paso 4: Documentacion Tecnica</h5>
                     <div class="mb-3">
                         <label class="form-label-custom">Contenido Markdown</label>
                         <textarea name="documentation" rows="8" class="form-control form-control-custom font-monospace"><?= e($project->documentation) ?></textarea>
@@ -96,9 +96,9 @@ declare(strict_types=1);
 
                 <!-- Paso 5: Resumen -->
                 <div class="wizard-pane d-none" id="wizardStep5">
-                    <h5 class="fw-bold mb-3" style="color: #172B4D;">Paso 5: Resumen y Confirmacion</h5>
+                    <h5 class="fw-bold mb-3" style="color: #1F2937;">Paso 5: Resumen y Confirmacion</h5>
                     <div class="p-3 rounded mb-3" style="background: #F8FAFB; border: 1px solid var(--border-color);">
-                        <div class="mb-2"><strong class="text-secondary">Codigo:</strong> <span class="fw-bold" style="color: #00ACE3;"><?= e($project->code) ?></span></div>
+                        <div class="mb-2"><strong class="text-secondary">Codigo:</strong> <span class="fw-bold" style="color: #10B981;"><?= e($project->code) ?></span></div>
                         <div class="mb-2"><strong class="text-secondary">Nombre:</strong> <span class="fw-medium text-dark"><?= e($project->name) ?></span></div>
                         <div class="mb-2"><strong class="text-secondary">Sede:</strong> <span class="badge-sede"><?= e($project->sede) ?></span></div>
                         <div class="mb-2"><strong class="text-secondary">Estado:</strong> <?= $project->statusBadge() ?></div>

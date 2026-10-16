@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center gap-2">
-        <span class="badge font-monospace fw-bold" style="background: rgba(23, 43, 77, 0.08); color: #172B4D; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
+        <span class="badge font-monospace fw-bold" style="background: rgba(31, 41, 55, 0.08); color: #1F2937; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
         <span class="fw-semibold" style="color: var(--text-primary);"><?= e($project->name) ?></span>
     </div>
     <div class="d-flex gap-2">

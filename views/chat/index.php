@@ -132,7 +132,7 @@ $directCount = count($contacts);
                      data-channel-title="Chat general"
                      data-channel-subtitle="Canal público de ingeniería &bull; Todo el equipo">
                     <div class="devioz-chat-avatar">
-                        <div class="channel-icon-box bg-cyan-box">
+                        <div class="channel-icon-box bg-emerald-box">
                             <i class="fa-solid fa-comments"></i>
                         </div>
                     </div>

@@ -160,7 +160,7 @@ use App\Core\View;
                 <div>
                     <div class="fw-bold text-white small d-flex align-items-center gap-1" id="botHeaderTitle">
                         <span>LABVA</span>
-                        <span class="badge" style="background-color: #00ACE3; font-size: 0.6rem; padding: 2px 6px;">AI</span>
+                        <span class="badge" style="background-color: #10B981; font-size: 0.6rem; padding: 2px 6px;">AI</span>
                     </div>
                     <div class="bot-header-status" id="labvaStatusText"><span class="bot-status-dot-inline">●</span> En línea &bull; Asistente Devioz OS</div>
                 </div>

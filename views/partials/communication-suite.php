@@ -132,7 +132,7 @@ if (!$currentUser) return;
         <div class="modal-content shadow-lg border-0 rounded-4">
             <div class="modal-header border-bottom py-3">
                 <h6 class="modal-title fw-bold text-dark d-flex align-items-center gap-2" id="deviozRequestCallTitle">
-                    <span class="p-2 rounded-circle" style="background: rgba(0, 172, 227, 0.12); color: #00ACE3;">
+                    <span class="p-2 rounded-circle" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">
                         <i class="fa-solid fa-phone"></i>
                     </span>
                     Solicitar Contacto Inmediato con Administración

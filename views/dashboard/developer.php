@@ -63,7 +63,7 @@ declare(strict_types=1);
                 <div class="p-3 rounded text-start" style="background: var(--bg-card-hover); border: 1px solid var(--border-color);">
                     <div class="small text-secondary mb-1">Asignado por / Lead:</div>
                     <div class="fw-semibold small mb-2" style="color: var(--text-primary);"><?= e($project->assignedBy() ? $project->assignedBy()->name : 'Administrador Responsable') ?></div>
-                    <a href="<?= url('/my-project') ?>" class="btn btn-brand btn-sm w-100 justify-content-center fw-bold" style="color: #172B4D !important;">Ver Detalles y Hitos</a>
+                    <a href="<?= url('/my-project') ?>" class="btn btn-brand btn-sm w-100 justify-content-center fw-bold" style="color: #1F2937 !important;">Ver Detalles y Hitos</a>
                 </div>
             </div>
         </div>

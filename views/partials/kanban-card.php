@@ -76,7 +76,7 @@ $dueDate = $p->assigned_at ? date('d M, 18:00', strtotime($p->assigned_at . ' +1
         <?php
         $cIdx = 0;
         foreach (array_slice($techs, 0, 2) as $t):
-            $colorPills = ['gl-label-cyan', 'gl-label-blue', 'gl-label-purple', 'gl-label-orange'];
+            $colorPills = ['gl-label-emerald', 'gl-label-blue', 'gl-label-purple', 'gl-label-orange'];
             $cClass = $colorPills[$cIdx % 4];
             $cIdx++;
         ?>

@@ -142,7 +142,7 @@ declare(strict_types=1);
     <div class="col-12 col-xl-8">
         <div class="card-custom">
             <div class="card-header-custom">
-                <div class="fw-semibold" style="color: #172B4D;">Últimos Proyectos Actualizados</div>
+                <div class="fw-semibold" style="color: #1F2937;">Últimos Proyectos Actualizados</div>
                 <a href="<?= url('/projects') ?>" class="small text-emerald text-decoration-none fw-semibold">Ver todos &rarr;</a>
             </div>
             <div class="table-responsive">
@@ -163,7 +163,7 @@ declare(strict_types=1);
                             <tr class="border-bottom" style="border-color: var(--border-color) !important;">
                                 <td class="fw-bold text-emerald font-monospace small text-nowrap"><?= e($p->code) ?></td>
                                 <td>
-                                    <div class="fw-medium" style="color: #172B4D;"><?= e($p->name) ?></div>
+                                    <div class="fw-medium" style="color: #1F2937;"><?= e($p->name) ?></div>
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2 min-w-0">

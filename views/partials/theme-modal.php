@@ -60,7 +60,7 @@ declare(strict_types=1);
                 <div class="devioz-theme-card active"
                      data-theme-key="vibecode"
                      title="Flor Cósmica de Cristal (Por defecto)"
-                     style="background: radial-gradient(at 85% 15%, #6366f1 0px, transparent 55%), radial-gradient(at 15% 85%, #00ace3 0px, transparent 55%), linear-gradient(135deg, #090e24 0%, #151b45 50%, #201a4e 100%);">
+                     style="background: radial-gradient(at 85% 15%, #6366f1 0px, transparent 55%), radial-gradient(at 15% 85%, #10B981 0px, transparent 55%), linear-gradient(135deg, #090e24 0%, #151b45 50%, #201a4e 100%);">
                     <span class="devioz-theme-badge-default">Por defecto</span>
                     <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                 </div>
@@ -172,7 +172,7 @@ declare(strict_types=1);
 
                 <!-- Botones de Acción -->
                 <div class="d-flex align-items-center gap-3 ms-auto flex-wrap">
-                    <button type="button" class="btn btn-devioz-save-lime" id="deviozSaveThemeBtn">
+                    <button type="button" class="btn btn-devioz-save" id="deviozSaveThemeBtn">
                         GUARDAR
                     </button>
                     <button type="button" class="btn btn-devioz-modal-link" data-bs-dismiss="modal">

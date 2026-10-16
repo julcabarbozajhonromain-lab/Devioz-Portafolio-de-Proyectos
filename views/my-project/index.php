@@ -16,11 +16,11 @@ declare(strict_types=1);
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                <span class="badge font-monospace fw-bold" style="background: rgba(23, 43, 77, 0.08); color: #172B4D; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
+                <span class="badge font-monospace fw-bold" style="background: rgba(31, 41, 55, 0.08); color: #1F2937; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
                 <?= $project->statusBadge() ?>
                 <span class="badge-sede"><?= e($project->sede) ?></span>
             </div>
-            <h3 class="fw-bold mb-1 project-hero-title" style="color: #172B4D; font-size: 1.45rem; letter-spacing: -0.01em;"><?= e($project->name) ?></h3>
+            <h3 class="fw-bold mb-1 project-hero-title" style="color: #1F2937; font-size: 1.45rem; letter-spacing: -0.01em;"><?= e($project->name) ?></h3>
             <div class="text-secondary small">
                 <span>Cliente: <strong class="text-dark"><?= e($project->clientName()) ?></strong></span>
                 <span class="mx-2">&bull;</span>
@@ -29,13 +29,13 @@ declare(strict_types=1);
         </div>
         <div class="text-md-end p-3 rounded-3" style="background: #F4F7F9; border: 1px solid #E0E8ED;">
             <span class="text-secondary small d-block">Avance Ponderado:</span>
-            <div class="fs-4 fw-bold" style="color: #00ACE3;"><?= $progress ?>%</div>
+            <div class="fs-4 fw-bold" style="color: #10B981;"><?= $progress ?>%</div>
         </div>
     </div>
 
     <!-- Barra de Progreso Devioz -->
     <div class="progress" style="height: 6px; border-radius: 999px; background: #E0E8ED;">
-        <div class="progress-bar" style="width: <?= $progress ?>%; background: #00ACE3;"></div>
+        <div class="progress-bar" style="width: <?= $progress ?>%; background: #10B981;"></div>
     </div>
 
     <!-- Ficha de Contacto Directo del Lead / Administrador Asignado (Estilo Devioz) -->
@@ -50,7 +50,7 @@ declare(strict_types=1);
             </div>
             <div>
                 <div class="small text-secondary" style="font-size: 0.70rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Responsable &bull; Lead Asignado</div>
-                <div class="fw-bold" style="color: #172B4D; font-size: 0.95rem;"><?= e($assignedLead ? $assignedLead->name : 'Elena Rostova') ?></div>
+                <div class="fw-bold" style="color: #1F2937; font-size: 0.95rem;"><?= e($assignedLead ? $assignedLead->name : 'Elena Rostova') ?></div>
                 <div class="text-secondary small d-flex align-items-center gap-2" style="font-size: 0.75rem;">
                     <span><i class="fa-solid fa-shield-halved text-primary me-1"></i> Auditoría QA</span>
                     <span>&bull;</span>
@@ -108,7 +108,7 @@ declare(strict_types=1);
         <div class="card-custom p-4">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
                 <div>
-                    <h5 class="fw-bold mb-0" style="color: #172B4D;">Cronograma de Hitos de Desarrollo</h5>
+                    <h5 class="fw-bold mb-0" style="color: #1F2937;">Cronograma de Hitos de Desarrollo</h5>
                     <span class="small text-secondary">Secuencia estricta de cumplimiento y ponderación</span>
                 </div>
                 <!-- Selector de Vistas Estilo Devioz: Lista / Gantt / Calendario -->
@@ -139,8 +139,8 @@ declare(strict_types=1);
                             <div class="card-custom p-3">
                                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-2">
                                     <div>
-                                        <span class="badge font-monospace fw-semibold me-2" style="background: rgba(23, 43, 77, 0.08); color: #172B4D; border: 1px solid #DBE2E8;">Paso <?= $index + 1 ?></span>
-                                        <span class="fw-bold fs-6" style="color: #172B4D;"><?= e($m->name) ?></span>
+                                        <span class="badge font-monospace fw-semibold me-2" style="background: rgba(31, 41, 55, 0.08); color: #1F2937; border: 1px solid #DBE2E8;">Paso <?= $index + 1 ?></span>
+                                        <span class="fw-bold fs-6" style="color: #1F2937;"><?= e($m->name) ?></span>
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
                                         <?php if ($m->isOverdue()): ?>
@@ -219,7 +219,7 @@ declare(strict_types=1);
                                 <div class="row align-items-center g-2">
                                     <div class="col-md-4 col-12">
                                         <div class="d-flex align-items-center gap-2">
-                                            <span class="badge font-monospace" style="background: rgba(23,43,77,0.08); color: #172B4D; font-size: 0.7rem;">H<?= $index + 1 ?></span>
+                                            <span class="badge font-monospace" style="background: rgba(31, 41, 55,0.08); color: #1F2937; font-size: 0.7rem;">H<?= $index + 1 ?></span>
                                             <span class="small fw-bold text-truncate text-dark" title="<?= e($m->name) ?>"><?= e($m->name) ?></span>
                                         </div>
                                         <div class="text-secondary small ps-4" style="font-size: 0.70rem;">
@@ -252,9 +252,9 @@ declare(strict_types=1);
                 <div class="row g-3">
                     <?php foreach ($milestones as $index => $m): ?>
                         <div class="col-md-6 col-lg-3">
-                            <div class="card-custom p-3 h-100 border position-relative" style="border-left: 4px solid <?= $m->status === 'completed' ? '#10b981' : ($m->status === 'in_progress' ? '#00ACE3' : '#94A3B8') ?> !important;">
+                            <div class="card-custom p-3 h-100 border position-relative" style="border-left: 4px solid <?= $m->status === 'completed' ? '#10b981' : ($m->status === 'in_progress' ? '#10B981' : '#94A3B8') ?> !important;">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <span class="badge font-monospace" style="background: rgba(23,43,77,0.08); color: #172B4D;">Paso <?= $index + 1 ?></span>
+                                    <span class="badge font-monospace" style="background: rgba(31, 41, 55,0.08); color: #1F2937;">Paso <?= $index + 1 ?></span>
                                     <span class="small fw-semibold <?= $m->isOverdue() ? 'text-danger' : 'text-secondary' ?>">
                                         <i class="fa-regular fa-calendar me-1"></i><?= format_date($m->due_date, 'd/m') ?>
                                     </span>
@@ -278,7 +278,7 @@ declare(strict_types=1);
     <!-- PESTAÑA 2: ENTREGAS -->
     <div class="tab-pane fade" id="tab-deliveries" role="tabpanel">
         <div class="card-custom p-4">
-            <h5 class="fw-bold mb-3" style="color: #172B4D;">Historial de Entregas y Auditorías QA</h5>
+            <h5 class="fw-bold mb-3" style="color: #1F2937;">Historial de Entregas y Auditorías QA</h5>
 
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0" style="--bs-table-bg: transparent;">
@@ -297,7 +297,7 @@ declare(strict_types=1);
                         <?php foreach ($deliveries as $del): ?>
                             <tr class="border-bottom" style="border-color: var(--border-color) !important;">
                                 <td>
-                                    <div class="fw-semibold" style="color: #172B4D;"><?= e($del->title) ?></div>
+                                    <div class="fw-semibold" style="color: #1F2937;"><?= e($del->title) ?></div>
                                     <?php if (!empty($del->video_url)): ?>
                                         <button type="button" class="btn btn-link p-0 small text-info text-decoration-none border-0" data-video-url="<?= e($del->video_url) ?>" data-video-title="<?= e($del->title) ?>"><i class="fa-solid fa-play" aria-hidden="true"></i> Ver Video</button>
                                     <?php endif; ?>
@@ -346,7 +346,7 @@ declare(strict_types=1);
             <!-- Formulario de Check-In -->
             <div class="col-lg-5">
                 <div class="card-custom p-4">
-                    <h5 class="fw-bold mb-2" style="color: #172B4D;">Registrar Check-In Diario</h5>
+                    <h5 class="fw-bold mb-2" style="color: #1F2937;">Registrar Check-In Diario</h5>
                     <p class="text-secondary small mb-3">Reporta tus avances, horas trabajadas y consultas técnicas o de escalabilidad.</p>
 
                     <form action="<?= url('/my-project/check-in') ?>" method="POST">
@@ -364,7 +364,7 @@ declare(strict_types=1);
                         <div class="mb-3">
                             <div class="d-flex justify-content-between align-items-center mb-1">
                                 <label for="hours_worked" class="form-label-custom mb-0">Horas Invertidas en la Sesión</label>
-                                <button type="button" class="btn btn-link p-0 text-decoration-none small" id="copyTrackerHoursBtn" style="font-size: 0.75rem; color: #00ACE3;">
+                                <button type="button" class="btn btn-link p-0 text-decoration-none small" id="copyTrackerHoursBtn" style="font-size: 0.75rem; color: #10B981;">
                                     <i class="fa-solid fa-stopwatch me-1"></i> Copiar de Jornada Devioz
                                 </button>
                             </div>
@@ -396,7 +396,7 @@ declare(strict_types=1);
             <!-- Historial de Check-Ins -->
             <div class="col-lg-7">
                 <div class="card-custom p-4">
-                    <h5 class="fw-bold mb-3" style="color: #172B4D;">Historial de Reportes Standup</h5>
+                    <h5 class="fw-bold mb-3" style="color: #1F2937;">Historial de Reportes Standup</h5>
                     <div class="list-group list-group-flush" style="--bs-list-group-bg: transparent;">
                         <?php foreach ($checkIns as $ci): ?>
                             <div class="list-group-item border-bottom p-3" style="border-color: var(--border-color) !important;">
@@ -424,7 +424,7 @@ declare(strict_types=1);
     <!-- PESTAÑA 4: COMENTARIOS -->
     <div class="tab-pane fade" id="tab-comments" role="tabpanel">
         <div class="card-custom p-4">
-            <h5 class="fw-bold mb-3" style="color: #172B4D;">Hilo de Comunicación y Retroalimentación</h5>
+            <h5 class="fw-bold mb-3" style="color: #1F2937;">Hilo de Comunicación y Retroalimentación</h5>
 
             <!-- Lista de Comentarios -->
             <div class="d-flex flex-column gap-3 mb-4">
@@ -435,7 +435,7 @@ declare(strict_types=1);
                         <div class="flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center mb-1">
                                 <div>
-                                    <span class="fw-bold small" style="color: #172B4D;"><?= e($u ? $u->name : 'Usuario') ?></span>
+                                    <span class="fw-bold small" style="color: #1F2937;"><?= e($u ? $u->name : 'Usuario') ?></span>
                                     <span class="badge <?= $u && $u->isAdmin() ? 'bg-danger' : 'bg-emerald' ?> ms-1" style="font-size: 0.65rem;">
                                         <?= $u && $u->isAdmin() ? 'Administrador' : 'Desarrollador' ?>
                                     </span>
@@ -472,7 +472,7 @@ declare(strict_types=1);
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="background-color: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary);">
             <div class="modal-header" style="border-bottom: 1px solid var(--border-color);">
-                <h5 class="modal-title fw-bold" style="color: #172B4D;" id="deliveryModalLabel">Subir Evidencia de Entrega</h5>
+                <h5 class="modal-title fw-bold" style="color: #1F2937;" id="deliveryModalLabel">Subir Evidencia de Entrega</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <form id="deliveryForm" action="<?= url('/my-project/delivery/1') ?>" method="POST" enctype="multipart/form-data">

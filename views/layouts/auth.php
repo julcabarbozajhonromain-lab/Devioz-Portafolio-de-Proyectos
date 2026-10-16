@@ -33,12 +33,12 @@ use App\Core\View;
     <style>
         :root {
             /* Variables Devioz Design System */
-            --ui-cyan: #00ACE3;
-            --ui-cyan-hover: #0093c4;
-            --ui-cyan-light: #EBF8FD;
-            --ui-lime: #9DCF00;
-            --ui-lime-hover: #88B500;
-            --ui-navy: #172B4D;
+            --ui-primary: #10B981;
+            --ui-primary-hover: #059669;
+            --ui-primary-subtle: #ECFDF5;
+            --ui-accent: #34D399;
+            --ui-accent-hover: #15803D;
+            --ui-navy: #1F2937;
             --ui-dark: #0F172A;
             --ui-border: #DFE3E6;
             --ui-gray-text: #535C69;
@@ -151,9 +151,9 @@ use App\Core\View;
         }
 
         .auth-aside-badge {
-            background: rgba(0, 172, 227, 0.25);
-            border: 1px solid rgba(0, 172, 227, 0.6);
-            color: #EBF8FD;
+            background: rgba(16, 185, 129, 0.25);
+            border: 1px solid rgba(16, 185, 129, 0.6);
+            color: #ECFDF5;
             font-size: 0.75rem;
             font-weight: 700;
             padding: 0.35rem 0.85rem;
@@ -242,8 +242,8 @@ use App\Core\View;
         .form-control-custom:focus,
         .form-select-custom:focus {
             background-color: #FFFFFF !important;
-            border-color: var(--ui-cyan) !important;
-            box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.22) !important;
+            border-color: var(--ui-primary) !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.22) !important;
             outline: none;
         }
 
@@ -256,10 +256,10 @@ use App\Core\View;
             letter-spacing: 0.4px;
         }
 
-        /* Botón Primario Devioz Cyan */
+        /* Botón principal de Devioz */
         .btn-ui-auth-submit {
-            background-color: var(--ui-cyan);
-            border-color: var(--ui-cyan);
+            background-color: var(--ui-primary);
+            border-color: var(--ui-primary);
             color: #FFFFFF !important;
             font-weight: 700;
             font-size: 0.95rem;
@@ -269,7 +269,7 @@ use App\Core\View;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 14px rgba(0, 172, 227, 0.35);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
             transition: all 0.2s ease;
             cursor: pointer;
             border: none;
@@ -277,9 +277,9 @@ use App\Core\View;
         }
 
         .btn-ui-auth-submit:hover {
-            background-color: var(--ui-cyan-hover);
+            background-color: var(--ui-primary-hover);
             transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(0, 172, 227, 0.5);
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.5);
         }
 
         /* Botón de alternar contraseña ("ojito") */
@@ -308,7 +308,7 @@ use App\Core\View;
         }
 
         .btn-toggle-password:hover {
-            color: var(--ui-cyan);
+            color: var(--ui-primary);
         }
 
         /* Acordeón de Credenciales Demo */
@@ -435,7 +435,7 @@ use App\Core\View;
         <header class="auth-header">
             <a href="<?= url('/') ?>" class="auth-brand">
                 <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="32" height="32" class="rounded">
-                <span>Devioz<span style="color: var(--ui-cyan);">OS</span></span>
+                <span>Devioz<span style="color: var(--ui-primary);">OS</span></span>
                 <span class="auth-brand-tag d-none d-sm-inline">Su espacio de trabajo ideal</span>
             </a>
 

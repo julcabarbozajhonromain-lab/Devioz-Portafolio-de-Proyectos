@@ -17,14 +17,14 @@ declare(strict_types=1);
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                <span class="badge font-monospace fw-bold" style="background: rgba(23, 43, 77, 0.08); color: #172B4D; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
+                <span class="badge font-monospace fw-bold" style="background: rgba(31, 41, 55, 0.08); color: #1F2937; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
                 <span class="badge bg-success">Aprobado</span>
                 <span class="badge-sede"><?= e($project->sede) ?></span>
                 <?php if ($project->final_score): ?>
                     <span class="badge bg-emerald">QA Score: <?= $project->final_score ?><?= (float)$project->final_score > 10 ? '/100' : '/10' ?></span>
                 <?php endif; ?>
             </div>
-            <h2 class="fw-bold mb-1 project-hero-title" style="color: #172B4D; font-size: 1.5rem; letter-spacing: -0.01em;"><?= e($project->name) ?></h2>
+            <h2 class="fw-bold mb-1 project-hero-title" style="color: #1F2937; font-size: 1.5rem; letter-spacing: -0.01em;"><?= e($project->name) ?></h2>
             <div class="text-secondary small mt-1">
                 <span>Cliente / Entidad: <strong class="text-dark"><?= e($project->clientName()) ?></strong></span>
                 <span class="mx-2">&bull;</span>
@@ -33,7 +33,7 @@ declare(strict_types=1);
         </div>
         <div class="d-flex gap-2 flex-wrap align-items-center">
             <?php if ($project->repository_url): ?>
-                <a href="<?= e($project->repository_url) ?>" target="_blank" class="btn btn-ghost btn-sm" style="border: 1px solid #DBE2E8; color: #172B4D;">
+                <a href="<?= e($project->repository_url) ?>" target="_blank" class="btn btn-ghost btn-sm" style="border: 1px solid #DBE2E8; color: #1F2937;">
                     <i class="fa-brands fa-github me-1"></i>
                     <span>Código Fuente</span>
                 </a>
@@ -56,7 +56,7 @@ declare(strict_types=1);
             <div class="text-secondary"><?= render_markdown($project->description ?: 'No se ha provisto una descripción detallada.') ?></div>
 
             <div class="mt-4">
-                <h6 class="fw-bold small mb-2" style="color: #172B4D;">Stack Tecnológico Empleado</h6>
+                <h6 class="fw-bold small mb-2" style="color: #1F2937;">Stack Tecnológico Empleado</h6>
                 <div class="d-flex flex-wrap gap-2">
                     <?php if (!empty($project->tech_stack) && is_array($project->tech_stack)): ?>
                         <?php foreach ($project->tech_stack as $tech): ?>
@@ -70,7 +70,7 @@ declare(strict_types=1);
             <?php if (!empty($project->video_url)): ?>
                 <div class="mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <h6 class="fw-bold small mb-0 d-flex align-items-center gap-2" style="color: #172B4D;">
+                        <h6 class="fw-bold small mb-0 d-flex align-items-center gap-2" style="color: #1F2937;">
                             <svg width="18" height="18" class="text-danger" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             <span>Demostración en Video / Sustentación</span>
                         </h6>
@@ -97,7 +97,7 @@ declare(strict_types=1);
         ?>
             <div class="card-custom p-4 mb-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="fw-bold mb-0 d-flex align-items-center gap-2" style="color: #172B4D;">
+                    <h5 class="fw-bold mb-0 d-flex align-items-center gap-2" style="color: #1F2937;">
                         <i class="fa-solid fa-images text-emerald"></i>
                         <span>Capturas del Sistema y Vistas de Pantalla</span>
                     </h5>
@@ -121,7 +121,7 @@ declare(strict_types=1);
         <!-- Documentación Técnica -->
         <?php if (!empty($project->documentation)): ?>
             <div class="card-custom p-4 mb-4">
-                <h5 class="fw-bold mb-3" style="color: #172B4D;">Documentación y Alcance</h5>
+                <h5 class="fw-bold mb-3" style="color: #1F2937;">Documentación y Alcance</h5>
                 <div class="p-3 rounded font-monospace small text-secondary" style="background: #F4F5F7; border: 1px solid #DBE2E8; white-space: pre-wrap;">
                     <?= e($project->documentation) ?>
                 </div>
@@ -130,7 +130,7 @@ declare(strict_types=1);
 
         <!-- Hitos Completados -->
         <div class="card-custom p-4">
-            <h5 class="fw-bold mb-3" style="color: #172B4D;">Hitos del Ciclo de Vida</h5>
+            <h5 class="fw-bold mb-3" style="color: #1F2937;">Hitos del Ciclo de Vida</h5>
             <div class="milestone-timeline">
                 <?php foreach ($milestones as $m): ?>
                     <div class="milestone-item completed">
@@ -138,7 +138,7 @@ declare(strict_types=1);
                             <svg width="10" height="10" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                         </div>
                         <div class="card-custom p-3">
-                            <div class="fw-bold small" style="color: #172B4D;"><?= e($m->name) ?></div>
+                            <div class="fw-bold small" style="color: #1F2937;"><?= e($m->name) ?></div>
                             <div class="small text-secondary"><?= e($m->description ?: 'Hito validado y aprobado.') ?></div>
                         </div>
                     </div>
@@ -150,10 +150,10 @@ declare(strict_types=1);
     <!-- Columna Lateral: Perfil del Autor -->
     <div class="col-lg-4">
         <div class="card-custom p-4 mb-4">
-            <h6 class="fw-bold small mb-3" style="color: #172B4D;">Autor del Software</h6>
+            <h6 class="fw-bold small mb-3" style="color: #1F2937;">Autor del Software</h6>
             <div class="text-center mb-3">
                 <img src="<?= e($developer ? $developer->avatarUrl() : '') ?>" class="rounded-circle border mb-2" width="72" height="72" style="object-fit: cover;" loading="lazy" alt="Avatar">
-                <h5 class="fw-bold mb-0" style="color: #172B4D;"><?= e($developer ? $developer->name : 'Desarrollador Devioz') ?></h5>
+                <h5 class="fw-bold mb-0" style="color: #1F2937;"><?= e($developer ? $developer->name : 'Desarrollador Devioz') ?></h5>
                 <span class="badge-sede mt-1"><?= e($developer ? $developer->sede : 'Sede') ?></span>
             </div>
             <p class="text-secondary small text-center mb-0">

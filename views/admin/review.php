@@ -138,7 +138,7 @@ sort($availableSedes);
         <!-- ========================================== -->
         <div class="gl-column kanban-column" data-column-status="in_review">
             <!-- Cabecera Chevron Devioz -->
-            <div class="ui-chevron-header ui-chevron-cyan">
+            <div class="ui-chevron-header ui-chevron-primary">
                 <div class="ui-chevron-title">
                     <span>En Revisión Activa</span>
                     <span class="ui-chevron-counter"><?= count($inReviewProjects) ?></span>
@@ -170,7 +170,7 @@ sort($availableSedes);
         <!-- ========================================== -->
         <div class="gl-column kanban-column" data-column-status="approved">
             <!-- Cabecera Chevron Devioz -->
-            <div class="ui-chevron-header ui-chevron-emerald">
+            <div class="ui-chevron-header ui-chevron-primary">
                 <div class="ui-chevron-title">
                     <span>Aprobados / Concluidos</span>
                     <span class="ui-chevron-counter"><?= count($approvedProjects) ?></span>

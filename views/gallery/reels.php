@@ -42,7 +42,7 @@ declare(strict_types=1);
                 <i class="fa-solid fa-magnifying-glass bili-search-icon"></i>
                 <input type="text" id="biliSearchInput" class="bili-search-input" placeholder="Buscar demo o tecnología..." style="background: rgba(255, 255, 255, 0.12) !important; color: #FFFFFF !important; border: 1px solid rgba(255, 255, 255, 0.25) !important;">
             </div>
-            <span class="badge rounded-pill py-2 px-3 small font-monospace d-none d-sm-inline-flex align-items-center gap-1.5" style="background: rgba(0, 172, 227, 0.25); border: 1px solid rgba(0, 172, 227, 0.5); color: #FFFFFF;">
+            <span class="badge rounded-pill py-2 px-3 small font-monospace d-none d-sm-inline-flex align-items-center gap-1.5" style="background: rgba(16, 185, 129, 0.25); border: 1px solid rgba(16, 185, 129, 0.5); color: #FFFFFF;">
                 <i class="fa-solid fa-play text-info"></i>
                 <span id="reelsCountBadge"><?= count($reels) ?></span> Demos
             </span>

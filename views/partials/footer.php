@@ -8,7 +8,7 @@ declare(strict_types=1);
         <span class="fw-semibold text-dark">Devioz OS</span> — Plataforma Corporativa de Gestión de Proyectos &copy; <?= date('Y') ?>
     </div>
     <div class="d-flex align-items-center gap-3">
-        <span class="badge" style="background: rgba(0, 172, 227, 0.12); color: #00ACE3; font-size: 0.72rem; font-weight: 600;">Enterprise Suite</span>
+        <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #10B981; font-size: 0.72rem; font-weight: 600;">Enterprise Suite</span>
         <span class="text-secondary small">Devioz UI Standards &bull; Devioz Core</span>
     </div>
 </footer>

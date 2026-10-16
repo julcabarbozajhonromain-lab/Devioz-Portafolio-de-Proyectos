@@ -59,7 +59,7 @@ declare(strict_types=1);
                         <div class="d-flex align-items-center gap-3">
                             <img src="<?= e($avatarUrl) ?>" alt="<?= e($m['name']) ?>" class="rounded-circle border" width="46" height="46" style="object-fit: cover;" loading="lazy">
                             <div>
-                                <h6 class="fw-bold mb-0" style="color: #172B4D;"><?= e($m['name']) ?></h6>
+                                <h6 class="fw-bold mb-0" style="color: #1F2937;"><?= e($m['name']) ?></h6>
                                 <span class="text-secondary small"><?= e($m['email']) ?></span>
                             </div>
                         </div>

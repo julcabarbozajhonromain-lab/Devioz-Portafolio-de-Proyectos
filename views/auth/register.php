@@ -7,7 +7,7 @@ declare(strict_types=1);
 <div class="mb-4">
     <div class="d-flex align-items-center gap-2 mb-2 d-lg-none">
         <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="28" height="28" class="rounded">
-        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--ui-cyan);">OS</span></span>
+        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--ui-primary);">OS</span></span>
     </div>
     <h3 class="fw-bold mb-1" style="color: var(--ui-navy); letter-spacing: -0.5px;">Crear Cuenta en Devioz OS</h3>
     <p class="text-secondary small mb-0">Únase a la plataforma de gestión de proyectos y talento TI</p>
@@ -132,7 +132,7 @@ declare(strict_types=1);
 <div class="text-center mt-4 pt-3 border-top">
     <p class="text-secondary small mb-0">
         ¿Ya tiene una cuenta registrada?
-        <a href="<?= url('/login') ?>" class="fw-bold text-decoration-none" style="color: var(--ui-cyan);">Inicie sesión</a>
+        <a href="<?= url('/login') ?>" class="fw-bold text-decoration-none" style="color: var(--ui-primary);">Inicie sesión</a>
     </p>
 </div>
 
@@ -158,7 +158,7 @@ declare(strict_types=1);
             if (val1 === val2) {
                 hint.textContent = 'Las contraseñas coinciden correctamente.';
                 hint.className = 'small mb-3 text-success fw-semibold';
-                passConf.style.borderColor = 'var(--ui-cyan)';
+                passConf.style.borderColor = 'var(--ui-primary)';
             } else {
                 hint.textContent = 'Las contraseñas aún no coinciden.';
                 hint.className = 'small mb-3 text-danger fw-semibold';

@@ -10,7 +10,7 @@ declare(strict_types=1);
  *   - Zero-Leak Public Isolation (La landing es 100% autónoma para clientes y observadores)
  *   - Autonomous Modals: Devioz Reels 16:9 Lightbox & Dossier de Ficha Técnica
  *   - Estándares Internacionales: ISO/IEC 25010, ISO/IEC 27001, OWASP Top 10, TMMi Nivel 3
- *   - Identidad Visual: Devioz (Cyan #00ACE3, Lime #9DCF00, Navy #172B4D)
+ *   - Identidad visual Devioz: esmeralda, menta y pizarra
  *
  * @var array<string, mixed> $stats
  * @var array<\App\Models\Project> $featuredProjects
@@ -78,13 +78,13 @@ if (!function_exists('devioz_parse_video')) {
     <style>
         :root {
             /* Paleta visual de la plataforma */
-            --ui-cyan: #00ACE3;
-            --ui-cyan-hover: #0093c4;
-            --ui-cyan-dark: #007799;
-            --ui-cyan-light: #EBF8FD;
-            --ui-lime: #9DCF00;
-            --ui-lime-hover: #88B500;
-            --ui-navy: #172B4D;
+            --ui-primary: #10B981;
+            --ui-primary-hover: #059669;
+            --ui-primary-dark: #047857;
+            --ui-primary-subtle: #ECFDF5;
+            --ui-accent: #34D399;
+            --ui-accent-hover: #15803D;
+            --ui-navy: #1F2937;
             --ui-navy-light: #253858;
             --ui-dark: #0F172A;
             --ui-darker: #0B1120;
@@ -128,7 +128,7 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-topbar.scrolled {
-            box-shadow: 0 4px 20px rgba(23, 43, 77, 0.08);
+            box-shadow: 0 4px 20px rgba(31, 41, 55, 0.08);
             background: rgba(255, 255, 255, 0.98);
         }
 
@@ -148,7 +148,7 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-brand-badge {
-            background: linear-gradient(135deg, var(--ui-cyan), #0284C7);
+            background: linear-gradient(135deg, var(--ui-primary), #059669);
             color: #fff;
             padding: 2px 8px;
             border-radius: 4px;
@@ -169,14 +169,14 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-nav-link:hover {
-            color: var(--ui-cyan);
-            background: var(--ui-cyan-light);
+            color: var(--ui-primary);
+            background: var(--ui-primary-subtle);
         }
 
         /* Botones de Acción */
-        .btn-ui-lime {
-            background-color: var(--ui-lime);
-            color: #172B4D !important;
+        .btn-ui-accent {
+            background-color: var(--ui-accent);
+            color: #1F2937 !important;
             font-weight: 700;
             font-size: 0.88rem;
             letter-spacing: 0.4px;
@@ -189,20 +189,20 @@ if (!function_exists('devioz_parse_video')) {
             align-items: center;
             justify-content: center;
             gap: 0.45rem;
-            box-shadow: 0 4px 14px rgba(157, 207, 0, 0.35);
+            box-shadow: 0 4px 14px rgba(52, 211, 153, 0.35);
             transition: all 0.2s ease;
             cursor: pointer;
         }
 
-        .btn-ui-lime:hover {
-            background-color: var(--ui-lime-hover);
+        .btn-ui-accent:hover {
+            background-color: var(--ui-accent-hover);
             transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(157, 207, 0, 0.45);
+            box-shadow: 0 6px 18px rgba(52, 211, 153, 0.45);
             color: #0F172A !important;
         }
 
-        .btn-ui-cyan {
-            background-color: var(--ui-cyan);
+        .btn-ui-primary {
+            background-color: var(--ui-primary);
             color: #FFFFFF !important;
             font-weight: 700;
             font-size: 0.88rem;
@@ -214,15 +214,15 @@ if (!function_exists('devioz_parse_video')) {
             align-items: center;
             justify-content: center;
             gap: 0.45rem;
-            box-shadow: 0 4px 14px rgba(0, 172, 227, 0.32);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.32);
             transition: all 0.2s ease;
             cursor: pointer;
         }
 
-        .btn-ui-cyan:hover {
-            background-color: var(--ui-cyan-hover);
+        .btn-ui-primary:hover {
+            background-color: var(--ui-primary-hover);
             transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(0, 172, 227, 0.45);
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
         }
 
         .btn-ui-outline {
@@ -242,9 +242,9 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .btn-ui-outline:hover {
-            border-color: var(--ui-cyan);
-            color: var(--ui-cyan) !important;
-            background: var(--ui-cyan-light);
+            border-color: var(--ui-primary);
+            color: var(--ui-primary) !important;
+            background: var(--ui-primary-subtle);
         }
 
         .btn-portal-client {
@@ -264,9 +264,9 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .btn-portal-client:hover {
-            color: var(--ui-cyan);
+            color: var(--ui-primary);
             background: #FFFFFF;
-            border-color: var(--ui-cyan);
+            border-color: var(--ui-primary);
         }
 
         /* ------------------------------------------------------------- */
@@ -281,8 +281,8 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-hero-badge {
-            background: #EBF8FD;
-            color: #007799;
+            background: #ECFDF5;
+            color: #047857;
             border: 1px solid #BAE6FD;
             font-size: 0.78rem;
             font-weight: 700;
@@ -327,7 +327,7 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-hero-checklist .check-icon {
-            color: var(--ui-lime);
+            color: var(--ui-accent);
             background: #F4FBE8;
             width: 22px;
             height: 22px;
@@ -424,7 +424,7 @@ if (!function_exists('devioz_parse_video')) {
         .ui-metric-num {
             font-size: 2.4rem;
             font-weight: 800;
-            color: var(--ui-cyan);
+            color: var(--ui-primary);
             letter-spacing: -0.5px;
             line-height: 1.1;
         }
@@ -503,8 +503,8 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-service-card:hover {
-            border-color: var(--ui-cyan);
-            box-shadow: 0 15px 35px rgba(23, 43, 77, 0.08);
+            border-color: var(--ui-primary);
+            box-shadow: 0 15px 35px rgba(31, 41, 55, 0.08);
             transform: translateY(-4px);
         }
 
@@ -554,8 +554,8 @@ if (!function_exists('devioz_parse_video')) {
             height: 50px;
             border-radius: 50%;
             background: #FFFFFF;
-            border: 4px solid var(--ui-cyan);
-            box-shadow: 0 0 0 4px rgba(0, 172, 227, 0.2);
+            border: 4px solid var(--ui-primary);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
             position: absolute;
             top: 0;
             left: 50%;
@@ -585,7 +585,7 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-timeline-content:hover {
-            border-color: var(--ui-cyan);
+            border-color: var(--ui-primary);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
@@ -604,8 +604,8 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-pillar-card:hover {
-            border-color: var(--ui-cyan);
-            box-shadow: 0 15px 35px rgba(23, 43, 77, 0.08);
+            border-color: var(--ui-primary);
+            box-shadow: 0 15px 35px rgba(31, 41, 55, 0.08);
             transform: translateY(-4px);
         }
 
@@ -619,7 +619,7 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .pillar-iso25010::before { background: #10B981; }
-        .pillar-iso27001::before { background: #0284C7; }
+        .pillar-iso27001::before { background: #059669; }
         .pillar-owasp::before { background: #8B5CF6; }
         .pillar-tmmi::before { background: #F59E0B; }
 
@@ -627,7 +627,7 @@ if (!function_exists('devioz_parse_video')) {
         /* DEVIOZ REELS (DEMOS 16:9 VERTICALES AUTÓNOMAS)                */
         /* ------------------------------------------------------------- */
         .ui-reels-section {
-            background: linear-gradient(180deg, #0F172A 0%, #172B4D 100%);
+            background: linear-gradient(180deg, #0F172A 0%, #1F2937 100%);
             color: #FFFFFF;
             padding: 5rem 0;
             position: relative;
@@ -652,8 +652,8 @@ if (!function_exists('devioz_parse_video')) {
         .ui-reel-card:hover {
             transform: translateY(-5px);
             background: rgba(18, 30, 60, 0.82);
-            border-color: rgba(0, 172, 227, 0.55);
-            box-shadow: 0 16px 36px rgba(0, 172, 227, 0.25), 0 0 20px rgba(0, 172, 227, 0.15);
+            border-color: rgba(16, 185, 129, 0.55);
+            box-shadow: 0 16px 36px rgba(16, 185, 129, 0.25), 0 0 20px rgba(16, 185, 129, 0.15);
         }
 
         .ui-reel-poster-box {
@@ -669,8 +669,8 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-reel-card:hover .ui-reel-poster-box {
-            border-color: rgba(0, 172, 227, 0.75);
-            box-shadow: 0 16px 36px rgba(0, 172, 227, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            border-color: rgba(16, 185, 129, 0.75);
+            box-shadow: 0 16px 36px rgba(16, 185, 129, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
         }
 
         .ui-reel-bg {
@@ -711,7 +711,7 @@ if (!function_exists('devioz_parse_video')) {
 
         .ui-reel-play-btn-blue {
             width: 100%;
-            background: linear-gradient(135deg, #00ACE3 0%, #0093c4 100%);
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
             color: #FFFFFF !important;
             border: none;
             border-radius: 8px;
@@ -723,13 +723,13 @@ if (!function_exists('devioz_parse_video')) {
             justify-content: center;
             gap: 6px;
             letter-spacing: 0.02em;
-            box-shadow: 0 4px 16px rgba(0, 172, 227, 0.5);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.5);
             transition: all 0.2s ease;
         }
 
         .ui-reel-card:hover .ui-reel-play-btn-blue {
-            background: linear-gradient(135deg, #0ec4fd 0%, #009ace 100%);
-            box-shadow: 0 6px 22px rgba(0, 172, 227, 0.75);
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            box-shadow: 0 6px 22px rgba(16, 185, 129, 0.75);
             transform: scale(1.02);
         }
 
@@ -749,16 +749,16 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-portfolio-filter-btn:hover {
-            border-color: var(--ui-cyan);
-            color: var(--ui-cyan);
-            background: var(--ui-cyan-light);
+            border-color: var(--ui-primary);
+            color: var(--ui-primary);
+            background: var(--ui-primary-subtle);
         }
 
         .ui-portfolio-filter-btn.active {
             background: var(--ui-navy);
             color: #FFFFFF;
             border-color: var(--ui-navy);
-            box-shadow: 0 4px 12px rgba(23, 43, 77, 0.15);
+            box-shadow: 0 4px 12px rgba(31, 41, 55, 0.15);
         }
 
         .ui-project-card {
@@ -774,8 +774,8 @@ if (!function_exists('devioz_parse_video')) {
 
         .ui-project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(23, 43, 77, 0.08);
-            border-color: var(--ui-cyan);
+            box-shadow: 0 15px 35px rgba(31, 41, 55, 0.08);
+            border-color: var(--ui-primary);
         }
 
         .ui-project-cover {
@@ -839,7 +839,7 @@ if (!function_exists('devioz_parse_video')) {
             border: 1px solid rgba(255, 255, 255, 0.18);
             width: 100%;
             max-width: 880px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(0, 172, 227, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(16, 185, 129, 0.25);
             overflow: hidden;
             position: relative;
             animation: slideUpModal 0.25s ease;
@@ -940,7 +940,7 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-footer-list a:hover {
-            color: var(--ui-cyan);
+            color: var(--ui-primary);
         }
 
         @media (max-width: 991.98px) {
@@ -976,7 +976,7 @@ if (!function_exists('devioz_parse_video')) {
             <div class="d-flex align-items-center gap-3">
                 <a href="#inicio" class="ui-brand">
                     <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz Technology Solutions" width="34" height="34" class="rounded">
-                    <span>Devioz<span style="color: var(--ui-cyan);">OS</span></span>
+                    <span>Devioz<span style="color: var(--ui-primary);">OS</span></span>
                     <span class="ui-brand-badge">IT Factory & QA</span>
                 </a>
             </div>
@@ -1003,12 +1003,12 @@ if (!function_exists('devioz_parse_video')) {
 
                 <!-- Botón de Acceso Exclusivo al Portal de Clientes/Consultores -->
                 <button type="button" class="btn-portal-client" id="btnOpenAuthModal" title="Acceso al Portal de Clientes y Consultores">
-                    <i class="fa-regular fa-circle-user" style="font-size: 1.05rem; color: var(--ui-cyan);"></i>
+                    <i class="fa-regular fa-circle-user" style="font-size: 1.05rem; color: var(--ui-primary);"></i>
                     <span class="d-none d-sm-inline">Portal Clientes</span>
                 </button>
 
                 <!-- Botón CTA Primario -->
-                <a href="#contacto" class="btn-ui-lime">
+                <a href="#contacto" class="btn-ui-accent">
                     <span>Cotizar Proyecto</span>
                     <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
                 </a>
@@ -1057,12 +1057,12 @@ if (!function_exists('devioz_parse_video')) {
                     </ul>
 
                     <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
-                        <a href="#contacto" class="btn-ui-lime py-3 px-4" style="font-size: 0.95rem;">
+                        <a href="#contacto" class="btn-ui-accent py-3 px-4" style="font-size: 0.95rem;">
                             <span>SOLICITAR PROPUESTA TÉCNICA</span>
                             <i class="fa-solid fa-bolt"></i>
                         </a>
 
-                        <a href="#reels" class="btn-ui-cyan py-3 px-4" style="font-size: 0.95rem;">
+                        <a href="#reels" class="btn-ui-primary py-3 px-4" style="font-size: 0.95rem;">
                             <i class="fa-solid fa-play"></i>
                             <span>Ver Demos en Vivo</span>
                         </a>
@@ -1096,7 +1096,7 @@ if (!function_exists('devioz_parse_video')) {
 
                         <!-- Floating Badge 2: OWASP Top 10 -->
                         <div class="ui-floating-badge badge-pos-2">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 38px; height: 38px; background: #0284C7;">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 38px; height: 38px; background: #059669;">
                                 <i class="fa-solid fa-shield-virus"></i>
                             </div>
                             <div>
@@ -1487,7 +1487,7 @@ if (!function_exists('devioz_parse_video')) {
                 <!-- Pilar 2: ISO 27001 -->
                 <div class="col-md-6 col-lg-3">
                     <div class="ui-pillar-card pillar-iso27001">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #0284C7;">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #059669;">
                             <i class="fa-solid fa-lock fs-5"></i>
                         </div>
                         <h5 class="fw-bold text-navy mb-1">ISO/IEC 27001:2022</h5>
@@ -1848,7 +1848,7 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 10. ACTO 8: CONTACTO DIRECTO & SOLICITUD DE PROPUESTA TÉCNICA         -->
     <!-- ===================================================================== -->
-    <section class="py-5" style="background: linear-gradient(135deg, #172B4D 0%, #0F172A 100%); color: #fff;" id="contacto">
+    <section class="py-5" style="background: linear-gradient(135deg, #1F2937 0%, #0F172A 100%); color: #fff;" id="contacto">
         <div class="container-xl py-4">
             <div class="row g-5 align-items-center">
 
@@ -1947,7 +1947,7 @@ if (!function_exists('devioz_parse_video')) {
                                     <textarea class="form-control" name="contact_message" id="contactMessageTextarea" rows="3" placeholder="Describe brevemente el alcance, tecnologías deseadas o plazos estimados..." required></textarea>
                                 </div>
                                 <div class="col-12 pt-2">
-                                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-pill shadow-sm" style="background: var(--ui-cyan); border-color: var(--ui-cyan); font-size: 1rem;">
+                                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-pill shadow-sm" style="background: var(--ui-primary); border-color: var(--ui-primary); font-size: 1rem;">
                                         <span>ENVIAR SOLICITUD DE PROPUESTA</span>
                                         <i class="fa-solid fa-paper-plane ms-2"></i>
                                     </button>
@@ -1971,7 +1971,7 @@ if (!function_exists('devioz_parse_video')) {
                 <div class="col-lg-4 col-md-6">
                     <div class="d-flex align-items-center gap-2 mb-3">
                         <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz Technology Solutions" width="30" height="30" class="rounded">
-                        <span class="fw-bold fs-5 text-white">Devioz<span style="color: var(--ui-cyan);">OS</span></span>
+                        <span class="fw-bold fs-5 text-white">Devioz<span style="color: var(--ui-primary);">OS</span></span>
                         <span class="ui-brand-badge">Enterprise Factory</span>
                     </div>
                     <p class="text-secondary small mb-3">
@@ -2147,7 +2147,7 @@ if (!function_exists('devioz_parse_video')) {
                         </div>
 
                         <div class="pt-3 border-top d-flex gap-2">
-                            <a href="#contacto" class="btn btn-primary rounded-pill w-100 fw-bold py-2 js-quote-similar-btn" style="background: var(--ui-cyan); border-color: var(--ui-cyan);">
+                            <a href="#contacto" class="btn btn-primary rounded-pill w-100 fw-bold py-2 js-quote-similar-btn" style="background: var(--ui-primary); border-color: var(--ui-primary);">
                                 <i class="fa-solid fa-paper-plane me-1"></i> Cotizar Solución Similar
                             </a>
                         </div>
@@ -2176,7 +2176,7 @@ if (!function_exists('devioz_parse_video')) {
             </div>
 
             <div class="p-4">
-                <div class="alert alert-info py-2 px-3 small mb-3 border-0" style="background: #EBF8FD; color: #007799;">
+                <div class="alert alert-info py-2 px-3 small mb-3 border-0" style="background: #ECFDF5; color: #047857;">
                     <i class="fa-solid fa-lock me-1"></i> Espacio reservado para empresas con proyectos activos y consultores autorizados.
                 </div>
 
@@ -2209,7 +2209,7 @@ if (!function_exists('devioz_parse_video')) {
                         </label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold rounded-3 shadow-sm mb-3" style="background: var(--ui-cyan); border-color: var(--ui-cyan);">
+                    <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold rounded-3 shadow-sm mb-3" style="background: var(--ui-primary); border-color: var(--ui-primary);">
                         <span>Ingresar al Portal</span>
                         <i class="fa-solid fa-right-to-bracket ms-1"></i>
                     </button>

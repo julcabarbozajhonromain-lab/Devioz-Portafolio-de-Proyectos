@@ -141,7 +141,7 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                 </button>
                 <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 p-0 devioz-notifications-menu" style="width: 320px; max-width: 90vw;">
                     <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-light rounded-top">
-                        <span class="fw-bold small" style="color: #172B4D;"><i class="fa-solid fa-bell me-1 text-primary"></i> Notificaciones</span>
+                        <span class="fw-bold small" style="color: #1F2937;"><i class="fa-solid fa-bell me-1 text-primary"></i> Notificaciones</span>
                         <button type="button" class="btn btn-link p-0 text-decoration-none small text-muted" id="markAllNotificationsReadBtn" style="font-size: 0.75rem;">Marcar leídas</button>
                     </div>
                     <div class="devioz-notifications-list" id="deviozNotificationsList" style="max-height: 320px; overflow-y: auto;">
@@ -175,7 +175,7 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                     <div class="p-3 bg-white border-bottom">
                         <div class="d-flex align-items-center gap-3">
                             <a href="<?= url('/profile') ?>" class="text-decoration-none flex-shrink-0">
-                                <img src="<?= e($currentUser->avatarUrl()) ?>" alt="<?= e($currentUser->name) ?>" class="rounded-circle" width="50" height="50" style="object-fit: cover; border: 2px solid #00ACE3;">
+                                <img src="<?= e($currentUser->avatarUrl()) ?>" alt="<?= e($currentUser->name) ?>" class="rounded-circle" width="50" height="50" style="object-fit: cover; border: 2px solid #10B981;">
                             </a>
                             <div class="min-w-0 flex-grow-1">
                                 <a href="<?= url('/profile') ?>" class="fw-bold text-dark text-truncate d-flex align-items-center gap-1 text-decoration-none" style="font-size: 0.95rem;">
@@ -183,7 +183,7 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                                     <i class="fa-solid fa-chevron-right text-muted" style="font-size: 0.70rem;"></i>
                                 </a>
                                 <div class="mt-1">
-                                    <span class="badge" style="background: rgba(0, 172, 227, 0.12); color: #00ACE3; font-size: 0.68rem; font-weight: 600;">
+                                    <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #10B981; font-size: 0.68rem; font-weight: 600;">
                                         <?= $currentUser->isAdmin() ? 'Administrator' : 'Developer' ?>
                                     </span>
                                 </div>
@@ -197,7 +197,7 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                                 <span id="popoverWorkdayLabel">Fuera del trabajo</span> | <strong class="font-monospace text-dark" id="popoverWorkdayClock">00:00:00</strong>
                             </div>
                             <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="btn btn-sm btn-primary px-3 py-1 fw-semibold d-flex align-items-center gap-1" style="background: #0075FF; border: none; font-size: 0.75rem; border-radius: 6px;" id="popoverQuickWorkdayBtn">
+                                <button type="button" class="btn btn-sm btn-primary px-3 py-1 fw-semibold d-flex align-items-center gap-1" style="background: #059669; border: none; font-size: 0.75rem; border-radius: 6px;" id="popoverQuickWorkdayBtn">
                                     <i class="fa-solid fa-play" id="popoverQuickWorkdayIcon" style="font-size: 0.65rem;"></i>
                                     <span id="popoverQuickWorkdayLabel">Iniciar</span>
                                 </button>

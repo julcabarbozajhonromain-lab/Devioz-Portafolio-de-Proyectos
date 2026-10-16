@@ -50,7 +50,7 @@ $unassignedProjects = $unassignedProjects ?? [];
     </div>
     <div class="col-12 col-md-4">
         <div class="card-custom p-3 d-flex align-items-center gap-3">
-            <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: rgba(0, 172, 227, 0.12); color: #00ACE3; font-size: 1.2rem;">
+            <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: rgba(16, 185, 129, 0.12); color: #10B981; font-size: 1.2rem;">
                 <i class="fa-solid fa-layer-group"></i>
             </div>
             <div>
@@ -63,7 +63,7 @@ $unassignedProjects = $unassignedProjects ?? [];
 
 <!-- SECCIÓN: PROYECTOS SIN ASIGNAR / EN ESPERA (SI EXISTEN) -->
 <?php if (!empty($unassignedProjects)): ?>
-<div class="card-custom mb-4" style="border-left: 4px solid #00ACE3;">
+<div class="card-custom mb-4" style="border-left: 4px solid #10B981;">
     <div class="card-header-custom d-flex justify-content-between align-items-center flex-wrap gap-2">
         <div class="d-flex align-items-center gap-2">
             <span class="rounded-circle bg-info p-1" style="width: 10px; height: 10px;"></span>
@@ -156,7 +156,7 @@ $unassignedProjects = $unassignedProjects ?? [];
                         <td>
                             <div class="d-flex align-items-center gap-2">
                                 <img src="<?= e($u->avatarUrl()) ?>" class="rounded-circle" width="30" height="30" loading="lazy" alt="<?= e($u->name) ?>" style="object-fit: cover;">
-                                <span class="fw-semibold" style="color: #172B4D;"><?= e($u->name) ?></span>
+                                <span class="fw-semibold" style="color: #1F2937;"><?= e($u->name) ?></span>
                             </div>
                         </td>
                         <td class="small text-secondary"><?= e($u->email) ?></td>
@@ -213,7 +213,7 @@ $unassignedProjects = $unassignedProjects ?? [];
                             <div class="text-secondary" style="font-size: 0.72rem;"><?= e($row['dev_email']) ?></div>
                         </td>
                         <td class="col-sede"><span class="badge-sede"><?= e($row['dev_sede']) ?></span></td>
-                        <td class="fw-bold" style="color: #00ACE3;"><?= e($row['project_code']) ?></td>
+                        <td class="fw-bold" style="color: #10B981;"><?= e($row['project_code']) ?></td>
                         <td class="fw-medium text-dark"><?= e($row['project_name']) ?></td>
                         <td>
                             <span class="badge bg-secondary"><?= e(ucfirst($row['project_status'])) ?></span>
@@ -310,7 +310,7 @@ $unassignedProjects = $unassignedProjects ?? [];
 
             <div class="modal-header border-bottom px-4 py-3 bg-light d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(0, 172, 227, 0.12); color: #00ACE3;">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(16, 185, 129, 0.12); color: #10B981;">
                         <i class="fa-solid fa-user-gear"></i>
                     </div>
                     <div>

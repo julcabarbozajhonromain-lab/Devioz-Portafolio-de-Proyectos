@@ -66,7 +66,7 @@ declare(strict_types=1);
                             <span class="small text-secondary"><i class="fa-solid fa-eye" aria-hidden="true"></i> <?= (int)$p->views_count ?> visitas</span>
                         </div>
 
-                        <h5 class="fw-bold mb-2" style="color: #172B4D;"><?= e($p->name) ?></h5>
+                        <h5 class="fw-bold mb-2" style="color: #1F2937;"><?= e($p->name) ?></h5>
                         <p class="text-secondary small mb-3 text-truncate-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                             <?= e($p->description ?: 'Proyecto corporativo finalizado.') ?>
                         </p>
@@ -84,7 +84,7 @@ declare(strict_types=1);
                     <div class="mt-auto pt-2 d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center gap-2 overflow-hidden">
                             <img src="<?= e($dev ? $dev->avatarUrl() : '') ?>" class="rounded-circle" width="26" height="26" loading="lazy" alt="Avatar" style="object-fit: cover;">
-                            <span class="small text-truncate" style="color: #172B4D; max-width: 120px;"><?= e($dev ? $dev->name : 'Autor') ?></span>
+                            <span class="small text-truncate" style="color: #1F2937; max-width: 120px;"><?= e($dev ? $dev->name : 'Autor') ?></span>
                         </div>
                         <div class="d-flex align-items-center gap-2">
                             <?php if (!empty($p->video_url)): ?>

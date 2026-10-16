@@ -7,7 +7,7 @@ declare(strict_types=1);
 <div class="mb-4">
     <div class="d-flex align-items-center gap-2 mb-2 d-lg-none">
         <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="28" height="28" class="rounded">
-        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--ui-cyan);">OS</span></span>
+        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--ui-primary);">OS</span></span>
     </div>
     <h3 class="fw-bold mb-1" style="color: var(--ui-navy); letter-spacing: -0.5px;">Inicie sesión en Devioz OS</h3>
     <p class="text-secondary small mb-0">Ingrese sus credenciales para acceder al sistema operativo y portafolio</p>
@@ -85,7 +85,7 @@ declare(strict_types=1);
         </label>
     </div>
 
-    <!-- Botón de Envío Devioz Cyan -->
+    <!-- Botón principal de Devioz -->
     <button type="submit" class="btn-ui-auth-submit" id="btnLoginSubmit">
         <span>Iniciar sesión</span>
         <i class="fa-solid fa-arrow-right"></i>
@@ -129,6 +129,6 @@ declare(strict_types=1);
 <div class="text-center pt-2 border-top">
     <p class="text-secondary small mb-0">
         ¿Aún no tiene una cuenta?
-        <a href="<?= url('/register') ?>" class="fw-bold text-decoration-none" style="color: var(--ui-cyan);">Regístrese gratis</a>
+        <a href="<?= url('/register') ?>" class="fw-bold text-decoration-none" style="color: var(--ui-primary);">Regístrese gratis</a>
     </p>
 </div>

@@ -26,7 +26,7 @@ $isoMetrics = [
         'std' => 'ISO/IEC 25010 §4.2.1',
         'score' => min(100.0, round($baseScore * 1.02, 1)),
         'desc' => 'Completitud y exactitud de reglas de negocio para ' . ($project->clientName() ?: 'Cliente Corporativo'),
-        'color' => '#00ACE3',
+        'color' => '#10B981',
         'icon' => 'fa-clipboard-check'
     ],
     [
@@ -35,7 +35,7 @@ $isoMetrics = [
         'std' => 'ISO/IEC 25010 §4.2.2',
         'score' => min(100.0, round($baseScore * 0.98, 1)),
         'desc' => 'Latencia de respuesta TTFB < 150ms y concurrencia optimizada',
-        'color' => '#7BD500',
+        'color' => '#16A34A',
         'icon' => 'fa-gauge-high'
     ],
     [
@@ -109,7 +109,7 @@ $owaspChecklist = [
     <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                <span class="badge font-monospace fw-bold" style="background: rgba(23, 43, 77, 0.08); color: #172B4D; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
+                <span class="badge font-monospace fw-bold" style="background: rgba(31, 41, 55, 0.08); color: #1F2937; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
                 <span class="ui-client-badge py-1 px-2" style="font-size: 0.82rem;">
                     <i class="fa-solid fa-briefcase me-1"></i>
                     <span><?= e($project->clientName()) ?></span>
@@ -127,7 +127,7 @@ $owaspChecklist = [
                     <span class="badge bg-success whitespace-nowrap">QA Score: <?= $project->final_score ?><?= (float)$project->final_score > 10 ? '/100' : '/10' ?></span>
                 <?php endif; ?>
             </div>
-            <h2 class="fw-bold mb-1 project-hero-title" style="color: #172B4D; font-size: 1.55rem; letter-spacing: -0.01em;"><?= e($project->name) ?></h2>
+            <h2 class="fw-bold mb-1 project-hero-title" style="color: #1F2937; font-size: 1.55rem; letter-spacing: -0.01em;"><?= e($project->name) ?></h2>
             <div class="text-secondary small d-flex align-items-center gap-2 mt-1 flex-wrap">
                 <span>Fecha de Asignación: <strong class="text-dark"><?= format_date($project->assigned_at) ?></strong></span>
                 <span>&bull;</span>
@@ -168,19 +168,19 @@ $owaspChecklist = [
         <!-- ========================================================================= -->
         <!-- 1. SUITE DE CALIDAD DE SOFTWARE ISO/IEC 25010 & OWASP TOP 10              -->
         <!-- ========================================================================= -->
-        <div class="card-custom p-4 mb-4" style="border-top: 4px solid #00ACE3;">
+        <div class="card-custom p-4 mb-4" style="border-top: 4px solid #10B981;">
             <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom" style="border-color: #DBE2E8 !important;">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(0, 172, 227, 0.12); color: #00ACE3;">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(16, 185, 129, 0.12); color: #10B981;">
                         <i class="fa-solid fa-shield-halved fs-6"></i>
                     </div>
                     <div>
-                        <h5 class="fw-bold mb-0" style="color: #172B4D; font-size: 1.05rem;">Auditoría de Calidad ISO/IEC 25010 & Seguridad OWASP</h5>
+                        <h5 class="fw-bold mb-0" style="color: #1F2937; font-size: 1.05rem;">Auditoría de Calidad ISO/IEC 25010 & Seguridad OWASP</h5>
                         <div class="text-secondary small" style="font-size: 0.75rem;">Dictamen técnico emitido bajo estándares internacionales de ingeniería de software</div>
                     </div>
                 </div>
                 <div class="text-end">
-                    <span class="badge" style="background: rgba(123, 213, 0, 0.15); color: #4d8600; font-weight: 700; font-size: 0.85rem; padding: 6px 10px;">
+                    <span class="badge" style="background: rgba(22, 163, 74, 0.15); color: #4d8600; font-weight: 700; font-size: 0.85rem; padding: 6px 10px;">
                         Score Global: <?= number_format($baseScore, 1) ?>/100
                     </span>
                 </div>
@@ -191,7 +191,7 @@ $owaspChecklist = [
                 <h6 class="fw-bold small mb-0 text-uppercase" style="letter-spacing: 0.04em; color: #5E6C84;">
                     <i class="fa-solid fa-chart-simple me-1 text-primary"></i> Atributos de Calidad del Producto (ISO/IEC 25010 SQuaRE)
                 </h6>
-                <span class="badge" style="background: rgba(0, 172, 227, 0.1); color: #00ACE3; font-size: 0.72rem;">
+                <span class="badge" style="background: rgba(16, 185, 129, 0.1); color: #10B981; font-size: 0.72rem;">
                     <i class="fa-solid fa-crosshairs me-1"></i> Radar Multidimensional
                 </span>
             </div>
@@ -211,11 +211,11 @@ $owaspChecklist = [
                         </div>
                         <div class="d-flex justify-content-center gap-3 mt-2" style="font-size: 0.72rem;">
                             <span class="d-flex align-items-center gap-1">
-                                <span class="rounded-circle d-inline-block" style="width: 8px; height: 8px; background: #00ACE3;"></span>
+                                <span class="rounded-circle d-inline-block" style="width: 8px; height: 8px; background: #10B981;"></span>
                                 <span class="text-secondary">Proyecto: <strong><?= number_format($baseScore, 1) ?>%</strong></span>
                             </span>
                             <span class="d-flex align-items-center gap-1">
-                                <span class="rounded-circle d-inline-block" style="width: 8px; height: 8px; background: #7BD500;"></span>
+                                <span class="rounded-circle d-inline-block" style="width: 8px; height: 8px; background: #16A34A;"></span>
                                 <span class="text-secondary">Línea Base: <strong>100%</strong></span>
                             </span>
                         </div>
@@ -309,12 +309,12 @@ $owaspChecklist = [
         <!-- 2. DESCRIPCIÓN GENERAL Y PATRONES DE ARQUITECTURA                         -->
         <!-- ========================================================================= -->
         <div class="card-custom p-4 mb-4">
-            <h5 class="fw-bold mb-3" style="color: #172B4D;">Descripción y Alcance Ejecutivo</h5>
+            <h5 class="fw-bold mb-3" style="color: #1F2937;">Descripción y Alcance Ejecutivo</h5>
             <div class="text-secondary"><?= render_markdown($project->description ?: 'No se ha provisto una descripción detallada.') ?></div>
 
             <!-- Stack Tecnológico -->
             <div class="mt-4">
-                <h6 class="fw-bold small mb-2" style="color: #172B4D;">Tecnologías y Patrones Aplicados</h6>
+                <h6 class="fw-bold small mb-2" style="color: #1F2937;">Tecnologías y Patrones Aplicados</h6>
                 <div class="d-flex flex-wrap gap-2">
                     <?php if (!empty($project->tech_stack) && is_array($project->tech_stack)): ?>
                         <?php foreach ($project->tech_stack as $tech): ?>
@@ -330,7 +330,7 @@ $owaspChecklist = [
             <?php if (!empty($project->video_url)): ?>
                 <div class="mt-4 pt-3 border-top" style="border-color: #DBE2E8 !important;">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <h6 class="fw-bold small mb-0 d-flex align-items-center gap-2" style="color: #172B4D;">
+                        <h6 class="fw-bold small mb-0 d-flex align-items-center gap-2" style="color: #1F2937;">
                             <svg width="18" height="18" class="text-danger" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             <span>Video de Sustentación / Demo del Software</span>
                         </h6>
@@ -359,7 +359,7 @@ $owaspChecklist = [
         ?>
             <div class="card-custom p-4 mb-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="fw-bold mb-0 d-flex align-items-center gap-2" style="color: #172B4D;">
+                    <h5 class="fw-bold mb-0 d-flex align-items-center gap-2" style="color: #1F2937;">
                         <i class="fa-solid fa-images text-emerald"></i>
                         <span>Capturas del Sistema y Entornos de Ejecución</span>
                     </h5>
@@ -386,19 +386,19 @@ $owaspChecklist = [
         <div class="card-custom p-4 mb-4" id="copilotProjectSuite" style="border: 1px solid #DBE2E8; background: #FFFFFF;">
             <div class="d-flex align-items-center justify-content-between mb-3 pb-3 border-bottom flex-wrap gap-2">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="rounded-3 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; background: linear-gradient(135deg, rgba(0, 172, 227, 0.15), rgba(123, 213, 0, 0.15)); color: #00ACE3;">
+                    <div class="rounded-3 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(22, 163, 74, 0.15)); color: #10B981;">
                         <i class="fa-solid fa-wand-magic-sparkles fs-5"></i>
                     </div>
                     <div>
                         <div class="d-flex align-items-center gap-2">
-                            <h5 class="fw-bold mb-0" style="color: #172B4D;">CoPilot LABVA AI</h5>
+                            <h5 class="fw-bold mb-0" style="color: #1F2937;">CoPilot LABVA AI</h5>
                             <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25" style="font-size: 0.65rem;">ASISTENTE SDLC & QA</span>
                         </div>
                         <div class="text-secondary small" style="font-size: 0.74rem;">Auditoría heurística, gobernanza ISO 25010 y mitigación OWASP en tiempo real.</div>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <span class="badge font-monospace" style="background: rgba(123, 213, 0, 0.1); color: #438A00; border: 1px solid rgba(123, 213, 0, 0.25); font-size: 0.68rem;">
+                    <span class="badge font-monospace" style="background: rgba(22, 163, 74, 0.1); color: #438A00; border: 1px solid rgba(22, 163, 74, 0.25); font-size: 0.68rem;">
                         <i class="fa-solid fa-circle text-success me-1" style="font-size: 0.5rem;"></i> Motor Activo
                     </span>
                     <button type="button" class="btn btn-sm btn-ghost p-1" id="copilotToggleCollapse" title="Minimizar / Expandir CoPilot" aria-label="Minimizar panel">
@@ -436,12 +436,12 @@ $owaspChecklist = [
                 <!-- Área de Visualización del Dictamen CoPilot -->
                 <div class="rounded p-3 mb-3 position-relative" id="copilotOutputContainer" style="background: #F8FAFB; border: 1px solid #E0E8ED; min-height: 120px; max-height: 480px; overflow-y: auto;">
                     <div id="copilotEmptyState" class="text-center py-4 text-secondary">
-                        <i class="fa-solid fa-brain fs-3 mb-2 opacity-50" style="color: #00ACE3;"></i>
+                        <i class="fa-solid fa-brain fs-3 mb-2 opacity-50" style="color: #10B981;"></i>
                         <div class="fw-semibold small text-dark">CoPilot LABVA AI listo para asistir</div>
                         <div class="small text-muted" style="font-size: 0.75rem;">Haz clic en una de las acciones arriba o escribe una consulta técnica específica para este proyecto.</div>
                     </div>
                     <div id="copilotLoadingState" class="text-center py-4 d-none">
-                        <div class="spinner-border spinner-border-sm text-primary mb-2" role="status" style="color: #00ACE3 !important;"></div>
+                        <div class="spinner-border spinner-border-sm text-primary mb-2" role="status" style="color: #10B981 !important;"></div>
                         <div class="small text-secondary fw-medium" id="copilotLoadingMsg">Procesando diagnóstico de ingeniería de software con LABVA AI...</div>
                     </div>
                     <div id="copilotResultContent" class="copilot-markdown-content d-none"></div>
@@ -451,10 +451,10 @@ $owaspChecklist = [
                 <div class="d-none align-items-center justify-content-between mb-3 pt-2 border-top" id="copilotResultActions">
                     <span class="small text-muted font-monospace" style="font-size: 0.68rem;" id="copilotEngineInfo">Modelo: Devioz Heuristic Engine</span>
                     <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-sm btn-ghost border" id="copilotCopyBtn" title="Copiar reporte al portapapeles" style="font-size: 0.75rem; color: #172B4D;">
+                        <button type="button" class="btn btn-sm btn-ghost border" id="copilotCopyBtn" title="Copiar reporte al portapapeles" style="font-size: 0.75rem; color: #1F2937;">
                             <i class="fa-regular fa-copy me-1"></i> <span id="copilotCopyBtnText">Copiar</span>
                         </button>
-                        <button type="button" class="btn btn-sm btn-ghost border" id="copilotInsertCommentBtn" title="Insertar en observaciones técnicas" style="font-size: 0.75rem; color: #00ACE3;">
+                        <button type="button" class="btn btn-sm btn-ghost border" id="copilotInsertCommentBtn" title="Insertar en observaciones técnicas" style="font-size: 0.75rem; color: #10B981;">
                             <i class="fa-solid fa-arrow-down-to-bracket me-1"></i> Insertar en Observaciones
                         </button>
                     </div>
@@ -477,14 +477,14 @@ $owaspChecklist = [
         <!-- 5. HITOS Y AVANCE DEL PROYECTO (SDLC TIMELINE)                            -->
         <!-- ========================================================================= -->
         <div class="card-custom p-4 mb-4">
-            <h5 class="fw-bold mb-3" style="color: #172B4D;">Cronograma de Hitos y Entregables (SDLC)</h5>
+            <h5 class="fw-bold mb-3" style="color: #1F2937;">Cronograma de Hitos y Entregables (SDLC)</h5>
             <div class="milestone-timeline">
                 <?php foreach ($milestones as $m): ?>
                     <div class="milestone-item <?= $m->status ?>">
                         <div class="milestone-dot"></div>
                         <div class="card-custom p-3">
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="fw-bold small" style="color: #172B4D;"><?= e($m->name) ?></span>
+                                <span class="fw-bold small" style="color: #1F2937;"><?= e($m->name) ?></span>
                                 <span class="small text-secondary"><?= format_date($m->due_date) ?></span>
                             </div>
                             <p class="text-secondary small mb-0"><?= e($m->description) ?></p>
@@ -498,13 +498,13 @@ $owaspChecklist = [
         <!-- 5. FEEDBACK Y OBSERVACIONES TÉCNICAS                                      -->
         <!-- ========================================================================= -->
         <div class="card-custom p-4">
-            <h5 class="fw-bold mb-3" style="color: #172B4D;">Feedback y Observaciones de Arquitectura</h5>
+            <h5 class="fw-bold mb-3" style="color: #1F2937;">Feedback y Observaciones de Arquitectura</h5>
             <div class="d-flex flex-column gap-3 mb-4">
                 <?php foreach ($comments as $com): ?>
                     <?php $u = $com->user(); ?>
                     <div class="p-3 rounded" style="background: #F8FAFB; border: 1px solid #DBE2E8;">
                         <div class="d-flex justify-content-between align-items-center mb-1">
-                            <span class="fw-bold small" style="color: #172B4D;"><?= e($u ? $u->name : 'Usuario') ?></span>
+                            <span class="fw-bold small" style="color: #1F2937;"><?= e($u ? $u->name : 'Usuario') ?></span>
                             <span class="text-secondary small"><?= format_date($com->created_at, 'd/m/Y H:i') ?></span>
                         </div>
                         <p class="text-secondary small mb-0"><?= nl2br(e($com->content)) ?></p>
@@ -531,11 +531,11 @@ $owaspChecklist = [
     <div class="col-lg-4">
         <!-- Tarjeta del Desarrollador Responsable -->
         <div class="card-custom p-3 mb-4">
-            <h6 class="fw-bold small mb-3" style="color: #172B4D;">Desarrollador Responsable</h6>
+            <h6 class="fw-bold small mb-3" style="color: #1F2937;">Desarrollador Responsable</h6>
             <div class="d-flex align-items-center gap-3">
                 <img src="<?= e($developer ? $developer->avatarUrl() : '') ?>" class="rounded-circle" width="46" height="46" style="object-fit: cover;" loading="lazy" alt="Avatar">
                 <div>
-                    <div class="fw-bold" style="color: #172B4D;"><?= e($developer ? $developer->name : 'No asignado') ?></div>
+                    <div class="fw-bold" style="color: #1F2937;"><?= e($developer ? $developer->name : 'No asignado') ?></div>
                     <div class="text-secondary small"><?= e($developer ? $developer->email : '') ?></div>
                     <span class="badge-sede mt-1"><?= e($developer ? $developer->sede : 'Sin sede') ?></span>
                 </div>
@@ -544,10 +544,10 @@ $owaspChecklist = [
 
         <!-- Sello de Certificación Devioz Enterprise -->
         <div class="card-custom p-3 mb-4 text-center" style="background: linear-gradient(135deg, #F8FAFB 0%, #FFFFFF 100%); border: 1px solid #DBE2E8;">
-            <div class="d-inline-flex p-3 rounded-circle mb-2" style="background: rgba(0, 172, 227, 0.1); color: #00ACE3;">
+            <div class="d-inline-flex p-3 rounded-circle mb-2" style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
                 <i class="fa-solid fa-certificate fs-3"></i>
             </div>
-            <h6 class="fw-bold mb-1" style="color: #172B4D;">Devioz Quality Assurance</h6>
+            <h6 class="fw-bold mb-1" style="color: #1F2937;">Devioz Quality Assurance</h6>
             <p class="text-secondary small mb-3" style="font-size: 0.75rem;">
                 Gobernanza bajo marco <strong>ISO/IEC 25010</strong>, mitigación <strong>OWASP Top 10</strong> y gestión de seguridad <strong>ISO/IEC 27001</strong>.
             </p>
@@ -561,7 +561,7 @@ $owaspChecklist = [
         <!-- Acciones de Administración (Si es Admin) -->
         <?php if (auth()->isAdmin()): ?>
             <div class="card-custom p-3 mb-4">
-                <h6 class="fw-bold small mb-3" style="color: #172B4D;">Dictamen de Calidad & QA Lead</h6>
+                <h6 class="fw-bold small mb-3" style="color: #1F2937;">Dictamen de Calidad & QA Lead</h6>
 
                 <!-- Aprobar Proyecto -->
                 <form action="<?= url("/admin/projects/{$project->id}/approve") ?>" method="POST" class="mb-2">
@@ -595,11 +595,11 @@ $owaspChecklist = [
 
         <!-- Datos del Proyecto -->
         <div class="card-custom p-3">
-            <h6 class="fw-bold small mb-3" style="color: #172B4D;">Información del Registro</h6>
+            <h6 class="fw-bold small mb-3" style="color: #1F2937;">Información del Registro</h6>
             <div class="d-flex flex-column gap-2 small">
                 <div class="d-flex justify-content-between">
                     <span class="text-secondary">Empresa / Cliente:</span>
-                    <span class="fw-semibold text-truncate" style="color: #00ACE3; max-width: 170px;"><?= e($project->clientName()) ?></span>
+                    <span class="fw-semibold text-truncate" style="color: #10B981; max-width: 170px;"><?= e($project->clientName()) ?></span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <span class="text-secondary">Fecha de Asignación:</span>
@@ -651,12 +651,12 @@ $owaspChecklist = [
                         label: 'Score Evaluado',
                         data: isoScores,
                         fill: true,
-                        backgroundColor: 'rgba(0, 172, 227, 0.22)',
-                        borderColor: '#00ACE3',
-                        pointBackgroundColor: '#00ACE3',
+                        backgroundColor: 'rgba(16, 185, 129, 0.22)',
+                        borderColor: '#10B981',
+                        pointBackgroundColor: '#10B981',
                         pointBorderColor: '#ffffff',
                         pointHoverBackgroundColor: '#ffffff',
-                        pointHoverBorderColor: '#00ACE3',
+                        pointHoverBorderColor: '#10B981',
                         pointRadius: 4,
                         pointHoverRadius: 6,
                         borderWidth: 2
@@ -665,7 +665,7 @@ $owaspChecklist = [
                         label: 'Meta Enterprise',
                         data: benchmark,
                         fill: false,
-                        borderColor: 'rgba(123, 213, 0, 0.65)',
+                        borderColor: 'rgba(22, 163, 74, 0.65)',
                         borderDash: [4, 4],
                         pointRadius: 0,
                         borderWidth: 1.5
@@ -704,7 +704,7 @@ $owaspChecklist = [
                         display: false
                     },
                     tooltip: {
-                        backgroundColor: '#172B4D',
+                        backgroundColor: '#1F2937',
                         titleFont: { family: '"Open Sans", sans-serif', size: 11, weight: 'bold' },
                         bodyFont: { family: '"Open Sans", sans-serif', size: 11 },
                         padding: 8,
@@ -895,7 +895,7 @@ $owaspChecklist = [
                     commentArea.value = prefix + "[Recomendación CoPilot LABVA AI]:\n" + currentCopilotRaw;
                     commentArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     commentArea.focus();
-                    commentArea.style.borderColor = '#00ACE3';
+                    commentArea.style.borderColor = '#10B981';
                     setTimeout(() => { commentArea.style.borderColor = ''; }, 1500);
                 }
             });
@@ -910,9 +910,9 @@ $owaspChecklist = [
             // Código en línea
             s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
             // Títulos
-            s = s.replace(/^### (.*$)/gim, '<h6 class="fw-bold mt-3 mb-1" style="color: #172B4D;">$1</h6>');
-            s = s.replace(/^## (.*$)/gim, '<h5 class="fw-bold mt-3 mb-2" style="color: #172B4D;">$1</h5>');
-            s = s.replace(/^# (.*$)/gim, '<h4 class="fw-bold mt-3 mb-2" style="color: #172B4D;">$1</h4>');
+            s = s.replace(/^### (.*$)/gim, '<h6 class="fw-bold mt-3 mb-1" style="color: #1F2937;">$1</h6>');
+            s = s.replace(/^## (.*$)/gim, '<h5 class="fw-bold mt-3 mb-2" style="color: #1F2937;">$1</h5>');
+            s = s.replace(/^# (.*$)/gim, '<h4 class="fw-bold mt-3 mb-2" style="color: #1F2937;">$1</h4>');
             // Negritas
             s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
             // Cursivas
