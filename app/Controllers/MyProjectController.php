@@ -170,7 +170,7 @@ class MyProjectController extends BaseController
         }
 
         // Cambiar estado del proyecto a 'in_progress' o 'pending_review'
-        if ($project->status === 'assigned') {
+        if (in_array($project->status, ['assigned', 'rejected'], true)) {
             if (!ProjectStatusTransition::apply($project, 'in_progress')) {
                 Session::flash('error', 'El estado del proyecto cambiÃ³ mientras se enviaba la entrega.');
                 redirect('/my-project');
