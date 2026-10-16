@@ -49,14 +49,21 @@ final class QualityAuditService
      */
     public static function assess(array $input): array
     {
+        foreach (['iso', 'owasp', 'tools', 'findings'] as $section) {
+            if (isset($input[$section]) && !is_array($input[$section])) {
+                throw new InvalidArgumentException('La sección ' . $section . ' debe contener datos estructurados.');
+            }
+        }
+
         $iso = [];
         $ratingTotal = 0;
         $ratingCount = 0;
         $complete = true;
 
         foreach (self::isoCriteria() as $key => [$label, $prompt]) {
-            $rawRating = $input['iso'][$key]['rating'] ?? '';
-            $evidence = trim((string)($input['iso'][$key]['evidence'] ?? ''));
+            $criterion = is_array($input['iso'][$key] ?? null) ? $input['iso'][$key] : [];
+            $rawRating = $criterion['rating'] ?? '';
+            $evidence = trim((string)($criterion['evidence'] ?? ''));
             $rating = filter_var($rawRating, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 4]]);
             if ($rating === false || $evidence === '') {
                 $complete = false;
@@ -74,8 +81,9 @@ final class QualityAuditService
 
         $owasp = [];
         foreach (self::owaspCriteria() as $key => $label) {
-            $result = (string)($input['owasp'][$key]['result'] ?? 'not_assessed');
-            $evidence = trim((string)($input['owasp'][$key]['evidence'] ?? ''));
+            $criterion = is_array($input['owasp'][$key] ?? null) ? $input['owasp'][$key] : [];
+            $result = (string)($criterion['result'] ?? 'not_assessed');
+            $evidence = trim((string)($criterion['evidence'] ?? ''));
             if (!in_array($result, ['no_finding', 'finding', 'not_applicable'], true) || $evidence === '') {
                 $complete = false;
             }
@@ -84,8 +92,9 @@ final class QualityAuditService
 
         $tools = [];
         foreach (['automated_tests' => 'Pruebas automatizadas', 'static_analysis' => 'Análisis estático', 'security_scan' => 'Análisis de seguridad'] as $key => $label) {
-            $status = (string)($input['tools'][$key]['status'] ?? 'not_run');
-            $evidence = trim((string)($input['tools'][$key]['evidence'] ?? ''));
+            $toolInput = is_array($input['tools'][$key] ?? null) ? $input['tools'][$key] : [];
+            $status = (string)($toolInput['status'] ?? 'not_run');
+            $evidence = trim((string)($toolInput['evidence'] ?? ''));
             if (!in_array($status, ['passed', 'failed', 'not_run', 'error'], true)) {
                 throw new InvalidArgumentException('Estado de herramienta no válido.');
             }
@@ -93,9 +102,9 @@ final class QualityAuditService
                 'label' => $label,
                 'status' => $status,
                 'evidence' => $evidence,
-                'source' => ($input['tools'][$key]['source'] ?? 'manual') === 'integration' ? 'integration' : 'manual',
-                'evidence_url' => trim((string)($input['tools'][$key]['evidence_url'] ?? '')),
-                'metrics' => $input['tools'][$key]['metrics'] ?? null,
+                'source' => ($toolInput['source'] ?? 'manual') === 'integration' ? 'integration' : 'manual',
+                'evidence_url' => ($toolInput['source'] ?? 'manual') === 'integration' ? trim((string)($toolInput['evidence_url'] ?? '')) : '',
+                'metrics' => ($toolInput['source'] ?? 'manual') === 'integration' ? ($toolInput['metrics'] ?? null) : null,
             ];
             if ($status !== 'passed' || $evidence === '') {
                 $complete = false;
@@ -104,6 +113,9 @@ final class QualityAuditService
 
         $findings = [];
         foreach (($input['findings'] ?? []) as $finding) {
+            if (!is_array($finding)) {
+                throw new InvalidArgumentException('Cada hallazgo debe ser un registro estructurado.');
+            }
             $title = trim((string)($finding['title'] ?? ''));
             $description = trim((string)($finding['description'] ?? ''));
             if ($title === '' && $description === '') {

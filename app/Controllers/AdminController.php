@@ -449,7 +449,23 @@ class AdminController extends BaseController
             echo \App\Core\View::renderError(404);
             exit;
         }
-        $sonarResult = SonarQubeService::qualityGate((string)($_POST['sonarqube_project_key'] ?? ''));
+        $sonarProjectKey = trim((string)($_POST['sonarqube_project_key'] ?? ''));
+        if (strlen($sonarProjectKey) > 200) {
+            Session::flash('error', 'El project key de SonarQube supera el límite permitido.');
+            redirect("/admin/quality-audits/create/{$deliveryId}");
+        }
+        $commitShaInput = trim((string)($_POST['commit_sha'] ?? ''));
+        $releaseVersionInput = trim((string)($_POST['release_version'] ?? ''));
+        if (($commitShaInput !== '' && !preg_match('/^[a-f0-9]{7,64}$/i', $commitShaInput)) || strlen($releaseVersionInput) > 100) {
+            Session::flash('error', 'Revisa el SHA del commit (7–64 caracteres hexadecimales) y la versión (máximo 100 caracteres).');
+            redirect("/admin/quality-audits/create/{$deliveryId}");
+        }
+        $sonarResult = SonarQubeService::qualityGate($sonarProjectKey);
+        $_POST['tools'] = is_array($_POST['tools'] ?? null) ? $_POST['tools'] : [];
+        $_POST['tools']['automated_tests'] = is_array($_POST['tools']['automated_tests'] ?? null) ? $_POST['tools']['automated_tests'] : [];
+        $_POST['tools']['security_scan'] = is_array($_POST['tools']['security_scan'] ?? null) ? $_POST['tools']['security_scan'] : [];
+        $_POST['tools']['automated_tests']['source'] = 'manual';
+        $_POST['tools']['security_scan']['source'] = 'manual';
         $_POST['tools']['static_analysis'] = [
             'status' => $sonarResult['status'],
             'evidence' => $sonarResult['notes'],
@@ -485,7 +501,7 @@ class AdminController extends BaseController
             }
             foreach ($assessment['criteria']['tools'] as $key => $tool) {
                 $db->insert('quality_tool_runs', [
-                    'audit_id' => $auditId, 'tool_key' => $key, 'source' => 'manual', 'status' => $tool['status'],
+                    'audit_id' => $auditId, 'tool_key' => $key, 'status' => $tool['status'],
                     'commit_sha' => $commitSha, 'notes' => $tool['evidence'] ?: null,
                     'evidence_url' => $tool['evidence_url'] ?: null,
                     'metrics' => $tool['metrics'] === null ? null : json_encode($tool['metrics'], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
