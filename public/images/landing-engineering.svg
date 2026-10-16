@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Flujo de ingenieria digital Devioz</title>
+  <desc id="desc">Ilustracion de producto, arquitectura, inteligencia artificial y calidad conectados en un flujo de desarrollo.</desc>
+  <defs>
+    <linearGradient id="bg" x1="110" y1="72" x2="875" y2="656" gradientUnits="userSpaceOnUse"><stop stop-color="#11243D"/><stop offset="1" stop-color="#183C59"/></linearGradient>
+    <linearGradient id="mint" x1="332" y1="196" x2="598" y2="568" gradientUnits="userSpaceOnUse"><stop stop-color="#B5F3DC"/><stop offset="1" stop-color="#57D2AD"/></linearGradient>
+    <linearGradient id="violet" x1="672" y1="148" x2="824" y2="270" gradientUnits="userSpaceOnUse"><stop stop-color="#D9D4FF"/><stop offset="1" stop-color="#9E92FF"/></linearGradient>
+    <linearGradient id="blue" x1="145" y1="482" x2="298" y2="610" gradientUnits="userSpaceOnUse"><stop stop-color="#C4E7FF"/><stop offset="1" stop-color="#7AC4F5"/></linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 330 -430 0 500 300)" gradientUnits="userSpaceOnUse"><stop stop-color="#327D89" stop-opacity=".48"/><stop offset="1" stop-color="#10243B" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#061322" flood-opacity=".32"/></filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="24"/></filter>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.5" fill="#D5F8EF" fill-opacity=".24"/></pattern>
+  </defs>
+  <rect x="20" y="20" width="920" height="680" rx="36" fill="url(#bg)"/>
+  <rect x="20" y="20" width="920" height="680" rx="36" fill="url(#glow)"/>
+  <circle cx="757" cy="155" r="112" fill="#8E83FF" fill-opacity=".25" filter="url(#soft)"/>
+  <circle cx="186" cy="556" r="105" fill="#54D6AE" fill-opacity=".18" filter="url(#soft)"/>
+  <path d="M65 148h830M65 584h830" stroke="#D9F2ED" stroke-opacity=".12"/>
+  <rect x="65" y="58" width="830" height="582" rx="25" fill="url(#dots)" fill-opacity=".55"/>
+
+  <g opacity=".82">
+    <path d="M264 358h121m190 0h122M478 258v-63m0 263v60" stroke="#8CE6CF" stroke-width="3" stroke-dasharray="7 9"/>
+    <circle cx="324" cy="358" r="5" fill="#A3F0D8"/><circle cx="635" cy="358" r="5" fill="#A3F0D8"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="280" y="125" width="400" height="468" rx="22" fill="#FBFDFE"/>
+    <path d="M302 125h356a22 22 0 0 1 22 22v47H280v-47a22 22 0 0 1 22-22Z" fill="#F0F5F7"/>
+    <circle cx="309" cy="158" r="5" fill="#F18B82"/><circle cx="329" cy="158" r="5" fill="#F2C56B"/><circle cx="349" cy="158" r="5" fill="#69C9A6"/>
+    <rect x="481" y="146" width="170" height="24" rx="12" fill="#E5EEF0"/>
+    <circle cx="497" cy="158" r="4" fill="#14A982"/><text x="508" y="162" fill="#506273" font-family="Arial,sans-serif" font-size="10" font-weight="700">DEVIOZ / PROJECT STUDIO</text>
+
+    <text x="310" y="222" fill="#142E46" font-family="Arial,sans-serif" font-size="19" font-weight="700">De idea a producto digital</text>
+    <text x="310" y="246" fill="#718195" font-family="Arial,sans-serif" font-size="11">Ingenieria, IA aplicada y calidad en un solo flujo</text>
+
+    <rect x="310" y="271" width="340" height="90" rx="14" fill="#F4F8FA" stroke="#E2EBEF"/>
+    <rect x="328" y="289" width="36" height="36" rx="10" fill="#DCF5EB"/>
+    <path d="M339 307h14m-7-7v14" stroke="#078D6C" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="377" y="300" fill="#294358" font-family="Arial,sans-serif" font-size="12" font-weight="700">Descubrimiento y arquitectura</text>
+    <text x="377" y="319" fill="#74869A" font-family="Arial,sans-serif" font-size="10">Objetivos claros, alcance y decisiones documentadas</text>
+    <rect x="328" y="337" width="304" height="5" rx="2.5" fill="#DDE7EA"/><rect x="328" y="337" width="190" height="5" rx="2.5" fill="#22B68B"/>
+
+    <rect x="310" y="377" width="162" height="126" rx="14" fill="#F7F8FD" stroke="#E6E8F2"/>
+    <rect x="328" y="394" width="31" height="31" rx="9" fill="#E8E5FF"/>
+    <path d="m337 409 6-6 6 6-6 6-6-6Z" stroke="#7165D6" stroke-width="1.8"/>
+    <text x="328" y="446" fill="#2D3E54" font-family="Arial,sans-serif" font-size="11" font-weight="700">IA con supervision</text>
+    <text x="328" y="465" fill="#74869A" font-family="Arial,sans-serif" font-size="9">Asistencia util, con contexto</text>
+    <text x="328" y="480" fill="#74869A" font-family="Arial,sans-serif" font-size="9">y control humano.</text>
+
+    <rect x="488" y="377" width="162" height="126" rx="14" fill="#F2FAF7" stroke="#DDEFE8"/>
+    <rect x="506" y="394" width="31" height="31" rx="9" fill="#DDF5E9"/>
+    <path d="m515 409 5 5 9-11" stroke="#118866" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="506" y="446" fill="#2D3E54" font-family="Arial,sans-serif" font-size="11" font-weight="700">Calidad verificable</text>
+    <text x="506" y="465" fill="#74869A" font-family="Arial,sans-serif" font-size="9">Pruebas, seguridad y</text>
+    <text x="506" y="480" fill="#74869A" font-family="Arial,sans-serif" font-size="9">evidencia por entrega.</text>
+
+    <path d="M310 526h340" stroke="#E6ECEF"/>
+    <circle cx="319" cy="553" r="5" fill="#14A982"/><text x="332" y="557" fill="#4D6375" font-family="Arial,sans-serif" font-size="10" font-weight="700">Personas + tecnologia + resultados</text>
+    <text x="310" y="578" fill="#8A99A8" font-family="Arial,sans-serif" font-size="8">FLUJO ADAPTABLE A CADA RETO</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="78" y="226" width="180" height="104" rx="17" fill="#fff"/>
+    <circle cx="108" cy="260" r="17" fill="url(#violet)"/>
+    <path d="M102 260h12m-6-6v12" stroke="#5548B8" stroke-width="2" stroke-linecap="round"/>
+    <text x="136" y="257" fill="#20374D" font-family="Arial,sans-serif" font-size="11" font-weight="700">IA aplicada</text>
+    <text x="136" y="275" fill="#75869A" font-family="Arial,sans-serif" font-size="9">Agentes y automatizacion</text>
+    <rect x="99" y="300" width="135" height="5" rx="2.5" fill="#ECEAFB"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="700" y="391" width="186" height="112" rx="17" fill="#fff"/>
+    <circle cx="731" cy="427" r="17" fill="url(#blue)"/>
+    <path d="M724 429h14m-11-6h8m-8 12h8" stroke="#2478AC" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="759" y="424" fill="#20374D" font-family="Arial,sans-serif" font-size="11" font-weight="700">Entrega continua</text>
+    <text x="759" y="442" fill="#75869A" font-family="Arial,sans-serif" font-size="9">Cloud, datos y seguridad</text>
+    <rect x="720" y="472" width="139" height="5" rx="2.5" fill="#E7F2F9"/><rect x="720" y="472" width="94" height="5" rx="2.5" fill="#5EB8E7"/>
+  </g>
+
+  <g>
+    <circle cx="478" cy="361" r="7" fill="#6AE2BE" stroke="#173C4D" stroke-width="4"/>
+    <circle cx="478" cy="361" r="17" stroke="#77E4C7" stroke-opacity=".35" stroke-width="2"/>
+  </g>
+</svg>

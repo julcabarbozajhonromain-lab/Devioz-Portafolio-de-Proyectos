@@ -273,43 +273,52 @@ if (!function_exists('devioz_parse_video')) {
         /* HERO SECTION                                                  */
         /* ------------------------------------------------------------- */
         .ui-hero-section {
-            background: radial-gradient(100% 75% at 50% 0%, #F0F8FF 0%, #FFFFFF 100%);
-            padding: 5rem 0 4rem;
+            background: radial-gradient(90% 75% at 85% 28%, #EAF7F3 0%, rgba(234, 247, 243, 0) 62%), #FFFFFF;
+            padding: 6.5rem 0 5.5rem;
             position: relative;
             overflow: hidden;
             border-bottom: 1px solid var(--ui-gray-border);
         }
 
         .ui-hero-badge {
-            background: #ECFDF5;
-            color: #047857;
-            border: 1px solid #BAE6FD;
-            font-size: 0.78rem;
+            background: #F0F8F5;
+            color: #087A62;
+            border: 1px solid #D7ECE4;
+            font-size: 0.76rem;
             font-weight: 700;
             padding: 0.38rem 1rem;
             border-radius: 20px;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.4rem;
         }
 
         .ui-hero-title {
-            font-size: 2.85rem;
-            font-weight: 800;
-            color: var(--ui-navy);
-            line-height: 1.18;
-            letter-spacing: -0.8px;
-            margin-bottom: 1.25rem;
+            font-size: clamp(2.75rem, 4.4vw, 4.2rem);
+            font-weight: 700;
+            color: #142B40;
+            line-height: 1.08;
+            letter-spacing: -1.8px;
+            margin-bottom: 1.3rem;
         }
 
         .ui-hero-subtitle {
-            font-size: 1.12rem;
-            color: #475569;
-            line-height: 1.65;
-            margin-bottom: 1.75rem;
-            max-width: 580px;
+            font-size: 1.08rem;
+            color: #596B7C;
+            line-height: 1.75;
+            margin-bottom: 1.7rem;
+            max-width: 540px;
         }
+
+        .ui-hero-services { display:flex; flex-wrap:wrap; gap:.55rem; margin-bottom:1.8rem; }
+        .ui-hero-services span { display:inline-flex; align-items:center; gap:.45rem; color:#385366; font-size:.82rem; font-weight:600; background:#fff; border:1px solid #E0E9EC; border-radius:999px; padding:.48rem .76rem; }
+        .ui-hero-services i { color:#0F9B77; font-size:.78rem; }
+        .ui-hero-visual { animation: heroReveal .9s cubic-bezier(.2,.7,.25,1) both; }
+        .ui-hero-visual img { width:100%; height:auto; display:block; filter:drop-shadow(0 22px 35px rgba(13,39,56,.15)); animation: heroFloat 7s ease-in-out 1s infinite; }
+        .ui-hero-note { font-size:.82rem; color:#667989; }
+        @keyframes heroReveal { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes heroFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
 
         .ui-hero-checklist {
             list-style: none;
@@ -410,9 +419,9 @@ if (!function_exists('devioz_parse_video')) {
         /* CINTA DE MÉTRICAS & RESUMEN DE CONFIANZA                      */
         /* ------------------------------------------------------------- */
         .ui-metrics-ribbon {
-            background: var(--ui-navy);
+            background: #142B40;
             color: #FFFFFF;
-            padding: 2.25rem 0;
+            padding: 1.25rem 0;
             border-top: 1px solid #1E293B;
             border-bottom: 1px solid #1E293B;
         }
@@ -422,18 +431,18 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .ui-metric-num {
-            font-size: 2.4rem;
-            font-weight: 800;
-            color: var(--ui-primary);
-            letter-spacing: -0.5px;
-            line-height: 1.1;
+            font-size: 1rem;
+            font-weight: 650;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            line-height: 1.35;
         }
 
         .ui-metric-label {
             font-size: 0.85rem;
-            color: #94A3B8;
-            margin-top: 0.35rem;
-            font-weight: 600;
+            color: #B9C8D3;
+            margin-top: 0.2rem;
+            font-weight: 400;
         }
 
         /* Trust Badges */
