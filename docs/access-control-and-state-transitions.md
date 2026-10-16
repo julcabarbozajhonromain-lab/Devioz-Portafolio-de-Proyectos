@@ -1,68 +1,66 @@
 # Acceso y estados de Devioz
 
-**Estado:** baseline verificado en código el 16 de octubre de 2026. Esta matriz describe los roles actuales (`admin`, `developer`) y separa lo existente de lo propuesto. No hay rol de cliente ni modelo `organization_id` todavía.
+**Estado:** verificado en codigo el 16 de octubre de 2026. El sistema tiene dos roles (`admin`, `developer`); todavia no existe un rol de cliente ni aislamiento por organizacion.
 
-## Matriz de permisos actual y objetivo
+## Matriz de acceso actual
 
-| Recurso / acción | Visitante | Desarrollador asignado | Otro desarrollador | Administrador | Estado / regla |
-| --- | --- | --- | --- | --- | --- |
-| Galería pública | Leer | Leer | Leer | Leer | Público; debe exponer solo los campos publicados. |
-| Ficha interna del proyecto | No | Leer su proyecto | No | Leer todos | La ficha comprueba asignación al usuario. |
-| Crear, editar, asignar, archivar proyecto | No | No | No | Sí | Rutas administrativas. |
-| Enviar proyecto a revisión | No | Sí, su proyecto | No | Sí | La ruta actual permite admin o el developer asignado. |
-| Completar hito / enviar entrega | No | Sí, de su proyecto | No | No | Debe validar que hito y proyecto pertenecen al usuario. |
-| Dictaminar QA | No | No | No | Sí | Admin; compuerta basada en evidencia. |
-| Aprobar / cambiar estado del proyecto | No | No | No | Sí | Admin y solo con auditoría aprobada para `approved`. Las transiciones aún requieren restringirse. |
-| Descargar evidencia de entrega | No | Sí, de su proyecto | No | Sí | Controlador valida propiedad; acepta compatibilidad con archivos antiguos públicos. |
-| Comentar en proyecto | No | Sí, su proyecto | No | Sí | Verificación de pertenencia en el controlador. |
-| Previsualizar / usar CoPilot | No | Sí, su proyecto | No | Sí | Preview valida propiedad. CoPilot debe usar la misma política; verificarla antes de devolver datos del proyecto. |
-| Configuración y usuarios | No | No | No | Sí | Solo administrador. |
-| Portal y aceptación de cliente | No | No | No | No | No implementado: no hay usuario/rol de cliente ni organización. |
+| Recurso / accion | Visitante | Desarrollador asignado | Otro desarrollador | Administrador |
+| --- | --- | --- | --- | --- |
+| Galeria publica | Leer proyectos publicados | Leer | Leer | Leer |
+| Ficha interna de proyecto | No | Solo su proyecto | No | Leer todos |
+| Crear, editar, asignar, archivar | No | No | No | Si |
+| Enviar proyecto a revision | No | Su proyecto | No | Si |
+| Completar hitos / enviar entregas | No | Su proyecto | No | No |
+| Dictaminar QA | No | No | No | Si, con evidencia |
+| Cambiar estado / aprobar | No | No | No | Si, transicion valida y QA aprobado para `approved` |
+| Descargar evidencia de entrega | No | Su proyecto | No | Si |
+| Comentar / previsualizar / CoPilot | No | Su proyecto | No | Si |
+| Configuracion y usuarios | No | No | No | Si |
+| Portal y aceptacion de cliente | No | No | No | No implementado |
 
-### Regla de autorización propuesta
+`ProjectPolicy` concentra permisos sobre recursos de proyecto y deniega por defecto. `ProjectStatusTransition` valida transiciones de estado y aplica el cambio con una condicion sobre el estado anterior para detectar cambios concurrentes. Las rutas siguen siendo responsables de autenticar y autorizar al actor. Cuando se agregue el portal de clientes, se necesitara `organization_id` y membresia real; `client_name` no proporciona aislamiento.
 
-Centralizar en `ProjectPolicy` las acciones `view`, `submit`, `comment`, `download`, `manage`, `audit` y `approve`. Denegar por defecto. Para recursos ligados a un proyecto, exigir administrador o desarrollador asignado; nunca confiar solo en que la ruta requiera login ni en IDs enviados por el navegador. Cuando se agreguen clientes, sumar `organization_id` y membresía al modelo; no simular tenancy con `client_name`.
+## Entidades y estados existentes
 
-## Estados que existen hoy
-
-| Entidad | Estados registrados | Comportamiento comprobado |
+| Entidad | Estados registrados | Funcion comprobada |
 | --- | --- | --- |
-| Proyecto | `draft`, `assigned`, `in_progress`, `pending_review`, `in_review`, `approved`, `rejected`, `completed`, `archived` | La entrega a revisión o completar todos los hitos establece `pending_review`. El endpoint Kanban admin acepta cualquier estado de la lista; no aplica una tabla de transiciones. |
-| Hito | `pending`, `in_progress`, `completed` | El desarrollador asignado puede marcarlo completo; completar todos los hitos mueve el proyecto a revisión. |
-| Entrega | `pending`, `approved`, `rejected` | Se crea pendiente; el dictamen QA puede aprobar o rechazar y completar el hito. |
-| Auditoría QA | `in_review`, `needs_changes`, `passed`, `blocked` | Se mantiene separada de la aprobación del proyecto. La compuerta además conserva `not_run`, `pending`, `passed`, `failed`, `blocked`. |
-| Aceptación del cliente | — | No implementada. `approved` no debe interpretarse como aceptación contractual del cliente. |
-| Release / despliegue | — | No implementado. `completed` no prueba que exista un despliegue. |
+| Proyecto | `draft`, `assigned`, `in_progress`, `pending_review`, `in_review`, `approved`, `rejected`, `completed`, `archived` | Envio a revision y finalizacion de hitos pueden mover el proyecto a `pending_review`. |
+| Hito | `pending`, `in_progress`, `completed` | El desarrollador asignado completa hitos. |
+| Entrega | `pending`, `approved`, `rejected` | QA dictamina entregas con base en evaluacion y evidencia. |
+| Auditoria QA | `in_review`, `needs_changes`, `passed`, `blocked` | El Quality Gate mantiene tambien `not_run`, `pending`, `passed`, `failed`, `blocked`. |
+| Aceptacion de cliente | No existe | `approved` no representa aceptacion contractual. |
+| Release / despliegue | No existe | `completed` no demuestra que haya ocurrido un despliegue. |
 
-## Transiciones recomendadas para el MVP
+## Transiciones de proyecto implementadas
 
-### Proyecto
+| Desde | Hacia | Actor / condicion |
+| --- | --- | --- |
+| `draft` | `assigned` | Admin asigna un responsable. |
+| `assigned` | `in_progress` | Desarrollador asignado envia la primera entrega. |
+| `assigned` | `pending_review` | Se conserva para el flujo actual de envio aunque no haya evidencia de entrega final; requiere definicion de negocio. |
+| `in_progress` | `pending_review` | Desarrollador asignado envia el proyecto o completa todos los hitos. |
+| `pending_review` | `in_review` | Admin inicia revision desde Kanban. |
+| `pending_review` / `in_review` | `approved` | Admin; exige auditoria QA aprobada con score. No equivale a aceptacion del cliente ni a despliegue. |
+| `pending_review` / `in_review` | `rejected` | Admin registra observacion. |
+| `rejected` | `in_progress` / `pending_review` | Desarrollador asignado reanuda trabajo o reenvia. |
+| `assigned` / `in_progress` | `draft` | Admin desasigna el proyecto y lo devuelve al pool. |
+| `pending_review` / `in_review` / `rejected` / `approved` / `completed` | `archived` | Admin archiva preservando el registro. |
+| `archived` | `assigned` | Admin reasigna el proyecto. |
 
-| Desde | Hacia | Quién | Condición |
-| --- | --- | --- | --- |
-| `draft` | `assigned` | Admin | Proyecto con responsable asignado. |
-| `assigned` | `in_progress` | Admin / developer asignado | Inicio confirmado. |
-| `in_progress` | `pending_review` | Developer asignado | Entrega final presentada o hitos requeridos completos. |
-| `pending_review` | `in_review` | Admin | Revisión iniciada. |
-| `in_review` | `rejected` | Admin | Observaciones documentadas; el proyecto vuelve a trabajo activo según política. |
-| `in_review` | `approved` | Admin | Quality Gate aprobado y evidencia de entrega final. No significa aceptación del cliente ni despliegue. |
-| `approved` | `completed` | Admin | Cierre administrativo explícito; no usar como sinónimo de deploy. |
-| estados terminales | `archived` | Admin | Retención y auditoría preservadas. |
+El mapa de transiciones vive en `app/Services/ProjectStatusTransition.php`. El tablero QA solo permite como destinos `pending_review`, `in_review`, `approved` y `rejected`; archivo y asignacion usan sus acciones administrativas. La aprobacion por tablero o ficha requiere una auditoria `passed` con Quality Gate `passed`. `completed` permanece como estado historico, sin una nueva transicion hacia el porque todavia no hay un proceso definido de cierre o despliegue.
 
-Las transiciones de regreso a `in_progress`, reapertura y cancelación deben decidirse con negocio antes de habilitarlas. Cualquier transición no listada se rechaza.
+## Maquinas futuras separadas
 
-### QA, aceptación y despliegue
+1. **QA:** evaluacion basada en evidencias, hallazgos, severidad, remediacion y Quality Gate. El dictamen QA no debe confundirse con aceptacion contractual.
+2. **Aceptacion de cliente:** futura secuencia `awaiting_client` hacia `accepted`, `changes_requested` o `declined`, despues de QA aprobado.
+3. **Release:** futura secuencia `ready` hacia `deploying`, `deployed` o `failed`, con version, commit, aprobador y rollback como evento auditable.
 
-1. QA: `in_review` → `passed`, `needs_changes` o `blocked`.
-2. Aceptación del cliente (futura): solo después de QA `passed`; `awaiting_client` → `accepted`, `changes_requested` o `declined`.
-3. Release (futura): solo después de aceptación o una excepción aprobada; registrar versión y commit antes de `ready` → `deploying` → `deployed` o `failed`; rollback se registra como evento propio.
+No crear estados para aceptacion o despliegue hasta implementar las operaciones que los ejecuten.
 
-No implementar todavía la máquina de aceptación ni la de despliegue mientras no exista el portal/operación que las ejecuta. Mantenerlas separadas en el modelo cuando ese alcance sea aprobado.
+## Pendientes de negocio y arquitectura
 
-## Hallazgos para el siguiente cambio
-
-- Alinear las comprobaciones por dueño del recurso con `ProjectPolicy`, incluyendo CoPilot y cualquier endpoint nuevo.
-- Restringir el endpoint Kanban a transiciones válidas, con un `UPDATE ... WHERE status = :expected_status` para evitar carreras.
-- Mantener evidencia de QA privada; revisar la ruta de compatibilidad de archivos legados antes de retirarla.
-- El esquema inicial contiene `DROP TABLE`; usar únicamente migraciones aditivas/versionadas para cambios en una base con datos.
-- La matriz no concede permisos de cliente porque hoy no existe ese rol ni aislamiento multiempresa.
+- Definir si enviar un proyecto en estado `assigned` exige una entrega final o hitos completos. El comportamiento actual se conserva para evitar cambiar el flujo sin validar datos y pantallas.
+- Acordar que significa `completed` y separar cierre, aceptacion del cliente y despliegue.
+- Revisar la compatibilidad de archivos de entregas antiguos antes de dejar toda evidencia como privada.
+- El esquema inicial contiene sentencias `DROP TABLE`; para bases con informacion se deben usar migraciones aditivas y versionadas.
+- No conceder acceso de cliente hasta contar con rol, organizacion, membresia y politicas de aislamiento.
