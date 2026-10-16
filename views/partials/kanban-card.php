@@ -18,17 +18,17 @@ $techString = implode(' ', $techs);
 
 // Semáforo de deadline según estado
 $deadlineClass = match ($p->status) {
-    'approved'       => 'bx-deadline-green',
-    'rejected'       => 'bx-deadline-amber',
-    'in_review'      => 'bx-deadline-blue',
-    default          => 'bx-deadline-amber',
+    'approved'       => 'ui-deadline-green',
+    'rejected'       => 'ui-deadline-amber',
+    'in_review'      => 'ui-deadline-blue',
+    default          => 'ui-deadline-amber',
 };
 
 // Estimación de fecha de entrega
 $dueDate = $p->assigned_at ? date('d M, 18:00', strtotime($p->assigned_at . ' +14 days')) : date('d M, 18:00', strtotime('+7 days'));
 ?>
 
-<div class="gl-card kanban-card" 
+<div class="gl-card kanban-card"
      data-project-id="<?= $p->id ?>"
      data-search-title="<?= e(strtolower($p->name)) ?>"
      data-search-code="<?= e(strtolower($p->code)) ?>"
@@ -36,10 +36,10 @@ $dueDate = $p->assigned_at ? date('d M, 18:00', strtotime($p->assigned_at . ' +1
      data-search-client="<?= e(strtolower($p->clientName())) ?>"
      data-search-sede="<?= e(strtolower($p->sede ?: '')) ?>"
      data-search-tech="<?= e(strtolower($techString)) ?>">
-    
+
     <!-- Top: Badge de Cliente/Empresa + Código de Proyecto -->
     <div class="d-flex align-items-center justify-content-between gap-2 mb-1">
-        <span class="bx-client-badge" title="Empresa / Cliente: <?= e($p->clientName()) ?>">
+        <span class="ui-client-badge" title="Empresa / Cliente: <?= e($p->clientName()) ?>">
             <i class="fa-solid fa-briefcase"></i>
             <span><?= e($p->clientName()) ?></span>
         </span>
@@ -51,14 +51,14 @@ $dueDate = $p->assigned_at ? date('d M, 18:00', strtotime($p->assigned_at . ' +1
         <?= e($p->name) ?>
     </a>
 
-    <!-- Miniatura Visual del Entregable (Media Preview estilo Bitrix24) -->
-    <div class="bx-card-cover-wrapper">
-        <img src="<?= e($p->coverUrl()) ?>" alt="<?= e($p->name) ?>" class="bx-card-cover-img" loading="lazy">
+    <!-- Miniatura Visual del Entregable (Media Preview estilo Devioz) -->
+    <div class="ui-card-cover-wrapper">
+        <img src="<?= e($p->coverUrl()) ?>" alt="<?= e($p->name) ?>" class="ui-card-cover-img" loading="lazy">
     </div>
 
     <!-- Plazo Límite con Semáforo + Sede -->
     <div class="d-flex align-items-center justify-content-between gap-1 my-1">
-        <span class="bx-deadline-badge <?= $deadlineClass ?>">
+        <span class="ui-deadline-badge <?= $deadlineClass ?>">
             <i class="fa-regular fa-clock"></i>
             <span><?= e($dueDate) ?></span>
         </span>
@@ -73,9 +73,9 @@ $dueDate = $p->assigned_at ? date('d M, 18:00', strtotime($p->assigned_at . ' +1
             <span class="gl-label gl-label-green">Nota: <?= number_format((float)$p->final_score, 1) ?></span>
         <?php endif; ?>
 
-        <?php 
+        <?php
         $cIdx = 0;
-        foreach (array_slice($techs, 0, 2) as $t): 
+        foreach (array_slice($techs, 0, 2) as $t):
             $colorPills = ['gl-label-cyan', 'gl-label-blue', 'gl-label-purple', 'gl-label-orange'];
             $cClass = $colorPills[$cIdx % 4];
             $cIdx++;
@@ -105,10 +105,10 @@ $dueDate = $p->assigned_at ? date('d M, 18:00', strtotime($p->assigned_at . ' +1
 
     <!-- Footer: Flujo de Delegación (Supervisor -> Dev) + Enlace de Detalle -->
     <div class="d-flex align-items-center justify-content-between pt-2 mt-2 border-top" style="border-color: var(--border-color) !important;">
-        <div class="bx-delegation-flow" title="Asignado por: <?= e($adminName) ?> → Desarrollador: <?= e($devName) ?>">
-            <img src="<?= e($adminAvatar) ?>" alt="<?= e($adminName) ?>" class="bx-avatar-supervisor" title="Supervisor: <?= e($adminName) ?>" loading="lazy">
-            <span class="bx-delegation-arrow">→</span>
-            <img src="<?= e($devAvatar) ?>" alt="<?= e($devName) ?>" class="bx-avatar-dev" title="Desarrollador: <?= e($devName) ?>" loading="lazy">
+        <div class="ui-delegation-flow" title="Asignado por: <?= e($adminName) ?> → Desarrollador: <?= e($devName) ?>">
+            <img src="<?= e($adminAvatar) ?>" alt="<?= e($adminName) ?>" class="ui-avatar-supervisor" title="Supervisor: <?= e($adminName) ?>" loading="lazy">
+            <span class="ui-delegation-arrow">→</span>
+            <img src="<?= e($devAvatar) ?>" alt="<?= e($devName) ?>" class="ui-avatar-dev" title="Desarrollador: <?= e($devName) ?>" loading="lazy">
             <span class="small text-secondary text-truncate ms-1" style="max-width: 90px;"><?= e(explode(' ', $devName)[0]) ?></span>
         </div>
         <a href="<?= url("/projects/{$p->id}") ?>" class="gl-card-link small">

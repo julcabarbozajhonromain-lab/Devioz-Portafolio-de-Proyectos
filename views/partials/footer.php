@@ -9,6 +9,6 @@ declare(strict_types=1);
     </div>
     <div class="d-flex align-items-center gap-3">
         <span class="badge" style="background: rgba(0, 172, 227, 0.12); color: #00ACE3; font-size: 0.72rem; font-weight: 600;">Enterprise Suite</span>
-        <span class="text-secondary small">Bitrix24 UI Standards &bull; Devioz Core</span>
+        <span class="text-secondary small">Devioz UI Standards &bull; Devioz Core</span>
     </div>
 </footer>

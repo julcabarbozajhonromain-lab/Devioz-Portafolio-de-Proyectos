@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 
 
-<!-- HEADER AIR DE AUDITORÍAS QA -->
+<!-- Encabezado de auditorías QA -->
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
         <h4 class="fw-bold mb-0 page-header-title text-white">Auditorías de Calidad & QA Software</h4>
@@ -60,7 +60,7 @@ declare(strict_types=1);
                         <td class="small text-secondary whitespace-nowrap"><?= format_date($del['submitted_at']) ?></td>
                         <td>
                             <?php if (!empty($del['video_url'])): ?>
-                                <button type="button" class="btn btn-bitrix-ghost btn-sm py-0 px-2 whitespace-nowrap" data-video-url="<?= e($del['video_url']) ?>" data-video-title="Entrega: <?= e($del['title']) ?> (<?= e($del['developer_name']) ?>)">
+                                <button type="button" class="btn btn-devioz-ghost btn-sm py-0 px-2 whitespace-nowrap" data-video-url="<?= e($del['video_url']) ?>" data-video-title="Entrega: <?= e($del['title']) ?> (<?= e($del['developer_name']) ?>)">
                                     <i class="fa-solid fa-play text-primary me-1" style="color: #00ACE3 !important;"></i> Reel
                                 </button>
                             <?php endif; ?>
@@ -71,10 +71,10 @@ declare(strict_types=1);
                             <?php endif; ?>
                         </td>
                         <td class="text-end">
-                            <button type="button" 
-                                    class="btn btn-bitrix-primary btn-sm whitespace-nowrap" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#gradeModal" 
+                            <button type="button"
+                                    class="btn btn-devioz-primary btn-sm whitespace-nowrap"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#gradeModal"
                                     data-delivery-id="<?= $del['id'] ?>"
                                     data-delivery-title="<?= e($del['title']) ?>"
                                     data-dev-name="<?= e($del['developer_name']) ?>">
@@ -160,29 +160,29 @@ declare(strict_types=1);
                     </p>
 
                     <div class="mb-3">
-                        <label for="score" class="bx-form-label">Score de Calidad QA (Escala 0 a 100) *</label>
-                        <input type="number" step="0.5" min="0" max="100" name="score" id="score" class="form-control bx-form-input" placeholder="Ej: 95.0" required autofocus>
+                        <label for="score" class="ui-form-label">Score de Calidad QA (Escala 0 a 100) *</label>
+                        <input type="number" step="0.5" min="0" max="100" name="score" id="score" class="form-control ui-form-input" placeholder="Ej: 95.0" required autofocus>
                         <div class="mt-1 text-muted" style="font-size: 12px;">Score &ge; 60 aprueba formalmente el hito. Score &ge; 90 otorga Certificación de Excelencia.</div>
                     </div>
 
                     <!-- Plantillas Rápidas de Dictamen Normativo -->
                     <div class="mb-2">
-                        <label class="bx-form-label d-flex justify-content-between align-items-center">
+                        <label class="ui-form-label d-flex justify-content-between align-items-center">
                             <span>Estándares de Arquitectura & Checklist QA *</span>
                             <span class="text-secondary small" style="font-size: 0.7rem;">Plantillas rápidas:</span>
                         </label>
                         <div class="d-flex gap-1 mb-2 flex-wrap">
-                            <button type="button" class="btn btn-sm btn-bitrix-ghost py-0 px-2 small" style="font-size: 0.72rem;" onclick="insertAuditTemplate('iso')">
+                            <button type="button" class="btn btn-sm btn-devioz-ghost py-0 px-2 small" style="font-size: 0.72rem;" onclick="insertAuditTemplate('iso')">
                                 <i class="fa-solid fa-certificate text-primary me-1"></i> ISO/IEC 25010
                             </button>
-                            <button type="button" class="btn btn-sm btn-bitrix-ghost py-0 px-2 small" style="font-size: 0.72rem;" onclick="insertAuditTemplate('owasp')">
+                            <button type="button" class="btn btn-sm btn-devioz-ghost py-0 px-2 small" style="font-size: 0.72rem;" onclick="insertAuditTemplate('owasp')">
                                 <i class="fa-solid fa-shield-halved text-success me-1"></i> OWASP Top 10
                             </button>
-                            <button type="button" class="btn btn-sm btn-bitrix-ghost py-0 px-2 small" style="font-size: 0.72rem;" onclick="insertAuditTemplate('full')">
+                            <button type="button" class="btn btn-sm btn-devioz-ghost py-0 px-2 small" style="font-size: 0.72rem;" onclick="insertAuditTemplate('full')">
                                 <i class="fa-solid fa-star text-warning me-1"></i> Auditoría Completa
                             </button>
                         </div>
-                        <textarea name="feedback" id="feedback" rows="5" class="form-control bx-form-input w-100 font-monospace" style="font-size: 0.82rem;" placeholder="Escribe el dictamen técnico, checklist validado y observaciones de calidad..." required></textarea>
+                        <textarea name="feedback" id="feedback" rows="5" class="form-control ui-form-input w-100 font-monospace" style="font-size: 0.82rem;" placeholder="Escribe el dictamen técnico, checklist validado y observaciones de calidad..." required></textarea>
                     </div>
 
                     <div class="p-2 rounded bg-light border d-flex align-items-center justify-content-between small text-secondary">
@@ -191,8 +191,8 @@ declare(strict_types=1);
                     </div>
                 </div>
                 <div class="modal-footer p-3 px-4" style="border-top: 1px solid #E0E8ED;">
-                    <button type="button" class="btn btn-bitrix-ghost" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-bitrix-primary">Aprobar Hito y Emitir Dictamen QA</button>
+                    <button type="button" class="btn btn-devioz-ghost" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-devioz-primary">Aprobar Hito y Emitir Dictamen QA</button>
                 </div>
             </form>
         </div>
@@ -206,7 +206,7 @@ function insertAuditTemplate(type) {
     if (!textarea) return;
 
     if (type === 'iso') {
-        textarea.value = `[AUDITORÍA ISO/IEC 25010]\n- Adecuación Funcional: Conforme con los requerimientos del cliente.\n- Eficiencia y Rendimiento: Tiempos de respuesta dentro del SLA.\n- Usabilidad: Interfaz ergonómica estándar Bitrix24 Air.\n- Mantenibilidad: Código ordenado, PSR-12 y sin duplicidad crítica.`;
+        textarea.value = `[AUDITORÍA ISO/IEC 25010]\n- Adecuación Funcional: Conforme con los requerimientos del cliente.\n- Eficiencia y Rendimiento: Tiempos de respuesta dentro del SLA.\n- Usabilidad: Interfaz ergonómica estándar Devioz.\n- Mantenibilidad: Código ordenado, PSR-12 y sin duplicidad crítica.`;
         if (scoreInput && !scoreInput.value) scoreInput.value = '95.0';
     } else if (type === 'owasp') {
         textarea.value = `[AUDITORÍA OWASP TOP 10 & APPSEC]\n- A01 Broken Access Control: Validado RBAC estricto.\n- A02 Cryptographic Failures: Claves protegidas, hashes seguros.\n- A03 Injection: Consultas 100% preparadas en PDO.\n- A05 Security Misconfig: Headers y tokens CSRF conformes.`;

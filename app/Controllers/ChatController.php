@@ -33,17 +33,17 @@ class ChatController extends BaseController
 
         // Mensajes del canal general del equipo
         $generalMessages = $db->fetchAll(
-            "SELECT m.*, u.name as sender_name, u.avatar as sender_avatar, u.role as sender_role 
-             FROM messages m 
-             LEFT JOIN users u ON m.sender_id = u.id 
+            "SELECT m.*, u.name as sender_name, u.avatar as sender_avatar, u.role as sender_role
+             FROM messages m
+             LEFT JOIN users u ON m.sender_id = u.id
              WHERE m.type = 'general_channel' OR (m.receiver_id = 0 AND m.type = 'general')
              ORDER BY m.created_at ASC LIMIT 50"
         );
 
         // Notas personales del usuario activo
         $personalNotes = $db->fetchAll(
-            "SELECT * FROM messages 
-             WHERE sender_id = :uid AND receiver_id = :ruid 
+            "SELECT * FROM messages
+             WHERE sender_id = :uid AND receiver_id = :ruid
              ORDER BY created_at ASC LIMIT 50",
             ['uid' => $user->id, 'ruid' => $user->id]
         );
@@ -67,7 +67,7 @@ class ChatController extends BaseController
         }
         @ini_set('zlib.output_compression', '0');
         @ini_set('implicit_flush', '1');
-        
+
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
         header('Connection: keep-alive');
@@ -75,18 +75,18 @@ class ChatController extends BaseController
 
         $user = $this->user();
         $db = Database::getInstance();
-        
+
         // MUY IMPORTANTE: Cerrar la sesión para no bloquear otras peticiones concurrentes del usuario (ej. navegación)
         session_write_close();
-        
+
         $lastCheckedId = isset($_GET['last_msg_id']) ? (int)$_GET['last_msg_id'] : 0;
-        $maxIterations = 50; 
-        
+        $maxIterations = 50;
+
         for ($i = 0; $i < $maxIterations; $i++) {
             $stmt = $db->getConnection()->prepare("SELECT id, sender_id, type, body, created_at, project_id FROM messages WHERE receiver_id = :uid AND read_at IS NULL AND id > :lastId ORDER BY id ASC LIMIT 5");
             $stmt->execute(['uid' => $user->id, 'lastId' => $lastCheckedId]);
             $newMessages = $stmt->fetchAll();
-            
+
             if (!empty($newMessages)) {
                 $lastCheckedId = end($newMessages)['id'];
                 $countStmt = $db->getConnection()->prepare("SELECT COUNT(*) FROM messages WHERE receiver_id = :uid AND read_at IS NULL");
@@ -112,7 +112,7 @@ class ChatController extends BaseController
         $db = Database::getInstance();
         $contactId = isset($_GET['contact_id']) ? (int)$_GET['contact_id'] : 0;
         $projectId = isset($_GET['project_id']) ? (int)$_GET['project_id'] : 0;
-        
+
         $project = null;
         if ($projectId > 0) {
             $project = Project::find($projectId);
@@ -176,7 +176,7 @@ class ChatController extends BaseController
         $input = json_decode(file_get_contents('php://input'), true) ?? $_POST;
         $receiverId = (int)($input['receiver_id'] ?? 0);
         $body = trim((string)($input['body'] ?? ''));
-        
+
         if ($receiverId <= 0 || $body === '') {
             $this->json(['success' => false, 'message' => 'Faltan datos'], 422);
         }
@@ -184,7 +184,7 @@ class ChatController extends BaseController
         if ($receiver && $user->sede !== $receiver->sede) {
             $this->json(['success' => false, 'message' => 'Violacion de seguridad 007: Inter-sede bloqueada.'], 403);
         }
-        
+
         Database::getInstance()->query(
             "INSERT INTO messages (sender_id, receiver_id, body, type, created_at) VALUES (:sid, :rid, :b, 'general', NOW())",
             ['sid' => $user->id, 'rid' => $receiverId, 'b' => $body]
@@ -204,7 +204,7 @@ class ChatController extends BaseController
             $this->json(['success' => false, 'message' => 'Violacion de seguridad 007: Inter-sede bloqueada.'], 403);
         }
 
-        $roomUrl = "https://meet.jit.si/Devioz-Bitrix-Meet-" . md5(uniqid());
+        $roomUrl = "https://meet.jit.si/Devioz-Meet-" . md5(uniqid());
         $body = "Solicitud de llamada urgente: {$reason}. Entrar aqui: {$roomUrl}";
         Database::getInstance()->query(
             "INSERT INTO messages (sender_id, receiver_id, body, type, priority, created_at) VALUES (:sid, :rid, :b, 'alert', 'urgent', NOW())",
@@ -219,26 +219,26 @@ class ChatController extends BaseController
         $user = $this->user();
         $db = Database::getInstance();
         $stmt = $db->getConnection()->prepare("
-            SELECT m.*, u.name as sender_name, u.avatar as sender_avatar 
-            FROM messages m 
-            LEFT JOIN users u ON m.sender_id = u.id 
-            WHERE m.receiver_id = :uid AND m.type = 'alert' 
+            SELECT m.*, u.name as sender_name, u.avatar as sender_avatar
+            FROM messages m
+            LEFT JOIN users u ON m.sender_id = u.id
+            WHERE m.receiver_id = :uid AND m.type = 'alert'
             ORDER BY m.created_at DESC LIMIT 10
         ");
         $stmt->execute(['uid' => $user->id]);
-        
+
         $notifications = [];
         $unreadCount = 0;
         foreach ($stmt->fetchAll() as $row) {
             if (empty($row['read_at'])) $unreadCount++;
-            
-            // Requerimiento "Solo la hora": Eliminar fecha completa y dejar unicamente la hora (estilo Bitrix)
+
+            // Requerimiento "Solo la hora": Eliminar fecha completa y dejar unicamente la hora (estilo Devioz)
             $time = date('H:i', strtotime($row['created_at']));
-            
-            $avatarUrl = !empty($row['sender_avatar']) 
-                ? (str_starts_with($row['sender_avatar'], 'http') ? $row['sender_avatar'] : '/'.$row['sender_avatar']) 
+
+            $avatarUrl = !empty($row['sender_avatar'])
+                ? (str_starts_with($row['sender_avatar'], 'http') ? $row['sender_avatar'] : '/'.$row['sender_avatar'])
                 : 'https://ui-avatars.com/api/?name='.urlencode($row['sender_name'] ?? 'Sys').'&background=00ACE3&color=fff';
-            
+
             $notifications[] = [
                 'id' => $row['id'],
                 'contact_id' => $row['sender_id'],

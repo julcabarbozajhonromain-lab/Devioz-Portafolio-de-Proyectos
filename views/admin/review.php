@@ -20,7 +20,7 @@ sort($availableSedes);
 
 <div class="gitlab-board-page" id="gitlabBoardContainer">
 
-    <!-- 1. Encabezado Air del Tablero de Revisión -->
+    <!-- Encabezado del tablero de revisión -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
         <div>
             <h4 class="fw-bold mb-0 page-header-title text-white">Tablero de Revisión & Auditoría QA</h4>
@@ -74,10 +74,10 @@ sort($availableSedes);
                 <svg class="gl-search-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
                 </svg>
-                <input type="text" 
-                       id="glBoardSearchInput" 
-                       class="gl-search-input" 
-                       placeholder="Buscar proyectos por código o nombre..." 
+                <input type="text"
+                       id="glBoardSearchInput"
+                       class="gl-search-input"
+                       placeholder="Buscar proyectos por código o nombre..."
                        aria-label="Buscar o filtrar proyectos"
                        autocomplete="off">
                 <button type="button" class="gl-search-clear d-none" id="glBoardSearchClear" title="Limpiar filtro">
@@ -105,16 +105,16 @@ sort($availableSedes);
         <!-- COLUMNA 1: BACKLOG / PENDIENTES           -->
         <!-- ========================================== -->
         <div class="gl-column kanban-column" data-column-status="pending_review">
-            <!-- Cabecera Chevron Bitrix24 -->
-            <div class="bx-chevron-header bx-chevron-blue">
-                <div class="bx-chevron-title">
+            <!-- Cabecera Chevron Devioz -->
+            <div class="ui-chevron-header ui-chevron-blue">
+                <div class="ui-chevron-title">
                     <span>Backlog / Pendientes</span>
-                    <span class="bx-chevron-counter"><?= count($pendingProjects) ?></span>
+                    <span class="ui-chevron-counter"><?= count($pendingProjects) ?></span>
                 </div>
-                <a href="<?= url('/projects/create') ?>" class="bx-chevron-add" title="Asignar nuevo proyecto">+</a>
+                <a href="<?= url('/projects/create') ?>" class="ui-chevron-add" title="Asignar nuevo proyecto">+</a>
             </div>
-            <!-- Sub-barra Liquid Glass estilo Bitrix24 -->
-            <div class="bx-chevron-subbar">
+            <!-- Sub-barra Liquid Glass estilo Devioz -->
+            <div class="ui-chevron-subbar">
                 <span>Fase Inicial SDLC</span>
                 <span><?= count($pendingProjects) ?> items</span>
             </div>
@@ -137,16 +137,16 @@ sort($availableSedes);
         <!-- COLUMNA 2: EN REVISIÓN ACTIVA              -->
         <!-- ========================================== -->
         <div class="gl-column kanban-column" data-column-status="in_review">
-            <!-- Cabecera Chevron Bitrix24 -->
-            <div class="bx-chevron-header bx-chevron-cyan">
-                <div class="bx-chevron-title">
+            <!-- Cabecera Chevron Devioz -->
+            <div class="ui-chevron-header ui-chevron-cyan">
+                <div class="ui-chevron-title">
                     <span>En Revisión Activa</span>
-                    <span class="bx-chevron-counter"><?= count($inReviewProjects) ?></span>
+                    <span class="ui-chevron-counter"><?= count($inReviewProjects) ?></span>
                 </div>
-                <span class="bx-chevron-add opacity-50" style="cursor: default;" title="Fase en proceso">+</span>
+                <span class="ui-chevron-add opacity-50" style="cursor: default;" title="Fase en proceso">+</span>
             </div>
-            <!-- Sub-barra Liquid Glass estilo Bitrix24 -->
-            <div class="bx-chevron-subbar">
+            <!-- Sub-barra Liquid Glass estilo Devioz -->
+            <div class="ui-chevron-subbar">
                 <span>Auditoría en Curso</span>
                 <span><?= count($inReviewProjects) ?> items</span>
             </div>
@@ -169,16 +169,16 @@ sort($availableSedes);
         <!-- COLUMNA 3: APROBADOS / CONCLUIDOS          -->
         <!-- ========================================== -->
         <div class="gl-column kanban-column" data-column-status="approved">
-            <!-- Cabecera Chevron Bitrix24 -->
-            <div class="bx-chevron-header bx-chevron-emerald">
-                <div class="bx-chevron-title">
+            <!-- Cabecera Chevron Devioz -->
+            <div class="ui-chevron-header ui-chevron-emerald">
+                <div class="ui-chevron-title">
                     <span>Aprobados / Concluidos</span>
-                    <span class="bx-chevron-counter"><?= count($approvedProjects) ?></span>
+                    <span class="ui-chevron-counter"><?= count($approvedProjects) ?></span>
                 </div>
-                <span class="bx-chevron-add opacity-50" style="cursor: default;" title="Fase de culminación">+</span>
+                <span class="ui-chevron-add opacity-50" style="cursor: default;" title="Fase de culminación">+</span>
             </div>
-            <!-- Sub-barra Liquid Glass estilo Bitrix24 -->
-            <div class="bx-chevron-subbar">
+            <!-- Sub-barra Liquid Glass estilo Devioz -->
+            <div class="ui-chevron-subbar">
                 <span>Quality Gate OK</span>
                 <span><?= count($approvedProjects) ?> items</span>
             </div>
@@ -201,16 +201,16 @@ sort($availableSedes);
         <!-- COLUMNA 4: OBSERVADOS / RECHAZADOS         -->
         <!-- ========================================== -->
         <div class="gl-column kanban-column" data-column-status="rejected">
-            <!-- Cabecera Chevron Bitrix24 -->
-            <div class="bx-chevron-header bx-chevron-amber">
-                <div class="bx-chevron-title">
+            <!-- Cabecera Chevron Devioz -->
+            <div class="ui-chevron-header ui-chevron-amber">
+                <div class="ui-chevron-title">
                     <span>Observados / Rechazados</span>
-                    <span class="bx-chevron-counter"><?= count($rejectedProjects) ?></span>
+                    <span class="ui-chevron-counter"><?= count($rejectedProjects) ?></span>
                 </div>
-                <span class="bx-chevron-add opacity-50" style="cursor: default;" title="Fase de observación">+</span>
+                <span class="ui-chevron-add opacity-50" style="cursor: default;" title="Fase de observación">+</span>
             </div>
-            <!-- Sub-barra Liquid Glass estilo Bitrix24 -->
-            <div class="bx-chevron-subbar">
+            <!-- Sub-barra Liquid Glass estilo Devioz -->
+            <div class="ui-chevron-subbar">
                 <span>Revisión Solicitada</span>
                 <span><?= count($rejectedProjects) ?> items</span>
             </div>
@@ -271,12 +271,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const matchSede = (activeSede === 'all') || (sede === activeSede.toLowerCase());
 
             // Criterio de Búsqueda
-            const matchSearch = !query || 
-                title.includes(query) || 
-                code.includes(query) || 
-                dev.includes(query) || 
-                client.includes(query) || 
-                sede.includes(query) || 
+            const matchSearch = !query ||
+                title.includes(query) ||
+                code.includes(query) ||
+                dev.includes(query) ||
+                client.includes(query) ||
+                sede.includes(query) ||
                 tech.includes(query);
 
             if (matchSede && matchSearch) {
@@ -289,10 +289,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Actualizar badges de conteo en cada columna (admite estilos GitLab y Bitrix24)
+        // Actualizar badges de conteo en cada columna (admite estilos GitLab y Devioz)
         columns.forEach(col => {
             const status = col.getAttribute('data-column-status');
-            const countBadge = col.querySelector('.gl-col-counter, .bx-chevron-counter');
+            const countBadge = col.querySelector('.gl-col-counter, .ui-chevron-counter');
             if (countBadge && status && visibleCounts[status] !== undefined) {
                 countBadge.textContent = visibleCounts[status];
             }
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const isFull = boardContainer.classList.toggle('gl-board-fullscreen');
             const iconExpand = document.getElementById('glFullscreenIconExpand');
             const iconCompress = document.getElementById('glFullscreenIconCompress');
-            
+
             if (iconExpand && iconCompress) {
                 if (isFull) {
                     iconExpand.classList.add('d-none');

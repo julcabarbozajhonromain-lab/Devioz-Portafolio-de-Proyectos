@@ -49,10 +49,10 @@ $isoMetrics = [
     ],
     [
         'id' => 'usability',
-        'name' => 'Usabilidad & UX Air',
+        'name' => 'Usabilidad y experiencia de usuario',
         'std' => 'ISO/IEC 25010 §4.2.4',
         'score' => min(100.0, round($baseScore * 0.97, 1)),
-        'desc' => 'Estándar ergonómico Bitrix24 Air, WCAG 2.1 AA y flujos guiados',
+        'desc' => 'Estándar ergonómico Devioz, WCAG 2.1 AA y flujos guiados',
         'color' => '#8b5cf6',
         'icon' => 'fa-wand-magic-sparkles'
     ],
@@ -104,13 +104,13 @@ $owaspChecklist = [
 ];
 ?>
 
-<!-- Encabezado Corporativo del Proyecto (Estilo Bitrix24 Air Enterprise) -->
+<!-- Encabezado Corporativo del Proyecto (Estilo Devioz) -->
 <div class="card-custom p-4 mb-4 project-header-card">
     <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
                 <span class="badge font-monospace fw-bold" style="background: rgba(23, 43, 77, 0.08); color: #172B4D; border: 1px solid #DBE2E8; font-size: 0.85rem;"><?= e($project->code) ?></span>
-                <span class="bx-client-badge py-1 px-2" style="font-size: 0.82rem;">
+                <span class="ui-client-badge py-1 px-2" style="font-size: 0.82rem;">
                     <i class="fa-solid fa-briefcase me-1"></i>
                     <span><?= e($project->clientName()) ?></span>
                 </span>
@@ -338,11 +338,11 @@ $owaspChecklist = [
                     </div>
 
                     <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-sm border" style="background: #000; border-color: #DBE2E8 !important;">
-                        <iframe 
-                            src="<?= e(getEmbedUrl($project->video_url, false)) ?>" 
-                            title="<?= e($project->name) ?>" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen 
+                        <iframe
+                            src="<?= e(getEmbedUrl($project->video_url, false)) ?>"
+                            title="<?= e($project->name) ?>"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
                             loading="lazy">
                         </iframe>
                     </div>
@@ -353,9 +353,9 @@ $owaspChecklist = [
         <!-- ========================================================================= -->
         <!-- 3. GALERÍA DE CAPTURAS DE PANTALLA Y ENTORNOS                             -->
         <!-- ========================================================================= -->
-        <?php 
+        <?php
             $gallery = is_array($project->gallery_images) ? $project->gallery_images : (json_decode($project->gallery_images ?? '[]', true) ?: []);
-            if (!empty($gallery)): 
+            if (!empty($gallery)):
         ?>
             <div class="card-custom p-4 mb-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
@@ -562,7 +562,7 @@ $owaspChecklist = [
         <?php if (auth()->isAdmin()): ?>
             <div class="card-custom p-3 mb-4">
                 <h6 class="fw-bold small mb-3" style="color: #172B4D;">Dictamen de Calidad & QA Lead</h6>
-                
+
                 <!-- Aprobar Proyecto -->
                 <form action="<?= url("/admin/projects/{$project->id}/approve") ?>" method="POST" class="mb-2">
                     <?= csrf_field() ?>

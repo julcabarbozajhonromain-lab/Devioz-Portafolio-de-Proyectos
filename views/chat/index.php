@@ -16,83 +16,83 @@ $directCount = count($contacts);
 ?>
 <style>
     /* En el Messenger unificado ocultamos los accesos flotantes duplicados */
-    #bitrixFloatingDock, #botAvatarSofiaBtn, #botPillSofiaBtn, #deviozBotWindow { display: none !important; }
+    #deviozFloatingDock, #botAvatarSofiaBtn, #botPillSofiaBtn, #deviozBotWindow { display: none !important; }
 </style>
 
-<div class="bitrix-messenger-wrapper" data-initial-channel="<?= e($selectedChannel) ?>" data-initial-contact="<?= (int)$selectedContactId ?>">
-    <!-- Contenedor Principal (Estilo Bitrix24 Messenger: Rail + Lista + Conversación) -->
-    <div class="bitrix-messenger-container has-rail">
+<div class="devioz-messenger-wrapper" data-initial-channel="<?= e($selectedChannel) ?>" data-initial-contact="<?= (int)$selectedContactId ?>">
+    <!-- Contenedor Principal (Estilo Devioz Messenger: Rail + Lista + Conversación) -->
+    <div class="devioz-messenger-container has-rail">
 
         <!-- ===================================================================== -->
-        <!-- RAIL VERTICAL DE CATEGORÍAS (Bitrix24: All · Tasks · CoPilot · Canales) -->
+        <!-- RAIL VERTICAL DE CATEGORÍAS (Devioz: All · Tasks · CoPilot · Canales) -->
         <!-- ===================================================================== -->
-        <nav class="bx-msg-rail" aria-label="Categorías del Messenger">
-            <button type="button" class="bx-rail-btn active" data-rail-filter="all" title="Todos los chats">
-                <span class="bx-rail-icon"><i class="fa-solid fa-house"></i></span>
-                <span class="bx-rail-label">Todos</span>
-                <span class="bx-rail-badge d-none" id="bxRailUnreadBadge">0</span>
+        <nav class="ui-msg-rail" aria-label="Categorías del Messenger">
+            <button type="button" class="ui-rail-btn active" data-rail-filter="all" title="Todos los chats">
+                <span class="ui-rail-icon"><i class="fa-solid fa-house"></i></span>
+                <span class="ui-rail-label">Todos</span>
+                <span class="ui-rail-badge d-none" id="uiRailUnreadBadge">0</span>
             </button>
-            <button type="button" class="bx-rail-btn" data-rail-filter="copilot" title="CoPilot LABVA AI">
-                <span class="bx-rail-icon bx-rail-icon-copilot"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                <span class="bx-rail-label">CoPilot</span>
+            <button type="button" class="ui-rail-btn" data-rail-filter="copilot" title="CoPilot LABVA AI">
+                <span class="ui-rail-icon ui-rail-icon-copilot"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                <span class="ui-rail-label">CoPilot</span>
             </button>
-            <button type="button" class="bx-rail-btn" data-rail-filter="channels" title="Canales">
-                <span class="bx-rail-icon"><i class="fa-solid fa-bullhorn"></i></span>
-                <span class="bx-rail-label">Canales</span>
+            <button type="button" class="ui-rail-btn" data-rail-filter="channels" title="Canales">
+                <span class="ui-rail-icon"><i class="fa-solid fa-bullhorn"></i></span>
+                <span class="ui-rail-label">Canales</span>
             </button>
-            <button type="button" class="bx-rail-btn" data-rail-filter="direct" title="Equipo técnico">
-                <span class="bx-rail-icon"><i class="fa-solid fa-user-group"></i></span>
-                <span class="bx-rail-label">Equipo</span>
+            <button type="button" class="ui-rail-btn" data-rail-filter="direct" title="Equipo técnico">
+                <span class="ui-rail-icon"><i class="fa-solid fa-user-group"></i></span>
+                <span class="ui-rail-label">Equipo</span>
             </button>
-            <button type="button" class="bx-rail-btn" data-rail-filter="notes" title="Mis notas">
-                <span class="bx-rail-icon"><i class="fa-solid fa-bookmark"></i></span>
-                <span class="bx-rail-label">Notas</span>
+            <button type="button" class="ui-rail-btn" data-rail-filter="notes" title="Mis notas">
+                <span class="ui-rail-icon"><i class="fa-solid fa-bookmark"></i></span>
+                <span class="ui-rail-label">Notas</span>
             </button>
         </nav>
-        
+
         <!-- ===================================================================== -->
         <!-- PANEL IZQUIERDO: LISTA DE CHATS, CANALES Y EMPLEADOS                 -->
         <!-- ===================================================================== -->
-        <aside class="bitrix-chat-sidebar">
+        <aside class="devioz-chat-sidebar">
             <!-- Barra Superior de Herramientas -->
-            <div class="bitrix-chat-sidebar-header">
-                <button type="button" class="btn-icon-bitrix" title="Directorio de Contactos" id="chatContactsDirectoryBtn">
+            <div class="devioz-chat-sidebar-header">
+                <button type="button" class="btn-icon-devioz" title="Directorio de Contactos" id="chatContactsDirectoryBtn">
                     <i class="fa-solid fa-address-book"></i>
                 </button>
-                <div class="bitrix-chat-search-box flex-grow-1">
+                <div class="devioz-chat-search-box flex-grow-1">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="bitrixChatSearchInput" placeholder="Buscar un empleado o chat" autocomplete="off">
-                    <button type="button" class="clear-search-btn d-none" id="bitrixChatSearchClear">&times;</button>
+                    <input type="text" id="deviozChatSearchInput" placeholder="Buscar un empleado o chat" autocomplete="off">
+                    <button type="button" class="clear-search-btn d-none" id="deviozChatSearchClear">&times;</button>
                 </div>
-                <button type="button" class="btn-icon-bitrix text-primary" title="Nuevo Chat" id="chatNewConversationBtn">
+                <button type="button" class="btn-icon-devioz text-primary" title="Nuevo Chat" id="chatNewConversationBtn">
                     <i class="fa-regular fa-pen-to-square"></i>
                 </button>
             </div>
 
-            <!-- Chips de Filtro (Bitrix24: All / Unread) -->
-            <div class="bx-msg-chips">
-                <button type="button" class="bx-msg-chip active" data-read-filter="all">Todos</button>
-                <button type="button" class="bx-msg-chip" data-read-filter="unread">No leídos <span class="bx-chip-count d-none" id="bxUnreadChipCount">0</span></button>
+            <!-- Chips de Filtro (Devioz: All / Unread) -->
+            <div class="ui-msg-chips">
+                <button type="button" class="ui-msg-chip active" data-read-filter="all">Todos</button>
+                <button type="button" class="ui-msg-chip" data-read-filter="unread">No leídos <span class="ui-chip-count d-none" id="uiUnreadChipCount">0</span></button>
             </div>
 
             <!-- Listado de Conversaciones & Canales -->
-            <div class="bitrix-chat-list" id="bitrixChatList">
-                
+            <div class="devioz-chat-list" id="deviozChatList">
+
                 <!-- 1. Canal CoPilot LABVA AI / Soporte -->
-                <div class="bitrix-chat-item <?= $selectedChannel === 'copilot' ? 'active' : '' ?>" 
+                <div class="devioz-chat-item <?= $selectedChannel === 'copilot' ? 'active' : '' ?>"
                      data-rail-group="copilot"
-                     data-channel-type="copilot" 
+                     data-channel-type="copilot"
                      data-channel-id="copilot"
                      data-channel-title="Soporte Devioz &bull; CoPilot LABVA"
                      data-channel-subtitle="Estamos listos para responder sus preguntas técnicas.">
-                    <div class="bitrix-chat-avatar position-relative">
+                    <div class="devioz-chat-avatar position-relative">
                         <img src="<?= asset('images/sofia-avatar.webp') ?>" alt="CoPilot" class="rounded-circle" onerror="this.src='https://ui-avatars.com/api/?name=CoPilot&background=A855F7&color=fff';">
                         <span class="copilot-sparkle-dot"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
                     </div>
-                    <div class="bitrix-chat-info">
+                    <div class="devioz-chat-info">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="chat-title d-flex align-items-center gap-1">
-                                <span class="badge-bitrix-bot">24</span>
+                                <span class="badge-devioz-bot">24</span>
                                 <strong>Soporte Devioz</strong>
                             </span>
                             <span class="chat-time text-muted">Hoy</span>
@@ -104,17 +104,17 @@ $directCount = count($contacts);
                 </div>
 
                 <!-- 2. Canal Noticias de la Compañía -->
-                <div class="bitrix-chat-item <?= $selectedChannel === 'news' ? 'active' : '' ?>" 
-                     data-rail-group="channels" data-channel-type="news" 
+                <div class="devioz-chat-item <?= $selectedChannel === 'news' ? 'active' : '' ?>"
+                     data-rail-group="channels" data-channel-type="news"
                      data-channel-id="news"
                      data-channel-title="Noticias de la compañía"
                      data-channel-subtitle="1 suscriptor &bull; Comunicados oficiales y arquitectura">
-                    <div class="bitrix-chat-avatar">
+                    <div class="devioz-chat-avatar">
                         <div class="channel-icon-box bg-emerald-box">
                             <i class="fa-solid fa-newspaper"></i>
                         </div>
                     </div>
-                    <div class="bitrix-chat-info">
+                    <div class="devioz-chat-info">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="chat-title"><strong>Noticias de la compañía</strong></span>
                             <span class="chat-time text-muted">Sáb</span>
@@ -126,17 +126,17 @@ $directCount = count($contacts);
                 </div>
 
                 <!-- 3. Canal Chat General -->
-                <div class="bitrix-chat-item <?= $selectedChannel === 'general' ? 'active' : '' ?>" 
-                     data-rail-group="channels" data-channel-type="general" 
+                <div class="devioz-chat-item <?= $selectedChannel === 'general' ? 'active' : '' ?>"
+                     data-rail-group="channels" data-channel-type="general"
                      data-channel-id="general"
                      data-channel-title="Chat general"
                      data-channel-subtitle="Canal público de ingeniería &bull; Todo el equipo">
-                    <div class="bitrix-chat-avatar">
+                    <div class="devioz-chat-avatar">
                         <div class="channel-icon-box bg-cyan-box">
                             <i class="fa-solid fa-comments"></i>
                         </div>
                     </div>
-                    <div class="bitrix-chat-info">
+                    <div class="devioz-chat-info">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="chat-title"><strong>Chat general</strong></span>
                             <span class="chat-time text-muted">Sáb</span>
@@ -148,17 +148,17 @@ $directCount = count($contacts);
                 </div>
 
                 <!-- 4. Canal Notas Personales -->
-                <div class="bitrix-chat-item <?= $selectedChannel === 'notes' ? 'active' : '' ?>" 
-                     data-rail-group="notes" data-channel-type="notes" 
+                <div class="devioz-chat-item <?= $selectedChannel === 'notes' ? 'active' : '' ?>"
+                     data-rail-group="notes" data-channel-type="notes"
                      data-channel-id="notes"
                      data-channel-title="Notas"
                      data-channel-subtitle="Visible solamente para usted &bull; Bloc de notas personal">
-                    <div class="bitrix-chat-avatar">
+                    <div class="devioz-chat-avatar">
                         <div class="channel-icon-box bg-blue-box">
                             <i class="fa-solid fa-bookmark"></i>
                         </div>
                     </div>
-                    <div class="bitrix-chat-info">
+                    <div class="devioz-chat-info">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="chat-title"><strong>Notas</strong></span>
                             <span class="chat-time text-muted">0:23</span>
@@ -170,25 +170,25 @@ $directCount = count($contacts);
                 </div>
 
                 <!-- Separador de Equipo Técnico -->
-                <div class="bitrix-chat-category-header">
+                <div class="devioz-chat-category-header">
                     <span>EQUIPO TÉCNICO & DIRECTO</span>
                     <span class="badge bg-secondary-subtle text-secondary" style="font-size: 0.65rem;"><?= count($contacts) ?></span>
                 </div>
 
                 <!-- Lista de Contactos Directos (Usuarios 1 a 1) -->
                 <?php foreach ($contacts as $contact): ?>
-                    <div class="bitrix-chat-item <?= ($selectedContactId === (int)$contact->id) ? 'active' : '' ?>" 
-                         data-rail-group="direct" data-channel-type="direct" 
+                    <div class="devioz-chat-item <?= ($selectedContactId === (int)$contact->id) ? 'active' : '' ?>"
+                         data-rail-group="direct" data-channel-type="direct"
                          data-contact-id="<?= (int)$contact->id ?>"
                          data-channel-title="<?= e($contact->name) ?>"
                          data-channel-subtitle="<?= e($contact->isAdmin() ? 'Administrador QA' : 'Ingeniero de Software') ?> &bull; <?= e($contact->sede ?: 'Central') ?>"
                          data-contact-avatar="<?= e($contact->avatarUrl()) ?>"
                          data-contact-role="<?= e($contact->role) ?>">
-                        <div class="bitrix-chat-avatar position-relative">
+                        <div class="devioz-chat-avatar position-relative">
                             <img src="<?= e($contact->avatarUrl()) ?>" alt="<?= e($contact->name) ?>" class="rounded-circle" loading="lazy">
                             <span class="online-indicator-dot"></span>
                         </div>
-                        <div class="bitrix-chat-info">
+                        <div class="devioz-chat-info">
                             <div class="d-flex justify-content-between align-items-center mb-1">
                                 <span class="chat-title text-truncate">
                                     <strong><?= e($contact->name) ?></strong>
@@ -208,40 +208,40 @@ $directCount = count($contacts);
         <!-- ===================================================================== -->
         <!-- PANEL DERECHO: VENTANA DE CONVERSACIÓN ACTIVA                         -->
         <!-- ===================================================================== -->
-        <main class="bitrix-chat-main <?= $isEmptyState ? 'is-empty' : '' ?>" id="bitrixChatMain">
+        <main class="devioz-chat-main <?= $isEmptyState ? 'is-empty' : '' ?>" id="deviozChatMain">
 
-            <!-- ESTADO VACÍO (Bitrix24: "Seleccione un chat para empezar a comunicarse") -->
-            <div class="bx-msg-empty-state" id="bxMsgEmptyState">
-                <div class="bx-empty-illustration">
-                    <div class="bx-empty-card bx-empty-card-back"><i class="fa-solid fa-table-columns"></i></div>
-                    <div class="bx-empty-card bx-empty-card-front">
+            <!-- ESTADO VACÍO (Devioz: "Seleccione un chat para empezar a comunicarse") -->
+            <div class="ui-msg-empty-state" id="uiMsgEmptyState">
+                <div class="ui-empty-illustration">
+                    <div class="ui-empty-card ui-empty-card-back"><i class="fa-solid fa-table-columns"></i></div>
+                    <div class="ui-empty-card ui-empty-card-front">
                         <span></span><span></span><span></span>
                     </div>
-                    <div class="bx-empty-bubble bx-empty-bubble-copilot"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                    <div class="bx-empty-bubble bx-empty-bubble-chat"><i class="fa-solid fa-comments"></i></div>
-                    <div class="bx-empty-bubble bx-empty-bubble-video"><i class="fa-solid fa-video"></i></div>
+                    <div class="ui-empty-bubble ui-empty-bubble-copilot"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div class="ui-empty-bubble ui-empty-bubble-chat"><i class="fa-solid fa-comments"></i></div>
+                    <div class="ui-empty-bubble ui-empty-bubble-video"><i class="fa-solid fa-video"></i></div>
                 </div>
-                <h5 class="bx-empty-title">Seleccione un chat para empezar a comunicarse</h5>
-                <div class="bx-empty-or">o</div>
+                <h5 class="ui-empty-title">Seleccione un chat para empezar a comunicarse</h5>
+                <div class="ui-empty-or">o</div>
                 <div class="d-flex flex-wrap justify-content-center gap-2">
-                    <button type="button" class="bx-empty-btn" data-open-channel="copilot">
+                    <button type="button" class="ui-empty-btn" data-open-channel="copilot">
                         <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Preguntar a CoPilot
                     </button>
-                    <button type="button" class="bx-empty-btn" id="bxEmptyNewChatBtn">
+                    <button type="button" class="ui-empty-btn" id="uiEmptyNewChatBtn">
                         <i class="fa-regular fa-pen-to-square me-1"></i> Nuevo chat
                     </button>
                 </div>
             </div>
-            
+
             <!-- Cabecera de la Conversación Activa -->
-            <header class="bitrix-chat-header" id="activeChatHeader">
+            <header class="devioz-chat-header" id="activeChatHeader">
                 <div class="d-flex align-items-center gap-3 min-w-0">
                     <div class="active-chat-avatar" id="activeChatAvatarBox">
                         <img src="<?= asset('images/sofia-avatar.webp') ?>" alt="Avatar" class="rounded-circle" id="activeChatAvatarImg" onerror="this.src='https://ui-avatars.com/api/?name=CoPilot&background=A855F7&color=fff';">
                     </div>
                     <div class="min-w-0">
                         <div class="d-flex align-items-center gap-2">
-                            <span class="badge-bitrix-bot d-none" id="activeChatBotBadge">24</span>
+                            <span class="badge-devioz-bot d-none" id="activeChatBotBadge">24</span>
                             <h6 class="fw-bold mb-0 text-dark text-truncate" id="activeChatTitle" style="font-size: 1rem;">
                                 Soporte Devioz &bull; CoPilot LABVA
                             </h6>
@@ -254,41 +254,41 @@ $directCount = count($contacts);
 
                 <!-- Acciones Rápidas del Header (Video llamada Meet, Búsqueda, etc.) -->
                 <div class="d-flex align-items-center gap-2 flex-shrink-0">
-                    <!-- Botón Videollamada HD Bitrix Meet -->
-                    <button type="button" class="btn btn-sm btn-bitrix-videocall d-flex align-items-center gap-2" id="chatHeaderVideocallBtn" title="Iniciar Videollamada HD Bitrix Meet">
+                    <!-- Botón Videollamada HD Devioz Meet -->
+                    <button type="button" class="btn btn-sm btn-devioz-videocall d-flex align-items-center gap-2" id="chatHeaderVideocallBtn" title="Iniciar Videollamada HD Devioz Meet">
                         <i class="fa-solid fa-video"></i>
                         <span class="d-none d-md-inline">Reunión Meet</span>
                     </button>
-                    <button type="button" class="btn-icon-bitrix" title="Buscar en esta conversación" id="chatSearchInThreadBtn">
+                    <button type="button" class="btn-icon-devioz" title="Buscar en esta conversación" id="chatSearchInThreadBtn">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
-                    <button type="button" class="btn-icon-bitrix" title="Alternar panel de información" id="chatToggleInfoPanelBtn">
+                    <button type="button" class="btn-icon-devioz" title="Alternar panel de información" id="chatToggleInfoPanelBtn">
                         <i class="fa-solid fa-table-columns"></i>
                     </button>
                 </div>
             </header>
 
             <!-- Área de Mensajes Desplazable -->
-            <div class="bitrix-chat-stream" id="bitrixChatStream">
-                
+            <div class="devioz-chat-stream" id="deviozChatStream">
+
                 <!-- VISTA 1: CoPilot LABVA AI / Soporte Devioz (Por Defecto) -->
                 <div class="chat-view-container <?= ($selectedChannel === 'copilot' && $selectedContactId === 0) ? '' : 'd-none' ?>" id="viewCopilot">
                     <div class="chat-date-divider">
                         <span>ayer</span>
                     </div>
 
-                    <!-- Mensaje de Bienvenida del Asistente (Exacto al Screenshot 1) -->
-                    <div class="bitrix-msg-bubble incoming">
+                    <!-- Mensaje de Bienvenida del Asistente -->
+                    <div class="devioz-msg-bubble incoming">
                         <div class="msg-avatar">
                             <img src="<?= asset('images/sofia-avatar.webp') ?>" alt="CoPilot" class="rounded-circle" onerror="this.src='https://ui-avatars.com/api/?name=CoPilot&background=A855F7&color=fff';">
                         </div>
                         <div class="msg-content">
                             <div class="msg-author d-flex align-items-center gap-2">
-                                <span class="badge-bitrix-bot">24</span>
+                                <span class="badge-devioz-bot">24</span>
                                 <strong>Soporte de Devioz &bull; CoPilot</strong>
                             </div>
                             <div class="msg-body">
-                                <p class="mb-2">¡Hola! Soy su asistente de <strong>Devioz OS & Bitrix24</strong>.</p>
+                                <p class="mb-2">¡Hola! Soy el asistente de <strong>Devioz OS</strong>.</p>
                                 <p class="mb-2">Puedo ofrecerle ayuda técnica para:</p>
                                 <ul class="mb-3 ps-3">
                                     <li>Auditar estándares de calidad de software <strong>ISO/IEC 25010</strong></li>
@@ -298,7 +298,7 @@ $directCount = count($contacts);
                                     <li>¡O responder consultas de arquitectura y base de datos cuando lo necesite!</li>
                                 </ul>
                                 <p class="mb-2">Pregunte con confianza, estoy en línea 24/7, u obtenga más información con los accesos directos:</p>
-                                
+
                                 <!-- Chips Rápidos de CoPilot -->
                                 <div class="d-flex flex-wrap gap-2 mb-3">
                                     <button type="button" class="copilot-chip-btn" data-copilot-prompt="Realiza una auditoría de calidad de software bajo la norma ISO/IEC 25010 para este sistema.">
@@ -315,8 +315,8 @@ $directCount = count($contacts);
                                     </button>
                                 </div>
 
-                                <!-- Tarjeta de Enlace Bitrix AI Assistant (Screenshot 1) -->
-                                <div class="bitrix-link-attachment-card">
+                                <!-- Tarjeta de Enlace Devioz AI Assistant -->
+                                <div class="devioz-link-attachment-card">
                                     <div class="attachment-border-line"></div>
                                     <div class="attachment-body">
                                         <div class="fw-bold text-dark small mb-1">Asistente de IA en los chats corporativos</div>
@@ -336,14 +336,14 @@ $directCount = count($contacts);
                     <div id="copilotDynamicMessages"></div>
                 </div>
 
-                <!-- VISTA 2: Notas Personales (Exacto al Screenshot 2) -->
+                <!-- VISTA 2: Notas Personales -->
                 <div class="chat-view-container <?= $selectedChannel === 'notes' ? '' : 'd-none' ?>" id="viewNotes">
                     <div class="chat-date-divider">
                         <span>hoy</span>
                     </div>
 
-                    <!-- Placeholder Ilustrado de Mis Notas (Screenshot 2) -->
-                    <div class="bitrix-channel-banner-card text-center my-4">
+                    <!-- Placeholder Ilustrado de Mis Notas -->
+                    <div class="devioz-channel-banner-card text-center my-4">
                         <div class="channel-banner-icon bg-blue-subtle text-primary mb-3">
                             <i class="fa-solid fa-bookmark fs-1"></i>
                         </div>
@@ -355,7 +355,7 @@ $directCount = count($contacts);
 
                     <div id="notesMessagesContainer">
                         <?php foreach ($personalNotes as $note): ?>
-                            <div class="bitrix-msg-bubble outgoing">
+                            <div class="devioz-msg-bubble outgoing">
                                 <div class="msg-content">
                                     <div class="msg-body">
                                         <?= nl2br(e($note['body'])) ?>
@@ -369,14 +369,14 @@ $directCount = count($contacts);
                     </div>
                 </div>
 
-                <!-- VISTA 3: Noticias de la Compañía (Exacto al Screenshot 3) -->
+                <!-- VISTA 3: Noticias de la Compañía -->
                 <div class="chat-view-container <?= $selectedChannel === 'news' ? '' : 'd-none' ?>" id="viewNews">
                     <div class="chat-date-divider">
                         <span>ayer</span>
                     </div>
 
-                    <!-- Banner Informativo de Noticias (Screenshot 3) -->
-                    <div class="bitrix-channel-banner-card text-center my-4">
+                    <!-- Banner Informativo de Noticias -->
+                    <div class="devioz-channel-banner-card text-center my-4">
                         <div class="channel-banner-icon bg-emerald-subtle text-emerald mb-3">
                             <i class="fa-solid fa-newspaper fs-1"></i>
                         </div>
@@ -392,7 +392,7 @@ $directCount = count($contacts);
                     <div class="d-flex flex-column gap-3" id="companyNewsFeed">
                         <?php foreach ($companyNews as $news): ?>
                             <?php $author = $news->user(); ?>
-                            <div class="bitrix-feed-post-card">
+                            <div class="devioz-feed-post-card">
                                 <div class="d-flex align-items-center gap-2 mb-2">
                                     <img src="<?= e($author ? $author->avatarUrl() : '') ?>" class="rounded-circle" width="32" height="32" alt="Avatar">
                                     <div>
@@ -412,14 +412,14 @@ $directCount = count($contacts);
                     </div>
                 </div>
 
-                <!-- VISTA 4: Chat General (Exacto al Screenshot 4) -->
+                <!-- VISTA 4: Chat General -->
                 <div class="chat-view-container <?= $selectedChannel === 'general' ? '' : 'd-none' ?>" id="viewGeneral">
                     <div class="chat-date-divider">
                         <span>ayer</span>
                     </div>
 
-                    <!-- Banner Informativo del Chat General (Screenshot 4) -->
-                    <div class="bitrix-channel-banner-card text-center my-4">
+                    <!-- Banner Informativo del Chat General -->
+                    <div class="devioz-channel-banner-card text-center my-4">
                         <div class="channel-banner-icon bg-info-subtle text-info mb-3">
                             <i class="fa-solid fa-comments fs-1"></i>
                         </div>
@@ -433,7 +433,7 @@ $directCount = count($contacts);
 
                     <div id="generalMessagesContainer">
                         <?php foreach ($generalMessages as $gMsg): ?>
-                            <div class="bitrix-msg-bubble <?= ($gMsg['sender_id'] == $currentUser->id) ? 'outgoing' : 'incoming' ?>">
+                            <div class="devioz-msg-bubble <?= ($gMsg['sender_id'] == $currentUser->id) ? 'outgoing' : 'incoming' ?>">
                                 <?php if ($gMsg['sender_id'] != $currentUser->id): ?>
                                     <div class="msg-avatar">
                                         <img src="<?= e(!empty($gMsg['sender_avatar']) ? $gMsg['sender_avatar'] : 'https://ui-avatars.com/api/?name='.urlencode($gMsg['sender_name']).'&background=00ACE3&color=fff') ?>" alt="Avatar" class="rounded-circle">
@@ -473,10 +473,10 @@ $directCount = count($contacts);
             </div>
 
             <!-- ================================================================= -->
-            <!-- PIE FLOTANTE: COMPOSITOR DE MENSAJE BITRIX24 AIR                  -->
+            <!-- PIE FLOTANTE: COMPOSITOR DE MENSAJE Devioz                  -->
             <!-- ================================================================= -->
-            <footer class="bitrix-chat-footer">
-                <form id="bitrixComposerForm" class="bitrix-composer-box">
+            <footer class="devioz-chat-footer">
+                <form id="deviozComposerForm" class="devioz-composer-box">
                     <!-- Botón Clip Adjuntos -->
                     <button type="button" class="composer-icon-btn" id="composerAttachBtn" title="Adjuntar archivo o imagen">
                         <i class="fa-solid fa-paperclip"></i>
@@ -484,9 +484,9 @@ $directCount = count($contacts);
 
                     <!-- Campo de Entrada Principal -->
                     <div class="composer-input-wrapper flex-grow-1">
-                        <textarea id="bitrixMessageInput" 
-                                  rows="1" 
-                                  placeholder="Escriba @ o + para mencionar a una persona, un chat o una IA" 
+                        <textarea id="deviozMessageInput"
+                                  rows="1"
+                                  placeholder="Escriba @ o + para mencionar a una persona, un chat o una IA"
                                   autocomplete="off"></textarea>
                     </div>
 

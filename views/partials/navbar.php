@@ -9,7 +9,7 @@ $currentUri = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '/';
 ?>
 
 <header class="topbar">
-    <!-- Izquierda: Botón Hamburguesa para Móvil (Sin texto Devioz24, estilo oficial Bitrix24 Air) -->
+    <!-- Izquierda: Botón Hamburguesa para Móvil (Sin texto Devioz OS, estilo oficial Devioz) -->
     <div class="d-flex align-items-center flex-shrink-0" id="topbarLeftArea">
         <button type="button" class="sidebar-nav-toggle-btn flex-shrink-0 d-lg-none me-2" id="sidebarToggleBtn" aria-label="Abrir barra lateral" title="Abrir barra lateral">
             <i class="fa-solid fa-bars text-white"></i>
@@ -20,8 +20,8 @@ $currentUri = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '/';
 $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/online');
 ?>
 
-    <!-- Centro: Pestañas Horizontales Bitrix24 Air Dinámicas (Feed, Messenger, Proyectos, Tableros, etc.) -->
-    <nav class="topbar-horizontal-nav d-none d-lg-flex align-items-center gap-1 mx-2 flex-grow-1" id="topbarHorizontalNav" aria-label="Navegación Bitrix24 Air">
+    <!-- Centro: Pestañas Horizontales Devioz Dinámicas (Feed, Messenger, Proyectos, Tableros, etc.) -->
+    <nav class="topbar-horizontal-nav d-none d-lg-flex align-items-center gap-1 mx-2 flex-grow-1" id="topbarHorizontalNav" aria-label="Navegación Devioz">
         <div class="topbar-nav-items-wrapper d-flex align-items-center gap-1" id="topbarVisibleNavItems">
             <?php if ($isChatMode): ?>
                 <?php $currentChan = $_GET['channel'] ?? ''; ?>
@@ -80,35 +80,35 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                 <span>Más</span>
                 <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.65rem;"></i>
             </button>
-            <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 p-0 bitrix-more-dropdown" id="topbarMoreDropdownMenu" style="min-width: 230px; z-index: 1060;">
+            <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 p-0 devioz-more-dropdown" id="topbarMoreDropdownMenu" style="min-width: 230px; z-index: 1060;">
                 <!-- Elementos que se desbordan dinámicamente por ancho de pantalla al 100% de zoom -->
                 <div id="topbarMoreDynamicItems" class="p-0"></div>
                 <div id="topbarMoreDivider" class="dropdown-divider my-1 d-none"></div>
 
-                <div class="bitrix-more-header">Ajustes & Personalización</div>
-                <a class="bitrix-more-item" href="javascript:void(0)" data-theme-modal-trigger>
+                <div class="devioz-more-header">Ajustes & Personalización</div>
+                <a class="devioz-more-item" href="javascript:void(0)" data-theme-modal-trigger>
                     <i class="fa-solid fa-palette text-warning"></i> Configuración de tema
                 </a>
-                <a class="bitrix-more-item" href="javascript:void(0)" onclick="location.reload()">
+                <a class="devioz-more-item" href="javascript:void(0)" onclick="location.reload()">
                     <i class="fa-solid fa-rotate text-secondary"></i> Restablecer menú
                 </a>
                 <div class="dropdown-divider my-1"></div>
-                <div class="bitrix-more-header">Módulos Corporativos</div>
-                <a class="bitrix-more-item" href="<?= url('/dashboard') ?>">
+                <div class="devioz-more-header">Módulos Corporativos</div>
+                <a class="devioz-more-item" href="<?= url('/dashboard') ?>">
                     <i class="fa-regular fa-newspaper text-info"></i> Feed Principal
                 </a>
-                <a class="bitrix-more-item" href="<?= url('/gallery') ?>">
+                <a class="devioz-more-item" href="<?= url('/gallery') ?>">
                     <i class="fa-solid fa-cube text-warning"></i> Galería Enterprise
                 </a>
-                <a class="bitrix-more-item" href="<?= url('/team') ?>">
+                <a class="devioz-more-item" href="<?= url('/team') ?>">
                     <i class="fa-solid fa-users text-success"></i> Talento & Red
                 </a>
                 <?php if (auth()->isAdmin()): ?>
-                    <a class="bitrix-more-item" href="<?= url('/admin/evaluations') ?>">
+                    <a class="devioz-more-item" href="<?= url('/admin/evaluations') ?>">
                         <i class="fa-solid fa-certificate text-warning"></i> Auditorías QA
                     </a>
                 <?php elseif (auth()->isDeveloper()): ?>
-                    <a class="bitrix-more-item" href="<?= url('/my-project') ?>">
+                    <a class="devioz-more-item" href="<?= url('/my-project') ?>">
                         <i class="fa-solid fa-briefcase text-primary"></i> Mi Proyecto Activo
                     </a>
                 <?php endif; ?>
@@ -118,49 +118,49 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
 
     <!-- Centro / Derecha: Buscador Global Command Palette + Botón Verde + Perfil -->
     <div class="d-flex align-items-center gap-2 flex-shrink-0" id="topbarRightArea">
-        <!-- Buscador Global Estilizado Bitrix24 Air (Ctrl + K) -->
-        <button type="button" class="btn gl-topbar-search d-flex align-items-center gap-2" id="commandPaletteTrigger" title="Búsqueda Rápida en Devioz24 (Ctrl + K)">
+        <!-- Buscador Global Estilizado Devioz (Ctrl + K) -->
+        <button type="button" class="btn gl-topbar-search d-flex align-items-center gap-2" id="commandPaletteTrigger" title="Búsqueda Rápida en Devioz OS (Ctrl + K)">
             <i class="fa-solid fa-magnifying-glass search-icon-lupa"></i>
-            <span class="d-none d-xl-inline search-label">Buscar en Devioz24...</span>
+            <span class="d-none d-xl-inline search-label">Buscar en Devioz OS...</span>
             <kbd class="gl-topbar-kbd d-none d-xxl-inline">Ctrl K</kbd>
         </button>
 
         <?php if (auth()->isAdmin()): ?>
-            <a href="<?= url('/projects/create') ?>" class="btn btn-sm btn-bitrix-green d-none d-xl-inline-flex align-items-center gap-1" title="Nuevo Proyecto SDLC">
+            <a href="<?= url('/projects/create') ?>" class="btn btn-sm btn-devioz-green d-none d-xl-inline-flex align-items-center gap-1" title="Nuevo Proyecto SDLC">
                 <i class="fa-solid fa-plus"></i>
                 <span>Nuevo Proyecto</span>
             </a>
         <?php endif; ?>
 
         <?php if ($currentUser): ?>
-            <!-- Centro de Notificaciones (Bitrix24 Notification Hub) -->
+            <!-- Centro de Notificaciones (Devioz Notification Hub) -->
             <div class="dropdown me-1">
                 <button type="button" class="btn topbar-icon-btn position-relative" id="topbarNotificationsBtn" data-bs-toggle="dropdown" aria-expanded="false" title="Centro de Notificaciones">
                     <i class="fa-solid fa-bell fs-6"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="topbarNotificationsCount" style="font-size: 0.65rem; padding: 0.25em 0.5em;">0</span>
                 </button>
-                <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 p-0 bitrix-notifications-menu" style="width: 320px; max-width: 90vw;">
+                <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 p-0 devioz-notifications-menu" style="width: 320px; max-width: 90vw;">
                     <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-light rounded-top">
                         <span class="fw-bold small" style="color: #172B4D;"><i class="fa-solid fa-bell me-1 text-primary"></i> Notificaciones</span>
                         <button type="button" class="btn btn-link p-0 text-decoration-none small text-muted" id="markAllNotificationsReadBtn" style="font-size: 0.75rem;">Marcar leídas</button>
                     </div>
-                    <div class="bitrix-notifications-list" id="bitrixNotificationsList" style="max-height: 320px; overflow-y: auto;">
+                    <div class="devioz-notifications-list" id="deviozNotificationsList" style="max-height: 320px; overflow-y: auto;">
                         <div class="p-3 text-center text-muted small">Cargando notificaciones...</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Acceso Rápido al Chat con Administración (Bitrix Chat) -->
+            <!-- Acceso Rápido al Chat con Administración (Devioz Chat) -->
             <button type="button" class="btn topbar-icon-btn position-relative me-1" id="topbarChatBtn" title="Chat y Contacto con la Administración" aria-label="Abrir Chat con la Administración">
                 <i class="fa-solid fa-comment-dots fs-6"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info d-none" id="topbarChatBadge" style="font-size: 0.65rem; padding: 0.25em 0.5em;">0</span>
             </button>
 
-            <?php 
+            <?php
                 $nameParts = preg_split('/\s+/', trim($currentUser->name ?? ''));
                 $userDisplayName = count($nameParts) >= 2 ? ($nameParts[0] . ' ' . $nameParts[1]) : ($currentUser->name ?? 'Usuario');
             ?>
-            <!-- Dropdown Usuario Estilo Bitrix24 Air (Screenshot 2) -->
+            <!-- Dropdown Usuario Estilo Devioz -->
             <div class="dropdown">
                 <button class="btn btn-user-pill d-flex align-items-center gap-2 p-1 pe-2 rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="<?= e($userDisplayName) ?>">
                     <img src="<?= e($currentUser->avatarUrl()) ?>" alt="<?= e($userDisplayName) ?>" class="rounded-circle" width="30" height="30" style="object-fit: cover;" loading="lazy">
@@ -169,9 +169,9 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                     </svg>
                 </button>
-                
-                <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 p-0 bitrix-profile-popover" style="width: 330px; max-width: 92vw; border-radius: 16px; overflow: hidden;">
-                    <!-- Cabecera del Usuario (Screenshot 2) -->
+
+                <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 p-0 devioz-profile-popover" style="width: 330px; max-width: 92vw; border-radius: 16px; overflow: hidden;">
+                    <!-- Cabecera del Usuario -->
                     <div class="p-3 bg-white border-bottom">
                         <div class="d-flex align-items-center gap-3">
                             <a href="<?= url('/profile') ?>" class="text-decoration-none flex-shrink-0">
@@ -190,7 +190,7 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                             </div>
                         </div>
 
-                        <!-- Barra de Estado de Jornada (Bitrix24 Air Style) -->
+                        <!-- Barra de Estado de Jornada (Devioz Style) -->
                         <div class="mt-3 p-2 rounded d-flex justify-content-between align-items-center" style="background: #F8FAFB; border: 1px solid #E0E8ED;">
                             <div class="text-secondary small d-flex align-items-center gap-2" style="font-size: 0.75rem;">
                                 <span class="rounded-circle flex-shrink-0" id="profileWorkdayDot" style="width: 8px; height: 8px; display: inline-block; background-color: #94A3B8;"></span>
@@ -224,7 +224,7 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                         </div>
                     </div>
 
-                    <!-- Enlaces Corporativos (Screenshot 2) -->
+                    <!-- Enlaces Corporativos -->
                     <div class="list-group list-group-flush" style="font-size: 0.80rem;">
                         <a href="<?= url('/profile') ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2 px-3">
                             <span class="d-flex align-items-center gap-2 text-dark">
@@ -243,7 +243,7 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                         <a href="javascript:void(0)" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2 px-3" id="popoverThemeToggle" data-theme-modal-trigger>
                             <span class="d-flex align-items-center gap-2 text-dark">
                                 <i class="fa-solid fa-palette text-warning"></i>
-                                <span>Tema visual (Bitrix24 Air)</span>
+                                <span>Tema visual (Devioz)</span>
                             </span>
                             <i class="fa-solid fa-chevron-right text-muted" style="font-size: 0.65rem;"></i>
                         </a>
@@ -266,7 +266,7 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                         <?php endif; ?>
                     </div>
 
-                    <!-- Footer: Pulso & Cerrar Sesión (Screenshot 2) -->
+                    <!-- Footer: Pulso & Cerrar Sesión -->
                     <div class="p-2 px-3 bg-light border-top d-flex justify-content-between align-items-center" style="font-size: 0.75rem;">
                         <a href="<?= url('/lounge') ?>" class="text-secondary text-decoration-none">
                             <i class="fa-solid fa-heart-pulse text-danger me-1"></i> Pulso de la compañía

@@ -1,5 +1,5 @@
 /* ==============================================================================
- * DEVIOZ OS — Hoja de Estilos Corporativa (Estándar Bitrix24 Enterprise)
+ * DEVIOZ OS — Hoja de Estilos Corporativa (Estándar Devioz Enterprise)
  * Tipografía: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
  * Paleta: Fondo #EEF2F4, Sidebar #172B4D, Acentos #00ACE3 / #7BD500
  * Bordes: #DBE2E8 | Sombras: 0 1px 3px rgba(23, 43, 77, 0.05)
@@ -7,7 +7,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-:root, [data-theme="light"], [data-theme="dark"], [data-ui-mode="bitrix"] {
+:root, [data-theme="light"], [data-theme="dark"], [data-ui-mode="devioz"] {
     color-scheme: light;
     --brand-primary: #00ACE3;
     --brand-hover: #0095C6;
@@ -47,7 +47,7 @@
 }
 
 /* ------------------------------------------------------------------------------
- * Base y Tipografía (Bitrix24 Oficial)
+ * Base y Tipografía (Devioz Oficial)
  * ------------------------------------------------------------------------------ */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -1116,9 +1116,9 @@ a:hover {
 }
 
 .bili-card-title,
-.b24-reel-card .bili-card-title,
+.ui-reel-card .bili-card-title,
 [data-theme="light"] .bili-card-title,
-[data-theme="light"] .b24-reel-card .bili-card-title,
+[data-theme="light"] .ui-reel-card .bili-card-title,
 .bili-card .bili-card-title,
 [data-theme="light"] .bili-card .bili-card-title {
     font-size: 0.85rem !important;
@@ -1135,16 +1135,16 @@ a:hover {
 }
 
 .bili-card:hover .bili-card-title,
-.b24-reel-card:hover .bili-card-title,
+.ui-reel-card:hover .bili-card-title,
 [data-theme="light"] .bili-card:hover .bili-card-title,
-[data-theme="light"] .b24-reel-card:hover .bili-card-title {
+[data-theme="light"] .ui-reel-card:hover .bili-card-title {
     color: #00ACE3 !important;
 }
 
 .bili-dev-line,
-.b24-reel-card .bili-dev-line,
+.ui-reel-card .bili-dev-line,
 [data-theme="light"] .bili-dev-line,
-[data-theme="light"] .b24-reel-card .bili-dev-line,
+[data-theme="light"] .ui-reel-card .bili-dev-line,
 .bili-card .bili-dev-line,
 [data-theme="light"] .bili-card .bili-dev-line {
     display: flex !important;
@@ -1159,9 +1159,9 @@ a:hover {
 }
 
 .bili-dev-line span,
-.b24-reel-card .bili-dev-line span,
+.ui-reel-card .bili-dev-line span,
 [data-theme="light"] .bili-dev-line span,
-[data-theme="light"] .b24-reel-card .bili-dev-line span {
+[data-theme="light"] .ui-reel-card .bili-dev-line span {
     color: rgba(255, 255, 255, 0.92) !important;
 }
 
@@ -1375,10 +1375,10 @@ a:hover {
 .bili-feed-header .text-white,
 [data-theme="light"] .bili-feed-header h4,
 [data-theme="light"] .bili-feed-header .text-white,
-.b24-reels-section h2,
-.b24-reels-section .text-white,
-[data-theme="light"] .b24-reels-section h2,
-[data-theme="light"] .b24-reels-section .text-white {
+.ui-reels-section h2,
+.ui-reels-section .text-white,
+[data-theme="light"] .ui-reels-section h2,
+[data-theme="light"] .ui-reels-section .text-white {
     color: #FFFFFF !important;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
 }
@@ -1387,10 +1387,10 @@ a:hover {
 .bili-feed-header .text-white-50,
 [data-theme="light"] .bili-feed-header p,
 [data-theme="light"] .bili-feed-header .text-white-50,
-.b24-reels-section p,
-.b24-reels-section .text-white-50,
-[data-theme="light"] .b24-reels-section p,
-[data-theme="light"] .b24-reels-section .text-white-50 {
+.ui-reels-section p,
+.ui-reels-section .text-white-50,
+[data-theme="light"] .ui-reels-section p,
+[data-theme="light"] .ui-reels-section .text-white-50 {
     color: rgba(255, 255, 255, 0.78) !important;
 }
 
@@ -2557,7 +2557,7 @@ a:hover {
     border: 2px solid #00ACE3;
 }
 
-/* Indicador de estado en línea verde Bitrix */
+/* Indicador de estado en línea verde Devioz */
 .bot-status-indicator {
     position: absolute;
     bottom: 1px;
@@ -2597,7 +2597,7 @@ a:hover {
 }
 
 
-/* Ventana de Chat Flotante Estilo Bitrix24 Enterprise */
+/* Ventana de Chat Flotante Estilo Devioz Enterprise */
 .devioz-bot-window {
     position: fixed;
     bottom: 5.75rem;
@@ -2614,7 +2614,7 @@ a:hover {
     flex-direction: column;
     overflow: hidden;
     z-index: 1060;
-    
+
     /* Animación fluida de apertura (Slide-up & Scale) */
     opacity: 0;
     visibility: hidden;
@@ -2684,7 +2684,7 @@ a:hover {
     transform: scale(1.05);
 }
 
-/* Cuerpo de Chat con Fondo Gris Azulado Mate Bitrix */
+/* Cuerpo de Chat con Fondo Gris Azulado Mate Devioz */
 .bot-window-body {
     flex: 1;
     overflow-y: auto;
@@ -2789,7 +2789,7 @@ a:hover {
     flex-shrink: 0;
 }
 
-/* Burbujas del Usuario (Azul Bitrix24 Primario) */
+/* Burbujas del Usuario (Azul Devioz Primario) */
 .bot-msg-user-bubble {
     background: #00ACE3 !important;
     color: #ffffff !important;
@@ -2842,7 +2842,7 @@ a:hover {
     transform: translateY(0);
 }
 
-/* Pie de Entrada de Texto Estilo Bitrix24 */
+/* Pie de Entrada de Texto Estilo Devioz */
 .bot-window-footer {
     padding: 0.85rem 1.15rem 0.6rem;
     background: #FFFFFF !important;
@@ -3251,11 +3251,11 @@ a:hover {
 .gl-stripe-red   { background-color: #db3b21; }
 
 /* ==============================================================================
- * BITRIX24 PIPELINE CHEVRON HEADERS & ENRICHED CARDS
+ * DEVIOZ PIPELINE CHEVRON HEADERS & ENRICHED CARDS
  * ============================================================================== */
 
 /* Contenedor Chevron de Etapa */
-.bx-chevron-header {
+.ui-chevron-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -3270,28 +3270,28 @@ a:hover {
     transition: filter 0.2s ease;
 }
 
-.bx-chevron-header:hover {
+.ui-chevron-header:hover {
     filter: brightness(1.06);
 }
 
-/* Colores de Etapa estilo Bitrix24 */
-.bx-chevron-blue {
+/* Colores de Etapa estilo Devioz */
+.ui-chevron-blue {
     background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
 }
 
-.bx-chevron-cyan {
+.ui-chevron-cyan {
     background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
 }
 
-.bx-chevron-emerald {
+.ui-chevron-emerald {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
 
-.bx-chevron-amber {
+.ui-chevron-amber {
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
 }
 
-.bx-chevron-title {
+.ui-chevron-title {
     display: flex;
     align-items: center;
     gap: 0.45rem;
@@ -3300,7 +3300,7 @@ a:hover {
     color: #ffffff !important;
 }
 
-.bx-chevron-counter {
+.ui-chevron-counter {
     background: rgba(255, 255, 255, 0.25);
     color: #ffffff;
     padding: 0.1rem 0.5rem;
@@ -3309,7 +3309,7 @@ a:hover {
     font-weight: 700;
 }
 
-.bx-chevron-add {
+.ui-chevron-add {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.2);
     width: 22px;
@@ -3325,14 +3325,14 @@ a:hover {
     transition: background 0.15s ease, transform 0.15s ease;
 }
 
-.bx-chevron-add:hover {
+.ui-chevron-add:hover {
     background: rgba(255, 255, 255, 0.38);
     color: #ffffff;
     transform: scale(1.1);
 }
 
 /* Badge de Cliente / Empresa */
-.bx-client-badge {
+.ui-client-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
@@ -3349,7 +3349,7 @@ a:hover {
     white-space: nowrap;
 }
 
-[data-ui-mode="pouf"] .bx-client-badge {
+[data-ui-mode="pouf"] .ui-client-badge {
     background: rgba(168, 85, 247, 0.12);
     color: #c084fc;
     border-color: rgba(192, 132, 252, 0.25);
@@ -3357,7 +3357,7 @@ a:hover {
 }
 
 /* Miniatura Visual de Portada en Tarjeta */
-.bx-card-cover-wrapper {
+.ui-card-cover-wrapper {
     width: 100%;
     height: 105px;
     border-radius: 8px;
@@ -3367,19 +3367,19 @@ a:hover {
     border: 1px solid var(--border-color);
 }
 
-.bx-card-cover-img {
+.ui-card-cover-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.gl-card:hover .bx-card-cover-img {
+.gl-card:hover .ui-card-cover-img {
     transform: scale(1.04);
 }
 
 /* Badge de Fecha Límite / Semáforo de Tiempo */
-.bx-deadline-badge {
+.ui-deadline-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
@@ -3389,33 +3389,33 @@ a:hover {
     border-radius: 5px;
 }
 
-.bx-deadline-amber {
+.ui-deadline-amber {
     background: rgba(245, 158, 11, 0.15);
     color: #f59e0b;
     border: 1px solid rgba(245, 158, 11, 0.25);
 }
 
-.bx-deadline-blue {
+.ui-deadline-blue {
     background: rgba(59, 130, 246, 0.15);
     color: #60a5fa;
     border: 1px solid rgba(59, 130, 246, 0.25);
 }
 
-.bx-deadline-green {
+.ui-deadline-green {
     background: rgba(16, 185, 129, 0.15);
     color: #34d399;
     border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
 /* Doble Avatar de Delegación (Supervisor -> Desarrollador) */
-.bx-delegation-flow {
+.ui-delegation-flow {
     display: flex;
     align-items: center;
     gap: 0.3rem;
     min-width: 0;
 }
 
-.bx-avatar-supervisor {
+.ui-avatar-supervisor {
     width: 22px;
     height: 22px;
     border-radius: 50%;
@@ -3424,7 +3424,7 @@ a:hover {
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.bx-avatar-dev {
+.ui-avatar-dev {
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -3433,27 +3433,27 @@ a:hover {
     box-shadow: 0 1px 4px rgba(16, 185, 129, 0.3);
 }
 
-.bx-delegation-arrow {
+.ui-delegation-arrow {
     color: var(--text-muted);
     font-size: 0.75rem;
     line-height: 1;
 }
 
 /* ==============================================================================
- * SISTEMA DE DISEÑO BITRIX24 (SAAS ENTERPRISE MODERNO)
+ * SISTEMA DE DISEÑO DEVIOZ (SAAS ENTERPRISE MODERNO)
  * ============================================================================== */
 
 /* ==============================================================================
- * ATMÓSFERA VISUAL BITRIX24 AIR (VIBECODE THEME & GLASSMORPHISM)
+ * ATMÓSFERA VISUAL Devioz (VIBECODE THEME & GLASSMORPHISM)
  * ============================================================================== */
 body,
-[data-ui-mode="bitrix"] body {
+[data-ui-mode="devioz"] body {
     background-color: #0b112c !important;
-    background-image: 
+    background-image:
         radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.28) 0px, transparent 55%),
         radial-gradient(at 0% 100%, rgba(0, 172, 227, 0.24) 0px, transparent 55%),
         radial-gradient(at 70% 60%, rgba(139, 92, 246, 0.22) 0px, transparent 50%),
-        url('../images/bitrix24-bg-hd.webp'),
+        url('../images/devioz-bg-hd.webp'),
         linear-gradient(135deg, #090e24 0%, #0d1538 45%, #141a3d 100%) !important;
     background-attachment: fixed !important;
     background-size: cover !important;
@@ -3462,9 +3462,9 @@ body,
     min-height: 100vh;
 }
 
-/* Header Superior Glassmorphic Estilo Bitrix24 Air */
+/* Header Superior Glassmorphic Estilo Devioz */
 .topbar,
-[data-ui-mode="bitrix"] .topbar {
+[data-ui-mode="devioz"] .topbar {
     background-color: rgba(14, 22, 45, 0.78) !important;
     backdrop-filter: blur(18px) !important;
     -webkit-backdrop-filter: blur(18px) !important;
@@ -3472,7 +3472,7 @@ body,
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Pestañas Horizontales Bitrix24 Air en Header */
+/* Pestañas Horizontales Devioz en Header */
 .topbar-horizontal-nav {
     display: flex;
     align-items: center;
@@ -3514,8 +3514,8 @@ body,
     color: #172B4D !important;
 }
 
-/* Botón Verde Acción Bitrix24 (+ Nuevo Proyecto) */
-.btn-bitrix-green {
+/* Botón Verde Acción Devioz (+ Nuevo Proyecto) */
+.btn-devioz-green {
     background: #10B981 !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
@@ -3529,7 +3529,7 @@ body,
     white-space: nowrap;
 }
 
-.btn-bitrix-green:hover {
+.btn-devioz-green:hover {
     background: #059669 !important;
     color: #FFFFFF !important;
     transform: translateY(-1px);
@@ -3538,7 +3538,7 @@ body,
 
 /* Buscador Glassmorphic Topbar */
 .gl-topbar-search,
-[data-ui-mode="bitrix"] .topbar .gl-topbar-search {
+[data-ui-mode="devioz"] .topbar .gl-topbar-search {
     background-color: rgba(255, 255, 255, 0.1) !important;
     border: 1px solid rgba(255, 255, 255, 0.16) !important;
     color: #FFFFFF !important;
@@ -3547,7 +3547,7 @@ body,
 }
 
 .gl-topbar-search:hover,
-[data-ui-mode="bitrix"] .topbar .gl-topbar-search:hover {
+[data-ui-mode="devioz"] .topbar .gl-topbar-search:hover {
     background-color: rgba(255, 255, 255, 0.18) !important;
     border-color: rgba(255, 255, 255, 0.3) !important;
 }
@@ -3567,9 +3567,9 @@ body,
     border-radius: 4px;
 }
 
-/* Sidebar Estilo Bitrix24 Enterprise (Glassmorphic Índigo con Desenfoque) */
+/* Sidebar Estilo Devioz Enterprise (Glassmorphic Índigo con Desenfoque) */
 .sidebar,
-[data-ui-mode="bitrix"] .sidebar {
+[data-ui-mode="devioz"] .sidebar {
     background-color: rgba(14, 22, 45, 0.88) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
@@ -3579,23 +3579,23 @@ body,
 }
 
 .sidebar .sidebar-header,
-[data-ui-mode="bitrix"] .sidebar .sidebar-header {
+[data-ui-mode="devioz"] .sidebar .sidebar-header {
     background-color: transparent !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .sidebar .sidebar-menu,
-[data-ui-mode="bitrix"] .sidebar .sidebar-menu {
+[data-ui-mode="devioz"] .sidebar .sidebar-menu {
     background-color: transparent !important;
 }
 
 .sidebar .sidebar-footer,
-[data-ui-mode="bitrix"] .sidebar .sidebar-footer {
+[data-ui-mode="devioz"] .sidebar .sidebar-footer {
     background-color: transparent !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Botón Mejorar Plan Estilo Bitrix24 */
+/* Botón Mejorar Plan Estilo Devioz */
 .sidebar-upgrade-btn {
     background: linear-gradient(135deg, #FF6B6B 0%, #E11D48 50%, #9333EA 100%) !important;
     color: #FFFFFF !important;
@@ -3622,7 +3622,7 @@ body,
 
 /* Tipografía de Alto Contraste en Sidebar */
 .sidebar .sidebar-category,
-[data-ui-mode="bitrix"] .sidebar .sidebar-category {
+[data-ui-mode="devioz"] .sidebar .sidebar-category {
     color: #8993A4 !important;
     font-size: 0.70rem !important;
     font-weight: 700 !important;
@@ -3632,7 +3632,7 @@ body,
 }
 
 .sidebar .nav-link-custom,
-[data-ui-mode="bitrix"] .sidebar .nav-link-custom {
+[data-ui-mode="devioz"] .sidebar .nav-link-custom {
     color: #DEEBFF !important;
     font-size: 0.875rem !important;
     font-weight: 500 !important;
@@ -3642,13 +3642,13 @@ body,
 }
 
 .sidebar .nav-link-custom:hover,
-[data-ui-mode="bitrix"] .sidebar .nav-link-custom:hover {
+[data-ui-mode="devioz"] .sidebar .nav-link-custom:hover {
     color: #FFFFFF !important;
     background-color: rgba(255, 255, 255, 0.12) !important;
 }
 
 .sidebar .nav-link-custom.active,
-[data-ui-mode="bitrix"] .sidebar .nav-link-custom.active {
+[data-ui-mode="devioz"] .sidebar .nav-link-custom.active {
     color: #FFFFFF !important;
     background-color: rgba(0, 172, 227, 0.35) !important;
     border: 1px solid rgba(0, 172, 227, 0.5) !important;
@@ -3656,20 +3656,20 @@ body,
 }
 
 .sidebar .nav-link-custom .icon-wrapper,
-[data-ui-mode="bitrix"] .sidebar .nav-link-custom .icon-wrapper {
+[data-ui-mode="devioz"] .sidebar .nav-link-custom .icon-wrapper {
     color: #A5C8ED !important;
 }
 
 
 .sidebar .nav-link-custom:hover .icon-wrapper,
 .sidebar .nav-link-custom.active .icon-wrapper,
-[data-ui-mode="bitrix"] .sidebar .nav-link-custom:hover .icon-wrapper,
-[data-ui-mode="bitrix"] .sidebar .nav-link-custom.active .icon-wrapper {
+[data-ui-mode="devioz"] .sidebar .nav-link-custom:hover .icon-wrapper,
+[data-ui-mode="devioz"] .sidebar .nav-link-custom.active .icon-wrapper {
     color: #FFFFFF !important;
 }
 
 .sidebar .sidebar-group-toggle,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle {
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle {
     color: #DEEBFF !important;
     font-size: 0.875rem !important;
     font-weight: 500 !important;
@@ -3679,63 +3679,63 @@ body,
 }
 
 .sidebar .sidebar-group-toggle:hover,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle:hover {
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle:hover {
     color: #FFFFFF !important;
     background-color: #24385A !important;
 }
 
 .sidebar .sidebar-group-toggle.active,
 .sidebar .sidebar-group-toggle[aria-expanded="true"],
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle.active,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle[aria-expanded="true"] {
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle.active,
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle[aria-expanded="true"] {
     color: #00ACE3 !important;
     background-color: rgba(0, 172, 227, 0.12) !important;
 }
 
 .sidebar .sidebar-group-toggle .icon-wrapper,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle .icon-wrapper {
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle .icon-wrapper {
     color: #A5C8ED !important;
 }
 
 .sidebar .sidebar-group-toggle:hover .icon-wrapper,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle:hover .icon-wrapper {
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle:hover .icon-wrapper {
     color: #FFFFFF !important;
 }
 
 .sidebar .sidebar-group-toggle.active .icon-wrapper,
 .sidebar .sidebar-group-toggle[aria-expanded="true"] .icon-wrapper,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle.active .icon-wrapper,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle[aria-expanded="true"] .icon-wrapper {
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle.active .icon-wrapper,
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle[aria-expanded="true"] .icon-wrapper {
     color: #00ACE3 !important;
 }
 
 .sidebar .sidebar-chevron,
-[data-ui-mode="bitrix"] .sidebar .sidebar-chevron {
+[data-ui-mode="devioz"] .sidebar .sidebar-chevron {
     color: #8993A4 !important;
     opacity: 1 !important;
 }
 
 .sidebar .sidebar-group-toggle:hover .sidebar-chevron,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle:hover .sidebar-chevron {
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle:hover .sidebar-chevron {
     color: #FFFFFF !important;
 }
 
 .sidebar .sidebar-group-toggle.active .sidebar-chevron,
 .sidebar .sidebar-group-toggle[aria-expanded="true"] .sidebar-chevron,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle.active .sidebar-chevron,
-[data-ui-mode="bitrix"] .sidebar .sidebar-group-toggle[aria-expanded="true"] .sidebar-chevron {
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle.active .sidebar-chevron,
+[data-ui-mode="devioz"] .sidebar .sidebar-group-toggle[aria-expanded="true"] .sidebar-chevron {
     color: #00ACE3 !important;
 }
 
 .sidebar .sidebar-submenu,
-[data-ui-mode="bitrix"] .sidebar .sidebar-submenu {
+[data-ui-mode="devioz"] .sidebar .sidebar-submenu {
     border-left: 1.5px solid rgba(222, 235, 255, 0.15) !important;
     margin-left: 0.95rem !important;
     padding-left: 0.5rem !important;
 }
 
 .sidebar .nav-link-sub,
-[data-ui-mode="bitrix"] .sidebar .nav-link-sub {
+[data-ui-mode="devioz"] .sidebar .nav-link-sub {
     color: #C1D5ED !important;
     font-size: 0.825rem !important;
     font-weight: 500 !important;
@@ -3745,20 +3745,20 @@ body,
 }
 
 .sidebar .nav-link-sub:hover,
-[data-ui-mode="bitrix"] .sidebar .nav-link-sub:hover {
+[data-ui-mode="devioz"] .sidebar .nav-link-sub:hover {
     color: #FFFFFF !important;
     background-color: #24385A !important;
 }
 
 .sidebar .nav-link-sub.active,
-[data-ui-mode="bitrix"] .sidebar .nav-link-sub.active {
+[data-ui-mode="devioz"] .sidebar .nav-link-sub.active {
     color: #FFFFFF !important;
     background-color: #00ACE3 !important;
     font-weight: 600 !important;
 }
 
 .sidebar .user-profile-badge,
-[data-ui-mode="bitrix"] .sidebar .user-profile-badge {
+[data-ui-mode="devioz"] .sidebar .user-profile-badge {
     color: #DEEBFF !important;
     border-radius: 8px !important;
     padding: 0.5rem !important;
@@ -3766,30 +3766,30 @@ body,
 }
 
 .sidebar .user-profile-badge:hover,
-[data-ui-mode="bitrix"] .sidebar .user-profile-badge:hover {
+[data-ui-mode="devioz"] .sidebar .user-profile-badge:hover {
     background-color: #24385A !important;
 }
 
 .sidebar .sidebar-user-name,
-[data-ui-mode="bitrix"] .sidebar .sidebar-user-name {
+[data-ui-mode="devioz"] .sidebar .sidebar-user-name {
     color: #FFFFFF !important;
 }
 
 .sidebar .sidebar-user-action i,
-[data-ui-mode="bitrix"] .sidebar .sidebar-user-action i {
+[data-ui-mode="devioz"] .sidebar .sidebar-user-action i {
     color: #8993A4 !important;
 }
 
 .sidebar .user-profile-badge:hover .sidebar-user-action i,
-[data-ui-mode="bitrix"] .sidebar .user-profile-badge:hover .sidebar-user-action i {
+[data-ui-mode="devioz"] .sidebar .user-profile-badge:hover .sidebar-user-action i {
     color: #FFFFFF !important;
 }
 
-/* Paneles y Tarjetas Bitrix24 */
-.bx-card,
-.bx-panel,
-[data-ui-mode="bitrix"] .card-custom,
-[data-ui-mode="bitrix"] .card {
+/* Paneles y Tarjetas Devioz */
+.ui-card,
+.ui-panel,
+[data-ui-mode="devioz"] .card-custom,
+[data-ui-mode="devioz"] .card {
     background-color: #FFFFFF !important;
     border: 1px solid #E0E8ED !important;
     border-radius: 10px !important;
@@ -3799,16 +3799,16 @@ body,
     transform: none !important;
 }
 
-.bx-card:hover,
-.bx-panel:hover,
-[data-ui-mode="bitrix"] .card-custom:hover,
-[data-ui-mode="bitrix"] .card:hover {
+.ui-card:hover,
+.ui-panel:hover,
+[data-ui-mode="devioz"] .card-custom:hover,
+[data-ui-mode="devioz"] .card:hover {
     transform: none !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07) !important;
     border-color: #D0D7DD !important;
 }
 
-.bx-panel-header {
+.ui-panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -3817,7 +3817,7 @@ body,
     border-bottom: 1px solid #E0E8ED;
 }
 
-.bx-panel-title {
+.ui-panel-title {
     font-size: 19px !important;
     font-weight: 600 !important;
     color: #263238 !important;
@@ -3825,14 +3825,14 @@ body,
     letter-spacing: -0.01em !important;
 }
 
-.bx-panel-subtitle {
+.ui-panel-subtitle {
     font-size: 13px !important;
     color: #78909C !important;
     margin-top: 0.25rem !important;
 }
 
-/* Pestañas Bitrix24 (Tabs con Borde Inferior Azul) */
-.bx-tabs-nav {
+/* Pestañas Devioz (Tabs con Borde Inferior Azul) */
+.ui-tabs-nav {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #E0E8ED;
@@ -3844,7 +3844,7 @@ body,
     overflow-x: auto;
 }
 
-.bx-tab-link {
+.ui-tab-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -3862,32 +3862,32 @@ body,
     white-space: nowrap;
 }
 
-.bx-tab-link:hover {
+.ui-tab-link:hover {
     color: #263238 !important;
     background: transparent;
 }
 
-.bx-tab-link.active {
+.ui-tab-link.active {
     color: #00ACE3 !important;
     border-bottom: 3px solid #00ACE3 !important;
     background: transparent !important;
 }
 
-.bx-tab-link i {
+.ui-tab-link i {
     font-size: 0.95rem;
     opacity: 0.85;
 }
 
-.bx-tab-link.active i {
+.ui-tab-link.active i {
     opacity: 1;
     color: #00ACE3 !important;
 }
 
-/* Formularios Bitrix24: Inputs con Fondo #FFFFFF, Borde #D0D7DD, Focus Ring #00ACE3 */
-[data-ui-mode="bitrix"] .form-control,
-[data-ui-mode="bitrix"] .form-select,
-[data-ui-mode="bitrix"] .form-control-custom,
-.bx-form-input {
+/* Formularios Devioz: Inputs con Fondo #FFFFFF, Borde #D0D7DD, Focus Ring #00ACE3 */
+[data-ui-mode="devioz"] .form-control,
+[data-ui-mode="devioz"] .form-select,
+[data-ui-mode="devioz"] .form-control-custom,
+.ui-form-input {
     background-color: #FFFFFF !important;
     border: 1px solid #D0D7DD !important;
     color: #263238 !important;
@@ -3898,10 +3898,10 @@ body,
     box-shadow: none !important;
 }
 
-[data-ui-mode="bitrix"] .form-control:focus,
-[data-ui-mode="bitrix"] .form-select:focus,
-[data-ui-mode="bitrix"] .form-control-custom:focus,
-.bx-form-input:focus {
+[data-ui-mode="devioz"] .form-control:focus,
+[data-ui-mode="devioz"] .form-select:focus,
+[data-ui-mode="devioz"] .form-control-custom:focus,
+.ui-form-input:focus {
     border-color: #00ACE3 !important;
     box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.20) !important;
     background-color: #FFFFFF !important;
@@ -3909,15 +3909,15 @@ body,
     outline: none !important;
 }
 
-[data-ui-mode="bitrix"] .form-control::placeholder,
-.bx-form-input::placeholder {
+[data-ui-mode="devioz"] .form-control::placeholder,
+.ui-form-input::placeholder {
     color: #78909C !important;
     font-size: 13.5px !important;
 }
 
-[data-ui-mode="bitrix"] .form-label,
-[data-ui-mode="bitrix"] .form-label-custom,
-.bx-form-label {
+[data-ui-mode="devioz"] .form-label,
+[data-ui-mode="devioz"] .form-label-custom,
+.ui-form-label {
     color: #263238 !important;
     font-size: 13px !important;
     font-weight: 600 !important;
@@ -3925,8 +3925,8 @@ body,
     display: inline-block !important;
 }
 
-[data-ui-mode="bitrix"] .input-group-text,
-.bx-input-group-btn {
+[data-ui-mode="devioz"] .input-group-text,
+.ui-input-group-btn {
     background-color: #FFFFFF !important;
     border: 1px solid #D0D7DD !important;
     color: #78909C !important;
@@ -3934,16 +3934,16 @@ body,
     transition: all 0.15s ease !important;
 }
 
-[data-ui-mode="bitrix"] .input-group-text:hover,
-.bx-input-group-btn:hover {
+[data-ui-mode="devioz"] .input-group-text:hover,
+.ui-input-group-btn:hover {
     color: #00ACE3 !important;
     background-color: #F4F7F9 !important;
 }
 
-/* Botones Bitrix24 */
-.btn-bitrix-primary,
-[data-ui-mode="bitrix"] .btn-brand,
-[data-ui-mode="bitrix"] .btn-primary {
+/* Botones Devioz */
+.btn-devioz-primary,
+[data-ui-mode="devioz"] .btn-brand,
+[data-ui-mode="devioz"] .btn-primary {
     background-color: #00ACE3 !important;
     border: 1px solid #00ACE3 !important;
     color: #FFFFFF !important;
@@ -3956,9 +3956,9 @@ body,
     transition: all 0.18s ease !important;
 }
 
-.btn-bitrix-primary:hover,
-[data-ui-mode="bitrix"] .btn-brand:hover,
-[data-ui-mode="bitrix"] .btn-primary:hover {
+.btn-devioz-primary:hover,
+[data-ui-mode="devioz"] .btn-brand:hover,
+[data-ui-mode="devioz"] .btn-primary:hover {
     background-color: #0095C6 !important;
     border-color: #0095C6 !important;
     color: #FFFFFF !important;
@@ -3966,9 +3966,9 @@ body,
     transform: translateY(-1px) !important;
 }
 
-.btn-bitrix-secondary,
-.btn-bitrix-success,
-[data-ui-mode="bitrix"] .btn-success {
+.btn-devioz-secondary,
+.btn-devioz-success,
+[data-ui-mode="devioz"] .btn-success {
     background-color: #7BD500 !important;
     border: 1px solid #7BD500 !important;
     color: #FFFFFF !important;
@@ -3979,9 +3979,9 @@ body,
     transition: all 0.18s ease !important;
 }
 
-.btn-bitrix-secondary:hover,
-.btn-bitrix-success:hover,
-[data-ui-mode="bitrix"] .btn-success:hover {
+.btn-devioz-secondary:hover,
+.btn-devioz-success:hover,
+[data-ui-mode="devioz"] .btn-success:hover {
     background-color: #6CB800 !important;
     border-color: #6CB800 !important;
     color: #FFFFFF !important;
@@ -3989,9 +3989,9 @@ body,
     transform: translateY(-1px) !important;
 }
 
-.btn-bitrix-ghost,
-[data-ui-mode="bitrix"] .btn-ghost,
-[data-ui-mode="bitrix"] .btn-outline-secondary {
+.btn-devioz-ghost,
+[data-ui-mode="devioz"] .btn-ghost,
+[data-ui-mode="devioz"] .btn-outline-secondary {
     background-color: #FFFFFF !important;
     border: 1px solid #D0D7DD !important;
     color: #263238 !important;
@@ -4004,22 +4004,22 @@ body,
     transition: all 0.15s ease !important;
 }
 
-.btn-bitrix-ghost:hover,
-[data-ui-mode="bitrix"] .btn-ghost:hover,
-[data-ui-mode="bitrix"] .btn-outline-secondary:hover {
+.btn-devioz-ghost:hover,
+[data-ui-mode="devioz"] .btn-ghost:hover,
+[data-ui-mode="devioz"] .btn-outline-secondary:hover {
     background-color: #F4F7F9 !important;
     border-color: #CBD5E1 !important;
     color: #263238 !important;
 }
 
-/* Avatar Bitrix24 con Badge Flotante Estilizado e Indicador de Estado */
-.bx-avatar-card {
+/* Avatar Devioz con Badge Flotante Estilizado e Indicador de Estado */
+.ui-avatar-card {
     position: relative;
     display: inline-block;
     margin: 0 auto;
 }
 
-.bx-avatar-frame {
+.ui-avatar-frame {
     width: 110px;
     height: 110px;
     border-radius: 50%;
@@ -4029,7 +4029,7 @@ body,
     background-color: #FFFFFF;
 }
 
-.bx-avatar-status-dot {
+.ui-avatar-status-dot {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -4041,7 +4041,7 @@ body,
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
 }
 
-.bx-avatar-cam-btn {
+.ui-avatar-cam-btn {
     position: absolute;
     bottom: 2px;
     right: 2px;
@@ -4059,14 +4059,14 @@ body,
     transition: all 0.18s ease;
 }
 
-.bx-avatar-cam-btn:hover {
+.ui-avatar-cam-btn:hover {
     background-color: #0095C6;
     transform: scale(1.08);
     color: #FFFFFF;
 }
 
-/* Badges y Tiles de Métricas Bitrix24 */
-.bx-role-badge-admin {
+/* Badges y Tiles de Métricas Devioz */
+.ui-role-badge-admin {
     background: rgba(0, 172, 227, 0.1) !important;
     color: #008cb9 !important;
     border: 1px solid rgba(0, 172, 227, 0.25) !important;
@@ -4076,7 +4076,7 @@ body,
     border-radius: 6px !important;
 }
 
-.bx-role-badge-dev {
+.ui-role-badge-dev {
     background: rgba(123, 213, 0, 0.12) !important;
     color: #5ea300 !important;
     border: 1px solid rgba(123, 213, 0, 0.25) !important;
@@ -4086,7 +4086,7 @@ body,
     border-radius: 6px !important;
 }
 
-.bx-status-active {
+.ui-status-active {
     background: rgba(123, 213, 0, 0.12) !important;
     color: #5ea300 !important;
     border: 1px solid rgba(123, 213, 0, 0.25) !important;
@@ -4099,7 +4099,7 @@ body,
     gap: 0.35rem;
 }
 
-.bx-tile {
+.ui-tile {
     background: #F4F7F9;
     border: 1px solid #E0E8ED;
     border-radius: 8px;
@@ -4107,20 +4107,20 @@ body,
     height: 100%;
 }
 
-.bx-tile-label {
+.ui-tile-label {
     font-size: 12px;
     color: #78909C;
     font-weight: 500;
     margin-bottom: 0.25rem;
 }
 
-.bx-tile-val {
+.ui-tile-val {
     font-size: 15px;
     font-weight: 600;
     color: #263238;
 }
 
-.bx-alert-box {
+.ui-alert-box {
     background: #F4F7F9;
     border: 1px solid #E0E8ED;
     border-radius: 8px;
@@ -4942,20 +4942,20 @@ body,
 }
 
 /* En Modo Claro, redefinir .text-white en textos estructurales para asegurar contraste óptimo */
-[data-theme="light"] .text-white:not(.btn):not(.btn *):not(.badge.bg-primary):not(.badge.bg-secondary):not(.badge.bg-success):not(.badge.bg-danger):not(.badge.bg-warning):not(.badge.bg-info):not(.badge.bg-emerald):not(.badge-status):not(.badge-status *):not(.brand-badge):not(.bot-avatar-badge):not(.bot-msg-user):not(.bot-msg-user *):not(.step-circle.bg-emerald):not(.project-hero-banner *):not(.project-hero-title):not(.spiral-card-inner *):not(.spiral-card-title):not(.spiral-card-dev):not(.page-header-title):not(.page-header-title *):not(.lounge-header-title):not(.lounge-header-title *):not(.sidebar-user-name):not(.sidebar-user-name *):not(.sidebar-footer *):not(.user-profile-badge *):not(.bx-chevron-header *):not(.bx-chevron-title):not(.bx-chevron-subbar *):not(.kanban-empty-placeholder *):not(.gl-btn-secondary):not(.gl-btn-secondary *):not(.bitrix-kanban-col-header *):not(.bili-card *):not(.bili-card):not(.bili-experience-container *):not(.bili-experience-container):not(.bili-cinema-modal *):not(.bili-cinema-modal):not(.b24-reel-card *):not(.b24-reel-card):not(.b24-reels-section *):not(.b24-reels-section):not(.bili-playlist-item *):not(.bili-playlist-item) {
+[data-theme="light"] .text-white:not(.btn):not(.btn *):not(.badge.bg-primary):not(.badge.bg-secondary):not(.badge.bg-success):not(.badge.bg-danger):not(.badge.bg-warning):not(.badge.bg-info):not(.badge.bg-emerald):not(.badge-status):not(.badge-status *):not(.brand-badge):not(.bot-avatar-badge):not(.bot-msg-user):not(.bot-msg-user *):not(.step-circle.bg-emerald):not(.project-hero-banner *):not(.project-hero-title):not(.spiral-card-inner *):not(.spiral-card-title):not(.spiral-card-dev):not(.page-header-title):not(.page-header-title *):not(.lounge-header-title):not(.lounge-header-title *):not(.sidebar-user-name):not(.sidebar-user-name *):not(.sidebar-footer *):not(.user-profile-badge *):not(.ui-chevron-header *):not(.ui-chevron-title):not(.ui-chevron-subbar *):not(.kanban-empty-placeholder *):not(.gl-btn-secondary):not(.gl-btn-secondary *):not(.devioz-kanban-col-header *):not(.bili-card *):not(.bili-card):not(.bili-experience-container *):not(.bili-experience-container):not(.bili-cinema-modal *):not(.bili-cinema-modal):not(.ui-reel-card *):not(.ui-reel-card):not(.ui-reels-section *):not(.ui-reels-section):not(.bili-playlist-item *):not(.bili-playlist-item) {
     color: #0f172a !important;
 }
 
-[data-theme="light"] h1:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.b24-reel-card *):not(.b24-reels-section *):not(.bili-playlist-item *), 
-[data-theme="light"] h2:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.b24-reel-card *):not(.b24-reels-section *):not(.bili-playlist-item *), 
-[data-theme="light"] h3:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.b24-reel-card *):not(.b24-reels-section *):not(.bili-playlist-item *), 
-[data-theme="light"] h4:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.b24-reel-card *):not(.b24-reels-section *):not(.bili-playlist-item *), 
-[data-theme="light"] h5:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.b24-reel-card *):not(.b24-reels-section *):not(.bili-playlist-item *), 
-[data-theme="light"] h6:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.b24-reel-card *):not(.b24-reels-section *):not(.bili-playlist-item *) {
+[data-theme="light"] h1:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.ui-reel-card *):not(.ui-reels-section *):not(.bili-playlist-item *),
+[data-theme="light"] h2:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.ui-reel-card *):not(.ui-reels-section *):not(.bili-playlist-item *),
+[data-theme="light"] h3:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.ui-reel-card *):not(.ui-reels-section *):not(.bili-playlist-item *),
+[data-theme="light"] h4:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.ui-reel-card *):not(.ui-reels-section *):not(.bili-playlist-item *),
+[data-theme="light"] h5:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.ui-reel-card *):not(.ui-reels-section *):not(.bili-playlist-item *),
+[data-theme="light"] h6:not(.project-hero-banner *):not(.page-header-title *):not(.page-header-title):not(.lounge-header-title):not(.bili-card *):not(.bili-experience-container *):not(.bili-cinema-modal *):not(.ui-reel-card *):not(.ui-reels-section *):not(.bili-playlist-item *) {
     color: #0f172a;
 }
 
-[data-theme="light"] .card-title:not(.bili-card *):not(.b24-reel-card *),
+[data-theme="light"] .card-title:not(.bili-card *):not(.ui-reel-card *),
 [data-theme="light"] .modal-title:not(.bili-cinema-modal *) {
     color: #0f172a !important;
 }
@@ -5214,29 +5214,29 @@ body,
     background-color: #f1f5f9;
 }
 
-/* Asistente Devioz en modo claro / Bitrix24 */
+/* Asistente Devioz en modo claro / Devioz */
 [data-theme="light"] .devioz-bot-window,
-[data-ui-mode="bitrix"] .devioz-bot-window {
+[data-ui-mode="devioz"] .devioz-bot-window {
     background-color: #FFFFFF !important;
     border-color: #DBE2E8 !important;
     box-shadow: 0 16px 40px -6px rgba(23, 43, 77, 0.18), 0 4px 12px rgba(23, 43, 77, 0.08) !important;
 }
 
 [data-theme="light"] .bot-window-header,
-[data-ui-mode="bitrix"] .bot-window-header {
+[data-ui-mode="devioz"] .bot-window-header {
     background-color: #172B4D !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 [data-theme="light"] .bot-window-body,
-[data-ui-mode="bitrix"] .bot-window-body {
+[data-ui-mode="devioz"] .bot-window-body {
     background-color: #EEF2F4 !important;
 }
 
 [data-theme="light"] .bot-speech-bubble,
 [data-theme="light"] .bot-msg-bot,
-[data-ui-mode="bitrix"] .bot-speech-bubble,
-[data-ui-mode="bitrix"] .bot-msg-bot {
+[data-ui-mode="devioz"] .bot-speech-bubble,
+[data-ui-mode="devioz"] .bot-msg-bot {
     background-color: #FFFFFF !important;
     color: #172B4D !important;
     border: 1px solid #DBE2E8 !important;
@@ -5245,8 +5245,8 @@ body,
 
 [data-theme="light"] .bot-suggestions button,
 [data-theme="light"] .bot-chip-btn,
-[data-ui-mode="bitrix"] .bot-suggestions button,
-[data-ui-mode="bitrix"] .bot-chip-btn {
+[data-ui-mode="devioz"] .bot-suggestions button,
+[data-ui-mode="devioz"] .bot-chip-btn {
     border-color: #DBE2E8 !important;
     color: #263238 !important;
     background-color: #FFFFFF !important;
@@ -5254,15 +5254,15 @@ body,
 
 [data-theme="light"] .bot-suggestions button:hover,
 [data-theme="light"] .bot-chip-btn:hover,
-[data-ui-mode="bitrix"] .bot-suggestions button:hover,
-[data-ui-mode="bitrix"] .bot-chip-btn:hover {
+[data-ui-mode="devioz"] .bot-suggestions button:hover,
+[data-ui-mode="devioz"] .bot-chip-btn:hover {
     background-color: #EAF6FC !important;
     color: #0077A3 !important;
     border-color: #00ACE3 !important;
 }
 
 [data-theme="light"] .bot-window-footer,
-[data-ui-mode="bitrix"] .bot-window-footer {
+[data-ui-mode="devioz"] .bot-window-footer {
     background-color: #FFFFFF !important;
     border-top: 1px solid #E0E8ED !important;
 }
@@ -6654,7 +6654,7 @@ body,
 }
 
 [data-theme="light"] .nav-pills .nav-link.active,
-[data-ui-mode="bitrix"] .nav-pills .nav-link.active,
+[data-ui-mode="devioz"] .nav-pills .nav-link.active,
 #projectTabs .nav-link.active {
     background: #00ACE3 !important;
     background: linear-gradient(135deg, #00ACE3 0%, #0095C6 100%) !important;
@@ -6687,9 +6687,9 @@ body,
  * ============================================================================== */
 .badge,
 .badge-sede,
-.bx-sede-badge,
-.bx-client-badge,
-.bx-deadline-badge,
+.ui-sede-badge,
+.ui-client-badge,
+.ui-deadline-badge,
 .status-badge,
 .category-filter-chip,
 .tech-tag-badge,
@@ -6737,10 +6737,10 @@ body,
 }
 
 /* ==============================================================================
- * 4. LIGHT WARM GLASSMORPHISM & BITRIX24 WORKSPACE WALLPAPER ENGINE
+ * 4. LIGHT WARM GLASSMORPHISM & DEVIOZ WORKSPACE WALLPAPER ENGINE
  * ============================================================================== */
 /* ==============================================================================
- * 4. BITRIX24 CORPORATE DESIGN SYSTEM — DEVIOZ OS
+ * 4. DEVIOZ CORPORATE DESIGN SYSTEM — DEVIOZ OS
  * ============================================================================== */
 .sidebar,
 .sidebar .sidebar-header,
@@ -6864,8 +6864,8 @@ body,
 .card-custom,
 .card-enterprise,
 .stat-card,
-.bx-panel,
-.bx-card {
+.ui-panel,
+.ui-card {
     background-color: #FFFFFF !important;
     border: 1px solid #DBE2E8 !important;
     border-radius: 8px !important;
@@ -6902,11 +6902,11 @@ body,
 }
 
 /* ==============================================================================
- * BITRIX24 ENTERPRISE SUITE: DOCK, CHAT DRAWER, MEET & NOTIFICATIONS
+ * DEVIOZ ENTERPRISE SUITE: DOCK, CHAT DRAWER, MEET & NOTIFICATIONS
  * ============================================================================== */
 
-/* 1. Dock Flotante Lateral Derecho (Bitrix24 Quick Contact Dock) */
-.bitrix-floating-dock {
+/* 1. Dock Flotante Lateral Derecho (Devioz Quick Contact Dock) */
+.devioz-floating-dock {
     position: fixed;
     right: 0;
     top: 50%;
@@ -6924,7 +6924,7 @@ body,
     transition: all 0.25s ease;
 }
 
-.bitrix-dock-btn {
+.devioz-dock-btn {
     position: relative;
     width: 42px;
     height: 42px;
@@ -6941,7 +6941,7 @@ body,
     padding: 0;
 }
 
-.bitrix-dock-btn:hover {
+.devioz-dock-btn:hover {
     background: #00ACE3;
     color: #FFFFFF;
     border-color: #00ACE3;
@@ -6949,13 +6949,13 @@ body,
     box-shadow: 0 4px 12px rgba(0, 172, 227, 0.4);
 }
 
-.bitrix-dock-btn-video:hover {
+.devioz-dock-btn-video:hover {
     background: #10B981 !important;
     border-color: #10B981 !important;
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
 }
 
-.bitrix-dock-badge {
+.devioz-dock-badge {
     position: absolute;
     top: -4px;
     right: -4px;
@@ -6969,7 +6969,7 @@ body,
     line-height: 1;
 }
 
-.bitrix-dock-tooltip {
+.devioz-dock-tooltip {
     position: absolute;
     right: 52px;
     top: 50%;
@@ -6988,14 +6988,14 @@ body,
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
-.bitrix-dock-btn:hover .bitrix-dock-tooltip {
+.devioz-dock-btn:hover .devioz-dock-tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateY(-50%) translateX(0);
 }
 
-/* 2. Drawer Lateral Deslizable de Chat (Bitrix24 Chat Drawer) */
-.bitrix-chat-drawer-backdrop {
+/* 2. Drawer Lateral Deslizable de Chat (Devioz Chat Drawer) */
+.devioz-chat-drawer-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(15, 23, 42, 0.45);
@@ -7006,12 +7006,12 @@ body,
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.bitrix-chat-drawer-backdrop.active {
+.devioz-chat-drawer-backdrop.active {
     opacity: 1;
     visibility: visible;
 }
 
-.bitrix-chat-drawer {
+.devioz-chat-drawer {
     position: fixed;
     top: 0;
     right: -450px;
@@ -7026,11 +7026,11 @@ body,
     transition: right 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bitrix-chat-drawer.active {
+.devioz-chat-drawer.active {
     right: 0;
 }
 
-.bitrix-chat-header {
+.devioz-chat-header {
     padding: 14px 18px;
     background: #FFFFFF;
     border-bottom: 1px solid #E2E8F0;
@@ -7040,7 +7040,7 @@ body,
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-.bitrix-chat-status-indicator {
+.devioz-chat-status-indicator {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -7058,7 +7058,7 @@ body,
     100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
-.bitrix-chat-project-banner {
+.devioz-chat-project-banner {
     padding: 8px 18px;
     background: #F8FAFC;
     border-bottom: 1px solid #E2E8F0;
@@ -7066,7 +7066,7 @@ body,
     color: #475569;
 }
 
-.bitrix-chat-body {
+.devioz-chat-body {
     flex: 1;
     overflow-y: auto;
     padding: 18px;
@@ -7076,23 +7076,23 @@ body,
     background: #F4F7F9;
 }
 
-.bitrix-chat-bubble-wrap {
+.devioz-chat-bubble-wrap {
     display: flex;
     flex-direction: column;
     max-width: 82%;
 }
 
-.bitrix-chat-bubble-wrap.mine {
+.devioz-chat-bubble-wrap.mine {
     align-self: flex-end;
     align-items: flex-end;
 }
 
-.bitrix-chat-bubble-wrap.theirs {
+.devioz-chat-bubble-wrap.theirs {
     align-self: flex-start;
     align-items: flex-start;
 }
 
-.bitrix-chat-bubble {
+.devioz-chat-bubble {
     padding: 10px 14px;
     font-size: 0.88rem;
     line-height: 1.45;
@@ -7101,14 +7101,14 @@ body,
     white-space: pre-wrap;
 }
 
-.bitrix-chat-bubble-wrap.mine .bitrix-chat-bubble {
+.devioz-chat-bubble-wrap.mine .devioz-chat-bubble {
     background: linear-gradient(135deg, #00ACE3 0%, #0095C6 100%);
     color: #FFFFFF;
     border-radius: 14px 14px 3px 14px;
     box-shadow: 0 2px 8px rgba(0, 172, 227, 0.25);
 }
 
-.bitrix-chat-bubble-wrap.theirs .bitrix-chat-bubble {
+.devioz-chat-bubble-wrap.theirs .devioz-chat-bubble {
     background: #FFFFFF;
     color: #1E293B;
     border: 1px solid #E2E8F0;
@@ -7116,21 +7116,21 @@ body,
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.bitrix-chat-bubble.bubble-alert {
+.devioz-chat-bubble.bubble-alert {
     background: #FEF3C7 !important;
     border: 1px solid #F59E0B !important;
     color: #78350F !important;
     font-weight: 500;
 }
 
-.bitrix-chat-time {
+.devioz-chat-time {
     font-size: 0.68rem;
     color: #64748B;
     margin-top: 3px;
     padding: 0 4px;
 }
 
-.bitrix-chat-quick-chips {
+.devioz-chat-quick-chips {
     padding: 8px 14px;
     background: #FFFFFF;
     border-top: 1px solid #E2E8F0;
@@ -7141,11 +7141,11 @@ body,
     scrollbar-width: none;
 }
 
-.bitrix-chat-quick-chips::-webkit-scrollbar {
+.devioz-chat-quick-chips::-webkit-scrollbar {
     display: none;
 }
 
-.bitrix-chip-btn {
+.devioz-chip-btn {
     border: 1px solid #E2E8F0;
     background: #F8FAFC;
     color: #475569;
@@ -7157,19 +7157,19 @@ body,
     flex-shrink: 0;
 }
 
-.bitrix-chip-btn:hover {
+.devioz-chip-btn:hover {
     background: #00ACE3;
     color: #FFFFFF;
     border-color: #00ACE3;
 }
 
-.bitrix-chat-footer {
+.devioz-chat-footer {
     padding: 12px 16px;
     background: #FFFFFF;
     border-top: 1px solid #E2E8F0;
 }
 
-.bitrix-chat-input-form {
+.devioz-chat-input-form {
     display: flex;
     align-items: flex-end;
     gap: 8px;
@@ -7180,13 +7180,13 @@ body,
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.bitrix-chat-input-form:focus-within {
+.devioz-chat-input-form:focus-within {
     border-color: #00ACE3;
     box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.15);
     background: #FFFFFF;
 }
 
-.bitrix-chat-input {
+.devioz-chat-input {
     flex: 1;
     border: none;
     background: transparent;
@@ -7199,7 +7199,7 @@ body,
     padding: 4px 0;
 }
 
-.bitrix-chat-send-btn {
+.devioz-chat-send-btn {
     border: none;
     background: #00ACE3;
     color: #FFFFFF;
@@ -7214,13 +7214,13 @@ body,
     flex-shrink: 0;
 }
 
-.bitrix-chat-send-btn:hover {
+.devioz-chat-send-btn:hover {
     background: #0095C6;
     transform: scale(1.05);
 }
 
-/* 3. Modal de Videollamada HD Bitrix Meet */
-.bitrix-video-modal-content {
+/* 3. Modal de Videollamada HD Devioz Meet */
+.devioz-video-modal-content {
     background: #0B1320 !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 14px !important;
@@ -7228,12 +7228,12 @@ body,
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
 }
 
-.bitrix-video-header {
+.devioz-video-header {
     background: #172B4D !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-.bitrix-video-body {
+.devioz-video-body {
     height: 78vh;
     min-height: 520px;
     background: #0B1320;
@@ -7241,14 +7241,14 @@ body,
     flex-direction: column;
 }
 
-.bitrix-video-iframe {
+.devioz-video-iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
 
-/* 4. Temporizador de Jornada en Navbar (Bitrix Time Tracker) */
-.bitrix-tracker-btn {
+/* 4. Temporizador de Jornada en Navbar (Devioz Time Tracker) */
+.devioz-tracker-btn {
     background: #F4F7F9 !important;
     border: 1px solid #E0E8ED !important;
     border-radius: 999px !important;
@@ -7257,7 +7257,7 @@ body,
     transition: all 0.2s ease !important;
 }
 
-.bitrix-tracker-btn:hover {
+.devioz-tracker-btn:hover {
     border-color: #00ACE3 !important;
     background: #FFFFFF !important;
 }
@@ -7271,26 +7271,26 @@ body,
     transition: background 0.3s ease;
 }
 
-.bitrix-tracker-btn.running {
+.devioz-tracker-btn.running {
     background: rgba(16, 185, 129, 0.1) !important;
     border-color: #10B981 !important;
     color: #065F46 !important;
 }
 
-.bitrix-tracker-btn.running .tracker-indicator {
+.devioz-tracker-btn.running .tracker-indicator {
     background: #10B981;
     animation: pulseStatus 1.8s infinite;
 }
 
-/* 5. Centro de Notificaciones Bitrix — Minimalista Sin Contornos */
-.bitrix-notifications-menu {
+/* 5. Centro de Notificaciones Devioz — Minimalista Sin Contornos */
+.devioz-notifications-menu {
     border-radius: 12px !important;
     overflow: hidden;
     border: none !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
-.bitrix-notification-item {
+.devioz-notification-item {
     padding: 10px 14px;
     border: none !important;
     display: flex;
@@ -7304,23 +7304,23 @@ body,
     outline: none !important;
 }
 
-.bitrix-notification-item:hover {
+.devioz-notification-item:hover {
     background: #F8FAFC;
 }
 
-.bitrix-notification-item.urgent {
+.devioz-notification-item.urgent {
     background: #FFFBEB;
     border: none !important;
 }
 
 /* 6. Selector de Vistas y Diagrama de Gantt */
-.bitrix-view-switcher .btn.active {
+.devioz-view-switcher .btn.active {
     background: #00ACE3 !important;
     color: #FFFFFF !important;
     box-shadow: 0 2px 6px rgba(0, 172, 227, 0.3) !important;
 }
 
-.bitrix-gantt-chart .bitrix-gantt-row:hover {
+.devioz-gantt-chart .devioz-gantt-row:hover {
     background: #FFFFFF;
     border-radius: 8px;
 }
@@ -7334,7 +7334,7 @@ input[type="search"],
 .command-palette-input,
 .form-control-custom,
 .form-control,
-.bx-form-input,
+.ui-form-input,
 #commandPaletteInput {
     font-weight: 400 !important;
     -webkit-font-smoothing: antialiased;
@@ -7517,7 +7517,7 @@ input[type="search"],
 }
 
 /* ========================================================================= */
-/* FIX GLOBAL: CONSISTENCIA, ENMARCADO Y CONTENCIÓN DE BOTONES (BITRIX24 OS) */
+/* FIX GLOBAL: CONSISTENCIA, ENMARCADO Y CONTENCIÓN DE BOTONES (DEVIOZ OS) */
 /* ========================================================================= */
 .btn {
     display: inline-flex;
@@ -7537,11 +7537,11 @@ input[type="search"],
     flex-shrink: 0;
 }
 
-.card-custom, 
-.card-enterprise, 
-.stat-card, 
-.gl-card, 
-.bx-card {
+.card-custom,
+.card-enterprise,
+.stat-card,
+.gl-card,
+.ui-card {
     overflow: hidden;
     word-break: break-word;
 }
@@ -7594,9 +7594,9 @@ input[type="search"],
     .sidebar,
     .topbar,
     .sidebar-overlay,
-    .bitrix-floating-dock,
-    .bitrix-chat-drawer,
-    .bitrix-chat-drawer-backdrop,
+    .devioz-floating-dock,
+    .devioz-chat-drawer,
+    .devioz-chat-drawer-backdrop,
     .bot-launchers-container,
     .devioz-bot-window,
     .command-palette-backdrop,
@@ -7658,9 +7658,9 @@ input[type="search"],
 
 
 /* ==============================================================================
- * BITRIX24 AIR SUB-HEADER & MULTI-MODAL VIEW SWITCHER (GRID / KANBAN / LIST)
+ * Devioz SUB-HEADER & MULTI-MODAL VIEW SWITCHER (GRID / KANBAN / LIST)
  * ============================================================================== */
-.bitrix-subnav-bar {
+.devioz-subnav-bar {
     background: #FFFFFF;
     border: 1px solid #DBE2E8;
     border-radius: 12px;
@@ -7673,18 +7673,18 @@ input[type="search"],
     box-shadow: 0 1px 3px rgba(23, 43, 77, 0.04);
 }
 
-.bitrix-subnav-tabs {
+.devioz-subnav-tabs {
     display: flex;
     align-items: center;
     gap: 4px;
     overflow-x: auto;
     scrollbar-width: none;
 }
-.bitrix-subnav-tabs::-webkit-scrollbar {
+.devioz-subnav-tabs::-webkit-scrollbar {
     display: none;
 }
 
-.bitrix-subnav-tab {
+.devioz-subnav-tab {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -7698,17 +7698,17 @@ input[type="search"],
     border: 1px solid transparent;
     white-space: nowrap;
 }
-.bitrix-subnav-tab:hover {
+.devioz-subnav-tab:hover {
     color: #172B4D;
     background: #F4F5F7;
 }
-.bitrix-subnav-tab.active {
+.devioz-subnav-tab.active {
     color: #00ACE3;
     background: rgba(0, 172, 227, 0.08);
     border-color: rgba(0, 172, 227, 0.25);
 }
 
-/* Bitrix UI Counter Pill */
+/* Devioz UI Counter Pill */
 .ui-counter {
     display: inline-flex;
     align-items: center;
@@ -7724,13 +7724,13 @@ input[type="search"],
     color: #42526E;
     transition: all 0.2s ease;
 }
-.bitrix-subnav-tab.active .ui-counter {
+.devioz-subnav-tab.active .ui-counter {
     background: #00ACE3;
     color: #FFFFFF;
 }
 
 /* View Switcher Pill Group */
-.bitrix-view-switcher {
+.devioz-view-switcher {
     display: inline-flex;
     align-items: center;
     background: #F4F5F7;
@@ -7738,7 +7738,7 @@ input[type="search"],
     border-radius: 8px;
     padding: 2px;
 }
-.bitrix-view-switcher .btn-view-toggle {
+.devioz-view-switcher .btn-view-toggle {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -7752,24 +7752,24 @@ input[type="search"],
     transition: all 0.2s ease;
     cursor: pointer;
 }
-.bitrix-view-switcher .btn-view-toggle:hover {
+.devioz-view-switcher .btn-view-toggle:hover {
     color: #172B4D;
 }
-.bitrix-view-switcher .btn-view-toggle.active {
+.devioz-view-switcher .btn-view-toggle.active {
     background: #FFFFFF !important;
     color: #00ACE3 !important;
     box-shadow: 0 1px 4px rgba(23, 43, 77, 0.12) !important;
 }
 
-/* Bitrix Kanban Board */
-.bitrix-kanban-board {
+/* Devioz Kanban Board */
+.devioz-kanban-board {
     display: flex;
     gap: 16px;
     overflow-x: auto;
     padding-bottom: 16px;
     min-height: 480px;
 }
-.bitrix-kanban-col {
+.devioz-kanban-col {
     flex: 0 0 290px;
     max-width: 290px;
     background: #F4F5F7;
@@ -7779,7 +7779,7 @@ input[type="search"],
     flex-direction: column;
     max-height: calc(100vh - 220px);
 }
-.bitrix-kanban-col-header {
+.devioz-kanban-col-header {
     padding: 12px 14px;
     display: flex;
     align-items: center;
@@ -7791,7 +7791,7 @@ input[type="search"],
     font-size: 0.85rem;
     font-weight: 700;
 }
-.bitrix-kanban-col-body {
+.devioz-kanban-col-body {
     padding: 10px;
     overflow-y: auto;
     display: flex;
@@ -7799,7 +7799,7 @@ input[type="search"],
     gap: 10px;
     flex-grow: 1;
 }
-.bitrix-kanban-card {
+.devioz-kanban-card {
     background: #FFFFFF;
     border: 1px solid #DBE2E8;
     border-radius: 8px;
@@ -7808,7 +7808,7 @@ input[type="search"],
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
-.bitrix-kanban-card:hover {
+.devioz-kanban-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(23, 43, 77, 0.1);
     border-color: #00ACE3;
@@ -7816,9 +7816,9 @@ input[type="search"],
 
 
 /* ==============================================================================
- * POPOVER DE CONTROL DE JORNADA LABORAL (BITRIX24 AIR WORKDAY DROPDOWN)
+ * POPOVER DE CONTROL DE JORNADA LABORAL (Devioz WORKDAY DROPDOWN)
  * ============================================================================== */
-.bitrix-workday-popover {
+.devioz-workday-popover {
     box-shadow: 0 10px 30px rgba(23, 43, 77, 0.15) !important;
     border: 1px solid #DBE2E8 !important;
     animation: fadeInDropdown 0.2s ease-out;
@@ -7836,9 +7836,9 @@ input[type="search"],
 }
 
 /* ==============================================================================
- * BITRIX24 AIR ENTERPRISE SIDEPANEL SLIDER (CAJÓN LATERAL DESLIZANTE)
+ * Devioz SIDEPANEL SLIDER (CAJÓN LATERAL DESLIZANTE)
  * ============================================================================== */
-.bitrix-sidepanel-backdrop {
+.devioz-sidepanel-backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -7853,12 +7853,12 @@ input[type="search"],
     transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bitrix-sidepanel-backdrop.active {
+.devioz-sidepanel-backdrop.active {
     opacity: 1;
     pointer-events: auto;
 }
 
-.bitrix-sidepanel-slider {
+.devioz-sidepanel-slider {
     position: fixed;
     top: 0;
     right: 0;
@@ -7875,11 +7875,11 @@ input[type="search"],
     overflow: hidden;
 }
 
-.bitrix-sidepanel-slider.active {
+.devioz-sidepanel-slider.active {
     transform: translateX(0);
 }
 
-.bitrix-sidepanel-header {
+.devioz-sidepanel-header {
     padding: 0.9rem 1.25rem;
     border-bottom: 1px solid #DBE2E8;
     background: #FFFFFF;
@@ -7890,14 +7890,14 @@ input[type="search"],
     flex-shrink: 0;
 }
 
-.bitrix-sidepanel-body {
+.devioz-sidepanel-body {
     padding: 1.25rem 1.5rem;
     overflow-y: auto;
     flex-grow: 1;
     background: #FFFFFF;
 }
 
-.bitrix-sidepanel-footer {
+.devioz-sidepanel-footer {
     padding: 0.85rem 1.25rem;
     border-top: 1px solid #DBE2E8;
     background: #F8FAFB;
@@ -7939,7 +7939,7 @@ input[type="search"],
 }
 
 /* ==============================================================================
- * BITRIX24 AIR COPILOT LABVA AI SUITE (FICHA TÉCNICA DE PROYECTO)
+ * Devioz COPILOT LABVA AI SUITE (FICHA TÉCNICA DE PROYECTO)
  * ============================================================================== */
 .copilot-chip-btn {
     background: #F8FAFB;
@@ -8028,15 +8028,15 @@ input[type="search"],
 }
 
 /* ==============================================================================
- * MÓDULO MESSENGER & CHATS BITRIX24 AIR (/chat & /online)
+ * MÓDULO MESSENGER & CHATS Devioz (/chat & /online)
  * ============================================================================== */
-.bitrix-messenger-wrapper {
+.devioz-messenger-wrapper {
     height: calc(100vh - 90px);
     display: flex;
     flex-direction: column;
 }
 
-.bitrix-messenger-container {
+.devioz-messenger-container {
     display: flex;
     flex: 1;
     background: #FFFFFF;
@@ -8048,7 +8048,7 @@ input[type="search"],
 }
 
 /* Panel Izquierdo: Sidebar de Chats */
-.bitrix-chat-sidebar {
+.devioz-chat-sidebar {
     width: 340px;
     min-width: 300px;
     max-width: 380px;
@@ -8058,7 +8058,7 @@ input[type="search"],
     background: #FFFFFF;
 }
 
-.bitrix-chat-sidebar-header {
+.devioz-chat-sidebar-header {
     padding: 0.65rem 0.85rem;
     display: flex;
     align-items: center;
@@ -8067,7 +8067,7 @@ input[type="search"],
     background: #FDFEFE;
 }
 
-.btn-icon-bitrix {
+.btn-icon-devioz {
     background: transparent;
     border: none;
     color: #64748B;
@@ -8082,18 +8082,18 @@ input[type="search"],
     font-size: 0.95rem;
 }
 
-.btn-icon-bitrix:hover {
+.btn-icon-devioz:hover {
     background: #F1F5F9;
     color: #172B4D;
 }
 
-.bitrix-chat-search-box {
+.devioz-chat-search-box {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.bitrix-chat-search-box .search-icon {
+.devioz-chat-search-box .search-icon {
     position: absolute;
     left: 10px;
     color: #94A3B8;
@@ -8101,7 +8101,7 @@ input[type="search"],
     pointer-events: none;
 }
 
-.bitrix-chat-search-box input {
+.devioz-chat-search-box input {
     width: 100%;
     padding: 0.38rem 1.8rem 0.38rem 2rem;
     border-radius: 20px;
@@ -8113,7 +8113,7 @@ input[type="search"],
     transition: all 0.2s ease;
 }
 
-.bitrix-chat-search-box input:focus {
+.devioz-chat-search-box input:focus {
     border-color: #00ACE3;
     background: #FFFFFF;
     box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.15);
@@ -8130,12 +8130,12 @@ input[type="search"],
     cursor: pointer;
 }
 
-.bitrix-chat-list {
+.devioz-chat-list {
     flex: 1;
     overflow-y: auto;
 }
 
-.bitrix-chat-item {
+.devioz-chat-item {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -8146,22 +8146,22 @@ input[type="search"],
     user-select: none;
 }
 
-.bitrix-chat-item:hover {
+.devioz-chat-item:hover {
     background: #F8FAFC;
 }
 
-.bitrix-chat-item.active {
+.devioz-chat-item.active {
     background: #E8F2FA;
     border-left: 3px solid #00ACE3;
 }
 
-.bitrix-chat-avatar {
+.devioz-chat-avatar {
     width: 44px;
     height: 44px;
     flex-shrink: 0;
 }
 
-.bitrix-chat-avatar img {
+.devioz-chat-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -8219,7 +8219,7 @@ input[type="search"],
     color: #0075FF;
 }
 
-.bitrix-chat-info {
+.devioz-chat-info {
     flex: 1;
     min-width: 0;
 }
@@ -8229,7 +8229,7 @@ input[type="search"],
     color: #172B4D;
 }
 
-.badge-bitrix-bot {
+.badge-devioz-bot {
     background: #00ACE3;
     color: #FFFFFF;
     font-size: 0.58rem;
@@ -8244,7 +8244,7 @@ input[type="search"],
     color: #64748B;
 }
 
-.bitrix-chat-category-header {
+.devioz-chat-category-header {
     font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -8260,7 +8260,7 @@ input[type="search"],
 }
 
 /* Panel Derecho: Chat Main */
-.bitrix-chat-main {
+.devioz-chat-main {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -8268,7 +8268,7 @@ input[type="search"],
     background: #FFFFFF;
 }
 
-.bitrix-chat-header {
+.devioz-chat-header {
     padding: 0.75rem 1.25rem;
     border-bottom: 1px solid #E0E8ED;
     display: flex;
@@ -8289,7 +8289,7 @@ input[type="search"],
     object-fit: cover;
 }
 
-.btn-bitrix-videocall {
+.btn-devioz-videocall {
     background: #EBF5FB;
     color: #0075FF;
     border: 1px solid rgba(0, 117, 255, 0.25);
@@ -8300,12 +8300,12 @@ input[type="search"],
     transition: all 0.2s ease;
 }
 
-.btn-bitrix-videocall:hover {
+.btn-devioz-videocall:hover {
     background: #0075FF;
     color: #FFFFFF;
 }
 
-.bitrix-chat-stream {
+.devioz-chat-stream {
     flex: 1;
     overflow-y: auto;
     padding: 1.25rem 1.75rem;
@@ -8331,35 +8331,35 @@ input[type="search"],
 }
 
 /* Burbujas de Mensaje */
-.bitrix-msg-bubble {
+.devioz-msg-bubble {
     display: flex;
     gap: 0.75rem;
     margin-bottom: 1rem;
     max-width: 82%;
 }
 
-.bitrix-msg-bubble.incoming {
+.devioz-msg-bubble.incoming {
     align-self: flex-start;
 }
 
-.bitrix-msg-bubble.outgoing {
+.devioz-msg-bubble.outgoing {
     align-self: flex-end;
     flex-direction: row-reverse;
 }
 
-.bitrix-msg-bubble .msg-avatar {
+.devioz-msg-bubble .msg-avatar {
     width: 34px;
     height: 34px;
     flex-shrink: 0;
 }
 
-.bitrix-msg-bubble .msg-avatar img {
+.devioz-msg-bubble .msg-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.bitrix-msg-bubble .msg-content {
+.devioz-msg-bubble .msg-content {
     background: #FFFFFF;
     border-radius: 12px;
     padding: 0.85rem 1.15rem;
@@ -8370,7 +8370,7 @@ input[type="search"],
     line-height: 1.5;
 }
 
-.bitrix-msg-bubble.outgoing .msg-content {
+.devioz-msg-bubble.outgoing .msg-content {
     background: #D9EFFF;
     border-color: #BBE1FC;
     color: #0F172A;
@@ -8387,7 +8387,7 @@ input[type="search"],
     color: #94A3B8;
 }
 
-.bitrix-link-attachment-card {
+.devioz-link-attachment-card {
     display: flex;
     background: #F8FAFC;
     border: 1px solid #E2E8F0;
@@ -8396,16 +8396,16 @@ input[type="search"],
     margin-top: 0.65rem;
 }
 
-.bitrix-link-attachment-card .attachment-border-line {
+.devioz-link-attachment-card .attachment-border-line {
     width: 4px;
     background: #00ACE3;
 }
 
-.bitrix-link-attachment-card .attachment-body {
+.devioz-link-attachment-card .attachment-body {
     padding: 0.65rem 0.85rem;
 }
 
-.bitrix-channel-banner-card {
+.devioz-channel-banner-card {
     background: #FFFFFF;
     border-radius: 14px;
     padding: 2.5rem 1.5rem;
@@ -8423,13 +8423,13 @@ input[type="search"],
 }
 
 /* Pie y Compositor */
-.bitrix-chat-footer {
+.devioz-chat-footer {
     padding: 0.85rem 1.25rem;
     background: #FFFFFF;
     border-top: 1px solid #E0E8ED;
 }
 
-.bitrix-composer-box {
+.devioz-composer-box {
     display: flex;
     align-items: center;
     gap: 0.65rem;
@@ -8440,7 +8440,7 @@ input[type="search"],
     transition: all 0.2s ease;
 }
 
-.bitrix-composer-box:focus-within {
+.devioz-composer-box:focus-within {
     background: #FFFFFF;
     border-color: #00ACE3;
     box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.15);
@@ -8499,12 +8499,12 @@ input[type="search"],
     transform: scale(1.05);
 }
 
-/* Popover de Perfil Bitrix */
-.bitrix-profile-popover {
+/* Popover de Perfil Devioz */
+.devioz-profile-popover {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25) !important;
 }
 
-.bitrix-feed-post-card {
+.devioz-feed-post-card {
     background: #FFFFFF;
     border-radius: 10px;
     padding: 1rem;
@@ -8513,7 +8513,7 @@ input[type="search"],
 }
 
 /* ==============================================================================
- * MEJORAS VISUALES AIR: LUPA, MÁS DROPDOWN, BOTONES TOPBAR Y TEMAS BITRIX24
+ * Mejoras visuales: buscador, menú de navegación, botones y temas
  * ============================================================================== */
 
 /* 1. Botones de Icono en Topbar (Campana, Chat, Notificaciones) */
@@ -8549,7 +8549,7 @@ input[type="search"],
 
 /* 2. Botón de Usuario en Topbar (Elena Rostova / Usuario) */
 .topbar .btn-user-pill,
-[data-ui-mode="bitrix"] .topbar .btn-user-pill {
+[data-ui-mode="devioz"] .topbar .btn-user-pill {
     background-color: rgba(255, 255, 255, 0.12) !important;
     border: 1px solid rgba(255, 255, 255, 0.20) !important;
     color: #FFFFFF !important;
@@ -8560,7 +8560,7 @@ input[type="search"],
 }
 
 .topbar .btn-user-pill:hover,
-[data-ui-mode="bitrix"] .topbar .btn-user-pill:hover {
+[data-ui-mode="devioz"] .topbar .btn-user-pill:hover {
     background-color: rgba(255, 255, 255, 0.24) !important;
     border-color: rgba(0, 172, 227, 0.4) !important;
     transform: translateY(-1px) !important;
@@ -8575,9 +8575,9 @@ input[type="search"],
     color: rgba(255, 255, 255, 0.7) !important;
 }
 
-/* 3. Buscador Global con Lupa Bitrix24 Air */
+/* 3. Buscador Global con Lupa Devioz */
 .gl-topbar-search,
-[data-ui-mode="bitrix"] .topbar .gl-topbar-search {
+[data-ui-mode="devioz"] .topbar .gl-topbar-search {
     background-color: rgba(255, 255, 255, 0.12) !important;
     border: 1px solid rgba(255, 255, 255, 0.22) !important;
     color: #FFFFFF !important;
@@ -8591,7 +8591,7 @@ input[type="search"],
 }
 
 .gl-topbar-search:hover,
-[data-ui-mode="bitrix"] .topbar .gl-topbar-search:hover {
+[data-ui-mode="devioz"] .topbar .gl-topbar-search:hover {
     background-color: rgba(255, 255, 255, 0.22) !important;
     border-color: #00ACE3 !important;
     box-shadow: 0 0 14px rgba(0, 172, 227, 0.35) !important;
@@ -8618,8 +8618,8 @@ input[type="search"],
     padding: 0.15rem 0.35rem !important;
 }
 
-/* 4. Tarjeta Flotante Blanca 'Más ▾' (Screenshot 2 Oficial Bitrix24) */
-.bitrix-more-dropdown {
+/* 4. Tarjeta Flotante Blanca 'Más ▾' */
+.devioz-more-dropdown {
     background: #FFFFFF !important;
     border-radius: 12px !important;
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
@@ -8629,7 +8629,7 @@ input[type="search"],
     overflow: hidden !important;
 }
 
-.bitrix-more-header {
+.devioz-more-header {
     font-size: 0.68rem !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
@@ -8638,7 +8638,7 @@ input[type="search"],
     padding: 0.45rem 1rem 0.2rem !important;
 }
 
-.bitrix-more-item {
+.devioz-more-item {
     display: flex !important;
     align-items: center !important;
     gap: 0.65rem !important;
@@ -8650,34 +8650,34 @@ input[type="search"],
     transition: all 0.15s ease !important;
 }
 
-.bitrix-more-item:hover {
+.devioz-more-item:hover {
     background-color: #F4F7F9 !important;
     color: #0075FF !important;
 }
 
-.bitrix-more-item i {
+.devioz-more-item i {
     font-size: 0.85rem !important;
     width: 16px !important;
     text-align: center !important;
     color: #64748B !important;
 }
 
-.bitrix-more-item:hover i {
+.devioz-more-item:hover i {
     color: #0075FF !important;
 }
 
-.bitrix-more-text-muted {
+.devioz-more-text-muted {
     padding: 0.25rem 1rem 0.4rem !important;
     font-size: 0.72rem !important;
     color: #94A3B8 !important;
     font-style: italic !important;
 }
 
-/* 5. Motor de Temas Visuales Bitrix24 Air (Colección Oficial de Wallpapers) */
+/* 5. Motor de Temas Visuales Devioz (Colección Oficial de Wallpapers) */
 body,
 body.theme-vibecode {
     background-color: #0b112c !important;
-    background-image: 
+    background-image:
         radial-gradient(at 90% 10%, rgba(99, 102, 241, 0.45) 0px, transparent 50%),
         radial-gradient(at 10% 90%, rgba(0, 172, 227, 0.40) 0px, transparent 55%),
         radial-gradient(at 60% 50%, rgba(139, 92, 246, 0.35) 0px, transparent 50%),
@@ -8689,7 +8689,7 @@ body.theme-vibecode {
 
 body.theme-meadow {
     background-color: #0b1522 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(8, 16, 32, 0.52) 0%, rgba(8, 18, 30, 0.40) 45%, rgba(5, 12, 22, 0.70) 100%),
         url('../images/wallpapers/meadow.webp') !important;
     background-attachment: fixed !important;
@@ -8699,7 +8699,7 @@ body.theme-meadow {
 
 body.theme-saturn {
     background-color: #120924 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(16, 9, 32, 0.52) 0%, rgba(18, 10, 36, 0.38) 45%, rgba(10, 5, 22, 0.70) 100%),
         url('../images/wallpapers/saturn.webp') !important;
     background-attachment: fixed !important;
@@ -8709,7 +8709,7 @@ body.theme-saturn {
 
 body.theme-halloween {
     background-color: #120e18 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(16, 10, 20, 0.52) 0%, rgba(16, 10, 20, 0.40) 45%, rgba(10, 6, 14, 0.72) 100%),
         url('../images/wallpapers/halloween.webp') !important;
     background-attachment: fixed !important;
@@ -8719,7 +8719,7 @@ body.theme-halloween {
 
 body.theme-winter {
     background-color: #081224 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(6, 14, 30, 0.58) 0%, rgba(8, 18, 36, 0.46) 45%, rgba(5, 10, 24, 0.74) 100%),
         url('../images/wallpapers/winter.webp') !important;
     background-attachment: fixed !important;
@@ -8729,7 +8729,7 @@ body.theme-winter {
 
 body.theme-nebula {
     background-color: #100822 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(14, 8, 28, 0.50) 0%, rgba(16, 8, 30, 0.38) 45%, rgba(9, 5, 20, 0.70) 100%),
         url('../images/wallpapers/nebula.webp') !important;
     background-attachment: fixed !important;
@@ -8739,7 +8739,7 @@ body.theme-nebula {
 
 body.theme-jellyfish {
     background-color: #041026 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(4, 14, 34, 0.50) 0%, rgba(5, 18, 38, 0.38) 45%, rgba(3, 9, 24, 0.70) 100%),
         url('../images/wallpapers/jellyfish.webp') !important;
     background-attachment: fixed !important;
@@ -8749,7 +8749,7 @@ body.theme-jellyfish {
 
 body.theme-earth {
     background-color: #030716 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(4, 8, 24, 0.48) 0%, rgba(4, 10, 26, 0.36) 45%, rgba(2, 5, 16, 0.68) 100%),
         url('../images/wallpapers/earth.webp') !important;
     background-attachment: fixed !important;
@@ -8759,7 +8759,7 @@ body.theme-earth {
 
 body.theme-spring {
     background-color: #160f22 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(18, 12, 28, 0.52) 0%, rgba(20, 14, 32, 0.40) 45%, rgba(12, 8, 20, 0.72) 100%),
         url('../images/wallpapers/spring.webp') !important;
     background-attachment: fixed !important;
@@ -8769,7 +8769,7 @@ body.theme-spring {
 
 body.theme-meadow-dew {
     background-color: #081a10 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(8, 24, 16, 0.52) 0%, rgba(9, 26, 18, 0.40) 45%, rgba(5, 16, 10, 0.72) 100%),
         url('../images/wallpapers/meadow-dew.webp') !important;
     background-attachment: fixed !important;
@@ -8779,7 +8779,7 @@ body.theme-meadow-dew {
 
 body.theme-ocean-silk {
     background-color: #041632 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(5, 20, 48, 0.50) 0%, rgba(6, 24, 52, 0.38) 45%, rgba(3, 12, 32, 0.70) 100%),
         url('../images/wallpapers/ocean-silk.webp') !important;
     background-attachment: fixed !important;
@@ -8787,11 +8787,11 @@ body.theme-ocean-silk {
     background-position: center center !important;
 }
 
-body.theme-bitrix-blue {
+body.theme-devioz-blue {
     background-color: #0a2246 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(10, 32, 70, 0.50) 0%, rgba(12, 38, 80, 0.38) 45%, rgba(6, 20, 46, 0.70) 100%),
-        url('../images/wallpapers/bitrix-blue.webp') !important;
+        url('../images/wallpapers/devioz-blue.webp') !important;
     background-attachment: fixed !important;
     background-size: cover !important;
     background-position: center center !important;
@@ -8799,9 +8799,9 @@ body.theme-bitrix-blue {
 
 body.theme-autumn {
     background-color: #141a24 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(12, 18, 36, 0.52) 0%, rgba(14, 20, 40, 0.42) 45%, rgba(8, 12, 24, 0.72) 100%),
-        url('../images/bitrix24-bg-hd.webp') !important;
+        url('../images/devioz-bg-hd.webp') !important;
     background-attachment: fixed !important;
     background-size: cover !important;
     background-position: center center !important;
@@ -8809,7 +8809,7 @@ body.theme-autumn {
 
 body.theme-cyber {
     background-color: #050714 !important;
-    background-image: 
+    background-image:
         radial-gradient(at 50% 0%, rgba(30, 58, 138, 0.5) 0px, transparent 65%),
         linear-gradient(180deg, #070a1e 0%, #03040c 100%) !important;
     background-attachment: fixed !important;
@@ -8818,7 +8818,7 @@ body.theme-cyber {
 
 body.theme-aurora {
     background-color: #041016 !important;
-    background-image: 
+    background-image:
         linear-gradient(180deg, rgba(5, 18, 24, 0.50) 0%, rgba(6, 20, 28, 0.38) 45%, rgba(3, 10, 16, 0.70) 100%),
         url('../images/wallpapers/aurora.webp') !important;
     background-attachment: fixed !important;
@@ -8828,18 +8828,18 @@ body.theme-aurora {
 
 body.theme-light {
     background-color: #EDF2F7 !important;
-    background-image: 
+    background-image:
         linear-gradient(135deg, #E2E8F0 0%, #EDF2F7 50%, #CBD5E1 100%) !important;
     background-attachment: fixed !important;
 }
 
-/* Modal Selector de Temas Visuales Idéntico a Bitrix24 */
-.bitrix-theme-modal-dialog {
+/* Modal Selector de Temas Visuales Idéntico a Devioz */
+.devioz-theme-modal-dialog {
     max-width: 880px !important;
     margin: 1.75rem auto;
 }
 
-.bitrix-theme-modal-content {
+.devioz-theme-modal-content {
     border-radius: 18px !important;
     border: none !important;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
@@ -8847,7 +8847,7 @@ body.theme-light {
     background: #FFFFFF !important;
 }
 
-.bitrix-theme-modal-header {
+.devioz-theme-modal-header {
     padding: 1.25rem 1.75rem 0.5rem !important;
     border-bottom: none !important;
     display: flex;
@@ -8855,7 +8855,7 @@ body.theme-light {
     justify-content: space-between;
 }
 
-.bitrix-theme-modal-title {
+.devioz-theme-modal-title {
     font-size: 1.25rem !important;
     font-weight: 700 !important;
     color: #333333 !important;
@@ -8863,7 +8863,7 @@ body.theme-light {
     letter-spacing: -0.01em !important;
 }
 
-.bitrix-theme-grid {
+.devioz-theme-grid {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 12px !important;
@@ -8873,20 +8873,20 @@ body.theme-light {
 }
 
 @media (max-width: 991px) {
-    .bitrix-theme-grid {
+    .devioz-theme-grid {
         grid-template-columns: repeat(3, 1fr) !important;
     }
 }
 
 @media (max-width: 576px) {
-    .bitrix-theme-grid {
+    .devioz-theme-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         max-height: 380px;
         padding: 0.5rem 1rem !important;
     }
 }
 
-.bitrix-theme-card {
+.devioz-theme-card {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
@@ -8900,17 +8900,17 @@ body.theme-light {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
-.bitrix-theme-card:hover {
+.devioz-theme-card:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-.bitrix-theme-card.active {
+.devioz-theme-card.active {
     border-color: #00ACE3 !important;
     box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.35) !important;
 }
 
-.bitrix-theme-badge-default {
+.devioz-theme-badge-default {
     position: absolute;
     top: 6px;
     left: 8px;
@@ -8925,7 +8925,7 @@ body.theme-light {
     z-index: 2;
 }
 
-.bitrix-theme-play-btn {
+.devioz-theme-play-btn {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -8945,12 +8945,12 @@ body.theme-light {
     z-index: 2;
 }
 
-.bitrix-theme-card:hover .bitrix-theme-play-btn {
+.devioz-theme-card:hover .devioz-theme-play-btn {
     background: rgba(255, 255, 255, 0.55);
     transform: translate(-50%, -50%) scale(1.1);
 }
 
-.bitrix-theme-video-title {
+.devioz-theme-video-title {
     position: absolute;
     bottom: 6px;
     left: 8px;
@@ -8961,7 +8961,7 @@ body.theme-light {
     z-index: 2;
 }
 
-.bitrix-theme-check-icon {
+.devioz-theme-check-icon {
     position: absolute;
     top: 6px;
     right: 6px;
@@ -8978,12 +8978,12 @@ body.theme-light {
     z-index: 2;
 }
 
-.bitrix-theme-card.active .bitrix-theme-check-icon {
+.devioz-theme-card.active .devioz-theme-check-icon {
     display: flex;
 }
 
-/* Footer Bitrix24 */
-.bitrix-theme-modal-footer {
+/* Footer Devioz */
+.devioz-theme-modal-footer {
     padding: 1rem 1.75rem 1.25rem !important;
     border-top: none !important;
     display: flex;
@@ -8993,7 +8993,7 @@ body.theme-light {
     gap: 12px;
 }
 
-.btn-bitrix-save-lime {
+.btn-devioz-save-lime {
     background: #9dcf00 !important;
     color: #FFFFFF !important;
     font-weight: 700 !important;
@@ -9007,16 +9007,16 @@ body.theme-light {
     transition: all 0.15s ease !important;
 }
 
-.btn-bitrix-save-lime:hover {
+.btn-devioz-save-lime:hover {
     background: #8bbb00 !important;
     box-shadow: 0 4px 10px rgba(157, 207, 0, 0.4) !important;
 }
 
-.btn-bitrix-save-lime:active {
+.btn-devioz-save-lime:active {
     background: #7ca800 !important;
 }
 
-.btn-bitrix-modal-link {
+.btn-devioz-modal-link {
     background: transparent !important;
     border: none !important;
     color: #525C69 !important;
@@ -9030,7 +9030,7 @@ body.theme-light {
     cursor: pointer;
 }
 
-.btn-bitrix-modal-link:hover {
+.btn-devioz-modal-link:hover {
     color: #263238 !important;
 }
 
@@ -9086,7 +9086,7 @@ body.theme-light {
 }
 
 /* ==============================================================================
- * DEVIOZ OS — TIPOGRAFÍA DE ALTO CONTRASTE (ESTÁNDAR BITRIX24 AIR WALLPAPER)
+ * DEVIOZ OS — TIPOGRAFÍA DE ALTO CONTRASTE (ESTÁNDAR Devioz WALLPAPER)
  * Fuera de las tarjetas: Texto blanco puro (#FFFFFF) con sombra sutil contra el fondo.
  * Dentro de las tarjetas: Texto oscuro (#172B4D) de máxima legibilidad corporativa.
  * ============================================================================== */
@@ -9120,7 +9120,7 @@ body.theme-light {
 }
 
 /* 3. Botones Secundarios / Ghost Fuera de Tarjetas */
-.main-content > div:not(.card-custom):not(.card):not(.bitrix-feed-card):not(.project-header-card) > .d-flex .btn-ghost,
+.main-content > div:not(.card-custom):not(.card):not(.devioz-feed-card):not(.project-header-card) > .d-flex .btn-ghost,
 .main-content > .d-flex .btn-ghost,
 .page-header-actions .btn-ghost {
     background: rgba(255, 255, 255, 0.16) !important;
@@ -9133,7 +9133,7 @@ body.theme-light {
     border-radius: 8px !important;
 }
 
-.main-content > div:not(.card-custom):not(.card):not(.bitrix-feed-card):not(.project-header-card) > .d-flex .btn-ghost:hover,
+.main-content > div:not(.card-custom):not(.card):not(.devioz-feed-card):not(.project-header-card) > .d-flex .btn-ghost:hover,
 .main-content > .d-flex .btn-ghost:hover,
 .page-header-actions .btn-ghost:hover {
     background: rgba(255, 255, 255, 0.28) !important;
@@ -9205,10 +9205,10 @@ body.theme-light {
 .card-custom *,
 .card,
 .card *,
-.bitrix-feed-card,
-.bitrix-feed-card *,
-.bitrix-sidepanel,
-.bitrix-sidepanel *,
+.devioz-feed-card,
+.devioz-feed-card *,
+.devioz-sidepanel,
+.devioz-sidepanel *,
 .modal-content,
 .modal-content *,
 .dropdown-menu,
@@ -9218,27 +9218,27 @@ body.theme-light {
 
 .card-custom h1, .card-custom h2, .card-custom h3, .card-custom h4, .card-custom h5, .card-custom h6,
 .card h1, .card h2, .card h3, .card h4, .card h5, .card h6,
-.bitrix-feed-card h1, .bitrix-feed-card h2, .bitrix-feed-card h3, .bitrix-feed-card h4, .bitrix-feed-card h5, .bitrix-feed-card h6,
-.bitrix-sidepanel h1, .bitrix-sidepanel h2, .bitrix-sidepanel h3, .bitrix-sidepanel h4, .bitrix-sidepanel h5, .bitrix-sidepanel h6,
+.devioz-feed-card h1, .devioz-feed-card h2, .devioz-feed-card h3, .devioz-feed-card h4, .devioz-feed-card h5, .devioz-feed-card h6,
+.devioz-sidepanel h1, .devioz-sidepanel h2, .devioz-sidepanel h3, .devioz-sidepanel h4, .devioz-sidepanel h5, .devioz-sidepanel h6,
 .modal-content h1, .modal-content h2, .modal-content h3, .modal-content h4, .modal-content h5, .modal-content h6 {
     color: #172B4D !important;
 }
 
 .card-custom p,
 .card p,
-.bitrix-feed-card p,
-.bitrix-sidepanel p,
+.devioz-feed-card p,
+.devioz-sidepanel p,
 .modal-content p {
     color: #334155 !important;
 }
 
 /* ==============================================================================
- * DEVIOZ OS — LIQUID GLASS (GLASSMORPHISM AIR BITRIX24 ENTERPRISE)
+ * Devioz OS — superficies translúcidas
  * Reemplazo de los fondos grises y opacos por vidrio esmerilado translúcido
  * ============================================================================== */
 
-/* Barra Subnav Air (Proyectos, Tareas, etc.) */
-.bitrix-subnav-bar {
+/* Barra secundaria de navegación */
+.devioz-subnav-bar {
     background: rgba(255, 255, 255, 0.16) !important;
     backdrop-filter: blur(16px) saturate(190%) !important;
     -webkit-backdrop-filter: blur(16px) saturate(190%) !important;
@@ -9247,18 +9247,18 @@ body.theme-light {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
 }
 
-.bitrix-subnav-tab {
+.devioz-subnav-tab {
     color: rgba(255, 255, 255, 0.85) !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
     transition: all 0.2s ease !important;
 }
 
-.bitrix-subnav-tab:hover {
+.devioz-subnav-tab:hover {
     color: #FFFFFF !important;
     background: rgba(255, 255, 255, 0.20) !important;
 }
 
-.bitrix-subnav-tab.active {
+.devioz-subnav-tab.active {
     background: #FFFFFF !important;
     color: #172B4D !important;
     font-weight: 700 !important;
@@ -9266,20 +9266,20 @@ body.theme-light {
     text-shadow: none !important;
 }
 
-.bitrix-subnav-tab .ui-counter {
+.devioz-subnav-tab .ui-counter {
     background: rgba(255, 255, 255, 0.25) !important;
     color: #FFFFFF !important;
     border: 1px solid rgba(255, 255, 255, 0.35) !important;
 }
 
-.bitrix-subnav-tab.active .ui-counter {
+.devioz-subnav-tab.active .ui-counter {
     background: #00ACE3 !important;
     color: #FFFFFF !important;
     border: none !important;
 }
 
-/* Selector de Vistas Air (Cuadrícula / Kanban / Lista) */
-.bitrix-view-switcher {
+/* Selector de vistas: cuadrícula, Kanban y lista */
+.devioz-view-switcher {
     background: rgba(255, 255, 255, 0.14) !important;
     border: 1px solid rgba(255, 255, 255, 0.22) !important;
     border-radius: 8px !important;
@@ -9373,7 +9373,7 @@ body.theme-light {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* Controles de Tableros & GitLab Air */
+/* Controles del tablero de revisión */
 .gl-scope-dropdown .gl-control-btn {
     background: rgba(255, 255, 255, 0.16) !important;
     backdrop-filter: blur(14px) saturate(180%) !important;
@@ -9457,7 +9457,7 @@ body.theme-light {
     }
 }
 
-/* Soporte y Posicionamiento Dropdown 'Más ▾' Bitrix24 Air */
+/* Soporte y Posicionamiento Dropdown 'Más ▾' Devioz */
 #topbarMoreNavDropdown {
     position: relative !important;
     overflow: visible !important;
@@ -9470,7 +9470,7 @@ body.theme-light {
     overflow: visible !important;
 }
 
-/* Botón 'Más ▾' Estilo Oficial Bitrix24 Air: Siempre visible, cápsula de cristal translúcida y texto blanco nítido */
+/* Botón 'Más ▾' Estilo Oficial Devioz: Siempre visible, cápsula de cristal translúcida y texto blanco nítido */
 #topbarMoreNavBtn {
     background: rgba(255, 255, 255, 0.14) !important;
     border: 1px solid rgba(255, 255, 255, 0.22) !important;
@@ -9713,7 +9713,7 @@ input.ps-5,
 [data-theme="light"] .sidebar .sidebar-user-name,
 [data-theme="light"] .sidebar-footer .sidebar-user-name,
 [data-theme="light"] .user-profile-badge .sidebar-user-name,
-[data-ui-mode="bitrix"] .sidebar .sidebar-user-name {
+[data-ui-mode="devioz"] .sidebar .sidebar-user-name {
     color: #FFFFFF !important;
     font-weight: 700 !important;
     font-size: 0.88rem !important;
@@ -9734,14 +9734,14 @@ input.ps-5,
 }
 
 /* ==============================================================================
- * BITRIX24 LIQUID GLASS KANBAN BOARDS (DISEÑO OFICIAL CRISTAL LÍQUIDO TRASLÚCIDO)
+ * DEVIOZ LIQUID GLASS KANBAN BOARDS (DISEÑO OFICIAL CRISTAL LÍQUIDO TRASLÚCIDO)
  * ============================================================================== */
 
 /* Columnas de Tablero Kanban con Cristal Líquido Traslúcido */
 .gl-column.kanban-column,
-.bitrix-kanban-col,
+.devioz-kanban-col,
 [data-theme="light"] .gl-column.kanban-column,
-[data-theme="light"] .bitrix-kanban-col,
+[data-theme="light"] .devioz-kanban-col,
 [data-theme="light"] .kanban-column {
     background: rgba(255, 255, 255, 0.22) !important;
     backdrop-filter: blur(18px) saturate(190%) !important;
@@ -9754,13 +9754,13 @@ input.ps-5,
 }
 
 .gl-column.kanban-column:hover,
-.bitrix-kanban-col:hover {
+.devioz-kanban-col:hover {
     border-color: rgba(0, 172, 227, 0.65) !important;
     box-shadow: 0 12px 36px 0 rgba(0, 172, 227, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
 }
 
-/* Cabeceras Chevron Bitrix24 con Borde Redondeado Superior */
-.bx-chevron-header {
+/* Cabeceras Chevron Devioz con Borde Redondeado Superior */
+.ui-chevron-header {
     border-radius: 13px 13px 0 0 !important;
     padding: 0.75rem 1.15rem !important;
     margin-bottom: 0 !important;
@@ -9768,8 +9768,8 @@ input.ps-5,
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Sub-barra de Etapa Traslúcida estilo Bitrix24 */
-.bx-chevron-subbar {
+/* Sub-barra de Etapa Traslúcida estilo Devioz */
+.ui-chevron-subbar {
     background: rgba(255, 255, 255, 0.12) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
     padding: 0.35rem 0.95rem !important;
@@ -9783,7 +9783,7 @@ input.ps-5,
 }
 
 /* Cabeceras en el Kanban de views/projects/index.php */
-.bitrix-kanban-col-header {
+.devioz-kanban-col-header {
     border-radius: 13px 13px 0 0 !important;
     padding: 0.75rem 1rem !important;
     color: #FFFFFF !important;
@@ -9792,34 +9792,34 @@ input.ps-5,
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Colores de Etapa estilo Bitrix24 para headers */
-.bx-chevron-blue, .bitrix-kanban-col:nth-child(1) .bitrix-kanban-col-header {
+/* Colores de Etapa estilo Devioz para headers */
+.ui-chevron-blue, .devioz-kanban-col:nth-child(1) .devioz-kanban-col-header {
     background: linear-gradient(135deg, #00AEEF 0%, #0084B4 100%) !important;
     color: #FFFFFF !important;
 }
-.bx-chevron-cyan, .bitrix-kanban-col:nth-child(2) .bitrix-kanban-col-header {
+.ui-chevron-cyan, .devioz-kanban-col:nth-child(2) .devioz-kanban-col-header {
     background: linear-gradient(135deg, #00C4D4 0%, #00A5B5 100%) !important;
     color: #FFFFFF !important;
 }
-.bx-chevron-emerald, .bitrix-kanban-col:nth-child(3) .bitrix-kanban-col-header {
+.ui-chevron-emerald, .devioz-kanban-col:nth-child(3) .devioz-kanban-col-header {
     background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
     color: #FFFFFF !important;
 }
-.bx-chevron-amber, .bitrix-kanban-col:nth-child(4) .bitrix-kanban-col-header {
+.ui-chevron-amber, .devioz-kanban-col:nth-child(4) .devioz-kanban-col-header {
     background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
     color: #FFFFFF !important;
 }
 
-.bitrix-kanban-col-header span {
+.devioz-kanban-col-header span {
     color: #FFFFFF !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Contenedor Interno de Tarjetas (Fondo 100% transparente para mostrar el cristal y wallpaper) */
 .gl-cards-container.kanban-cards-wrapper,
-.bitrix-kanban-col-body,
+.devioz-kanban-col-body,
 [data-theme="light"] .gl-cards-container.kanban-cards-wrapper,
-[data-theme="light"] .bitrix-kanban-col-body {
+[data-theme="light"] .devioz-kanban-col-body {
     background: transparent !important;
     padding: 0.85rem !important;
     display: flex !important;
@@ -9829,9 +9829,9 @@ input.ps-5,
 
 /* Tarjetas Flotantes en el Kanban (Blanco Nítido con Sombras Suaves) */
 .gl-card.kanban-card,
-.bitrix-kanban-card,
+.devioz-kanban-card,
 [data-theme="light"] .gl-card.kanban-card,
-[data-theme="light"] .bitrix-kanban-card {
+[data-theme="light"] .devioz-kanban-card {
     background: #FFFFFF !important;
     border: 1px solid rgba(226, 232, 240, 0.95) !important;
     border-radius: 12px !important;
@@ -9840,7 +9840,7 @@ input.ps-5,
 }
 
 .gl-card.kanban-card:hover,
-.bitrix-kanban-card:hover {
+.devioz-kanban-card:hover {
     transform: translateY(-3px) scale(1.01) !important;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06) !important;
     border-color: #00ACE3 !important;
@@ -9861,7 +9861,7 @@ input.ps-5,
     -webkit-backdrop-filter: blur(8px) !important;
 }
 
-/* Barra de Controles en Tablero de Revisión (GitLab / Bitrix24 Board) */
+/* Barra de Controles en Tablero de Revisión (GitLab / Devioz Board) */
 .gl-controls-bar {
     background: rgba(255, 255, 255, 0.16) !important;
     backdrop-filter: blur(14px) saturate(180%) !important;
@@ -9899,16 +9899,16 @@ input.ps-5,
 
 
 /* ==============================================================================
- * MESSENGER UNIFICADO ESTILO BITRIX24 (RAIL + LISTA + CONVERSACIÓN + COPILOT)
+ * MESSENGER UNIFICADO ESTILO DEVIOZ (RAIL + LISTA + CONVERSACIÓN + COPILOT)
  * ============================================================================== */
-.bitrix-messenger-container.has-rail {
+.devioz-messenger-container.has-rail {
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 }
 
 /* Rail vertical de categorías */
-.bx-msg-rail {
+.ui-msg-rail {
     width: 72px;
     min-width: 72px;
     display: flex;
@@ -9920,7 +9920,7 @@ input.ps-5,
     border-right: 1px solid #E0E8ED;
     overflow-y: auto;
 }
-.bx-rail-btn {
+.ui-rail-btn {
     position: relative;
     width: 60px;
     border: none;
@@ -9935,9 +9935,9 @@ input.ps-5,
     cursor: pointer;
     transition: background 0.18s ease, color 0.18s ease;
 }
-.bx-rail-btn:hover { background: #E9F1F5; }
-.bx-rail-btn.active { background: #FFFFFF; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08); color: #0B66C3; }
-.bx-rail-icon {
+.ui-rail-btn:hover { background: #E9F1F5; }
+.ui-rail-btn.active { background: #FFFFFF; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08); color: #0B66C3; }
+.ui-rail-icon {
     width: 34px;
     height: 34px;
     border-radius: 10px;
@@ -9947,14 +9947,14 @@ input.ps-5,
     font-size: 1rem;
     color: #2FC6F6;
 }
-.bx-rail-btn.active .bx-rail-icon { color: #0B66C3; }
-.bx-rail-icon-copilot {
+.ui-rail-btn.active .ui-rail-icon { color: #0B66C3; }
+.ui-rail-icon-copilot {
     background: linear-gradient(135deg, #8E52EC 0%, #2FC6F6 100%);
     color: #FFFFFF !important;
     font-size: 0.9rem;
 }
-.bx-rail-label { font-size: 0.66rem; font-weight: 600; line-height: 1; }
-.bx-rail-badge {
+.ui-rail-label { font-size: 0.66rem; font-weight: 600; line-height: 1; }
+.ui-rail-badge {
     position: absolute;
     top: 2px;
     right: 8px;
@@ -9971,17 +9971,17 @@ input.ps-5,
     justify-content: center;
 }
 
-/* Lista de chats más compacta tipo Bitrix24 */
-.bitrix-messenger-container.has-rail .bitrix-chat-sidebar { width: 320px; min-width: 280px; }
+/* Lista de chats más compacta tipo Devioz */
+.devioz-messenger-container.has-rail .devioz-chat-sidebar { width: 320px; min-width: 280px; }
 
 /* Chips All / Unread */
-.bx-msg-chips {
+.ui-msg-chips {
     display: flex;
     gap: 0.4rem;
     padding: 0.55rem 0.85rem;
     border-bottom: 1px solid #EEF2F5;
 }
-.bx-msg-chip {
+.ui-msg-chip {
     border: 1px solid #D5DFE6;
     background: #FFFFFF;
     color: #525C69;
@@ -9994,9 +9994,9 @@ input.ps-5,
     gap: 0.35rem;
     transition: all 0.15s ease;
 }
-.bx-msg-chip:hover { border-color: #2FC6F6; }
-.bx-msg-chip.active { background: #E5F7FE; border-color: #2FC6F6; color: #0B66C3; }
-.bx-chip-count {
+.ui-msg-chip:hover { border-color: #2FC6F6; }
+.ui-msg-chip.active { background: #E5F7FE; border-color: #2FC6F6; color: #0B66C3; }
+.ui-chip-count {
     background: #B8C2CC;
     color: #FFFFFF;
     border-radius: 8px;
@@ -10005,11 +10005,11 @@ input.ps-5,
 }
 
 /* Elemento de chat oculto por filtro */
-.bitrix-chat-item.bx-hidden,
-.bitrix-chat-category-header.bx-hidden { display: none !important; }
+.devioz-chat-item.ui-hidden,
+.devioz-chat-category-header.ui-hidden { display: none !important; }
 
 /* Estado vacío del panel derecho */
-.bx-msg-empty-state {
+.ui-msg-empty-state {
     display: none;
     flex: 1;
     flex-direction: column;
@@ -10019,48 +10019,48 @@ input.ps-5,
     padding: 2rem;
     background: linear-gradient(180deg, #F7FAFC 0%, #EEF4F8 100%);
 }
-.bitrix-chat-main.is-empty .bx-msg-empty-state { display: flex; }
-.bitrix-chat-main.is-empty > .bitrix-chat-header,
-.bitrix-chat-main.is-empty > .bitrix-chat-stream,
-.bitrix-chat-main.is-empty > .bitrix-chat-footer { display: none !important; }
+.devioz-chat-main.is-empty .ui-msg-empty-state { display: flex; }
+.devioz-chat-main.is-empty > .devioz-chat-header,
+.devioz-chat-main.is-empty > .devioz-chat-stream,
+.devioz-chat-main.is-empty > .devioz-chat-footer { display: none !important; }
 
-.bx-empty-illustration { position: relative; width: 240px; height: 150px; margin-bottom: 1.5rem; }
-.bx-empty-card {
+.ui-empty-illustration { position: relative; width: 240px; height: 150px; margin-bottom: 1.5rem; }
+.ui-empty-card {
     position: absolute;
     border-radius: 14px;
     box-shadow: 0 10px 30px rgba(11, 102, 195, 0.18);
 }
-.bx-empty-card-back {
+.ui-empty-card-back {
     left: 20px; top: 10px; width: 150px; height: 110px;
     background: linear-gradient(135deg, #B9E9FB 0%, #8FD3F5 100%);
     display: flex; align-items: flex-start; justify-content: flex-start;
     padding: 12px; color: #FFFFFF; font-size: 1.2rem;
 }
-.bx-empty-card-front {
+.ui-empty-card-front {
     left: 70px; top: 40px; width: 150px; height: 95px;
     background: #FFFFFF;
     display: flex; flex-direction: column; gap: 8px; padding: 16px;
 }
-.bx-empty-card-front span { display: block; height: 8px; border-radius: 4px; background: #E0E8ED; }
-.bx-empty-card-front span:nth-child(1) { width: 70%; background: #2FC6F6; }
-.bx-empty-card-front span:nth-child(2) { width: 90%; }
-.bx-empty-card-front span:nth-child(3) { width: 55%; }
-.bx-empty-bubble {
+.ui-empty-card-front span { display: block; height: 8px; border-radius: 4px; background: #E0E8ED; }
+.ui-empty-card-front span:nth-child(1) { width: 70%; background: #2FC6F6; }
+.ui-empty-card-front span:nth-child(2) { width: 90%; }
+.ui-empty-card-front span:nth-child(3) { width: 55%; }
+.ui-empty-bubble {
     position: absolute;
     width: 42px; height: 42px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     color: #FFFFFF; font-size: 1rem;
     box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
-    animation: bxFloat 3.2s ease-in-out infinite;
+    animation: uiFloat 3.2s ease-in-out infinite;
 }
-.bx-empty-bubble-copilot { right: 0; top: 0; background: linear-gradient(135deg, #8E52EC, #F06FA8); }
-.bx-empty-bubble-chat { left: 0; bottom: 0; background: #2FC6F6; animation-delay: 0.6s; }
-.bx-empty-bubble-video { right: 30px; bottom: -6px; background: #9DCF00; animation-delay: 1.2s; }
-@keyframes bxFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.ui-empty-bubble-copilot { right: 0; top: 0; background: linear-gradient(135deg, #8E52EC, #F06FA8); }
+.ui-empty-bubble-chat { left: 0; bottom: 0; background: #2FC6F6; animation-delay: 0.6s; }
+.ui-empty-bubble-video { right: 30px; bottom: -6px; background: #9DCF00; animation-delay: 1.2s; }
+@keyframes uiFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
-.bx-empty-title { font-size: 1.05rem; font-weight: 600; color: #333D47; margin-bottom: 0.35rem; }
-.bx-empty-or { color: #8C99A6; font-size: 0.85rem; margin-bottom: 0.75rem; }
-.bx-empty-btn {
+.ui-empty-title { font-size: 1.05rem; font-weight: 600; color: #333D47; margin-bottom: 0.35rem; }
+.ui-empty-or { color: #8C99A6; font-size: 0.85rem; margin-bottom: 0.75rem; }
+.ui-empty-btn {
     border: 1px solid #C3D3DD;
     background: rgba(255, 255, 255, 0.85);
     color: #0B66C3;
@@ -10070,11 +10070,11 @@ input.ps-5,
     font-weight: 600;
     transition: all 0.15s ease;
 }
-.bx-empty-btn:hover { background: #FFFFFF; border-color: #2FC6F6; box-shadow: 0 4px 12px rgba(47, 198, 246, 0.25); }
+.ui-empty-btn:hover { background: #FFFFFF; border-color: #2FC6F6; box-shadow: 0 4px 12px rgba(47, 198, 246, 0.25); }
 
 @media (max-width: 991.98px) {
-    .bx-msg-rail { width: 58px; min-width: 58px; }
-    .bx-rail-btn { width: 48px; }
-    .bx-rail-label { display: none; }
-    .bitrix-messenger-container.has-rail .bitrix-chat-sidebar { width: 260px; min-width: 220px; }
+    .ui-msg-rail { width: 58px; min-width: 58px; }
+    .ui-rail-btn { width: 48px; }
+    .ui-rail-label { display: none; }
+    .devioz-messenger-container.has-rail .devioz-chat-sidebar { width: 260px; min-width: 220px; }
 }

@@ -1,5 +1,5 @@
 /**
- * DEVIOZ OS — JavaScript Enterprise Suite v3.0 (Bitrix24 UI/UX Architecture)
+ * DEVIOZ OS — JavaScript Enterprise Suite v3.0 (Devioz UI/UX Architecture)
  * Video Lightbox, Reels (Shorts), Command Palette (Ctrl+K), LABVA AI, Modales & Kanban
  */
 
@@ -47,11 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ['DeviozBot', initDeviozBot],
         ['ReelsInteractions', initReelsInteractions],
         ['LoungeInteractive', initLoungeInteractive],
-        ['BitrixSuite', initBitrixSuite],
+        ['DeviozSuite', initDeviozSuite],
         ['ReactiveLiveSearch', initReactiveLiveSearch],
         ['LinkPreviewListeners', initLinkPreviewListeners],
         ['SidePanel', initSidePanel],
-        ['BitrixMessenger', initBitrixMessenger],
+        ['DeviozMessenger', initDeviozMessenger],
         ['CheckCelebration', checkForCelebration]
     ];
 
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * 1. Control del Tema Corporativo (Bitrix24 Light por defecto)
+ * 1. Control del Tema Corporativo (Devioz Light por defecto)
  */
 function initTheme() {
     const htmlElement = document.documentElement;
@@ -73,11 +73,11 @@ function initTheme() {
 }
 
 function initWallpaperCustomizer() {
-    const themeModalEl = document.getElementById('bitrixThemeModal');
+    const themeModalEl = document.getElementById('deviozThemeModal');
     const allThemeKeys = [
-        'vibecode', 'meadow', 'saturn', 'halloween', 'winter', 
-        'nebula', 'jellyfish', 'earth', 'spring', 'meadow-dew', 
-        'ocean-silk', 'bitrix-blue', 'autumn', 'cyber', 'aurora', 'light'
+        'vibecode', 'meadow', 'saturn', 'halloween', 'winter',
+        'nebula', 'jellyfish', 'earth', 'spring', 'meadow-dew',
+        'ocean-silk', 'devioz-blue', 'autumn', 'cyber', 'aurora', 'light'
     ];
 
     let currentTheme = localStorage.getItem('devioz_visual_theme') || 'vibecode';
@@ -106,7 +106,7 @@ function initWallpaperCustomizer() {
         }
 
         // Sincronizar estado visual de tarjetas (tanto en modal como en pestañas de perfil)
-        document.querySelectorAll('.bitrix-theme-card, .theme-preview-card').forEach(c => {
+        document.querySelectorAll('.devioz-theme-card, .theme-preview-card').forEach(c => {
             if (c.getAttribute('data-theme-key') === themeKey) {
                 c.classList.add('active');
             } else {
@@ -151,7 +151,7 @@ function initWallpaperCustomizer() {
 
     // Delegación de clic en tarjetas de temas (Modal y página de ajustes)
     document.addEventListener('click', (e) => {
-        const card = e.target.closest('.bitrix-theme-card, .theme-preview-card');
+        const card = e.target.closest('.devioz-theme-card, .theme-preview-card');
         if (card) {
             const themeKey = card.getAttribute('data-theme-key');
             if (themeKey) {
@@ -160,8 +160,8 @@ function initWallpaperCustomizer() {
         }
     });
 
-    // Botón GUARDAR estilo Bitrix24
-    const saveBtn = document.getElementById('bitrixSaveThemeBtn');
+    // Botón GUARDAR estilo Devioz
+    const saveBtn = document.getElementById('deviozSaveThemeBtn');
     if (saveBtn) {
         saveBtn.addEventListener('click', () => {
             localStorage.setItem('devioz_visual_theme', currentTheme);
@@ -176,7 +176,7 @@ function initWallpaperCustomizer() {
         });
     }
 
-    // Botón CANCELAR estilo Bitrix24
+    // Botón CANCELAR estilo Devioz
     if (themeModalEl) {
         themeModalEl.addEventListener('hidden.bs.modal', () => {
             // Si el usuario cerró sin guardar cambios explícitos, asegurar que el tema guardado permanezca
@@ -185,9 +185,9 @@ function initWallpaperCustomizer() {
         });
     }
 
-    // Botón TEMA PERSONALIZADO estilo Bitrix24
-    const customThemeBtn = document.getElementById('bitrixCustomThemeBtn');
-    const customWallpaperInput = document.getElementById('bitrixCustomWallpaperInput');
+    // Botón TEMA PERSONALIZADO estilo Devioz
+    const customThemeBtn = document.getElementById('deviozCustomThemeBtn');
+    const customWallpaperInput = document.getElementById('deviozCustomWallpaperInput');
     if (customThemeBtn && customWallpaperInput) {
         customThemeBtn.addEventListener('click', () => {
             customWallpaperInput.click();
@@ -217,7 +217,7 @@ function initWallpaperCustomizer() {
 }
 
 /**
- * 1.1 Navegación Dinámica Responsive Bitrix24 Air (Colapso Inteligente en "Más ▾")
+ * 1.1 Navegación Dinámica Responsive Devioz (Colapso Inteligente en "Más ▾")
  * Al hacer zoom o en resoluciones menores, consume los elementos que no entran hacia "Más ▾".
  * Al reducir el zoom o agrandar la pantalla, los suelta de regreso inmediatamente.
  * Además, garantiza apertura y cierre 100% confiable del menú desplegable "Más ▾".
@@ -345,7 +345,7 @@ function initResponsiveTopbarNav() {
         if (overflowItems.length > 0) {
             overflowItems.forEach(item => {
                 const a = document.createElement('a');
-                a.className = `bitrix-more-item ${item.isActive ? 'active fw-bold' : ''}`;
+                a.className = `devioz-more-item ${item.isActive ? 'active fw-bold' : ''}`;
                 a.href = item.href;
                 a.innerHTML = `<i class="${item.icon} text-primary me-2"></i><span>${item.label}</span>`;
                 dynamicItemsContainer.appendChild(a);
@@ -577,7 +577,7 @@ function initKanbanSortable() {
 
 function updateKanbanCounters() {
     document.querySelectorAll('.kanban-column').forEach((col) => {
-        const countBadge = col.querySelector('.kanban-count, .bx-chevron-counter, .gl-col-counter');
+        const countBadge = col.querySelector('.kanban-count, .ui-chevron-counter, .gl-col-counter');
         const cards = col.querySelectorAll('.kanban-card');
         if (countBadge) {
             countBadge.textContent = cards.length;
@@ -1277,11 +1277,11 @@ function initReelsInteractions() {
         const existingIframe = videoBg.querySelector('iframe');
         if (!existingIframe) {
             videoBg.innerHTML = `
-                <iframe 
-                    src="${fullEmbed}" 
-                    class="w-100 h-100 border-0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen 
+                <iframe
+                    src="${fullEmbed}"
+                    class="w-100 h-100 border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
                     playsinline>
                 </iframe>
             `;
@@ -1966,10 +1966,10 @@ function initStatsChart() {
 
 /**
  * ==============================================================================
- * BITRIX24 ENTERPRISE SUITE (CHAT 1 A 1, DOCK, MEET, NOTIFICACIONES Y TRACKER)
+ * DEVIOZ ENTERPRISE SUITE (CHAT 1 A 1, DOCK, MEET, NOTIFICACIONES Y TRACKER)
  * ==============================================================================
  */
-function initBitrixSuite() {
+function initDeviozSuite() {
     const appUrlMeta = document.querySelector('meta[name="app-url"]');
     const baseUrl = appUrlMeta ? appUrlMeta.getAttribute('content').replace(/\/+$/, '') : '';
 
@@ -1979,46 +1979,46 @@ function initBitrixSuite() {
     let currentCallRoomUrl = '';
 
     // Elementos del Chat Drawer
-    const chatDrawer = document.getElementById('bitrixChatDrawer');
-    const chatBackdrop = document.getElementById('bitrixChatBackdrop');
-    const chatCloseBtn = document.getElementById('bitrixChatCloseBtn');
-    const chatForm = document.getElementById('bitrixChatForm');
-    const chatInput = document.getElementById('bitrixChatInput');
-    const chatMessagesBody = document.getElementById('bitrixChatMessagesBody');
-    const chatContactName = document.getElementById('bitrixChatContactName');
-    const chatContactRole = document.getElementById('bitrixChatContactRole');
-    const chatContactAvatar = document.getElementById('bitrixChatContactAvatar');
-    const chatProjectBanner = document.getElementById('bitrixChatProjectBanner');
-    const chatProjectCode = document.getElementById('bitrixChatProjectCode');
-    const chatProjectName = document.getElementById('bitrixChatProjectName');
+    const chatDrawer = document.getElementById('deviozChatDrawer');
+    const chatBackdrop = document.getElementById('deviozChatBackdrop');
+    const chatCloseBtn = document.getElementById('deviozChatCloseBtn');
+    const chatForm = document.getElementById('deviozChatForm');
+    const chatInput = document.getElementById('deviozChatInput');
+    const chatMessagesBody = document.getElementById('deviozChatMessagesBody');
+    const chatContactName = document.getElementById('deviozChatContactName');
+    const chatContactRole = document.getElementById('deviozChatContactRole');
+    const chatContactAvatar = document.getElementById('deviozChatContactAvatar');
+    const chatProjectBanner = document.getElementById('deviozChatProjectBanner');
+    const chatProjectCode = document.getElementById('deviozChatProjectCode');
+    const chatProjectName = document.getElementById('deviozChatProjectName');
 
     // Botones de Apertura de Chat
-    const dockChatBtn = document.getElementById('bitrixDockChatBtn');
+    const dockChatBtn = document.getElementById('deviozDockChatBtn');
     const topbarChatBtn = document.getElementById('topbarChatBtn');
     const projectOpenChatBtn = document.getElementById('projectOpenChatBtn');
 
-    // Elementos de Videollamada Bitrix Meet
-    const videoModalEl = document.getElementById('bitrixVideoModal');
-    const videoContainer = document.getElementById('bitrixVideoContainer');
-    const dockVideoBtn = document.getElementById('bitrixDockVideoBtn');
-    const chatHeaderVideoBtn = document.getElementById('bitrixChatHeaderVideoBtn');
+    // Elementos de Videollamada Devioz Meet
+    const videoModalEl = document.getElementById('deviozVideoModal');
+    const videoContainer = document.getElementById('deviozVideoContainer');
+    const dockVideoBtn = document.getElementById('deviozDockVideoBtn');
+    const chatHeaderVideoBtn = document.getElementById('deviozChatHeaderVideoBtn');
     const projectLaunchVideoBtn = document.getElementById('projectLaunchVideoBtn');
     const copyMeetingLinkBtn = document.getElementById('copyMeetingLinkBtn');
 
     // Elementos de Solicitud de Llamada
-    const dockCallBtn = document.getElementById('bitrixDockCallBtn');
-    const chatHeaderCallBtn = document.getElementById('bitrixChatHeaderCallBtn');
+    const dockCallBtn = document.getElementById('deviozDockCallBtn');
+    const chatHeaderCallBtn = document.getElementById('deviozChatHeaderCallBtn');
     const projectRequestCallBtn = document.getElementById('projectRequestCallBtn');
-    const requestCallModalEl = document.getElementById('bitrixRequestCallModal');
-    const requestCallForm = document.getElementById('bitrixRequestCallForm');
+    const requestCallModalEl = document.getElementById('deviozRequestCallModal');
+    const requestCallForm = document.getElementById('deviozRequestCallForm');
     const callRequestReason = document.getElementById('callRequestReason');
     const callRequestQuickSelect = document.getElementById('callRequestQuickSelect');
 
     // Elementos de Notificaciones
     const notifCountBadge = document.getElementById('topbarNotificationsCount');
-    const notifListEl = document.getElementById('bitrixNotificationsList');
+    const notifListEl = document.getElementById('deviozNotificationsList');
     const notifMarkReadBtn = document.getElementById('markAllNotificationsReadBtn');
-    const dockChatBadge = document.getElementById('bitrixDockChatBadge');
+    const dockChatBadge = document.getElementById('deviozDockChatBadge');
     const topbarChatBadge = document.getElementById('topbarChatBadge');
 
     // --------------------------------------------------------------------------
@@ -2125,11 +2125,11 @@ function initBitrixSuite() {
             const alertClass = (msg.type === 'alert') ? 'bubble-alert' : '';
 
             html += `
-                <div class="bitrix-chat-bubble-wrap ${wrapClass}">
-                    <div class="bitrix-chat-bubble ${alertClass}">
+                <div class="devioz-chat-bubble-wrap ${wrapClass}">
+                    <div class="devioz-chat-bubble ${alertClass}">
                         ${escapeHtml(msg.body)}
                     </div>
-                    <div class="bitrix-chat-time">
+                    <div class="devioz-chat-time">
                         ${msg.date_label} ${msg.is_mine ? (msg.is_read ? '<span class="text-info">✓✓</span>' : '<span>✓</span>') : ''}
                     </div>
                 </div>`;
@@ -2205,7 +2205,7 @@ function initBitrixSuite() {
     }
 
     // Chips de preguntas frecuentes
-    document.querySelectorAll('.bitrix-chip-btn').forEach(chip => {
+    document.querySelectorAll('.devioz-chip-btn').forEach(chip => {
         chip.addEventListener('click', () => {
             if (chatInput) {
                 chatInput.value = chip.getAttribute('data-chat-text') || '';
@@ -2215,18 +2215,18 @@ function initBitrixSuite() {
     });
 
     // --------------------------------------------------------------------------
-    // 2. VIDEOLLAMADA HD BITRIX MEET (SIN SALIR DE LA PLATAFORMA)
+    // 2. VIDEOLLAMADA HD DEVIOZ MEET (SIN SALIR DE LA PLATAFORMA)
     // --------------------------------------------------------------------------
 
-    function launchBitrixVideoMeet(customRoomUrl = null) {
+    function launchDeviozVideoMeet(customRoomUrl = null) {
         if (!videoContainer || !videoModalEl) return;
-        const roomUrl = customRoomUrl || currentCallRoomUrl || `https://meet.jit.si/Devioz-Bitrix-Meet-Room`;
+        const roomUrl = customRoomUrl || currentCallRoomUrl || `https://meet.jit.si/Devioz-Meet-Room`;
 
         videoContainer.innerHTML = `
-            <iframe 
+            <iframe
                 src="${roomUrl}#config.prejoinPageEnabled=false&config.startWithAudioMuted=false&config.disableDeepLinking=true&config.toolbarButtons=%5B%22microphone%22%2C%22camera%22%2C%22desktop%22%2C%22chat%22%2C%22hangup%22%2C%22tileview%22%2C%22fullscreen%22%2C%22raisehand%22%5D"
                 allow="camera; microphone; fullscreen; display-capture; autoplay"
-                class="bitrix-video-iframe">
+                class="devioz-video-iframe">
             </iframe>`;
 
         const modal = bootstrap.Modal.getOrCreateInstance(videoModalEl);
@@ -2234,18 +2234,18 @@ function initBitrixSuite() {
     }
 
     if (dockVideoBtn) {
-        dockVideoBtn.addEventListener('click', () => launchBitrixVideoMeet());
+        dockVideoBtn.addEventListener('click', () => launchDeviozVideoMeet());
     }
 
     if (chatHeaderVideoBtn) {
-        chatHeaderVideoBtn.addEventListener('click', () => launchBitrixVideoMeet());
+        chatHeaderVideoBtn.addEventListener('click', () => launchDeviozVideoMeet());
     }
 
     if (projectLaunchVideoBtn) {
         projectLaunchVideoBtn.addEventListener('click', () => {
             const pCode = projectLaunchVideoBtn.getAttribute('data-project-code') || 'DEV';
             const cleanCode = pCode.replace(/[^a-zA-Z0-9]/g, '');
-            launchBitrixVideoMeet(`https://meet.jit.si/Devioz-Bitrix-Meet-${cleanCode}`);
+            launchDeviozVideoMeet(`https://meet.jit.si/Devioz-Meet-${cleanCode}`);
         });
     }
 
@@ -2257,7 +2257,7 @@ function initBitrixSuite() {
 
     if (copyMeetingLinkBtn) {
         copyMeetingLinkBtn.addEventListener('click', () => {
-            const url = currentCallRoomUrl || 'https://meet.jit.si/Devioz-Bitrix-Meet-Room';
+            const url = currentCallRoomUrl || 'https://meet.jit.si/Devioz-Meet-Room';
             navigator.clipboard.writeText(url).then(() => {
                 copyMeetingLinkBtn.innerHTML = '<i class="fa-solid fa-check me-1 text-success"></i> Copiado!';
                 setTimeout(() => {
@@ -2327,7 +2327,7 @@ function initBitrixSuite() {
                     currentCallRoomUrl = data.room_url;
 
                     // Abrir la sala de video de inmediato
-                    launchBitrixVideoMeet(data.room_url);
+                    launchDeviozVideoMeet(data.room_url);
 
                     // Si el chat estaba abierto, refrescar
                     if (chatDrawer && chatDrawer.classList.contains('active')) {
@@ -2361,7 +2361,7 @@ function initBitrixSuite() {
                     data.notifications.forEach(n => {
                         const urgentClass = n.is_urgent ? 'urgent' : '';
                         html += `
-                            <div class="bitrix-notification-item ${urgentClass}" data-contact-id="${n.contact_id || ''}" data-action="${n.action_url}">
+                            <div class="devioz-notification-item ${urgentClass}" data-contact-id="${n.contact_id || ''}" data-action="${n.action_url}">
                                 <img src="${n.avatar}" class="rounded-circle border flex-shrink-0" width="34" height="34" style="object-fit: cover;">
                                 <div class="min-w-0 flex-grow-1">
                                     <div class="d-flex justify-content-between align-items-center mb-1">
@@ -2376,7 +2376,7 @@ function initBitrixSuite() {
                     notifListEl.innerHTML = html;
 
                     // Click en notificación abre chat si aplica
-                    notifListEl.querySelectorAll('.bitrix-notification-item').forEach(item => {
+                    notifListEl.querySelectorAll('.devioz-notification-item').forEach(item => {
                         item.addEventListener('click', () => {
                             const cId = item.getAttribute('data-contact-id');
                             const action = item.getAttribute('data-action');
@@ -2445,19 +2445,19 @@ function initBitrixSuite() {
     }
 
     // --------------------------------------------------------------------------
-    // Motor en Tiempo Real (Bitrix24 SSE)
+    // Motor en Tiempo Real (Devioz SSE)
     // --------------------------------------------------------------------------
     let sseSource = null;
     let lastMsgId = 0;
 
     function initSSE() {
         if (sseSource) sseSource.close();
-        
+
         sseSource = new EventSource(appUrl('/api/chat/stream?last_msg_id=' + lastMsgId));
-        
+
         sseSource.onmessage = function(event) {
             const data = JSON.parse(event.data);
-            
+
             // Actualizar Badge global
             if (data.unread_count !== undefined) {
                 if (dockChatBadge) {
@@ -2472,22 +2472,22 @@ function initBitrixSuite() {
 
             if (data.messages && data.messages.length > 0) {
                 lastMsgId = data.messages[data.messages.length - 1].id;
-                
+
                 // Si el chat esta abierto, recargarlo
                 if (chatDrawer && chatDrawer.classList.contains('active')) {
                     loadConversation(activeContactId, activeProjectId, false);
                 }
-                
+
                 // Actualizar notificaciones en la campana
                 fetchNotifications();
             }
         };
-        
+
         sseSource.onerror = function() {
             sseSource.close();
             setTimeout(initSSE, 5000); // Reconectar tras 5s
         };
-        
+
         sseSource.addEventListener('close', function() {
             sseSource.close();
             initSSE();
@@ -2515,16 +2515,16 @@ function initBitrixSuite() {
     });
 
     // --------------------------------------------------------------------------
-    // 5. TEMPORIZADOR DE JORNADA (BITRIX WORKDAY TRACKER)
+    // 5. TEMPORIZADOR DE JORNADA (DEVIOZ WORKDAY TRACKER)
     // --------------------------------------------------------------------------
 
-    const trackerToggleBtn = document.getElementById('bitrixTrackerToggle');
+    const trackerToggleBtn = document.getElementById('deviozTrackerToggle');
     const trackerTimerText = document.getElementById('trackerTimerText');
     const trackerActionLabel = document.getElementById('trackerActionLabel');
     const copyTrackerHoursBtn = document.getElementById('copyTrackerHoursBtn');
     const hoursWorkedInput = document.getElementById('hours_worked');
 
-    // Elementos del Popover Bitrix Workday
+    // Elementos del Popover Devioz Workday
     const popoverTimerText = document.getElementById('popoverTimerText');
     const popoverProgressBar = document.getElementById('popoverProgressBar');
     const popoverDailyProgressPercent = document.getElementById('popoverDailyProgressPercent');
@@ -2550,8 +2550,8 @@ function initBitrixSuite() {
     const popoverQuickWorkdayLabel = document.getElementById('popoverQuickWorkdayLabel');
     const popoverFinishWorkdayBtn = document.getElementById('popoverFinishWorkdayBtn');
 
-    let trackerRunning = localStorage.getItem('bitrix_tracker_running') === 'true';
-    let trackerSeconds = parseInt(localStorage.getItem('bitrix_tracker_seconds') || '0', 10);
+    let trackerRunning = localStorage.getItem('devioz_tracker_running') === 'true';
+    let trackerSeconds = parseInt(localStorage.getItem('devioz_tracker_seconds') || '0', 10);
     let trackerTimerInterval = null;
 
     function formatTrackerTime(totalSec) {
@@ -2593,7 +2593,7 @@ function initBitrixSuite() {
         }
 
         // Hora de marcación de ingreso
-        const checkinTime = localStorage.getItem('bitrix_workday_checkin') || '—';
+        const checkinTime = localStorage.getItem('devioz_workday_checkin') || '—';
         if (workdayCheckinTimeText) {
             workdayCheckinTimeText.textContent = checkinTime;
         }
@@ -2717,20 +2717,20 @@ function initBitrixSuite() {
 
     function startTracker() {
         trackerRunning = true;
-        localStorage.setItem('bitrix_tracker_running', 'true');
+        localStorage.setItem('devioz_tracker_running', 'true');
 
         // Registrar hora de ingreso si no existe aún hoy
-        if (!localStorage.getItem('bitrix_workday_checkin')) {
+        if (!localStorage.getItem('devioz_workday_checkin')) {
             const now = new Date();
             const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            localStorage.setItem('bitrix_workday_checkin', timeStr);
+            localStorage.setItem('devioz_workday_checkin', timeStr);
         }
 
         updateTrackerUI();
         if (!trackerTimerInterval) {
             trackerTimerInterval = setInterval(() => {
                 trackerSeconds++;
-                localStorage.setItem('bitrix_tracker_seconds', trackerSeconds.toString());
+                localStorage.setItem('devioz_tracker_seconds', trackerSeconds.toString());
                 updateTrackerUI();
             }, 1000);
         }
@@ -2738,7 +2738,7 @@ function initBitrixSuite() {
 
     function pauseTracker() {
         trackerRunning = false;
-        localStorage.setItem('bitrix_tracker_running', 'false');
+        localStorage.setItem('devioz_tracker_running', 'false');
         if (trackerTimerInterval) {
             clearInterval(trackerTimerInterval);
             trackerTimerInterval = null;
@@ -2774,9 +2774,9 @@ function initBitrixSuite() {
             e.stopPropagation();
             if (confirm('¿Confirmas que deseas finalizar tu jornada laboral de hoy? Se registrará el tiempo acumulado.')) {
                 pauseTracker();
-                localStorage.removeItem('bitrix_workday_checkin');
+                localStorage.removeItem('devioz_workday_checkin');
                 trackerSeconds = 0;
-                localStorage.setItem('bitrix_tracker_seconds', '0');
+                localStorage.setItem('devioz_tracker_seconds', '0');
                 updateTrackerUI();
             }
         });
@@ -2810,9 +2810,9 @@ function initBitrixSuite() {
             e.stopPropagation();
             if (confirm('¿Confirmas que deseas finalizar tu jornada laboral de hoy? Se registrará el tiempo acumulado.')) {
                 pauseTracker();
-                localStorage.removeItem('bitrix_workday_checkin');
+                localStorage.removeItem('devioz_workday_checkin');
                 trackerSeconds = 0;
-                localStorage.setItem('bitrix_tracker_seconds', '0');
+                localStorage.setItem('devioz_tracker_seconds', '0');
                 updateTrackerUI();
             }
         });
@@ -2820,13 +2820,13 @@ function initBitrixSuite() {
 
     // Persistencia del Standup diario
     if (workdayStandupInput) {
-        workdayStandupInput.value = localStorage.getItem('bitrix_workday_standup') || '';
+        workdayStandupInput.value = localStorage.getItem('devioz_workday_standup') || '';
 
         if (workdayStandupSaveBtn) {
             workdayStandupSaveBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const val = workdayStandupInput.value.trim();
-                localStorage.setItem('bitrix_workday_standup', val);
+                localStorage.setItem('devioz_workday_standup', val);
                 if (workdayStandupSavedMsg) {
                     workdayStandupSavedMsg.textContent = '✓ Standup guardado correctamente';
                     workdayStandupSavedMsg.style.color = '#10B981';
@@ -2846,7 +2846,7 @@ function initBitrixSuite() {
             hoursWorkedInput.value = rounded;
             copyTrackerHoursBtn.innerHTML = `<i class="fa-solid fa-check text-success me-1"></i> ${rounded} hrs copiadas`;
             setTimeout(() => {
-                copyTrackerHoursBtn.innerHTML = '<i class="fa-solid fa-stopwatch me-1"></i> Copiar de Jornada Bitrix';
+                copyTrackerHoursBtn.innerHTML = '<i class="fa-solid fa-stopwatch me-1"></i> Copiar de Jornada Devioz';
             }, 2500);
         });
     }
@@ -3071,12 +3071,12 @@ function initLinkPreviewListeners() {
 
 /**
  * ==============================================================================
- * BITRIX24 AIR ENTERPRISE SIDEPANEL SLIDER (CAJÓN LATERAL DESLIZANTE)
+ * Devioz SIDEPANEL SLIDER (CAJÓN LATERAL DESLIZANTE)
  * ==============================================================================
  */
 function initSidePanel() {
-    const backdrop = document.getElementById('bitrixSidepanelBackdrop');
-    const slider = document.getElementById('bitrixSidepanelSlider');
+    const backdrop = document.getElementById('deviozSidepanelBackdrop');
+    const slider = document.getElementById('deviozSidepanelSlider');
     const closeBtn = document.getElementById('spCloseBtn');
 
     if (!backdrop || !slider) return;
@@ -3227,10 +3227,10 @@ function initSidePanel() {
                     p.milestones.forEach(m => {
                         const item = document.createElement('div');
                         const statusClass = m.status === 'completed' ? 'completed' : (m.status === 'in_progress' ? 'in_progress' : 'pending');
-                        const iconHtml = m.status === 'completed' 
+                        const iconHtml = m.status === 'completed'
                             ? '<i class="fa-solid fa-circle-check text-success me-2"></i>'
                             : (m.status === 'in_progress' ? '<i class="fa-solid fa-spinner fa-spin text-primary me-2"></i>' : '<i class="fa-regular fa-circle text-secondary me-2"></i>');
-                        
+
                         const badgeStatus = m.status === 'completed'
                             ? '<span class="badge bg-success-subtle text-success" style="font-size: 0.65rem;">Completado</span>'
                             : (m.status === 'in_progress' ? '<span class="badge bg-primary-subtle text-primary" style="font-size: 0.65rem;">En Curso</span>' : '<span class="badge bg-secondary-subtle text-secondary" style="font-size: 0.65rem;">Pendiente</span>');
@@ -3318,31 +3318,31 @@ function initSidePanel() {
 }
 
 // ==============================================================================
-// 10. CONTROLADOR DEL MÓDULO MESSENGER & CHATS BITRIX24 AIR (/chat & /online)
+// 10. CONTROLADOR DEL MÓDULO MESSENGER & CHATS Devioz (/chat & /online)
 // ==============================================================================
-function initBitrixMessenger() {
-    const messengerWrapper = document.querySelector('.bitrix-messenger-wrapper');
+function initDeviozMessenger() {
+    const messengerWrapper = document.querySelector('.devioz-messenger-wrapper');
     if (!messengerWrapper) return;
 
     let activeChannelType = 'copilot';
     let activeContactId = null;
 
-    const chatItems = document.querySelectorAll('.bitrix-chat-item');
-    const mainEl = document.getElementById('bitrixChatMain');
+    const chatItems = document.querySelectorAll('.devioz-chat-item');
+    const mainEl = document.getElementById('deviozChatMain');
     const chatTitle = document.getElementById('activeChatTitle');
     const chatSubtitle = document.getElementById('activeChatSubtitle');
     const chatAvatarImg = document.getElementById('activeChatAvatarImg');
     const chatBotBadge = document.getElementById('activeChatBotBadge');
-    const composerForm = document.getElementById('bitrixComposerForm');
-    const messageInput = document.getElementById('bitrixMessageInput');
-    const searchInput = document.getElementById('bitrixChatSearchInput');
-    const searchClear = document.getElementById('bitrixChatSearchClear');
+    const composerForm = document.getElementById('deviozComposerForm');
+    const messageInput = document.getElementById('deviozMessageInput');
+    const searchInput = document.getElementById('deviozChatSearchInput');
+    const searchClear = document.getElementById('deviozChatSearchClear');
     const videocallBtn = document.getElementById('chatHeaderVideocallBtn');
     const directMessagesContainer = document.getElementById('directMessagesContainer');
     const directLoadingIndicator = document.getElementById('directLoadingIndicator');
-    const railButtons = document.querySelectorAll('.bx-rail-btn[data-rail-filter]');
-    const categoryHeader = document.querySelector('.bitrix-chat-category-header');
-    const chipButtons = document.querySelectorAll('.bx-msg-chip[data-read-filter]');
+    const railButtons = document.querySelectorAll('.ui-rail-btn[data-rail-filter]');
+    const categoryHeader = document.querySelector('.devioz-chat-category-header');
+    const chipButtons = document.querySelectorAll('.ui-msg-chip[data-read-filter]');
 
     function switchChatView(type, contactId = null, title = '', subtitle = '', avatarUrl = '', isBot = false) {
         activeChannelType = type;
@@ -3378,14 +3378,14 @@ function initBitrixMessenger() {
             loadDirectConversation(contactId);
         }
 
-        const stream = document.getElementById('bitrixChatStream');
+        const stream = document.getElementById('deviozChatStream');
         if (stream) stream.scrollTop = stream.scrollHeight;
     }
 
     function loadDirectConversation(contactId) {
         if (!contactId || !directMessagesContainer) return;
         if (directLoadingIndicator) directLoadingIndicator.classList.remove('d-none');
-        
+
         fetch(appUrl(`/api/chat/conversation?contact_id=${contactId}`))
             .then(res => res.json())
             .then(data => {
@@ -3403,7 +3403,7 @@ function initBitrixMessenger() {
                             <div class="text-secondary" style="font-size: 0.70rem;">Envía un mensaje para comenzar la conversación segura.</div>
                         </div>`;
                 }
-                const stream = document.getElementById('bitrixChatStream');
+                const stream = document.getElementById('deviozChatStream');
                 if (stream) stream.scrollTop = stream.scrollHeight;
             })
             .catch(err => {
@@ -3415,7 +3415,7 @@ function initBitrixMessenger() {
     function appendDirectBubble(text, isMine, time) {
         if (!directMessagesContainer) return;
         const bubble = document.createElement('div');
-        bubble.className = `bitrix-msg-bubble ${isMine ? 'outgoing' : 'incoming'}`;
+        bubble.className = `devioz-msg-bubble ${isMine ? 'outgoing' : 'incoming'}`;
         bubble.innerHTML = `
             <div class="msg-content">
                 <div class="msg-body">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
@@ -3424,7 +3424,7 @@ function initBitrixMessenger() {
                 </div>
             </div>`;
         directMessagesContainer.appendChild(bubble);
-        const stream = document.getElementById('bitrixChatStream');
+        const stream = document.getElementById('deviozChatStream');
         if (stream) stream.scrollTop = stream.scrollHeight;
     }
 
@@ -3461,13 +3461,13 @@ function initBitrixMessenger() {
             chatItems.forEach(item => {
                 const group = item.getAttribute('data-rail-group') || item.getAttribute('data-channel-type');
                 if (filter === 'all') {
-                    item.classList.remove('bx-hidden');
+                    item.classList.remove('ui-hidden');
                     item.style.display = 'flex';
                 } else if (filter === group) {
-                    item.classList.remove('bx-hidden');
+                    item.classList.remove('ui-hidden');
                     item.style.display = 'flex';
                 } else {
-                    item.classList.add('bx-hidden');
+                    item.classList.add('ui-hidden');
                     item.style.display = 'none';
                 }
             });
@@ -3477,10 +3477,10 @@ function initBitrixMessenger() {
             }
 
             if (filter === 'copilot') {
-                const copilotItem = document.querySelector('.bitrix-chat-item[data-channel-type="copilot"]');
+                const copilotItem = document.querySelector('.devioz-chat-item[data-channel-type="copilot"]');
                 if (copilotItem) copilotItem.click();
             } else if (filter === 'notes') {
-                const notesItem = document.querySelector('.bitrix-chat-item[data-channel-type="notes"]');
+                const notesItem = document.querySelector('.devioz-chat-item[data-channel-type="notes"]');
                 if (notesItem) notesItem.click();
             }
         });
@@ -3494,11 +3494,11 @@ function initBitrixMessenger() {
             const readFilter = chip.getAttribute('data-read-filter');
 
             chatItems.forEach(item => {
-                if (item.classList.contains('bx-hidden')) return;
+                if (item.classList.contains('ui-hidden')) return;
                 if (readFilter === 'all') {
                     item.style.display = 'flex';
                 } else if (readFilter === 'unread') {
-                    const hasBadge = item.querySelector('.badge-bitrix-bot, .badge, .ui-counter') !== null;
+                    const hasBadge = item.querySelector('.badge-devioz-bot, .badge, .ui-counter') !== null;
                     item.style.display = hasBadge ? 'flex' : 'none';
                 }
             });
@@ -3508,12 +3508,12 @@ function initBitrixMessenger() {
     // Botones del Estado Vacío
     document.querySelectorAll('[data-open-channel="copilot"]').forEach(btn => {
         btn.addEventListener('click', () => {
-            const copilotItem = document.querySelector('.bitrix-chat-item[data-channel-type="copilot"]');
+            const copilotItem = document.querySelector('.devioz-chat-item[data-channel-type="copilot"]');
             if (copilotItem) copilotItem.click();
         });
     });
 
-    const emptyNewChatBtn = document.getElementById('bxEmptyNewChatBtn');
+    const emptyNewChatBtn = document.getElementById('uiEmptyNewChatBtn');
     if (emptyNewChatBtn) {
         emptyNewChatBtn.addEventListener('click', () => {
             const el = document.getElementById('newChatModal');
@@ -3545,7 +3545,7 @@ function initBitrixMessenger() {
             searchInput.value = '';
             searchClear.classList.add('d-none');
             chatItems.forEach(item => {
-                if (!item.classList.contains('bx-hidden')) {
+                if (!item.classList.contains('ui-hidden')) {
                     item.style.display = 'flex';
                 }
             });
@@ -3567,7 +3567,7 @@ function initBitrixMessenger() {
                 const copilotContainer = document.getElementById('copilotDynamicMessages');
                 if (copilotContainer) {
                     const outBubble = document.createElement('div');
-                    outBubble.className = 'bitrix-msg-bubble outgoing';
+                    outBubble.className = 'devioz-msg-bubble outgoing';
                     outBubble.innerHTML = `
                         <div class="msg-content">
                             <div class="msg-body">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
@@ -3576,7 +3576,7 @@ function initBitrixMessenger() {
                     copilotContainer.appendChild(outBubble);
 
                     const typingBubble = document.createElement('div');
-                    typingBubble.className = 'bitrix-msg-bubble incoming';
+                    typingBubble.className = 'devioz-msg-bubble incoming';
                     typingBubble.id = 'copilotTypingIndicator';
                     typingBubble.innerHTML = `
                         <div class="msg-avatar">
@@ -3587,8 +3587,8 @@ function initBitrixMessenger() {
                             <div class="text-secondary small"><i class="fa-solid fa-spinner fa-spin me-2"></i> Procesando consulta técnica...</div>
                         </div>`;
                     copilotContainer.appendChild(typingBubble);
-                    
-                    const stream = document.getElementById('bitrixChatStream');
+
+                    const stream = document.getElementById('deviozChatStream');
                     if (stream) stream.scrollTop = stream.scrollHeight;
 
                     fetch(appUrl('/api/projects/1/copilot'), {
@@ -3605,14 +3605,14 @@ function initBitrixMessenger() {
                         if (ind) ind.remove();
 
                         const inBubble = document.createElement('div');
-                        inBubble.className = 'bitrix-msg-bubble incoming';
+                        inBubble.className = 'devioz-msg-bubble incoming';
                         inBubble.innerHTML = `
                             <div class="msg-avatar">
                                 <img src="${appUrl('/images/sofia-avatar.webp')}" class="rounded-circle" onerror="this.src='https://ui-avatars.com/api/?name=CoPilot&background=A855F7&color=fff';">
                             </div>
                             <div class="msg-content">
                                 <div class="msg-author d-flex align-items-center gap-2">
-                                    <span class="badge-bitrix-bot">24</span>
+                                    <span class="badge-devioz-bot">24</span>
                                     <strong>CoPilot LABVA AI</strong>
                                 </div>
                                 <div class="msg-body copilot-markdown-content">${data.output || escapeHtml(data.message || 'Análisis completado.')}</div>
@@ -3630,7 +3630,7 @@ function initBitrixMessenger() {
                 const notesContainer = document.getElementById('notesMessagesContainer');
                 if (notesContainer) {
                     const bubble = document.createElement('div');
-                    bubble.className = 'bitrix-msg-bubble outgoing';
+                    bubble.className = 'devioz-msg-bubble outgoing';
                     bubble.innerHTML = `
                         <div class="msg-content">
                             <div class="msg-body">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
@@ -3642,7 +3642,7 @@ function initBitrixMessenger() {
                 const gContainer = document.getElementById('generalMessagesContainer');
                 if (gContainer) {
                     const bubble = document.createElement('div');
-                    bubble.className = 'bitrix-msg-bubble outgoing';
+                    bubble.className = 'devioz-msg-bubble outgoing';
                     bubble.innerHTML = `
                         <div class="msg-content">
                             <div class="msg-body">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
@@ -3687,10 +3687,10 @@ function initBitrixMessenger() {
 
     if (videocallBtn) {
         videocallBtn.addEventListener('click', () => {
-            if (typeof launchBitrixVideoMeet === 'function') {
-                launchBitrixVideoMeet();
+            if (typeof launchDeviozVideoMeet === 'function') {
+                launchDeviozVideoMeet();
             } else {
-                window.open('https://meet.jit.si/Devioz-Bitrix-Meet-Room', '_blank');
+                window.open('https://meet.jit.si/Devioz-Meet-Room', '_blank');
             }
         });
     }
@@ -3698,7 +3698,7 @@ function initBitrixMessenger() {
     document.querySelectorAll('.start-contact-direct-btn').forEach(b => {
         b.addEventListener('click', () => {
             const cid = b.getAttribute('data-contact-id');
-            const target = document.querySelector(`.bitrix-chat-item[data-contact-id="${cid}"]`);
+            const target = document.querySelector(`.devioz-chat-item[data-contact-id="${cid}"]`);
             if (target) {
                 target.click();
                 const m = bootstrap.Modal.getInstance(document.getElementById('newChatModal'));
@@ -3715,25 +3715,25 @@ function initBitrixMessenger() {
         });
     }
 
-    // Inicialización según parámetros de URL o estado vacío Bitrix24
+    // Inicialización según parámetros de URL o estado vacío Devioz
     const initialChannel = messengerWrapper.getAttribute('data-initial-channel') || '';
     const initialContact = messengerWrapper.getAttribute('data-initial-contact') || '0';
 
     if (initialContact && parseInt(initialContact, 10) > 0) {
-        const contactItem = document.querySelector(`.bitrix-chat-item[data-contact-id="${initialContact}"]`);
+        const contactItem = document.querySelector(`.devioz-chat-item[data-contact-id="${initialContact}"]`);
         if (contactItem) contactItem.click();
     } else if (initialChannel && initialChannel !== '') {
-        const channelItem = document.querySelector(`.bitrix-chat-item[data-channel-type="${initialChannel}"]`);
+        const channelItem = document.querySelector(`.devioz-chat-item[data-channel-type="${initialChannel}"]`);
         if (channelItem) {
             channelItem.click();
-            const railTarget = document.querySelector(`.bx-rail-btn[data-rail-filter="${initialChannel}"]`);
+            const railTarget = document.querySelector(`.ui-rail-btn[data-rail-filter="${initialChannel}"]`);
             if (railTarget) {
                 railButtons.forEach(b => b.classList.remove('active'));
                 railTarget.classList.add('active');
             }
         }
     } else {
-        // Estado vacío exacto a Bitrix24
+        // Estado vacío exacto a Devioz
         if (mainEl) mainEl.classList.add('is-empty');
         chatItems.forEach(i => i.classList.remove('active'));
     }

@@ -200,9 +200,9 @@ class LabvaAiService
         // Desarrolladores libres
         $db = Database::getInstance();
         $stmt = $db->query("
-            SELECT u.name, u.sede, u.email 
-            FROM users u 
-            WHERE u.role = 'developer' AND u.active = 1 
+            SELECT u.name, u.sede, u.email
+            FROM users u
+            WHERE u.role = 'developer' AND u.active = 1
               AND u.id NOT IN (SELECT developer_id FROM projects WHERE deleted_at IS NULL AND status != 'rejected')
             ORDER BY u.name ASC LIMIT 10
         ");
@@ -293,9 +293,9 @@ PROMPT;
         if (str_contains($q, 'practicante') || str_contains($q, 'desarrollador') || str_contains($q, 'sin proyecto') || str_contains($q, 'libre') || str_contains($q, 'disponible') || str_contains($q, 'desocupado')) {
             $db = Database::getInstance();
             $stmt = $db->query("
-                SELECT u.name, u.sede, u.email 
-                FROM users u 
-                WHERE u.role = 'developer' AND u.active = 1 
+                SELECT u.name, u.sede, u.email
+                FROM users u
+                WHERE u.role = 'developer' AND u.active = 1
                   AND u.id NOT IN (SELECT developer_id FROM projects WHERE deleted_at IS NULL AND status != 'rejected')
                 ORDER BY u.name ASC LIMIT 8
             ");
@@ -485,7 +485,7 @@ PROMPT;
                     . "**Evaluación Dimensional:**\n"
                     . "• **Adecuación Funcional (§4.2.1):** 96% de completitud en reglas de negocio requeridas por {$client}. Cobertura de casos de uso y validación de endpoints completada.\n"
                     . "• **Eficiencia de Desempeño (§4.2.2):** Latencia TTFB proyectada < 120ms. Se recomienda asegurar índices compuestos en MySQL para consultas filtradas.\n"
-                    . "• **Compatibilidad (§4.2.3):** Cumplimiento de contratos RESTful JSON y compatibilidad multi-navegador bajo directrices Bitrix24 Air.\n"
+                    . "• **Compatibilidad (§4.2.3):** Cumplimiento de contratos RESTful JSON y compatibilidad multi-navegador bajo directrices Devioz.\n"
                     . "• **Usabilidad & Accesibilidad (§4.2.4):** Interfaces con contraste accesible (WCAG 2.1 AA) y navegación reactiva por teclado.\n"
                     . "• **Fiabilidad & Resiliencia (§4.2.5):** Manejo global de excepciones, rollback transaccional con PDO y registros auditables.\n"
                     . "• **Seguridad (§4.2.6):** Mitigación activa de OWASP Top 10, autenticación cifrada y control de acceso RBAC estricto.\n"
@@ -538,7 +538,7 @@ PROMPT;
                     . "**2. Ficha Técnica y Stack:**\n"
                     . "• **Entorno:** `{$techStr}`\n"
                     . "• **Base de Datos:** MySQL / MariaDB con transacciones ACID.\n"
-                    . "• **Interfaz:** Bitrix24 Air Enterprise Responsive UI.\n\n"
+                    . "• **Interfaz:** Devioz Responsive UI.\n\n"
                     . "**3. Hitos Verificados y Entregables:**\n"
                     . "• Arquitectura base y modelado de datos aprobado.\n"
                     . "• Módulos operativos y lógica de negocio implementada.\n"

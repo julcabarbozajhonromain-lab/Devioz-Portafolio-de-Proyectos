@@ -8,7 +8,7 @@ declare(strict_types=1);
 $unassignedProjects = $unassignedProjects ?? [];
 ?>
 
-<!-- HEADER AIR DE ASIGNACIONES -->
+<!-- Encabezado de asignaciones -->
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
         <h4 class="fw-bold mb-0 page-header-title text-white">Matriz de Asignaciones de Talento</h4>
@@ -17,7 +17,7 @@ $unassignedProjects = $unassignedProjects ?? [];
         </div>
     </div>
     <div class="d-flex align-items-center gap-2">
-        <a href="<?= url('/projects/create') ?>" class="btn btn-bitrix-green btn-sm d-flex align-items-center gap-1 shadow-sm">
+        <a href="<?= url('/projects/create') ?>" class="btn btn-devioz-green btn-sm d-flex align-items-center gap-1 shadow-sm">
             <i class="fa-solid fa-plus"></i>
             <span>Nueva Asignación Directa</span>
         </a>
@@ -100,12 +100,12 @@ $unassignedProjects = $unassignedProjects ?? [];
                         </td>
                         <td class="small text-secondary"><?= format_date($up['created_at']) ?></td>
                         <td class="text-end col-actions text-nowrap">
-                            <button type="button" class="btn btn-bitrix-green btn-sm px-2 py-1"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalReassign" 
-                                    data-project-id="<?= $up['project_id'] ?>" 
-                                    data-project-code="<?= e($up['project_code']) ?>" 
-                                    data-project-name="<?= e($up['project_name']) ?>" 
+                            <button type="button" class="btn btn-devioz-green btn-sm px-2 py-1"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalReassign"
+                                    data-project-id="<?= $up['project_id'] ?>"
+                                    data-project-code="<?= e($up['project_code']) ?>"
+                                    data-project-name="<?= e($up['project_name']) ?>"
                                     data-current-dev="Sin Asignar (En Espera)">
                                 <i class="fa-solid fa-user-plus me-1"></i> Asignar
                             </button>
@@ -246,19 +246,19 @@ $unassignedProjects = $unassignedProjects ?? [];
                                         </li>
                                         <li><hr class="dropdown-divider my-1"></li>
                                         <li>
-                                            <button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1 text-dark" 
-                                                    data-bs-toggle="modal" 
-                                                    data-bs-target="#modalReassign" 
-                                                    data-project-id="<?= $row['project_id'] ?>" 
-                                                    data-project-code="<?= e($row['project_code']) ?>" 
-                                                    data-project-name="<?= e($row['project_name']) ?>" 
+                                            <button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1 text-dark"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalReassign"
+                                                    data-project-id="<?= $row['project_id'] ?>"
+                                                    data-project-code="<?= e($row['project_code']) ?>"
+                                                    data-project-name="<?= e($row['project_name']) ?>"
                                                     data-current-dev="<?= e($row['dev_name']) ?>">
                                                 <i class="fa-solid fa-user-pen text-warning" style="width: 16px;"></i>
                                                 <span>Reasignar Desarrollador</span>
                                             </button>
                                         </li>
                                         <li>
-                                            <button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1 text-danger" 
+                                            <button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1 text-danger"
                                                     onclick="confirmUnassign('<?= $row['project_id'] ?>', '<?= e(addslashes($row['project_code'])) ?>', '<?= e(addslashes($row['dev_name'])) ?>')">
                                                 <i class="fa-solid fa-user-xmark text-danger" style="width: 16px;"></i>
                                                 <span>Desasignar / Liberar</span>
@@ -266,7 +266,7 @@ $unassignedProjects = $unassignedProjects ?? [];
                                         </li>
                                         <li><hr class="dropdown-divider my-1"></li>
                                         <li>
-                                            <button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1 text-danger" 
+                                            <button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1 text-danger"
                                                     onclick="confirmDelete('<?= $row['project_id'] ?>', '<?= e(addslashes($row['project_code'])) ?>')">
                                                 <i class="fa-solid fa-trash-can text-danger" style="width: 16px;"></i>
                                                 <span>Eliminar del Catálogo</span>
@@ -302,12 +302,12 @@ $unassignedProjects = $unassignedProjects ?? [];
 </form>
 
 <!-- ========================================================================= -->
-<!-- MODAL BITRIX24 AIR: REASIGNAR / ASIGNAR DESARROLLADOR                     -->
+<!-- MODAL Devioz: REASIGNAR / ASIGNAR DESARROLLADOR                     -->
 <!-- ========================================================================= -->
 <div class="modal fade" id="modalReassign" tabindex="-1" aria-labelledby="modalReassignLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg border-0" style="border-radius: 16px; overflow: hidden; background: #FFFFFF;">
-            
+
             <div class="modal-header border-bottom px-4 py-3 bg-light d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-2">
                     <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(0, 172, 227, 0.12); color: #00ACE3;">

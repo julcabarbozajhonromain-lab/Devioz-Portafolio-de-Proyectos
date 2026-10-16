@@ -31,9 +31,9 @@ class ProjectController extends BaseController
         $status = trim((string)($_GET['status'] ?? ''));
         $sede = trim((string)($_GET['sede'] ?? ''));
 
-        $sql = "SELECT p.*, u.name as dev_name, u.avatar as dev_avatar 
-                FROM `projects` p 
-                JOIN `users` u ON p.developer_id = u.id 
+        $sql = "SELECT p.*, u.name as dev_name, u.avatar as dev_avatar
+                FROM `projects` p
+                JOIN `users` u ON p.developer_id = u.id
                 WHERE p.deleted_at IS NULL";
         $params = [];
 
@@ -60,7 +60,7 @@ class ProjectController extends BaseController
         $rows = $db->fetchAll($sql, $params);
         $projects = array_map(fn($r) => new Project($r), $rows);
 
-        // Contadores globales por etapa SDLC para las pestañas Bitrix24 ui-counter
+        // Contadores globales por etapa SDLC para las pestañas Devioz ui-counter
         $statusCounts = [
             'all'         => (int)$db->fetchColumn("SELECT COUNT(*) FROM `projects` WHERE deleted_at IS NULL"),
             'in_progress' => (int)$db->fetchColumn("SELECT COUNT(*) FROM `projects` WHERE deleted_at IS NULL AND status IN ('assigned', 'in_progress')"),
@@ -123,13 +123,13 @@ class ProjectController extends BaseController
         $db = Database::getInstance();
         // Obtener desarrolladores sin proyecto activo
         $availableDevelopers = $db->fetchAll(
-            "SELECT * FROM `users` 
-             WHERE `role` = 'developer' 
-               AND `active` = 1 
-               AND `deleted_at` IS NULL 
+            "SELECT * FROM `users`
+             WHERE `role` = 'developer'
+               AND `active` = 1
+               AND `deleted_at` IS NULL
                AND `id` NOT IN (
-                   SELECT `developer_id` FROM `projects` 
-                   WHERE `status` NOT IN ('completed', 'archived', 'rejected') 
+                   SELECT `developer_id` FROM `projects`
+                   WHERE `status` NOT IN ('completed', 'archived', 'rejected')
                      AND `deleted_at` IS NULL
                )
              ORDER BY `name` ASC"
@@ -415,7 +415,7 @@ class ProjectController extends BaseController
     }
 
     /**
-     * API JSON para el Bitrix SidePanel Slider (Previsualización e Inspección Rápida)
+     * API JSON para el Devioz SidePanel Slider (Previsualización e Inspección Rápida)
      */
     public function previewApi(string $id): void
     {

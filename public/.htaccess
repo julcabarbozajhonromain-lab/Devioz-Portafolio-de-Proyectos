@@ -23,7 +23,7 @@
     Header set X-Frame-Options "SAMEORIGIN"
 </IfModule>
 
-# Static Assets Browser Caching (Bitrix24 High Performance)
+# Static Assets Browser Caching (Devioz High Performance)
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 day"

@@ -12,7 +12,7 @@ declare(strict_types=1);
 </div>
 
 <!-- Hero del Proyecto en Portafolio con Alto Contraste -->
-<!-- Encabezado Corporativo del Proyecto en Galería (Estilo Bitrix24) -->
+<!-- Encabezado Corporativo del Proyecto en Galería (Estilo Devioz) -->
 <div class="card-custom p-4 mb-4">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
         <div>
@@ -78,11 +78,11 @@ declare(strict_types=1);
                     </div>
 
                     <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-lg border border-secondary border-opacity-25" style="background: #000;">
-                        <iframe 
-                            src="<?= e(getEmbedUrl($project->video_url, false)) ?>" 
-                            title="<?= e($project->name) ?>" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen 
+                        <iframe
+                            src="<?= e(getEmbedUrl($project->video_url, false)) ?>"
+                            title="<?= e($project->name) ?>"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
                             loading="lazy">
                         </iframe>
                     </div>
@@ -91,9 +91,9 @@ declare(strict_types=1);
         </div>
 
         <!-- Galería de Capturas de Pantalla -->
-        <?php 
+        <?php
             $gallery = is_array($project->gallery_images) ? $project->gallery_images : (json_decode($project->gallery_images ?? '[]', true) ?: []);
-            if (!empty($gallery)): 
+            if (!empty($gallery)):
         ?>
             <div class="card-custom p-4 mb-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">

@@ -35,7 +35,7 @@ foreach ($projects as $p) {
 ?>
 
 <!-- ========================================================================= -->
-<!-- 1. HEADER DE ACCIONES RÁPIDAS (ESTILO BITRIX24 AIR ENTERPRISE)             -->
+<!-- 1. HEADER DE ACCIONES RÁPIDAS (ESTILO Devioz)             -->
 <!-- ========================================================================= -->
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
     <div>
@@ -57,7 +57,7 @@ foreach ($projects as $p) {
                 <i class="fa-solid fa-table-columns text-info"></i>
                 <span>Revisión QA</span>
             </a>
-            <a href="<?= url('/projects/create') ?>" class="btn btn-bitrix-green btn-sm d-flex align-items-center gap-1">
+            <a href="<?= url('/projects/create') ?>" class="btn btn-devioz-green btn-sm d-flex align-items-center gap-1">
                 <i class="fa-solid fa-plus"></i>
                 <span>Asignar Proyecto</span>
             </a>
@@ -66,32 +66,32 @@ foreach ($projects as $p) {
 </div>
 
 <!-- ========================================================================= -->
-<!-- 2. SUB-HEADER AIR CON PESTAÑAS UI-COUNTER & SELECTOR DE VISTAS            -->
+<!-- Barra secundaria con pestañas y selector de vistas -->
 <!-- ========================================================================= -->
-<div class="bitrix-subnav-bar mb-3">
+<div class="devioz-subnav-bar mb-3">
     <!-- Pestañas de Estado con Contadores en Píldora -->
-    <div class="bitrix-subnav-tabs">
-        <a href="<?= url('/projects') ?>" class="bitrix-subnav-tab <?= empty($status) ? 'active' : '' ?>">
+    <div class="devioz-subnav-tabs">
+        <a href="<?= url('/projects') ?>" class="devioz-subnav-tab <?= empty($status) ? 'active' : '' ?>">
             <span>Todos</span>
             <span class="ui-counter"><?= $statusCounts['all'] ?></span>
         </a>
-        <a href="<?= url('/projects?status=in_progress' . ($sede ? "&sede={$sede}" : '')) ?>" class="bitrix-subnav-tab <?= $status === 'in_progress' ? 'active' : '' ?>">
+        <a href="<?= url('/projects?status=in_progress' . ($sede ? "&sede={$sede}" : '')) ?>" class="devioz-subnav-tab <?= $status === 'in_progress' ? 'active' : '' ?>">
             <span>En Desarrollo</span>
             <span class="ui-counter"><?= $statusCounts['in_progress'] ?></span>
         </a>
-        <a href="<?= url('/projects?status=in_review' . ($sede ? "&sede={$sede}" : '')) ?>" class="bitrix-subnav-tab <?= in_array($status, ['in_review', 'pending_review'], true) ? 'active' : '' ?>">
+        <a href="<?= url('/projects?status=in_review' . ($sede ? "&sede={$sede}" : '')) ?>" class="devioz-subnav-tab <?= in_array($status, ['in_review', 'pending_review'], true) ? 'active' : '' ?>">
             <span>Auditoría QA</span>
             <span class="ui-counter bg-warning text-dark"><?= $statusCounts['review'] ?></span>
         </a>
-        <a href="<?= url('/projects?status=approved' . ($sede ? "&sede={$sede}" : '')) ?>" class="bitrix-subnav-tab <?= in_array($status, ['approved', 'completed'], true) ? 'active' : '' ?>">
+        <a href="<?= url('/projects?status=approved' . ($sede ? "&sede={$sede}" : '')) ?>" class="devioz-subnav-tab <?= in_array($status, ['approved', 'completed'], true) ? 'active' : '' ?>">
             <span>Certificados</span>
             <span class="ui-counter bg-success text-white"><?= $statusCounts['approved'] ?></span>
         </a>
     </div>
 
     <!-- Selector Multi-Modal de Vistas: Cuadrícula | Kanban | Lista -->
-    <div class="bitrix-view-switcher" id="projectsViewSwitcher">
-        <button type="button" class="btn-view-toggle active" data-view="grid" title="Cuadrícula Air de Tarjetas">
+    <div class="devioz-view-switcher" id="projectsViewSwitcher">
+        <button type="button" class="btn-view-toggle active" data-view="grid" title="Vista de tarjetas">
             <i class="fa-solid fa-grip"></i>
             <span class="d-none d-sm-inline">Cuadrícula</span>
         </button>
@@ -146,12 +146,12 @@ foreach ($projects as $p) {
 <!-- 4. CONTENEDOR MULTI-MODAL: 3 VISTAS INTEGRADAS                             -->
 <!-- ========================================================================= -->
 
-<!-- VISTA 1: CUADRÍCULA AIR DE TARJETAS (DEFAULT) -->
+<!-- Vista de tarjetas -->
 <div id="viewContainerGrid" class="projects-view-pane">
     <div class="row g-4" id="projectGridRow">
         <?php foreach ($projects as $p): ?>
-            <?php 
-                $dev = $p->developer(); 
+            <?php
+                $dev = $p->developer();
                 $searchIndex = strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName() . ' ' . ($dev ? $dev->name : '') . ' ' . $p->sede));
             ?>
             <div class="col-md-6 col-xl-4 project-item-card" data-search="<?= $searchIndex ?>">
@@ -171,7 +171,7 @@ foreach ($projects as $p) {
                     <div class="card-body-custom flex-grow-1 d-flex flex-column justify-content-between p-3">
                         <div>
                             <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                                <span class="bx-client-badge py-1 px-2" style="font-size: 0.78rem;" title="Cliente Corporativo">
+                                <span class="ui-client-badge py-1 px-2" style="font-size: 0.78rem;" title="Cliente Corporativo">
                                     <i class="fa-solid fa-briefcase me-1"></i>
                                     <span><?= e($p->clientName()) ?></span>
                                 </span>
@@ -222,17 +222,17 @@ foreach ($projects as $p) {
 
 <!-- VISTA 2: TABLERO KANBAN SDLC (COLUMNAS POR ETAPA) -->
 <div id="viewContainerKanban" class="projects-view-pane d-none">
-    <div class="bitrix-kanban-board">
+    <div class="devioz-kanban-board">
         <!-- Columna 1: Asignación Inicial -->
-        <div class="bitrix-kanban-col">
-            <div class="bitrix-kanban-col-header" style="border-top: 3px solid #00ACE3;">
+        <div class="devioz-kanban-col">
+            <div class="devioz-kanban-col-header" style="border-top: 3px solid #00ACE3;">
                 <span style="color: #172B4D;">Asignación & Inicio</span>
                 <span class="ui-counter bg-primary text-white"><?= count($kanbanAssigned) ?></span>
             </div>
-            <div class="bitrix-kanban-col-body">
+            <div class="devioz-kanban-col-body">
                 <?php foreach ($kanbanAssigned as $p): ?>
                     <?php $dev = $p->developer(); ?>
-                    <div class="bitrix-kanban-card project-item-card" data-search="<?= strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName())) ?>" data-sidepanel-project="<?= $p->id ?>" role="button" title="Inspección rápida (SidePanel)">
+                    <div class="devioz-kanban-card project-item-card" data-search="<?= strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName())) ?>" data-sidepanel-project="<?= $p->id ?>" role="button" title="Inspección rápida (SidePanel)">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="badge font-monospace text-dark bg-light border" style="font-size: 0.68rem;"><?= e($p->code) ?></span>
                             <span class="badge-sede" style="font-size: 0.65rem;"><?= e($p->sede) ?></span>
@@ -258,15 +258,15 @@ foreach ($projects as $p) {
         </div>
 
         <!-- Columna 2: En Desarrollo & Sprints -->
-        <div class="bitrix-kanban-col">
-            <div class="bitrix-kanban-col-header" style="border-top: 3px solid #3b82f6;">
+        <div class="devioz-kanban-col">
+            <div class="devioz-kanban-col-header" style="border-top: 3px solid #3b82f6;">
                 <span style="color: #FFFFFF;">En Desarrollo</span>
                 <span class="ui-counter bg-primary text-white"><?= count($kanbanInProgress) ?></span>
             </div>
-            <div class="bitrix-kanban-col-body">
+            <div class="devioz-kanban-col-body">
                 <?php foreach ($kanbanInProgress as $p): ?>
                     <?php $dev = $p->developer(); ?>
-                    <div class="bitrix-kanban-card project-item-card" data-search="<?= strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName())) ?>" data-sidepanel-project="<?= $p->id ?>" role="button" title="Inspección rápida (SidePanel)">
+                    <div class="devioz-kanban-card project-item-card" data-search="<?= strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName())) ?>" data-sidepanel-project="<?= $p->id ?>" role="button" title="Inspección rápida (SidePanel)">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="badge font-monospace text-dark bg-light border" style="font-size: 0.68rem;"><?= e($p->code) ?></span>
                             <span class="badge-sede" style="font-size: 0.65rem;"><?= e($p->sede) ?></span>
@@ -292,15 +292,15 @@ foreach ($projects as $p) {
         </div>
 
         <!-- Columna 3: Auditoría QA & Dictamen -->
-        <div class="bitrix-kanban-col">
-            <div class="bitrix-kanban-col-header" style="border-top: 3px solid #f59e0b;">
+        <div class="devioz-kanban-col">
+            <div class="devioz-kanban-col-header" style="border-top: 3px solid #f59e0b;">
                 <span style="color: #FFFFFF;">Auditoría QA</span>
                 <span class="ui-counter bg-warning text-dark"><?= count($kanbanReview) ?></span>
             </div>
-            <div class="bitrix-kanban-col-body">
+            <div class="devioz-kanban-col-body">
                 <?php foreach ($kanbanReview as $p): ?>
                     <?php $dev = $p->developer(); ?>
-                    <div class="bitrix-kanban-card project-item-card" data-search="<?= strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName())) ?>" data-sidepanel-project="<?= $p->id ?>" role="button" title="Inspección rápida (SidePanel)">
+                    <div class="devioz-kanban-card project-item-card" data-search="<?= strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName())) ?>" data-sidepanel-project="<?= $p->id ?>" role="button" title="Inspección rápida (SidePanel)">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="badge font-monospace text-dark bg-light border" style="font-size: 0.68rem;"><?= e($p->code) ?></span>
                             <span class="badge bg-warning bg-opacity-25 text-warning fw-bold" style="font-size: 0.65rem;">Revisión QA</span>
@@ -326,15 +326,15 @@ foreach ($projects as $p) {
         </div>
 
         <!-- Columna 4: Aprobado & Release Certificado -->
-        <div class="bitrix-kanban-col">
-            <div class="bitrix-kanban-col-header" style="border-top: 3px solid #7BD500;">
+        <div class="devioz-kanban-col">
+            <div class="devioz-kanban-col-header" style="border-top: 3px solid #7BD500;">
                 <span style="color: #FFFFFF;">Certificado & Release</span>
                 <span class="ui-counter bg-success text-white"><?= count($kanbanApproved) ?></span>
             </div>
-            <div class="bitrix-kanban-col-body">
+            <div class="devioz-kanban-col-body">
                 <?php foreach ($kanbanApproved as $p): ?>
                     <?php $dev = $p->developer(); ?>
-                    <div class="bitrix-kanban-card project-item-card" data-search="<?= strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName())) ?>" data-sidepanel-project="<?= $p->id ?>" role="button" title="Inspección rápida (SidePanel)">
+                    <div class="devioz-kanban-card project-item-card" data-search="<?= strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName())) ?>" data-sidepanel-project="<?= $p->id ?>" role="button" title="Inspección rápida (SidePanel)">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="badge font-monospace text-dark bg-light border" style="font-size: 0.68rem;"><?= e($p->code) ?></span>
                             <span class="badge bg-success" style="font-size: 0.65rem;">Score: <?= $p->final_score ?: '100' ?></span>
@@ -380,8 +380,8 @@ foreach ($projects as $p) {
                 </thead>
                 <tbody>
                     <?php foreach ($projects as $p): ?>
-                        <?php 
-                            $dev = $p->developer(); 
+                        <?php
+                            $dev = $p->developer();
                             $searchIndex = strtolower(e($p->code . ' ' . $p->name . ' ' . $p->clientName() . ' ' . ($dev ? $dev->name : '') . ' ' . $p->sede));
                         ?>
                         <tr class="project-item-card border-bottom" data-search="<?= $searchIndex ?>" style="border-color: #DBE2E8 !important;">
@@ -430,7 +430,7 @@ foreach ($projects as $p) {
                                     <button type="button" class="btn btn-ghost btn-sm py-1 px-2 border" data-sidepanel-project="<?= $p->id ?>" title="Inspección Rápida (SidePanel)" style="font-size: 0.75rem; color: #00ACE3;">
                                         <i class="fa-solid fa-table-columns"></i>
                                     </button>
-                                    <a href="<?= url("/projects/{$p->id}") ?>" class="btn btn-bitrix-primary btn-sm py-1 px-2" style="font-size: 0.75rem;">Ver</a>
+                                    <a href="<?= url("/projects/{$p->id}") ?>" class="btn btn-devioz-primary btn-sm py-1 px-2" style="font-size: 0.75rem;">Ver</a>
                                 </div>
                             </td>
                         </tr>

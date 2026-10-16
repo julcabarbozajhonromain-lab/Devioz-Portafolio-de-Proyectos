@@ -11,14 +11,14 @@ use App\Core\View;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="app-url" content="<?= rtrim(url('/'), '/') ?>">
     <title><?= e($title ?? 'Iniciar Sesión — Devioz OS') ?></title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?= asset('images/devioz-icon.png') ?>">
 
-    <!-- Preload del Fondo Oficial Bitrix24 HD -->
-    <link rel="preload" href="<?= asset('images/bitrix24-bg-hd.webp') ?>" as="image">
+    <!-- Preload del Fondo Oficial Devioz HD -->
+    <link rel="preload" href="<?= asset('images/devioz-bg-hd.webp') ?>" as="image">
 
-    <!-- Google Fonts: Open Sans Oficial Bitrix24 & JetBrains Mono -->
+    <!-- Google Fonts: Open Sans Oficial Devioz & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -32,29 +32,29 @@ use App\Core\View;
 
     <style>
         :root {
-            /* Variables Bitrix24 Design System */
-            --b24-cyan: #00ACE3;
-            --b24-cyan-hover: #0093c4;
-            --b24-cyan-light: #EBF8FD;
-            --b24-lime: #9DCF00;
-            --b24-lime-hover: #88B500;
-            --b24-navy: #172B4D;
-            --b24-dark: #0F172A;
-            --b24-border: #DFE3E6;
-            --b24-gray-text: #535C69;
-            --b24-charcoal: #202428;
+            /* Variables Devioz Design System */
+            --ui-cyan: #00ACE3;
+            --ui-cyan-hover: #0093c4;
+            --ui-cyan-light: #EBF8FD;
+            --ui-lime: #9DCF00;
+            --ui-lime-hover: #88B500;
+            --ui-navy: #172B4D;
+            --ui-dark: #0F172A;
+            --ui-border: #DFE3E6;
+            --ui-gray-text: #535C69;
+            --ui-charcoal: #202428;
         }
 
-        /* Estructura Base con Imagen de Fondo Bitrix24 */
-        body.b24net-auth-page {
+        /* Estructura Base con Imagen de Fondo Devioz */
+        body.auth-auth-page {
             font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background: #1E293B url('<?= asset("images/bitrix24-bg-hd.webp") ?>') no-repeat center center fixed;
+            background: #1E293B url('<?= asset("images/devioz-bg-hd.webp") ?>') no-repeat center center fixed;
             background-size: cover;
             position: relative;
-            color: var(--b24-charcoal);
+            color: var(--ui-charcoal);
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
@@ -62,7 +62,7 @@ use App\Core\View;
         }
 
         /* Overlay Gradiente Suave para Garantizar Contraste y Legibilidad */
-        .b24net-overlay {
+        .auth-overlay {
             position: fixed;
             inset: 0;
             background: radial-gradient(circle at 75% 50%, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.55) 100%);
@@ -73,7 +73,7 @@ use App\Core\View;
         }
 
         /* Contenedor Principal de la Capa de UI */
-        .b24net-layout-container {
+        .auth-layout-container {
             position: relative;
             z-index: 2;
             min-height: 100vh;
@@ -82,15 +82,15 @@ use App\Core\View;
             justify-content: space-between;
         }
 
-        /* Topbar / Header Bitrix24 */
-        .b24net-header {
+        /* Topbar / Header Devioz */
+        .auth-header {
             padding: 1.5rem 2rem 0.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .b24net-brand {
+        .auth-brand {
             display: inline-flex;
             align-items: center;
             gap: 0.65rem;
@@ -102,7 +102,7 @@ use App\Core\View;
             letter-spacing: -0.5px;
         }
 
-        .b24net-brand-tag {
+        .auth-brand-tag {
             font-size: 0.85rem;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.85);
@@ -111,7 +111,7 @@ use App\Core\View;
             border-left: 1px solid rgba(255, 255, 255, 0.35);
         }
 
-        .b24net-btn-home {
+        .auth-btn-home {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -128,14 +128,14 @@ use App\Core\View;
             transition: all 0.2s ease;
         }
 
-        .b24net-btn-home:hover {
+        .auth-btn-home:hover {
             background: rgba(255, 255, 255, 0.3);
             color: #FFFFFF;
             transform: translateY(-1px);
         }
 
         /* Área Central con Columna Split */
-        .b24net-main {
+        .auth-main {
             flex: 1;
             display: flex;
             align-items: center;
@@ -144,13 +144,13 @@ use App\Core\View;
         }
 
         /* Columna Izquierda: Cover / Hero Institucional */
-        .b24net-aside-cover {
+        .auth-aside-cover {
             color: #FFFFFF;
             padding-right: 2.5rem;
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
         }
 
-        .b24net-aside-badge {
+        .auth-aside-badge {
             background: rgba(0, 172, 227, 0.25);
             border: 1px solid rgba(0, 172, 227, 0.6);
             color: #EBF8FD;
@@ -167,7 +167,7 @@ use App\Core\View;
             backdrop-filter: blur(6px);
         }
 
-        .b24net-aside-title {
+        .auth-aside-title {
             font-size: clamp(2.2rem, 3.8vw, 3.2rem);
             font-weight: 800;
             line-height: 1.15;
@@ -176,7 +176,7 @@ use App\Core\View;
             color: #FFFFFF;
         }
 
-        .b24net-aside-subtitle {
+        .auth-aside-subtitle {
             font-size: 1.1rem;
             line-height: 1.6;
             color: rgba(255, 255, 255, 0.9);
@@ -185,7 +185,7 @@ use App\Core\View;
             text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
         }
 
-        .b24net-feature-pill {
+        .auth-feature-pill {
             background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -202,8 +202,8 @@ use App\Core\View;
             color: #FFFFFF;
         }
 
-        /* Tarjeta Isla de Autenticación (Estilo Bitrix24 Island Card) */
-        .b24-island-card {
+        /* Tarjeta Isla de Autenticación (Estilo Devioz Island Card) */
+        .ui-island-card {
             background: #FFFFFF;
             border-radius: 18px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
@@ -227,7 +227,7 @@ use App\Core\View;
             }
         }
 
-        /* Estilización de Inputs Bitrix24 */
+        /* Estilización de Inputs Devioz */
         .form-control-custom,
         .form-select-custom {
             background-color: #F8FAFC !important;
@@ -242,7 +242,7 @@ use App\Core\View;
         .form-control-custom:focus,
         .form-select-custom:focus {
             background-color: #FFFFFF !important;
-            border-color: var(--b24-cyan) !important;
+            border-color: var(--ui-cyan) !important;
             box-shadow: 0 0 0 3px rgba(0, 172, 227, 0.22) !important;
             outline: none;
         }
@@ -256,10 +256,10 @@ use App\Core\View;
             letter-spacing: 0.4px;
         }
 
-        /* Botón Primario Bitrix24 Cyan */
-        .btn-b24-auth-submit {
-            background-color: var(--b24-cyan);
-            border-color: var(--b24-cyan);
+        /* Botón Primario Devioz Cyan */
+        .btn-ui-auth-submit {
+            background-color: var(--ui-cyan);
+            border-color: var(--ui-cyan);
             color: #FFFFFF !important;
             font-weight: 700;
             font-size: 0.95rem;
@@ -276,8 +276,8 @@ use App\Core\View;
             width: 100%;
         }
 
-        .btn-b24-auth-submit:hover {
-            background-color: var(--b24-cyan-hover);
+        .btn-ui-auth-submit:hover {
+            background-color: var(--ui-cyan-hover);
             transform: translateY(-1px);
             box-shadow: 0 6px 18px rgba(0, 172, 227, 0.5);
         }
@@ -308,7 +308,7 @@ use App\Core\View;
         }
 
         .btn-toggle-password:hover {
-            color: var(--b24-cyan);
+            color: var(--ui-cyan);
         }
 
         /* Acordeón de Credenciales Demo */
@@ -327,7 +327,7 @@ use App\Core\View;
         }
 
         .btn-demo-creds-toggle:hover {
-            color: var(--b24-navy);
+            color: var(--ui-navy);
             background: #F1F5F9;
         }
 
@@ -366,8 +366,8 @@ use App\Core\View;
             color: #0F172A !important;
         }
 
-        /* Footer Bitrix24 Network */
-        .b24net-footer {
+        /* Footer Devioz Network */
+        .auth-footer {
             padding: 1rem 2rem 1.5rem;
             display: flex;
             align-items: center;
@@ -379,7 +379,7 @@ use App\Core\View;
             gap: 0.75rem;
         }
 
-        .b24net-footer-btn {
+        .auth-footer-btn {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.25);
@@ -394,29 +394,29 @@ use App\Core\View;
             font-size: 0.8rem;
         }
 
-        .b24net-footer a {
+        .auth-footer a {
             color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             transition: color 0.15s ease;
         }
 
-        .b24net-footer a:hover {
+        .auth-footer a:hover {
             color: #FFFFFF;
             text-decoration: underline;
         }
 
         /* Responsividad */
         @media (max-width: 991.98px) {
-            .b24net-header {
+            .auth-header {
                 padding: 1rem 1.25rem;
             }
-            .b24net-aside-cover {
+            .auth-aside-cover {
                 display: none;
             }
-            .b24-island-card {
+            .ui-island-card {
                 padding: 2rem 1.5rem;
             }
-            .b24net-footer {
+            .auth-footer {
                 justify-content: center;
                 text-align: center;
                 padding: 1rem 1.25rem;
@@ -424,61 +424,61 @@ use App\Core\View;
         }
     </style>
 </head>
-<body class="b24net-auth-page">
+<body class="auth-auth-page">
 
     <!-- Capa de Oscurecimiento Gradual -->
-    <div class="b24net-overlay"></div>
+    <div class="auth-overlay"></div>
 
-    <div class="b24net-layout-container">
-        
+    <div class="auth-layout-container">
+
         <!-- Header Superior -->
-        <header class="b24net-header">
-            <a href="<?= url('/') ?>" class="b24net-brand">
+        <header class="auth-header">
+            <a href="<?= url('/') ?>" class="auth-brand">
                 <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="32" height="32" class="rounded">
-                <span>Devioz<span style="color: var(--b24-cyan);">OS</span></span>
-                <span class="b24net-brand-tag d-none d-sm-inline">Su espacio de trabajo ideal</span>
+                <span>Devioz<span style="color: var(--ui-cyan);">OS</span></span>
+                <span class="auth-brand-tag d-none d-sm-inline">Su espacio de trabajo ideal</span>
             </a>
 
-            <a href="<?= url('/') ?>" class="b24net-btn-home" title="Volver a la portada principal">
+            <a href="<?= url('/') ?>" class="auth-btn-home" title="Volver a la portada principal">
                 <i class="fa-solid fa-arrow-left"></i>
                 <span class="d-none d-sm-inline">Volver al Inicio</span>
             </a>
         </header>
 
         <!-- Contenido Central Split (Cover Izquierdo + Isla Derecha) -->
-        <main class="b24net-main">
+        <main class="auth-main">
             <div class="container-xl">
                 <div class="row align-items-center g-4 justify-content-center">
-                    
+
                     <!-- Columna Izquierda: Información de Portada (Visible en Desktop) -->
                     <div class="col-lg-6 col-xl-7 d-none d-lg-block">
-                        <div class="b24net-aside-cover">
-                            
-                            <div class="b24net-aside-badge">
+                        <div class="auth-aside-cover">
+
+                            <div class="auth-aside-badge">
                                 <i class="fa-solid fa-shield-halved text-info"></i>
                                 <span>Estándar Enterprise • ISO 25010 • ISO 27001 • TMMi 3</span>
                             </div>
 
-                            <h1 class="b24net-aside-title">
+                            <h1 class="auth-aside-title">
                                 Su espacio de trabajo ideal
                             </h1>
 
-                            <p class="b24net-aside-subtitle">
+                            <p class="auth-aside-subtitle">
                                 Gestión ágil de proyectos, evaluación de talento TI y aseguramiento métrico de calidad con asistencia de IA LABVA.
                             </p>
 
                             <!-- Píldoras de Valor Institucional -->
-                            <div class="b24net-feature-pill">
+                            <div class="auth-feature-pill">
                                 <i class="fa-solid fa-circle-check text-success fs-5"></i>
                                 <span>Gobernanza con QA Scorecard (0 a 100 pts) y Quality Gate.</span>
                             </div>
 
-                            <div class="b24net-feature-pill">
+                            <div class="auth-feature-pill">
                                 <i class="fa-solid fa-lock text-info fs-5"></i>
                                 <span>Seguridad Zero-Trust, sesiones blindadas y OWASP Top 10.</span>
                             </div>
 
-                            <div class="b24net-feature-pill">
+                            <div class="auth-feature-pill">
                                 <i class="fa-solid fa-clock text-warning fs-5"></i>
                                 <span>Workday con control biométrico y geocercas en hubs de Devioz.</span>
                             </div>
@@ -488,8 +488,8 @@ use App\Core\View;
 
                     <!-- Columna Derecha: Tarjeta Isla del Formulario -->
                     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                        <div class="b24-island-card">
-                            
+                        <div class="ui-island-card">
+
                             <!-- Flash Messages -->
                             <?= View::partial('partials/flash') ?>
 
@@ -504,9 +504,9 @@ use App\Core\View;
         </main>
 
         <!-- Footer Inferior -->
-        <footer class="b24net-footer">
+        <footer class="auth-footer">
             <div class="d-flex align-items-center gap-3">
-                <div class="b24net-footer-btn">
+                <div class="auth-footer-btn">
                     <i class="fa-solid fa-globe"></i>
                     <span>Español</span>
                 </div>

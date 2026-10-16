@@ -39,16 +39,16 @@ $isComunidadActive = str_contains($currentUri, '/reels') || str_contains($curren
             <span>Feed</span>
         </a>
 
-        <!-- Chat / Messenger Bitrix Suite Trigger -->
-        <a href="<?= url('/chat') ?>" class="nav-link-custom <?= (str_contains($currentUri, '/chat') && (($_GET['channel'] ?? '') !== 'copilot')) ? 'active' : '' ?>" id="sidebarBitrixChatTrigger" title="Messenger Corporativo">
+        <!-- Chat / Messenger Devioz Suite Trigger -->
+        <a href="<?= url('/chat') ?>" class="nav-link-custom <?= (str_contains($currentUri, '/chat') && (($_GET['channel'] ?? '') !== 'copilot')) ? 'active' : '' ?>" id="sidebarDeviozChatTrigger" title="Messenger Corporativo">
             <span class="icon-wrapper text-info">
                 <i class="fa-regular fa-comment-dots" style="font-size: 1rem;"></i>
             </span>
             <span>Messenger</span>
         </a>
 
-        <!-- CoPilot AI Trigger Encapsulado en Bitrix24 Messenger -->
-        <a href="<?= url('/chat?channel=copilot') ?>" class="nav-link-custom <?= (str_contains($currentUri, '/chat') && (($_GET['channel'] ?? '') === 'copilot')) ? 'active' : '' ?>" id="sidebarBitrixCopilotTrigger" title="CoPilot LABVA AI">
+        <!-- CoPilot AI Trigger Encapsulado en Devioz Messenger -->
+        <a href="<?= url('/chat?channel=copilot') ?>" class="nav-link-custom <?= (str_contains($currentUri, '/chat') && (($_GET['channel'] ?? '') === 'copilot')) ? 'active' : '' ?>" id="sidebarDeviozCopilotTrigger" title="CoPilot LABVA AI">
             <span class="icon-wrapper" style="color: #A855F7;">
                 <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 0.95rem;"></i>
             </span>

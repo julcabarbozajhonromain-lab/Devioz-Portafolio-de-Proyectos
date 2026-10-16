@@ -7,20 +7,20 @@ if (!$currentUser) return;
 ?>
 
 <!-- ========================================================================= -->
-<!-- BITRIX24 AIR ENTERPRISE SIDEPANEL SLIDER (CAJÓN LATERAL DESLIZANTE)       -->
+<!-- Devioz SIDEPANEL SLIDER (CAJÓN LATERAL DESLIZANTE)       -->
 <!-- ========================================================================= -->
 
 <!-- 1. Telón de Fondo Desenfundado (Backdrop) -->
-<div class="bitrix-sidepanel-backdrop" id="bitrixSidepanelBackdrop"></div>
+<div class="devioz-sidepanel-backdrop" id="deviozSidepanelBackdrop"></div>
 
 <!-- 2. Cajón Lateral Deslizante Principal (Slider) -->
-<aside class="bitrix-sidepanel-slider" id="bitrixSidepanelSlider" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="spProjectTitle">
+<aside class="devioz-sidepanel-slider" id="deviozSidepanelSlider" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="spProjectTitle">
     <!-- Cabecera del SidePanel -->
-    <div class="bitrix-sidepanel-header">
+    <div class="devioz-sidepanel-header">
         <div class="d-flex align-items-center gap-2 flex-wrap min-w-0">
             <span class="badge font-monospace fw-bold" id="spProjectCode" style="background: rgba(23, 43, 77, 0.08); color: #172B4D; border: 1px solid #DBE2E8; font-size: 0.82rem;">#DEV-000</span>
             <span id="spProjectStatusBadge"></span>
-            <span class="bx-client-badge py-1 px-2" style="font-size: 0.75rem;" id="spProjectClient">
+            <span class="ui-client-badge py-1 px-2" style="font-size: 0.75rem;" id="spProjectClient">
                 <i class="fa-solid fa-briefcase me-1"></i>
                 <span id="spClientNameText">Cliente Corporativo</span>
             </span>
@@ -37,7 +37,7 @@ if (!$currentUser) return;
     </div>
 
     <!-- Cuerpo del SidePanel -->
-    <div class="bitrix-sidepanel-body" id="bitrixSidepanelBody">
+    <div class="devioz-sidepanel-body" id="deviozSidepanelBody">
         <!-- Estado Cargando (Spinner) -->
         <div id="spLoadingState" class="text-center py-5">
             <div class="spinner-border text-primary mb-2" role="status" style="width: 2rem; height: 2rem; color: #00ACE3 !important;"></div>
@@ -124,7 +124,7 @@ if (!$currentUser) return;
     </div>
 
     <!-- Pie del SidePanel con Acciones Rápidas -->
-    <div class="bitrix-sidepanel-footer">
+    <div class="devioz-sidepanel-footer">
         <div class="d-flex align-items-center gap-2" id="spExternalLinks">
             <a href="#" target="_blank" class="btn btn-sm btn-ghost p-1 px-2 border d-none" id="spRepoLink" style="font-size: 0.75rem; color: #172B4D;">
                 <i class="fa-brands fa-github me-1"></i> Repositorio

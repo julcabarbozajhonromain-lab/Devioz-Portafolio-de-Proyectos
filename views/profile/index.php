@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * Devioz OS — Vista de Configuración de Cuenta y Perfil
- * Estilo Visual: Bitrix24 SaaS Moderno (Light Palette, Clean Tabs, Enriched Panels)
+ * Estilo Visual: Devioz SaaS Moderno (Light Palette, Clean Tabs, Enriched Panels)
  */
 
 $user = $user ?? auth()->user();
@@ -13,7 +13,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
 ?>
 
 <div class="container-fluid px-2 px-md-4 py-3">
-    <!-- Breadcrumb de Navegación Bitrix24 -->
+    <!-- Breadcrumb de Navegación Devioz -->
     <nav class="gl-breadcrumbs d-flex align-items-center gap-2 mb-2" aria-label="Breadcrumb">
         <a href="<?= url('/dashboard') ?>" class="gl-breadcrumb-item d-flex align-items-center gap-1 text-decoration-none" style="color: rgba(255, 255, 255, 0.85) !important;">
             <i class="fa-solid fa-house" style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.85) !important;"></i>
@@ -23,7 +23,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
         <span class="gl-breadcrumb-current fw-semibold text-white" style="color: #FFFFFF !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);">Perfil y Ajustes</span>
     </nav>
 
-    <!-- Cabecera de la Sección Estilo Bitrix24 -->
+    <!-- Cabecera de la Sección Estilo Devioz -->
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
         <div>
             <h2 class="fw-bold mb-0 page-header-title d-flex align-items-center gap-2 text-white" style="font-size: 22px; color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 2px 8px rgba(0, 0, 0, 0.35) !important;">
@@ -32,12 +32,12 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
             </h2>
         </div>
         <div class="d-flex align-items-center gap-2">
-            <a href="<?= url('/dashboard') ?>" class="btn btn-bitrix-ghost btn-sm px-3">
+            <a href="<?= url('/dashboard') ?>" class="btn btn-devioz-ghost btn-sm px-3">
                 <i class="fa-solid fa-arrow-left me-1"></i>
                 <span>Volver al Panel</span>
             </a>
             <?php if ($user->isDeveloper()): ?>
-                <a href="<?= url('/my-project') ?>" class="btn btn-bitrix-secondary btn-sm px-3">
+                <a href="<?= url('/my-project') ?>" class="btn btn-devioz-secondary btn-sm px-3">
                     <i class="fa-solid fa-briefcase me-1"></i>
                     <span>Mi Proyecto</span>
                 </a>
@@ -47,27 +47,27 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
 
     <div class="row g-4">
         <!-- ========================================================================= -->
-        <!-- COLUMNA IZQUIERDA: TARJETA DE IDENTIDAD Y RESUMEN BITRIX24                 -->
+        <!-- COLUMNA IZQUIERDA: TARJETA DE IDENTIDAD Y RESUMEN DEVIOZ                 -->
         <!-- ========================================================================= -->
         <div class="col-lg-4 col-xl-3">
             <!-- Tarjeta Visual del Perfil -->
-            <div class="bx-card text-center mb-4">
+            <div class="ui-card text-center mb-4">
                 <!-- Avatar con Badge Flotante Estilizado y Disparador de Carga -->
-                <div class="bx-avatar-card mb-3">
-                    <img src="<?= e($user->avatarUrl()) ?>" 
-                         alt="<?= e($user->name) ?>" 
+                <div class="ui-avatar-card mb-3">
+                    <img src="<?= e($user->avatarUrl()) ?>"
+                         alt="<?= e($user->name) ?>"
                          id="sidebarProfilePreview"
-                         class="bx-avatar-frame"
-                         width="110" 
+                         class="ui-avatar-frame"
+                         width="110"
                          height="110"
                          loading="lazy">
-                    
-                    <!-- Indicador de Estado Activo Flotante (Verde Bitrix) -->
-                    <span class="bx-avatar-status-dot" title="Cuenta Activa y Verificada" data-bs-toggle="tooltip"></span>
 
-                    <!-- Disparador de Carga de Cámara (Azul Bitrix) -->
-                    <label for="avatarInput" 
-                           class="bx-avatar-cam-btn" 
+                    <!-- Indicador de Estado Activo Flotante (Verde Devioz) -->
+                    <span class="ui-avatar-status-dot" title="Cuenta Activa y Verificada" data-bs-toggle="tooltip"></span>
+
+                    <!-- Disparador de Carga de Cámara (Azul Devioz) -->
+                    <label for="avatarInput"
+                           class="ui-avatar-cam-btn"
                            title="Subir o cambiar foto de perfil"
                            data-bs-toggle="tooltip">
                         <i class="fa-solid fa-camera" style="font-size: 0.85rem;"></i>
@@ -79,12 +79,12 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
 
                 <!-- Badges de Rol y Sede -->
                 <div class="d-flex align-items-center justify-content-center gap-2 flex-wrap mb-3">
-                    <span class="<?= $isAdmin ? 'bx-role-badge-admin' : 'bx-role-badge-dev' ?>">
+                    <span class="<?= $isAdmin ? 'ui-role-badge-admin' : 'ui-role-badge-dev' ?>">
                         <i class="fa-solid <?= $isAdmin ? 'fa-user-shield' : 'fa-code' ?> me-1"></i>
                         <?= $isAdmin ? 'Administrador' : 'Desarrollador' ?>
                     </span>
                     <?php if ($user->sede): ?>
-                        <span class="bx-sede-badge">
+                        <span class="ui-sede-badge">
                             <i class="fa-solid fa-location-dot me-1" style="color: #78909C;"></i>
                             <?= e($user->sede) ?>
                         </span>
@@ -108,15 +108,15 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                 <?php endif; ?>
             </div>
 
-            <!-- Resumen de Métricas de Cuenta Bitrix24 -->
-            <div class="bx-card">
+            <!-- Resumen de Métricas de Cuenta Devioz -->
+            <div class="ui-card">
                 <div class="fw-bold text-uppercase mb-3" style="font-size: 11px; letter-spacing: 0.05em; color: #78909C;">
                     Resumen de Cuenta
                 </div>
                 <div class="d-flex flex-column gap-2.5">
                     <div class="d-flex justify-content-between align-items-center pb-2 border-bottom" style="border-color: #E0E8ED !important;">
                         <span style="font-size: 13px; color: #78909C;">Estado:</span>
-                        <span class="bx-status-active">
+                        <span class="ui-status-active">
                             <i class="fa-solid fa-circle-check"></i> Activa
                         </span>
                     </div>
@@ -135,8 +135,8 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                 </div>
             </div>
 
-            <!-- Tarjeta de Tema Visual y Fondo (Configuración Bitrix24 Air) -->
-            <div class="bx-card mt-3">
+            <!-- Tarjeta de Tema Visual y Fondo (Configuración Devioz) -->
+            <div class="ui-card mt-3">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <div class="fw-bold text-uppercase" style="font-size: 11px; letter-spacing: 0.05em; color: #78909C;">
                         Tema Visual de Espacio
@@ -144,9 +144,9 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                     <i class="fa-solid fa-palette text-warning" style="font-size: 0.95rem;"></i>
                 </div>
                 <p class="small text-secondary mb-3" style="font-size: 12px; line-height: 1.45;">
-                    Personaliza la imagen de fondo y atmósfera de tu espacio de trabajo corporativo con la colección oficial Bitrix24.
+                    Personaliza la imagen de fondo y atmósfera de tu espacio de trabajo corporativo con la colección oficial Devioz.
                 </p>
-                <button type="button" class="btn btn-bitrix-secondary btn-sm w-100 py-2 d-flex align-items-center justify-content-center gap-2" data-theme-modal-trigger>
+                <button type="button" class="btn btn-devioz-secondary btn-sm w-100 py-2 d-flex align-items-center justify-content-center gap-2" data-theme-modal-trigger>
                     <i class="fa-solid fa-palette text-warning"></i>
                     <span class="fw-semibold">Cambiar tema visual</span>
                 </button>
@@ -154,37 +154,37 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
         </div>
 
         <!-- ========================================================================= -->
-        <!-- COLUMNA DERECHA: PESTAÑAS Y PANELES BITRIX24                               -->
+        <!-- COLUMNA DERECHA: PESTAÑAS Y PANELES DEVIOZ                               -->
         <!-- ========================================================================= -->
         <div class="col-lg-8 col-xl-9">
-            <!-- Pestañas Horizontales Estilo Bitrix24 (Borde Inferior Azul #00ACE3) -->
-            <ul class="bx-tabs-nav nav" id="profileTabsNav" role="tablist">
+            <!-- Pestañas Horizontales Estilo Devioz (Borde Inferior Azul #00ACE3) -->
+            <ul class="ui-tabs-nav nav" id="profileTabsNav" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="bx-tab-link active" id="tab-personal-btn" data-bs-toggle="tab" data-bs-target="#tab-personal" type="button" role="tab" aria-controls="tab-personal" aria-selected="true">
+                    <button class="ui-tab-link active" id="tab-personal-btn" data-bs-toggle="tab" data-bs-target="#tab-personal" type="button" role="tab" aria-controls="tab-personal" aria-selected="true">
                         <i class="fa-solid fa-id-card"></i>
                         <span>Datos Personales</span>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="bx-tab-link" id="tab-security-btn" data-bs-toggle="tab" data-bs-target="#tab-security" type="button" role="tab" aria-controls="tab-security" aria-selected="false">
+                    <button class="ui-tab-link" id="tab-security-btn" data-bs-toggle="tab" data-bs-target="#tab-security" type="button" role="tab" aria-controls="tab-security" aria-selected="false">
                         <i class="fa-solid fa-lock"></i>
                         <span>Seguridad y Contraseña</span>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="bx-tab-link" id="tab-avatar-btn" data-bs-toggle="tab" data-bs-target="#tab-avatar" type="button" role="tab" aria-controls="tab-avatar" aria-selected="false">
+                    <button class="ui-tab-link" id="tab-avatar-btn" data-bs-toggle="tab" data-bs-target="#tab-avatar" type="button" role="tab" aria-controls="tab-avatar" aria-selected="false">
                         <i class="fa-solid fa-camera"></i>
                         <span>Foto de Perfil</span>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="bx-tab-link" id="tab-system-btn" data-bs-toggle="tab" data-bs-target="#tab-system" type="button" role="tab" aria-controls="tab-system" aria-selected="false">
+                    <button class="ui-tab-link" id="tab-system-btn" data-bs-toggle="tab" data-bs-target="#tab-system" type="button" role="tab" aria-controls="tab-system" aria-selected="false">
                         <i class="fa-solid fa-shield-halved"></i>
                         <span>Estado de Cuenta</span>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="bx-tab-link" id="tab-theme-btn" data-bs-toggle="tab" data-bs-target="#tab-theme" type="button" role="tab" aria-controls="tab-theme" aria-selected="false">
+                    <button class="ui-tab-link" id="tab-theme-btn" data-bs-toggle="tab" data-bs-target="#tab-theme" type="button" role="tab" aria-controls="tab-theme" aria-selected="false">
                         <i class="fa-solid fa-palette text-warning"></i>
                         <span>Tema Visual</span>
                     </button>
@@ -197,11 +197,11 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                 <!-- PESTAÑA 1: DATOS PERSONALES                -->
                 <!-- ========================================== -->
                 <div class="tab-pane fade show active" id="tab-personal" role="tabpanel" aria-labelledby="tab-personal-btn">
-                    <div class="bx-panel">
-                        <div class="bx-panel-header">
+                    <div class="ui-panel">
+                        <div class="ui-panel-header">
                             <div>
-                                <h3 class="bx-panel-title">Información Personal y Profesional</h3>
-                                <p class="bx-panel-subtitle">Actualiza tus nombres, correo y detalles visibles para supervisores y compañeros de proyecto.</p>
+                                <h3 class="ui-panel-title">Información Personal y Profesional</h3>
+                                <p class="ui-panel-subtitle">Actualiza tus nombres, correo y detalles visibles para supervisores y compañeros de proyecto.</p>
                             </div>
                             <span class="badge" style="background: rgba(0, 172, 227, 0.1); color: #00ACE3; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;">
                                 <i class="fa-solid fa-pen-to-square me-1"></i> Editable
@@ -212,32 +212,32 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                             <?= csrf_field() ?>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="name" class="bx-form-label">Nombre Completo *</label>
-                                    <input type="text" 
-                                           name="name" 
-                                           id="name" 
-                                           class="form-control bx-form-input" 
-                                           value="<?= e($user->name) ?>" 
-                                           required 
-                                           minlength="3" 
-                                           maxlength="150" 
+                                    <label for="name" class="ui-form-label">Nombre Completo *</label>
+                                    <input type="text"
+                                           name="name"
+                                           id="name"
+                                           class="form-control ui-form-input"
+                                           value="<?= e($user->name) ?>"
+                                           required
+                                           minlength="3"
+                                           maxlength="150"
                                            placeholder="Ej: Jhon Julca">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="email" class="bx-form-label">Correo Electrónico *</label>
-                                    <input type="email" 
-                                           name="email" 
-                                           id="email" 
-                                           class="form-control bx-form-input" 
-                                           value="<?= e($user->email) ?>" 
-                                           required 
+                                    <label for="email" class="ui-form-label">Correo Electrónico *</label>
+                                    <input type="email"
+                                           name="email"
+                                           id="email"
+                                           class="form-control ui-form-input"
+                                           value="<?= e($user->email) ?>"
+                                           required
                                            placeholder="usuario@devioz.org">
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="sede" class="bx-form-label">Sede Académica * <span class="text-danger fw-semibold">(Obligatorio)</span></label>
-                                    <select name="sede" id="sede" class="form-select bx-form-input" required>
+                                    <label for="sede" class="ui-form-label">Sede Académica * <span class="text-danger fw-semibold">(Obligatorio)</span></label>
+                                    <select name="sede" id="sede" class="form-select ui-form-input" required>
                                         <option value="" disabled <?= empty($user->sede) ? 'selected' : '' ?>>— Selecciona tu Sede Académica —</option>
                                         <option value="Cercado" <?= $user->sede === 'Cercado' ? 'selected' : '' ?>>Cercado</option>
                                         <option value="Lima Norte" <?= $user->sede === 'Lima Norte' ? 'selected' : '' ?>>Lima Norte</option>
@@ -249,12 +249,12 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="bio" class="bx-form-label">Biografía / Presentación Breve</label>
-                                    <textarea name="bio" 
-                                              id="bio" 
-                                              class="form-control bx-form-input" 
-                                              rows="3" 
-                                              maxlength="500" 
+                                    <label for="bio" class="ui-form-label">Biografía / Presentación Breve</label>
+                                    <textarea name="bio"
+                                              id="bio"
+                                              class="form-control ui-form-input"
+                                              rows="3"
+                                              maxlength="500"
                                               placeholder="Comparte brevemente tus intereses tecnológicos, proyectos o metas profesionales..."><?= e($user->bio ?? '') ?></textarea>
                                     <div class="mt-1" style="font-size: 12px; color: #78909C;">
                                         Máximo 500 caracteres. Visible en el directorio del equipo y fichas de proyecto.
@@ -262,7 +262,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                                 </div>
 
                                 <div class="col-12 text-sm-end text-center mt-4">
-                                    <button type="submit" class="btn btn-bitrix-primary btn-sm px-4">
+                                    <button type="submit" class="btn btn-devioz-primary btn-sm px-4">
                                         <i class="fa-solid fa-floppy-disk me-1"></i>
                                         <span>Guardar Cambios</span>
                                     </button>
@@ -276,11 +276,11 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                 <!-- PESTAÑA 2: SEGURIDAD Y CONTRASEÑA          -->
                 <!-- ========================================== -->
                 <div class="tab-pane fade" id="tab-security" role="tabpanel" aria-labelledby="tab-security-btn">
-                    <div class="bx-panel">
-                        <div class="bx-panel-header">
+                    <div class="ui-panel">
+                        <div class="ui-panel-header">
                             <div>
-                                <h3 class="bx-panel-title">Seguridad y Modificación de Contraseña</h3>
-                                <p class="bx-panel-subtitle">Protege tu cuenta actualizando periódicamente tu clave de acceso al entorno.</p>
+                                <h3 class="ui-panel-title">Seguridad y Modificación de Contraseña</h3>
+                                <p class="ui-panel-subtitle">Protege tu cuenta actualizando periódicamente tu clave de acceso al entorno.</p>
                             </div>
                             <span class="badge" style="background: rgba(245, 158, 11, 0.1); color: #d97706; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;">
                                 <i class="fa-solid fa-shield-halved me-1"></i> Protección Activa
@@ -291,61 +291,61 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                             <?= csrf_field() ?>
                             <div class="row g-3">
                                 <div class="col-md-12">
-                                    <label for="current_password" class="bx-form-label">Contraseña Actual *</label>
+                                    <label for="current_password" class="ui-form-label">Contraseña Actual *</label>
                                     <div class="input-group">
-                                        <input type="password" 
-                                               name="current_password" 
-                                               id="current_password" 
-                                               class="form-control bx-form-input" 
-                                               required 
+                                        <input type="password"
+                                               name="current_password"
+                                               id="current_password"
+                                               class="form-control ui-form-input"
+                                               required
                                                placeholder="Ingresa tu contraseña actual">
-                                        <button class="btn btn-outline-secondary bx-input-group-btn toggle-password-btn" type="button" data-target="current_password" title="Mostrar/ocultar">
+                                        <button class="btn btn-outline-secondary ui-input-group-btn toggle-password-btn" type="button" data-target="current_password" title="Mostrar/ocultar">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="new_password" class="bx-form-label">Nueva Contraseña *</label>
+                                    <label for="new_password" class="ui-form-label">Nueva Contraseña *</label>
                                     <div class="input-group">
-                                        <input type="password" 
-                                               name="new_password" 
-                                               id="new_password" 
-                                               class="form-control bx-form-input" 
-                                               required 
-                                               minlength="6" 
+                                        <input type="password"
+                                               name="new_password"
+                                               id="new_password"
+                                               class="form-control ui-form-input"
+                                               required
+                                               minlength="6"
                                                placeholder="Mínimo 6 caracteres">
-                                        <button class="btn btn-outline-secondary bx-input-group-btn toggle-password-btn" type="button" data-target="new_password" title="Mostrar/ocultar">
+                                        <button class="btn btn-outline-secondary ui-input-group-btn toggle-password-btn" type="button" data-target="new_password" title="Mostrar/ocultar">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="new_password_confirmation" class="bx-form-label">Confirmar Nueva Contraseña *</label>
+                                    <label for="new_password_confirmation" class="ui-form-label">Confirmar Nueva Contraseña *</label>
                                     <div class="input-group">
-                                        <input type="password" 
-                                               name="new_password_confirmation" 
-                                               id="new_password_confirmation" 
-                                               class="form-control bx-form-input" 
-                                               required 
-                                               minlength="6" 
+                                        <input type="password"
+                                               name="new_password_confirmation"
+                                               id="new_password_confirmation"
+                                               class="form-control ui-form-input"
+                                               required
+                                               minlength="6"
                                                placeholder="Repite la nueva contraseña">
-                                        <button class="btn btn-outline-secondary bx-input-group-btn toggle-password-btn" type="button" data-target="new_password_confirmation" title="Mostrar/ocultar">
+                                        <button class="btn btn-outline-secondary ui-input-group-btn toggle-password-btn" type="button" data-target="new_password_confirmation" title="Mostrar/ocultar">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <div class="bx-alert-box">
+                                    <div class="ui-alert-box">
                                         <i class="fa-solid fa-circle-info" style="color: #00ACE3; font-size: 1rem;"></i>
                                         <span>Recomendación: Usa una combinación de letras mayúsculas, minúsculas, números y caracteres especiales para máxima solidez.</span>
                                     </div>
                                 </div>
 
                                 <div class="col-12 text-sm-end text-center mt-4">
-                                    <button type="submit" class="btn btn-bitrix-primary btn-sm px-4">
+                                    <button type="submit" class="btn btn-devioz-primary btn-sm px-4">
                                         <i class="fa-solid fa-key me-1"></i>
                                         <span>Modificar Contraseña</span>
                                     </button>
@@ -359,11 +359,11 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                 <!-- PESTAÑA 3: FOTO DE PERFIL / AVATAR         -->
                 <!-- ========================================== -->
                 <div class="tab-pane fade" id="tab-avatar" role="tabpanel" aria-labelledby="tab-avatar-btn">
-                    <div class="bx-panel">
-                        <div class="bx-panel-header">
+                    <div class="ui-panel">
+                        <div class="ui-panel-header">
                             <div>
-                                <h3 class="bx-panel-title">Foto de Perfil y Avatar</h3>
-                                <p class="bx-panel-subtitle">Sube una fotografía o avatar para personalizar tu cuenta en todo el sistema.</p>
+                                <h3 class="ui-panel-title">Foto de Perfil y Avatar</h3>
+                                <p class="ui-panel-subtitle">Sube una fotografía o avatar para personalizar tu cuenta en todo el sistema.</p>
                             </div>
                         </div>
 
@@ -372,31 +372,31 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                             <div class="row align-items-center g-4">
                                 <div class="col-sm-auto text-center">
                                     <!-- Preview en Tiempo Real -->
-                                    <div class="bx-avatar-card">
-                                        <img src="<?= e($user->avatarUrl()) ?>" 
-                                             alt="Vista previa" 
+                                    <div class="ui-avatar-card">
+                                        <img src="<?= e($user->avatarUrl()) ?>"
+                                             alt="Vista previa"
                                              id="avatarPreviewImg"
-                                             class="bx-avatar-frame" 
-                                             width="95" 
+                                             class="ui-avatar-frame"
+                                             width="95"
                                              height="95"
                                              loading="lazy">
-                                        <span class="bx-avatar-status-dot"></span>
+                                        <span class="ui-avatar-status-dot"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm">
-                                    <label for="avatarInput" class="bx-form-label">Seleccionar archivo de imagen:</label>
-                                    <input type="file" 
-                                           name="avatar" 
-                                           id="avatarInput" 
-                                           class="form-control bx-form-input" 
-                                           accept="image/png, image/jpeg, image/webp" 
+                                    <label for="avatarInput" class="ui-form-label">Seleccionar archivo de imagen:</label>
+                                    <input type="file"
+                                           name="avatar"
+                                           id="avatarInput"
+                                           class="form-control ui-form-input"
+                                           accept="image/png, image/jpeg, image/webp"
                                            required>
                                     <div class="mt-2" style="font-size: 12px; color: #78909C;">
                                         Formatos admitidos: <strong>JPG, PNG o WEBP</strong>. Tamaño máximo: <strong>5 MB</strong>. Proporción cuadrada 1:1 recomendada.
                                     </div>
                                 </div>
                                 <div class="col-12 text-sm-end text-center mt-4">
-                                    <button type="submit" class="btn btn-bitrix-primary btn-sm px-4" id="btnSaveAvatar">
+                                    <button type="submit" class="btn btn-devioz-primary btn-sm px-4" id="btnSaveAvatar">
                                         <i class="fa-solid fa-cloud-arrow-up me-1"></i>
                                         <span>Guardar Foto de Perfil</span>
                                     </button>
@@ -410,42 +410,42 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                 <!-- PESTAÑA 4: DETALLES Y ESTADO DE CUENTA     -->
                 <!-- ========================================== -->
                 <div class="tab-pane fade" id="tab-system" role="tabpanel" aria-labelledby="tab-system-btn">
-                    <div class="bx-panel">
-                        <div class="bx-panel-header">
+                    <div class="ui-panel">
+                        <div class="ui-panel-header">
                             <div>
-                                <h3 class="bx-panel-title">Información del Sistema y Trazabilidad</h3>
-                                <p class="bx-panel-subtitle">Datos administrativos, permisos y estado de sesión en la plataforma Devioz.</p>
+                                <h3 class="ui-panel-title">Información del Sistema y Trazabilidad</h3>
+                                <p class="ui-panel-subtitle">Datos administrativos, permisos y estado de sesión en la plataforma Devioz.</p>
                             </div>
                         </div>
 
                         <div class="row g-3">
                             <div class="col-6 col-md-3">
-                                <div class="bx-tile">
-                                    <div class="bx-tile-label">Rol en la plataforma</div>
-                                    <div class="bx-tile-val text-truncate"><?= $isAdmin ? 'Administrador' : 'Desarrollador' ?></div>
+                                <div class="ui-tile">
+                                    <div class="ui-tile-label">Rol en la plataforma</div>
+                                    <div class="ui-tile-val text-truncate"><?= $isAdmin ? 'Administrador' : 'Desarrollador' ?></div>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
-                                <div class="bx-tile">
-                                    <div class="bx-tile-label">Estado operacional</div>
-                                    <div class="bx-tile-val text-truncate d-flex align-items-center gap-1" style="color: #5ea300;">
+                                <div class="ui-tile">
+                                    <div class="ui-tile-label">Estado operacional</div>
+                                    <div class="ui-tile-val text-truncate d-flex align-items-center gap-1" style="color: #5ea300;">
                                         <i class="fa-solid fa-circle-check"></i>
                                         <span>Activa</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
-                                <div class="bx-tile">
-                                    <div class="bx-tile-label">Miembro desde</div>
-                                    <div class="bx-tile-val text-truncate">
+                                <div class="ui-tile">
+                                    <div class="ui-tile-label">Miembro desde</div>
+                                    <div class="ui-tile-val text-truncate">
                                         <?= !empty($user->created_at) ? date('d/m/Y', strtotime((string)$user->created_at)) : '—' ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
-                                <div class="bx-tile">
-                                    <div class="bx-tile-label">Último acceso</div>
-                                    <div class="bx-tile-val text-truncate">
+                                <div class="ui-tile">
+                                    <div class="ui-tile-label">Último acceso</div>
+                                    <div class="ui-tile-val text-truncate">
                                         <?= !empty($user->last_login_at) ? date('d/m/Y H:i', strtotime((string)$user->last_login_at)) : 'Hoy' ?>
                                     </div>
                                 </div>
@@ -455,65 +455,65 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                 </div>
 
                 <!-- ========================================== -->
-                <!-- PESTAÑA 5: TEMA VISUAL (BITRIX24 AIR)      -->
+                <!-- PESTAÑA 5: TEMA VISUAL (Devioz)      -->
                 <!-- ========================================== -->
                 <div class="tab-pane fade" id="tab-theme" role="tabpanel" aria-labelledby="tab-theme-btn">
-                    <div class="bx-panel">
-                        <div class="bx-panel-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div class="ui-panel">
+                        <div class="ui-panel-header d-flex align-items-center justify-content-between flex-wrap gap-2">
                             <div>
-                                <h3 class="bx-panel-title">Fondo de Pantalla y Tema Visual</h3>
-                                <p class="bx-panel-subtitle">Personaliza la atmósfera de tu espacio de trabajo (Bitrix24 Air). El tema seleccionado se guarda automáticamente para todas tus sesiones.</p>
+                                <h3 class="ui-panel-title">Fondo de Pantalla y Tema Visual</h3>
+                                <p class="ui-panel-subtitle">Personaliza la atmósfera de tu espacio de trabajo (Devioz). El tema seleccionado se guarda automáticamente para todas tus sesiones.</p>
                             </div>
-                            <button type="button" class="btn btn-bitrix-secondary btn-sm px-3" data-theme-modal-trigger>
+                            <button type="button" class="btn btn-devioz-secondary btn-sm px-3" data-theme-modal-trigger>
                                 <i class="fa-solid fa-palette text-warning me-1"></i>
                                 <span>Abrir Galería Completa</span>
                             </button>
                         </div>
 
                         <!-- Galería de Fondos de Pantalla Rápida -->
-                        <div class="bitrix-theme-grid mt-2" style="max-height: none; padding: 0.5rem 0 !important;">
+                        <div class="devioz-theme-grid mt-2" style="max-height: none; padding: 0.5rem 0 !important;">
                             <!-- 1. Amanecer en el Prado -->
-                            <div class="bitrix-theme-card" data-theme-key="meadow" title="Amanecer en el Prado" style="background-image: url('<?= asset('images/wallpapers/meadow.webp') ?>');">
-                                <span class="bitrix-theme-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <div class="devioz-theme-card" data-theme-key="meadow" title="Amanecer en el Prado" style="background-image: url('<?= asset('images/wallpapers/meadow.webp') ?>');">
+                                <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
 
                             <!-- 2. Saturno Video -->
-                            <div class="bitrix-theme-card" data-theme-key="saturn" title="Saturno (video)" style="background-image: url('<?= asset('images/wallpapers/saturn.webp') ?>');">
-                                <div class="bitrix-theme-play-btn"><i class="fa-solid fa-play"></i></div>
-                                <span class="bitrix-theme-video-title">Saturno (video)</span>
-                                <span class="bitrix-theme-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <div class="devioz-theme-card" data-theme-key="saturn" title="Saturno (video)" style="background-image: url('<?= asset('images/wallpapers/saturn.webp') ?>');">
+                                <div class="devioz-theme-play-btn"><i class="fa-solid fa-play"></i></div>
+                                <span class="devioz-theme-video-title">Saturno (video)</span>
+                                <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
 
                             <!-- 3. Bosque Halloween -->
-                            <div class="bitrix-theme-card" data-theme-key="halloween" title="Bosque Encantado Halloween" style="background-image: url('<?= asset('images/wallpapers/halloween.webp') ?>');">
-                                <span class="bitrix-theme-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <div class="devioz-theme-card" data-theme-key="halloween" title="Bosque Encantado Halloween" style="background-image: url('<?= asset('images/wallpapers/halloween.webp') ?>');">
+                                <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
 
                             <!-- 4. Bosque Nevado -->
-                            <div class="bitrix-theme-card" data-theme-key="winter" title="Bosque Nevado Invernal" style="background-image: url('<?= asset('images/wallpapers/winter.webp') ?>');">
-                                <span class="bitrix-theme-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <div class="devioz-theme-card" data-theme-key="winter" title="Bosque Nevado Invernal" style="background-image: url('<?= asset('images/wallpapers/winter.webp') ?>');">
+                                <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
 
                             <!-- 5. Flor Cósmica (Por defecto) -->
-                            <div class="bitrix-theme-card active" data-theme-key="vibecode" title="Flor Cósmica de Cristal" style="background: radial-gradient(at 85% 15%, #6366f1 0px, transparent 55%), radial-gradient(at 15% 85%, #00ace3 0px, transparent 55%), linear-gradient(135deg, #090e24 0%, #151b45 50%, #201a4e 100%);">
-                                <span class="bitrix-theme-badge-default">Por defecto</span>
-                                <span class="bitrix-theme-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <div class="devioz-theme-card active" data-theme-key="vibecode" title="Flor Cósmica de Cristal" style="background: radial-gradient(at 85% 15%, #6366f1 0px, transparent 55%), radial-gradient(at 15% 85%, #00ace3 0px, transparent 55%), linear-gradient(135deg, #090e24 0%, #151b45 50%, #201a4e 100%);">
+                                <span class="devioz-theme-badge-default">Por defecto</span>
+                                <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
 
                             <!-- 6. Nebulosa Púrpura -->
-                            <div class="bitrix-theme-card" data-theme-key="nebula" title="Nebulosa Púrpura" style="background-image: url('<?= asset('images/wallpapers/nebula.webp') ?>');">
-                                <span class="bitrix-theme-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <div class="devioz-theme-card" data-theme-key="nebula" title="Nebulosa Púrpura" style="background-image: url('<?= asset('images/wallpapers/nebula.webp') ?>');">
+                                <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
 
                             <!-- 7. Medusa de Cristal -->
-                            <div class="bitrix-theme-card" data-theme-key="jellyfish" title="Medusa de Cristal (video)" style="background-image: url('<?= asset('images/wallpapers/jellyfish.webp') ?>');">
-                                <div class="bitrix-theme-play-btn"><i class="fa-solid fa-play"></i></div>
-                                <span class="bitrix-theme-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <div class="devioz-theme-card" data-theme-key="jellyfish" title="Medusa de Cristal (video)" style="background-image: url('<?= asset('images/wallpapers/jellyfish.webp') ?>');">
+                                <div class="devioz-theme-play-btn"><i class="fa-solid fa-play"></i></div>
+                                <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
 
                             <!-- 8. Tierra desde el Espacio -->
-                            <div class="bitrix-theme-card" data-theme-key="earth" title="Tierra desde el Espacio" style="background-image: url('<?= asset('images/wallpapers/earth.webp') ?>');">
-                                <span class="bitrix-theme-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <div class="devioz-theme-card" data-theme-key="earth" title="Tierra desde el Espacio" style="background-image: url('<?= asset('images/wallpapers/earth.webp') ?>');">
+                                <span class="devioz-theme-check-icon"><i class="fa-solid fa-check"></i></span>
                             </div>
                         </div>
 
@@ -522,7 +522,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
                                 <i class="fa-solid fa-circle-info text-info fs-5"></i>
                                 <span class="small text-secondary" style="font-size: 13px;">Haz clic en cualquier miniatura para aplicar el tema en vivo. También puedes subir tu propio fondo personalizado desde la galería.</span>
                             </div>
-                            <button type="button" class="btn btn-bitrix-save-lime btn-sm px-4" data-theme-modal-trigger>
+                            <button type="button" class="btn btn-devioz-save-lime btn-sm px-4" data-theme-modal-trigger>
                                 <i class="fa-solid fa-images me-1"></i> Ver Todos (16 Fondos)
                             </button>
                         </div>
@@ -538,7 +538,7 @@ $hasCustomAvatar = !empty($user->avatar) && str_starts_with($user->avatar, '/upl
 <!-- ========================================================================= -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Sincronización de Hash de URL con Pestañas Bitrix24
+    // 1. Sincronización de Hash de URL con Pestañas Devioz
     const hashToTab = {
         '#seccion-personal': '#tab-personal-btn',
         '#seccion-seguridad': '#tab-security-btn',

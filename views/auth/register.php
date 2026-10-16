@@ -7,9 +7,9 @@ declare(strict_types=1);
 <div class="mb-4">
     <div class="d-flex align-items-center gap-2 mb-2 d-lg-none">
         <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="28" height="28" class="rounded">
-        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--b24-cyan);">OS</span></span>
+        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--ui-cyan);">OS</span></span>
     </div>
-    <h3 class="fw-bold mb-1" style="color: var(--b24-navy); letter-spacing: -0.5px;">Crear Cuenta en Devioz OS</h3>
+    <h3 class="fw-bold mb-1" style="color: var(--ui-navy); letter-spacing: -0.5px;">Crear Cuenta en Devioz OS</h3>
     <p class="text-secondary small mb-0">Únase a la plataforma de gestión de proyectos y talento TI</p>
 </div>
 
@@ -24,14 +24,14 @@ declare(strict_types=1);
             <span class="input-group-text bg-light border-end-0 text-muted" style="border-radius: 8px 0 0 8px;">
                 <i class="fa-regular fa-user"></i>
             </span>
-            <input type="text" 
-                   class="form-control form-control-custom border-start-0" 
-                   id="name" 
-                   name="name" 
-                   value="<?= e(old('name')) ?>" 
-                   placeholder="Ej: Juan Pérez Morales" 
+            <input type="text"
+                   class="form-control form-control-custom border-start-0"
+                   id="name"
+                   name="name"
+                   value="<?= e(old('name')) ?>"
+                   placeholder="Ej: Juan Pérez Morales"
                    autocomplete="name"
-                   required 
+                   required
                    autofocus
                    style="border-radius: 0 8px 8px 0;">
         </div>
@@ -44,12 +44,12 @@ declare(strict_types=1);
             <span class="input-group-text bg-light border-end-0 text-muted" style="border-radius: 8px 0 0 8px;">
                 <i class="fa-regular fa-envelope"></i>
             </span>
-            <input type="email" 
-                   class="form-control form-control-custom border-start-0" 
-                   id="email" 
-                   name="email" 
-                   value="<?= e(old('email')) ?>" 
-                   placeholder="nombre.apellido@devioz.io" 
+            <input type="email"
+                   class="form-control form-control-custom border-start-0"
+                   id="email"
+                   name="email"
+                   value="<?= e(old('email')) ?>"
+                   placeholder="nombre.apellido@devioz.io"
                    autocomplete="email"
                    required
                    style="border-radius: 0 8px 8px 0;">
@@ -77,18 +77,18 @@ declare(strict_types=1);
         <div class="col-sm-6">
             <label for="password" class="form-label-custom">Contraseña</label>
             <div class="input-group auth-password-wrapper">
-                <input type="password" 
-                       class="form-control form-control-custom pe-5" 
-                       id="password" 
-                       name="password" 
-                       placeholder="Mín. 8 caracteres" 
+                <input type="password"
+                       class="form-control form-control-custom pe-5"
+                       id="password"
+                       name="password"
+                       placeholder="Mín. 8 caracteres"
                        autocomplete="new-password"
                        required
                        style="border-radius: 8px;">
-                <button type="button" 
-                        class="btn-toggle-password" 
-                        data-target="password" 
-                        aria-label="Mostrar u ocultar contraseña" 
+                <button type="button"
+                        class="btn-toggle-password"
+                        data-target="password"
+                        aria-label="Mostrar u ocultar contraseña"
                         title="Mostrar contraseña"
                         tabindex="-1">
                     <i class="fa-regular fa-eye eye-open"></i>
@@ -99,18 +99,18 @@ declare(strict_types=1);
         <div class="col-sm-6">
             <label for="password_confirmation" class="form-label-custom">Confirmar</label>
             <div class="input-group auth-password-wrapper">
-                <input type="password" 
-                       class="form-control form-control-custom pe-5" 
-                       id="password_confirmation" 
-                       name="password_confirmation" 
-                       placeholder="Repetir clave" 
+                <input type="password"
+                       class="form-control form-control-custom pe-5"
+                       id="password_confirmation"
+                       name="password_confirmation"
+                       placeholder="Repetir clave"
                        autocomplete="new-password"
                        required
                        style="border-radius: 8px;">
-                <button type="button" 
-                        class="btn-toggle-password" 
-                        data-target="password_confirmation" 
-                        aria-label="Mostrar u ocultar contraseña" 
+                <button type="button"
+                        class="btn-toggle-password"
+                        data-target="password_confirmation"
+                        aria-label="Mostrar u ocultar contraseña"
                         title="Mostrar contraseña"
                         tabindex="-1">
                     <i class="fa-regular fa-eye eye-open"></i>
@@ -122,7 +122,7 @@ declare(strict_types=1);
     <div id="passwordMatchHint" class="small mb-3 d-none"></div>
 
     <!-- Botón de Envío -->
-    <button type="submit" class="btn-b24-auth-submit mt-2" id="btnRegisterSubmit">
+    <button type="submit" class="btn-ui-auth-submit mt-2" id="btnRegisterSubmit">
         <span>Crear mi cuenta</span>
         <i class="fa-solid fa-arrow-right"></i>
     </button>
@@ -131,8 +131,8 @@ declare(strict_types=1);
 <!-- Enlace para Volver a Iniciar Sesión -->
 <div class="text-center mt-4 pt-3 border-top">
     <p class="text-secondary small mb-0">
-        ¿Ya tiene una cuenta registrada? 
-        <a href="<?= url('/login') ?>" class="fw-bold text-decoration-none" style="color: var(--b24-cyan);">Inicie sesión</a>
+        ¿Ya tiene una cuenta registrada?
+        <a href="<?= url('/login') ?>" class="fw-bold text-decoration-none" style="color: var(--ui-cyan);">Inicie sesión</a>
     </p>
 </div>
 
@@ -158,7 +158,7 @@ declare(strict_types=1);
             if (val1 === val2) {
                 hint.textContent = 'Las contraseñas coinciden correctamente.';
                 hint.className = 'small mb-3 text-success fw-semibold';
-                passConf.style.borderColor = 'var(--b24-cyan)';
+                passConf.style.borderColor = 'var(--ui-cyan)';
             } else {
                 hint.textContent = 'Las contraseñas aún no coinciden.';
                 hint.className = 'small mb-3 text-danger fw-semibold';

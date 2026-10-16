@@ -10,7 +10,7 @@ declare(strict_types=1);
  *   - Zero-Leak Public Isolation (La landing es 100% autónoma para clientes y observadores)
  *   - Autonomous Modals: Devioz Reels 16:9 Lightbox & Dossier de Ficha Técnica
  *   - Estándares Internacionales: ISO/IEC 25010, ISO/IEC 27001, OWASP Top 10, TMMi Nivel 3
- *   - Identidad Visual: Bitrix24 Air Enterprise (Cyan #00ACE3, Lime #9DCF00, Navy #172B4D)
+ *   - Identidad Visual: Devioz (Cyan #00ACE3, Lime #9DCF00, Navy #172B4D)
  *
  * @var array<string, mixed> $stats
  * @var array<\App\Models\Project> $featuredProjects
@@ -77,22 +77,22 @@ if (!function_exists('devioz_parse_video')) {
 
     <style>
         :root {
-            /* Paleta Oficial Bitrix24 Air Enterprise */
-            --b24-cyan: #00ACE3;
-            --b24-cyan-hover: #0093c4;
-            --b24-cyan-dark: #007799;
-            --b24-cyan-light: #EBF8FD;
-            --b24-lime: #9DCF00;
-            --b24-lime-hover: #88B500;
-            --b24-navy: #172B4D;
-            --b24-navy-light: #253858;
-            --b24-dark: #0F172A;
-            --b24-darker: #0B1120;
-            --b24-gray-bg: #F8FAFC;
-            --b24-gray-border: #E2E8F0;
-            --b24-gray-text: #475569;
-            --b24-charcoal: #1E293B;
-            --b24-white: #FFFFFF;
+            /* Paleta visual de la plataforma */
+            --ui-cyan: #00ACE3;
+            --ui-cyan-hover: #0093c4;
+            --ui-cyan-dark: #007799;
+            --ui-cyan-light: #EBF8FD;
+            --ui-lime: #9DCF00;
+            --ui-lime-hover: #88B500;
+            --ui-navy: #172B4D;
+            --ui-navy-light: #253858;
+            --ui-dark: #0F172A;
+            --ui-darker: #0B1120;
+            --ui-gray-bg: #F8FAFC;
+            --ui-gray-border: #E2E8F0;
+            --ui-gray-text: #475569;
+            --ui-charcoal: #1E293B;
+            --ui-white: #FFFFFF;
         }
 
         html {
@@ -101,7 +101,7 @@ if (!function_exists('devioz_parse_video')) {
 
         body {
             font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: var(--b24-charcoal);
+            color: var(--ui-charcoal);
             background-color: #FFFFFF;
             margin: 0;
             padding: 0;
@@ -116,26 +116,26 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* TOPBAR & NAVEGACIÓN                                           */
         /* ------------------------------------------------------------- */
-        .b24-topbar {
+        .ui-topbar {
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--b24-gray-border);
+            border-bottom: 1px solid var(--ui-gray-border);
             position: sticky;
             top: 0;
             z-index: 1040;
             transition: all 0.25s ease-in-out;
         }
 
-        .b24-topbar.scrolled {
+        .ui-topbar.scrolled {
             box-shadow: 0 4px 20px rgba(23, 43, 77, 0.08);
             background: rgba(255, 255, 255, 0.98);
         }
 
-        .b24-brand {
+        .ui-brand {
             font-weight: 800;
             font-size: 1.45rem;
-            color: var(--b24-navy);
+            color: var(--ui-navy);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -143,12 +143,12 @@ if (!function_exists('devioz_parse_video')) {
             letter-spacing: -0.5px;
         }
 
-        .b24-brand:hover {
-            color: var(--b24-navy);
+        .ui-brand:hover {
+            color: var(--ui-navy);
         }
 
-        .b24-brand-badge {
-            background: linear-gradient(135deg, var(--b24-cyan), #0284C7);
+        .ui-brand-badge {
+            background: linear-gradient(135deg, var(--ui-cyan), #0284C7);
             color: #fff;
             padding: 2px 8px;
             border-radius: 4px;
@@ -158,8 +158,8 @@ if (!function_exists('devioz_parse_video')) {
             letter-spacing: 0.8px;
         }
 
-        .b24-nav-link {
-            color: var(--b24-gray-text);
+        .ui-nav-link {
+            color: var(--ui-gray-text);
             font-size: 0.92rem;
             font-weight: 600;
             text-decoration: none;
@@ -168,14 +168,14 @@ if (!function_exists('devioz_parse_video')) {
             transition: all 0.15s ease;
         }
 
-        .b24-nav-link:hover {
-            color: var(--b24-cyan);
-            background: var(--b24-cyan-light);
+        .ui-nav-link:hover {
+            color: var(--ui-cyan);
+            background: var(--ui-cyan-light);
         }
 
         /* Botones de Acción */
-        .btn-b24-lime {
-            background-color: var(--b24-lime);
+        .btn-ui-lime {
+            background-color: var(--ui-lime);
             color: #172B4D !important;
             font-weight: 700;
             font-size: 0.88rem;
@@ -194,15 +194,15 @@ if (!function_exists('devioz_parse_video')) {
             cursor: pointer;
         }
 
-        .btn-b24-lime:hover {
-            background-color: var(--b24-lime-hover);
+        .btn-ui-lime:hover {
+            background-color: var(--ui-lime-hover);
             transform: translateY(-1px);
             box-shadow: 0 6px 18px rgba(157, 207, 0, 0.45);
             color: #0F172A !important;
         }
 
-        .btn-b24-cyan {
-            background-color: var(--b24-cyan);
+        .btn-ui-cyan {
+            background-color: var(--ui-cyan);
             color: #FFFFFF !important;
             font-weight: 700;
             font-size: 0.88rem;
@@ -219,16 +219,16 @@ if (!function_exists('devioz_parse_video')) {
             cursor: pointer;
         }
 
-        .btn-b24-cyan:hover {
-            background-color: var(--b24-cyan-hover);
+        .btn-ui-cyan:hover {
+            background-color: var(--ui-cyan-hover);
             transform: translateY(-1px);
             box-shadow: 0 6px 18px rgba(0, 172, 227, 0.45);
         }
 
-        .btn-b24-outline {
+        .btn-ui-outline {
             background: transparent;
-            color: var(--b24-navy) !important;
-            border: 1.5px solid var(--b24-gray-border);
+            color: var(--ui-navy) !important;
+            border: 1.5px solid var(--ui-gray-border);
             font-weight: 600;
             font-size: 0.88rem;
             padding: 0.6rem 1.35rem;
@@ -241,14 +241,14 @@ if (!function_exists('devioz_parse_video')) {
             cursor: pointer;
         }
 
-        .btn-b24-outline:hover {
-            border-color: var(--b24-cyan);
-            color: var(--b24-cyan) !important;
-            background: var(--b24-cyan-light);
+        .btn-ui-outline:hover {
+            border-color: var(--ui-cyan);
+            color: var(--ui-cyan) !important;
+            background: var(--ui-cyan-light);
         }
 
         .btn-portal-client {
-            color: var(--b24-navy);
+            color: var(--ui-navy);
             font-weight: 600;
             font-size: 0.88rem;
             text-decoration: none;
@@ -264,23 +264,23 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         .btn-portal-client:hover {
-            color: var(--b24-cyan);
+            color: var(--ui-cyan);
             background: #FFFFFF;
-            border-color: var(--b24-cyan);
+            border-color: var(--ui-cyan);
         }
 
         /* ------------------------------------------------------------- */
         /* HERO SECTION                                                  */
         /* ------------------------------------------------------------- */
-        .b24-hero-section {
+        .ui-hero-section {
             background: radial-gradient(100% 75% at 50% 0%, #F0F8FF 0%, #FFFFFF 100%);
             padding: 5rem 0 4rem;
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid var(--b24-gray-border);
+            border-bottom: 1px solid var(--ui-gray-border);
         }
 
-        .b24-hero-badge {
+        .ui-hero-badge {
             background: #EBF8FD;
             color: #007799;
             border: 1px solid #BAE6FD;
@@ -294,16 +294,16 @@ if (!function_exists('devioz_parse_video')) {
             margin-bottom: 1.25rem;
         }
 
-        .b24-hero-title {
+        .ui-hero-title {
             font-size: 2.85rem;
             font-weight: 800;
-            color: var(--b24-navy);
+            color: var(--ui-navy);
             line-height: 1.18;
             letter-spacing: -0.8px;
             margin-bottom: 1.25rem;
         }
 
-        .b24-hero-subtitle {
+        .ui-hero-subtitle {
             font-size: 1.12rem;
             color: #475569;
             line-height: 1.65;
@@ -311,13 +311,13 @@ if (!function_exists('devioz_parse_video')) {
             max-width: 580px;
         }
 
-        .b24-hero-checklist {
+        .ui-hero-checklist {
             list-style: none;
             padding: 0;
             margin: 0 0 2rem;
         }
 
-        .b24-hero-checklist li {
+        .ui-hero-checklist li {
             font-size: 0.93rem;
             color: #334155;
             margin-bottom: 0.75rem;
@@ -326,8 +326,8 @@ if (!function_exists('devioz_parse_video')) {
             gap: 0.65rem;
         }
 
-        .b24-hero-checklist .check-icon {
-            color: var(--b24-lime);
+        .ui-hero-checklist .check-icon {
+            color: var(--ui-lime);
             background: #F4FBE8;
             width: 22px;
             height: 22px;
@@ -342,43 +342,43 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         /* Mockup Interactivo Terminal / Pipeline */
-        .b24-mockup-wrapper {
+        .ui-mockup-wrapper {
             background: #FFFFFF;
-            border: 1px solid var(--b24-gray-border);
+            border: 1px solid var(--ui-gray-border);
             border-radius: 16px;
             box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
             overflow: hidden;
             position: relative;
         }
 
-        .b24-mockup-header {
+        .ui-mockup-header {
             background: #F8FAFC;
             padding: 0.85rem 1.25rem;
-            border-bottom: 1px solid var(--b24-gray-border);
+            border-bottom: 1px solid var(--ui-gray-border);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .b24-window-dots {
+        .ui-window-dots {
             display: flex;
             gap: 6px;
         }
 
-        .b24-dot {
+        .ui-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
         }
 
-        .b24-dot-red { background: #EF4444; }
-        .b24-dot-yellow { background: #F59E0B; }
-        .b24-dot-green { background: #10B981; }
+        .ui-dot-red { background: #EF4444; }
+        .ui-dot-yellow { background: #F59E0B; }
+        .ui-dot-green { background: #10B981; }
 
-        .b24-floating-badge {
+        .ui-floating-badge {
             position: absolute;
             background: #FFFFFF;
-            border: 1px solid var(--b24-gray-border);
+            border: 1px solid var(--ui-gray-border);
             border-radius: 12px;
             padding: 0.75rem 1rem;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
@@ -409,27 +409,27 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* CINTA DE MÉTRICAS & RESUMEN DE CONFIANZA                      */
         /* ------------------------------------------------------------- */
-        .b24-metrics-ribbon {
-            background: var(--b24-navy);
+        .ui-metrics-ribbon {
+            background: var(--ui-navy);
             color: #FFFFFF;
             padding: 2.25rem 0;
             border-top: 1px solid #1E293B;
             border-bottom: 1px solid #1E293B;
         }
 
-        .b24-metric-card {
+        .ui-metric-card {
             text-align: center;
         }
 
-        .b24-metric-num {
+        .ui-metric-num {
             font-size: 2.4rem;
             font-weight: 800;
-            color: var(--b24-cyan);
+            color: var(--ui-cyan);
             letter-spacing: -0.5px;
             line-height: 1.1;
         }
 
-        .b24-metric-label {
+        .ui-metric-label {
             font-size: 0.85rem;
             color: #94A3B8;
             margin-top: 0.35rem;
@@ -437,19 +437,19 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         /* Trust Badges */
-        .b24-trust-section {
+        .ui-trust-section {
             background: #FFFFFF;
             padding: 1.5rem 0;
-            border-bottom: 1px solid var(--b24-gray-border);
+            border-bottom: 1px solid var(--ui-gray-border);
         }
 
-        .b24-trust-badge-item {
+        .ui-trust-badge-item {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
             background: #F8FAFC;
-            border: 1px solid var(--b24-gray-border);
+            border: 1px solid var(--ui-gray-border);
             border-radius: 8px;
             font-size: 0.82rem;
             font-weight: 600;
@@ -459,7 +459,7 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* TITULOS DE SECCIÓN ESTANDARIZADOS                             */
         /* ------------------------------------------------------------- */
-        .b24-section-tag {
+        .ui-section-tag {
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -470,15 +470,15 @@ if (!function_exists('devioz_parse_video')) {
             margin-bottom: 0.85rem;
         }
 
-        .b24-section-title {
+        .ui-section-title {
             font-size: 2.35rem;
             font-weight: 800;
-            color: var(--b24-navy);
+            color: var(--ui-navy);
             letter-spacing: -0.5px;
             margin-bottom: 1rem;
         }
 
-        .b24-section-desc {
+        .ui-section-desc {
             font-size: 1.05rem;
             color: #64748B;
             max-width: 720px;
@@ -489,9 +489,9 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* SERVICIOS CORE                                                */
         /* ------------------------------------------------------------- */
-        .b24-service-card {
+        .ui-service-card {
             background: #FFFFFF;
-            border: 1px solid var(--b24-gray-border);
+            border: 1px solid var(--ui-gray-border);
             border-radius: 16px;
             padding: 2.25rem 2rem;
             height: 100%;
@@ -502,13 +502,13 @@ if (!function_exists('devioz_parse_video')) {
             justify-content: space-between;
         }
 
-        .b24-service-card:hover {
-            border-color: var(--b24-cyan);
+        .ui-service-card:hover {
+            border-color: var(--ui-cyan);
             box-shadow: 0 15px 35px rgba(23, 43, 77, 0.08);
             transform: translateY(-4px);
         }
 
-        .b24-service-icon {
+        .ui-service-icon {
             width: 54px;
             height: 54px;
             border-radius: 12px;
@@ -522,12 +522,12 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* METODOLOGÍA CRONOLÓGICA (TIMELINE END-TO-END)                */
         /* ------------------------------------------------------------- */
-        .b24-timeline-wrapper {
+        .ui-timeline-wrapper {
             position: relative;
             padding: 1.5rem 0;
         }
 
-        .b24-timeline-wrapper::before {
+        .ui-timeline-wrapper::before {
             content: '';
             position: absolute;
             top: 40px;
@@ -539,22 +539,22 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         @media (max-width: 991.98px) {
-            .b24-timeline-wrapper::before {
+            .ui-timeline-wrapper::before {
                 left: 30px;
             }
         }
 
-        .b24-timeline-item {
+        .ui-timeline-item {
             position: relative;
             margin-bottom: 3rem;
         }
 
-        .b24-timeline-dot {
+        .ui-timeline-dot {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             background: #FFFFFF;
-            border: 4px solid var(--b24-cyan);
+            border: 4px solid var(--ui-cyan);
             box-shadow: 0 0 0 4px rgba(0, 172, 227, 0.2);
             position: absolute;
             top: 0;
@@ -564,37 +564,37 @@ if (!function_exists('devioz_parse_video')) {
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            color: var(--b24-navy);
+            color: var(--ui-navy);
             font-size: 1.1rem;
             z-index: 3;
         }
 
         @media (max-width: 991.98px) {
-            .b24-timeline-dot {
+            .ui-timeline-dot {
                 left: 30px;
             }
         }
 
-        .b24-timeline-content {
+        .ui-timeline-content {
             background: #FFFFFF;
-            border: 1px solid var(--b24-gray-border);
+            border: 1px solid var(--ui-gray-border);
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             transition: all 0.25s ease;
         }
 
-        .b24-timeline-content:hover {
-            border-color: var(--b24-cyan);
+        .ui-timeline-content:hover {
+            border-color: var(--ui-cyan);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         /* ------------------------------------------------------------- */
         /* LOS 4 PILARES DE CALIDAD Y NORMATIVAS                         */
         /* ------------------------------------------------------------- */
-        .b24-pillar-card {
+        .ui-pillar-card {
             background: #FFFFFF;
-            border: 1px solid var(--b24-gray-border);
+            border: 1px solid var(--ui-gray-border);
             border-radius: 16px;
             padding: 2rem 1.75rem;
             height: 100%;
@@ -603,13 +603,13 @@ if (!function_exists('devioz_parse_video')) {
             overflow: hidden;
         }
 
-        .b24-pillar-card:hover {
-            border-color: var(--b24-cyan);
+        .ui-pillar-card:hover {
+            border-color: var(--ui-cyan);
             box-shadow: 0 15px 35px rgba(23, 43, 77, 0.08);
             transform: translateY(-4px);
         }
 
-        .b24-pillar-card::before {
+        .ui-pillar-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -626,14 +626,14 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* DEVIOZ REELS (DEMOS 16:9 VERTICALES AUTÓNOMAS)                */
         /* ------------------------------------------------------------- */
-        .b24-reels-section {
+        .ui-reels-section {
             background: linear-gradient(180deg, #0F172A 0%, #172B4D 100%);
             color: #FFFFFF;
             padding: 5rem 0;
             position: relative;
         }
 
-        .b24-reel-card {
+        .ui-reel-card {
             background: rgba(14, 22, 45, 0.65);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -649,14 +649,14 @@ if (!function_exists('devioz_parse_video')) {
             position: relative;
         }
 
-        .b24-reel-card:hover {
+        .ui-reel-card:hover {
             transform: translateY(-5px);
             background: rgba(18, 30, 60, 0.82);
             border-color: rgba(0, 172, 227, 0.55);
             box-shadow: 0 16px 36px rgba(0, 172, 227, 0.25), 0 0 20px rgba(0, 172, 227, 0.15);
         }
 
-        .b24-reel-poster-box {
+        .ui-reel-poster-box {
             position: relative;
             width: 100%;
             aspect-ratio: 3 / 4;
@@ -668,12 +668,12 @@ if (!function_exists('devioz_parse_video')) {
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .b24-reel-card:hover .b24-reel-poster-box {
+        .ui-reel-card:hover .ui-reel-poster-box {
             border-color: rgba(0, 172, 227, 0.75);
             box-shadow: 0 16px 36px rgba(0, 172, 227, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
         }
 
-        .b24-reel-bg {
+        .ui-reel-bg {
             position: absolute;
             inset: 0;
             background-size: cover;
@@ -681,12 +681,12 @@ if (!function_exists('devioz_parse_video')) {
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .b24-reel-card:hover .b24-reel-bg {
+        .ui-reel-card:hover .ui-reel-bg {
             transform: scale(1.06);
         }
 
         /* Hover Overlay Liquid Glass Estilo Bilibili */
-        .b24-reel-hover-overlay {
+        .ui-reel-hover-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg, rgba(8, 14, 30, 0.12) 0%, rgba(8, 14, 30, 0.75) 45%, rgba(6, 11, 26, 0.96) 100%);
@@ -703,13 +703,13 @@ if (!function_exists('devioz_parse_video')) {
             z-index: 3;
         }
 
-        .b24-reel-card:hover .b24-reel-hover-overlay {
+        .ui-reel-card:hover .ui-reel-hover-overlay {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
-        .b24-reel-play-btn-blue {
+        .ui-reel-play-btn-blue {
             width: 100%;
             background: linear-gradient(135deg, #00ACE3 0%, #0093c4 100%);
             color: #FFFFFF !important;
@@ -727,7 +727,7 @@ if (!function_exists('devioz_parse_video')) {
             transition: all 0.2s ease;
         }
 
-        .b24-reel-card:hover .b24-reel-play-btn-blue {
+        .ui-reel-card:hover .ui-reel-play-btn-blue {
             background: linear-gradient(135deg, #0ec4fd 0%, #009ace 100%);
             box-shadow: 0 6px 22px rgba(0, 172, 227, 0.75);
             transform: scale(1.02);
@@ -736,10 +736,10 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* SHOWCASE DE PROYECTOS CERTIFICADOS                            */
         /* ------------------------------------------------------------- */
-        .b24-portfolio-filter-btn {
+        .ui-portfolio-filter-btn {
             background: #FFFFFF;
-            border: 1px solid var(--b24-gray-border);
-            color: var(--b24-gray-text);
+            border: 1px solid var(--ui-gray-border);
+            color: var(--ui-gray-text);
             font-weight: 600;
             font-size: 0.88rem;
             padding: 0.5rem 1.15rem;
@@ -748,22 +748,22 @@ if (!function_exists('devioz_parse_video')) {
             cursor: pointer;
         }
 
-        .b24-portfolio-filter-btn:hover {
-            border-color: var(--b24-cyan);
-            color: var(--b24-cyan);
-            background: var(--b24-cyan-light);
+        .ui-portfolio-filter-btn:hover {
+            border-color: var(--ui-cyan);
+            color: var(--ui-cyan);
+            background: var(--ui-cyan-light);
         }
 
-        .b24-portfolio-filter-btn.active {
-            background: var(--b24-navy);
+        .ui-portfolio-filter-btn.active {
+            background: var(--ui-navy);
             color: #FFFFFF;
-            border-color: var(--b24-navy);
+            border-color: var(--ui-navy);
             box-shadow: 0 4px 12px rgba(23, 43, 77, 0.15);
         }
 
-        .b24-project-card {
+        .ui-project-card {
             background: #FFFFFF;
-            border: 1px solid var(--b24-gray-border);
+            border: 1px solid var(--ui-gray-border);
             border-radius: 16px;
             overflow: hidden;
             transition: all 0.25s ease;
@@ -772,31 +772,31 @@ if (!function_exists('devioz_parse_video')) {
             height: 100%;
         }
 
-        .b24-project-card:hover {
+        .ui-project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(23, 43, 77, 0.08);
-            border-color: var(--b24-cyan);
+            border-color: var(--ui-cyan);
         }
 
-        .b24-project-cover {
+        .ui-project-cover {
             height: 190px;
             position: relative;
             background-color: #E2E8F0;
             overflow: hidden;
         }
 
-        .b24-project-cover img {
+        .ui-project-cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
         }
 
-        .b24-project-card:hover .b24-project-cover img {
+        .ui-project-card:hover .ui-project-cover img {
             transform: scale(1.05);
         }
 
-        .b24-tech-tag {
+        .ui-tech-tag {
             background: #F1F5F9;
             color: #334155;
             font-size: 0.72rem;
@@ -809,7 +809,7 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* MODAL AUTÓNOMO: REEL LIGHTBOX 16:9                            */
         /* ------------------------------------------------------------- */
-        .b24-modal-overlay {
+        .ui-modal-overlay {
             position: fixed;
             inset: 0;
             background: rgba(15, 23, 42, 0.85);
@@ -821,7 +821,7 @@ if (!function_exists('devioz_parse_video')) {
             padding: 1.25rem;
         }
 
-        .b24-modal-overlay.active {
+        .ui-modal-overlay.active {
             display: flex;
             animation: fadeInModal 0.25s ease;
         }
@@ -831,7 +831,7 @@ if (!function_exists('devioz_parse_video')) {
             to { opacity: 1; }
         }
 
-        .b24-reel-dialog {
+        .ui-reel-dialog {
             background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
@@ -850,7 +850,7 @@ if (!function_exists('devioz_parse_video')) {
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .b24-reel-player-box {
+        .ui-reel-player-box {
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -858,14 +858,14 @@ if (!function_exists('devioz_parse_video')) {
             background: #000;
         }
 
-        .b24-reel-player-box iframe,
-        .b24-reel-player-box video {
+        .ui-reel-player-box iframe,
+        .ui-reel-player-box video {
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        .b24-close-reel-btn {
+        .ui-close-reel-btn {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -884,7 +884,7 @@ if (!function_exists('devioz_parse_video')) {
             transition: all 0.2s ease;
         }
 
-        .b24-close-reel-btn:hover {
+        .ui-close-reel-btn:hover {
             background: #EF4444;
             border-color: #EF4444;
         }
@@ -892,7 +892,7 @@ if (!function_exists('devioz_parse_video')) {
         /* ------------------------------------------------------------- */
         /* MODAL AUTÓNOMO: FICHA TÉCNICA DEL PROYECTO (PUBLIC DOSSIER)   */
         /* ------------------------------------------------------------- */
-        .b24-dossier-dialog {
+        .ui-dossier-dialog {
             background: #FFFFFF;
             border-radius: 20px;
             width: 100%;
@@ -904,9 +904,9 @@ if (!function_exists('devioz_parse_video')) {
         }
 
         /* ------------------------------------------------------------- */
-        /* FOOTER CORPORATIVO BITRIX24                                   */
+        /* FOOTER CORPORATIVO DEVIOZ                                   */
         /* ------------------------------------------------------------- */
-        .b24-footer {
+        .ui-footer {
             background: #0F172A;
             color: #94A3B8;
             padding: 5rem 0 2.5rem;
@@ -914,7 +914,7 @@ if (!function_exists('devioz_parse_video')) {
             font-size: 0.88rem;
         }
 
-        .b24-footer-title {
+        .ui-footer-title {
             color: #F8FAFC;
             font-weight: 700;
             font-size: 0.95rem;
@@ -923,38 +923,38 @@ if (!function_exists('devioz_parse_video')) {
             letter-spacing: 0.5px;
         }
 
-        .b24-footer-list {
+        .ui-footer-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .b24-footer-list li {
+        .ui-footer-list li {
             margin-bottom: 0.65rem;
         }
 
-        .b24-footer-list a {
+        .ui-footer-list a {
             color: #94A3B8;
             text-decoration: none;
             transition: color 0.15s ease;
         }
 
-        .b24-footer-list a:hover {
-            color: var(--b24-cyan);
+        .ui-footer-list a:hover {
+            color: var(--ui-cyan);
         }
 
         @media (max-width: 991.98px) {
-            .b24-hero-section {
+            .ui-hero-section {
                 padding: 3.5rem 0 2.5rem;
                 text-align: center;
             }
-            .b24-hero-title {
+            .ui-hero-title {
                 font-size: 2.15rem;
             }
-            .b24-hero-subtitle {
+            .ui-hero-subtitle {
                 margin: 0 auto 1.5rem;
             }
-            .b24-hero-checklist {
+            .ui-hero-checklist {
                 display: inline-block;
                 text-align: left;
             }
@@ -969,33 +969,33 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 1. TOPBAR DE NAVEGACIÓN INSTITUCIONAL (AUTÓNOMA)                      -->
     <!-- ===================================================================== -->
-    <header class="b24-topbar" id="mainHeader">
+    <header class="ui-topbar" id="mainHeader">
         <div class="container-xl d-flex align-items-center justify-content-between py-2 py-lg-3">
-            
+
             <!-- Logo Institucional -->
             <div class="d-flex align-items-center gap-3">
-                <a href="#inicio" class="b24-brand">
+                <a href="#inicio" class="ui-brand">
                     <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz Technology Solutions" width="34" height="34" class="rounded">
-                    <span>Devioz<span style="color: var(--b24-cyan);">OS</span></span>
-                    <span class="b24-brand-badge">IT Factory & QA</span>
+                    <span>Devioz<span style="color: var(--ui-cyan);">OS</span></span>
+                    <span class="ui-brand-badge">IT Factory & QA</span>
                 </a>
             </div>
 
             <!-- Menú de Navegación Suave (In-Page Anchors — Cero saltos internos) -->
             <nav class="d-none d-lg-flex align-items-center gap-1">
-                <a href="#servicios" class="b24-nav-link">Servicios</a>
-                <a href="#metodologia" class="b24-nav-link">Metodología</a>
-                <a href="#calidad" class="b24-nav-link">Estándares ISO</a>
-                <a href="#reels" class="b24-nav-link d-flex align-items-center gap-1.5">
+                <a href="#servicios" class="ui-nav-link">Servicios</a>
+                <a href="#metodologia" class="ui-nav-link">Metodología</a>
+                <a href="#calidad" class="ui-nav-link">Estándares ISO</a>
+                <a href="#reels" class="ui-nav-link d-flex align-items-center gap-1.5">
                     <i class="fa-solid fa-play text-danger" style="font-size: 0.72rem;"></i> Devioz Reels
                 </a>
-                <a href="#portafolio" class="b24-nav-link">Casos de Éxito</a>
-                <a href="#contacto" class="b24-nav-link">Contacto</a>
+                <a href="#portafolio" class="ui-nav-link">Casos de Éxito</a>
+                <a href="#contacto" class="ui-nav-link">Contacto</a>
             </nav>
 
             <!-- Acciones Derecha: Portal Clientes & Botón CTA -->
             <div class="d-flex align-items-center gap-2 gap-sm-3">
-                
+
                 <!-- Selector de Idioma Simbólico -->
                 <div class="d-none d-md-flex align-items-center text-muted small fw-bold px-2.5 py-1 rounded" style="background: #F1F5F9; font-size: 0.78rem;">
                     <i class="fa-solid fa-globe me-1"></i> ES
@@ -1003,12 +1003,12 @@ if (!function_exists('devioz_parse_video')) {
 
                 <!-- Botón de Acceso Exclusivo al Portal de Clientes/Consultores -->
                 <button type="button" class="btn-portal-client" id="btnOpenAuthModal" title="Acceso al Portal de Clientes y Consultores">
-                    <i class="fa-regular fa-circle-user" style="font-size: 1.05rem; color: var(--b24-cyan);"></i>
+                    <i class="fa-regular fa-circle-user" style="font-size: 1.05rem; color: var(--ui-cyan);"></i>
                     <span class="d-none d-sm-inline">Portal Clientes</span>
                 </button>
 
                 <!-- Botón CTA Primario -->
-                <a href="#contacto" class="btn-b24-lime">
+                <a href="#contacto" class="btn-ui-lime">
                     <span>Cotizar Proyecto</span>
                     <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
                 </a>
@@ -1019,25 +1019,25 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 2. ACTO 1: HERO & PROPUESTA DE VALOR CORPORATIVA                      -->
     <!-- ===================================================================== -->
-    <section class="b24-hero-section" id="inicio">
+    <section class="ui-hero-section" id="inicio">
         <div class="container-xl">
             <div class="row align-items-center g-5">
-                
+
                 <div class="col-lg-6">
-                    <div class="b24-hero-badge">
+                    <div class="ui-hero-badge">
                         <i class="fa-solid fa-shield-halved text-info"></i>
                         <span>Fábrica de Software Enterprise • ISO/IEC 25010 • OWASP DevSecOps</span>
                     </div>
 
-                    <h1 class="b24-hero-title">
+                    <h1 class="ui-hero-title">
                         Ingeniería de Software de Misión Crítica. Certificada de Extremo a Extremo.
                     </h1>
 
-                    <p class="b24-hero-subtitle">
+                    <p class="ui-hero-subtitle">
                         En <strong>Devioz Technology Solutions</strong> diseñamos, construimos y aseguramos sistemas digitales corporativos. Transformamos requerimientos de alta complejidad en soluciones escalables auditadas bajo rigurosos Quality Gates.
                     </p>
 
-                    <ul class="b24-hero-checklist">
+                    <ul class="ui-hero-checklist">
                         <li>
                             <span class="check-icon"><i class="fa-solid fa-check"></i></span>
                             <span><strong>Arquitecturas Limpias y Resilientes:</strong> Microservicios, DDD y patrones Cloud-Native orientados a alta concurrencia.</span>
@@ -1057,17 +1057,17 @@ if (!function_exists('devioz_parse_video')) {
                     </ul>
 
                     <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
-                        <a href="#contacto" class="btn-b24-lime py-3 px-4" style="font-size: 0.95rem;">
+                        <a href="#contacto" class="btn-ui-lime py-3 px-4" style="font-size: 0.95rem;">
                             <span>SOLICITAR PROPUESTA TÉCNICA</span>
                             <i class="fa-solid fa-bolt"></i>
                         </a>
 
-                        <a href="#reels" class="btn-b24-cyan py-3 px-4" style="font-size: 0.95rem;">
+                        <a href="#reels" class="btn-ui-cyan py-3 px-4" style="font-size: 0.95rem;">
                             <i class="fa-solid fa-play"></i>
                             <span>Ver Demos en Vivo</span>
                         </a>
 
-                        <a href="#metodologia" class="btn-b24-outline py-2.5 px-3">
+                        <a href="#metodologia" class="btn-ui-outline py-2.5 px-3">
                             <i class="fa-solid fa-timeline"></i>
                             <span>Conoce Nuestra Metodología</span>
                         </a>
@@ -1082,9 +1082,9 @@ if (!function_exists('devioz_parse_video')) {
                 <!-- Mockup Interactivo: Pipeline CI/CD & Quality Gate Devioz -->
                 <div class="col-lg-6">
                     <div class="position-relative">
-                        
+
                         <!-- Floating Badge 1: ISO 25010 -->
-                        <div class="b24-floating-badge badge-pos-1">
+                        <div class="ui-floating-badge badge-pos-1">
                             <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 38px; height: 38px; background: #10B981;">
                                 <i class="fa-solid fa-certificate"></i>
                             </div>
@@ -1095,7 +1095,7 @@ if (!function_exists('devioz_parse_video')) {
                         </div>
 
                         <!-- Floating Badge 2: OWASP Top 10 -->
-                        <div class="b24-floating-badge badge-pos-2">
+                        <div class="ui-floating-badge badge-pos-2">
                             <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 38px; height: 38px; background: #0284C7;">
                                 <i class="fa-solid fa-shield-virus"></i>
                             </div>
@@ -1105,12 +1105,12 @@ if (!function_exists('devioz_parse_video')) {
                             </div>
                         </div>
 
-                        <div class="b24-mockup-wrapper">
-                            <div class="b24-mockup-header">
-                                <div class="b24-window-dots">
-                                    <div class="b24-dot b24-dot-red"></div>
-                                    <div class="b24-dot b24-dot-yellow"></div>
-                                    <div class="b24-dot b24-dot-green"></div>
+                        <div class="ui-mockup-wrapper">
+                            <div class="ui-mockup-header">
+                                <div class="ui-window-dots">
+                                    <div class="ui-dot ui-dot-red"></div>
+                                    <div class="ui-dot ui-dot-yellow"></div>
+                                    <div class="ui-dot ui-dot-green"></div>
                                 </div>
                                 <div class="text-muted small fw-semibold font-mono" style="font-size: 0.75rem;">
                                     <i class="fa-solid fa-lock text-success me-1"></i> devioz-pipeline-runner // release-candidate-v2.6
@@ -1177,31 +1177,31 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 3. CINTA DE MÉTRICAS & INDICADORES DE IMPACTO                         -->
     <!-- ===================================================================== -->
-    <section class="b24-metrics-ribbon">
+    <section class="ui-metrics-ribbon">
         <div class="container-xl">
             <div class="row g-4 align-items-center">
                 <div class="col-6 col-md-3">
-                    <div class="b24-metric-card">
-                        <div class="b24-metric-num"><?= number_format((int)($stats['total_projects'] ?? 24)) ?>+</div>
-                        <div class="b24-metric-label">Soluciones Entregadas</div>
+                    <div class="ui-metric-card">
+                        <div class="ui-metric-num"><?= number_format((int)($stats['total_projects'] ?? 24)) ?>+</div>
+                        <div class="ui-metric-label">Soluciones Entregadas</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
-                    <div class="b24-metric-card">
-                        <div class="b24-metric-num"><?= e($stats['uptime_sla'] ?? '99.9%') ?></div>
-                        <div class="b24-metric-label">Disponibilidad en Producción (SLA)</div>
+                    <div class="ui-metric-card">
+                        <div class="ui-metric-num"><?= e($stats['uptime_sla'] ?? '99.9%') ?></div>
+                        <div class="ui-metric-label">Disponibilidad en Producción (SLA)</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
-                    <div class="b24-metric-card">
-                        <div class="b24-metric-num"><?= e($stats['qa_avg_score'] ?? '9.6') ?>/10</div>
-                        <div class="b24-metric-label">Índice de Calidad ISO 25010</div>
+                    <div class="ui-metric-card">
+                        <div class="ui-metric-num"><?= e($stats['qa_avg_score'] ?? '9.6') ?>/10</div>
+                        <div class="ui-metric-label">Índice de Calidad ISO 25010</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
-                    <div class="b24-metric-card">
-                        <div class="b24-metric-num">0</div>
-                        <div class="b24-metric-label">Vulnerabilidades Críticas OWASP</div>
+                    <div class="ui-metric-card">
+                        <div class="ui-metric-num">0</div>
+                        <div class="ui-metric-label">Vulnerabilidades Críticas OWASP</div>
                     </div>
                 </div>
             </div>
@@ -1209,26 +1209,26 @@ if (!function_exists('devioz_parse_video')) {
     </section>
 
     <!-- Trust Badges -->
-    <section class="b24-trust-section">
+    <section class="ui-trust-section">
         <div class="container-xl">
             <div class="d-flex flex-wrap justify-content-center align-items-center gap-2.5">
-                <div class="b24-trust-badge-item">
+                <div class="ui-trust-badge-item">
                     <i class="fa-solid fa-cube text-success"></i>
                     <span>ISO/IEC 25010:2023 Calidad del Software</span>
                 </div>
-                <div class="b24-trust-badge-item">
+                <div class="ui-trust-badge-item">
                     <i class="fa-solid fa-shield-halved text-primary"></i>
                     <span>ISO/IEC 27001:2022 Seguridad ISMS</span>
                 </div>
-                <div class="b24-trust-badge-item">
+                <div class="ui-trust-badge-item">
                     <i class="fa-solid fa-bug-slash text-danger"></i>
                     <span>OWASP Top 10 DevSecOps</span>
                 </div>
-                <div class="b24-trust-badge-item">
+                <div class="ui-trust-badge-item">
                     <i class="fa-solid fa-vial-circle-check text-warning"></i>
                     <span>TMMi Nivel 3 Testing Riguroso</span>
                 </div>
-                <div class="b24-trust-badge-item">
+                <div class="ui-trust-badge-item">
                     <i class="fa-solid fa-award text-info"></i>
                     <span>Clean Architecture & SOLID Principles</span>
                 </div>
@@ -1242,20 +1242,20 @@ if (!function_exists('devioz_parse_video')) {
     <section class="py-5" style="background: #FAFCFE;" id="servicios">
         <div class="container-xl py-4">
             <div class="text-center">
-                <span class="b24-section-tag bg-primary-subtle text-primary">Capacidades & Especialización TI</span>
-                <h2 class="b24-section-title">Soluciones que Impulsan a Empresas Exigentes</h2>
-                <p class="b24-section-desc">
+                <span class="ui-section-tag bg-primary-subtle text-primary">Capacidades & Especialización TI</span>
+                <h2 class="ui-section-title">Soluciones que Impulsan a Empresas Exigentes</h2>
+                <p class="ui-section-desc">
                     Diseñamos y operamos productos digitales con ingeniería de punta, garantizando que cada componente técnico aporte valor medible y escalabilidad a tu negocio.
                 </p>
             </div>
 
             <div class="row g-4">
-                
+
                 <!-- Servicio 1: Software Factory Enterprise -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="b24-service-card">
+                    <div class="ui-service-card">
                         <div>
-                            <div class="b24-service-icon bg-primary-subtle text-primary">
+                            <div class="ui-service-icon bg-primary-subtle text-primary">
                                 <i class="fa-solid fa-code"></i>
                             </div>
                             <h4 class="fw-bold text-navy mb-2 fs-5">Software Factory Enterprise</h4>
@@ -1274,9 +1274,9 @@ if (!function_exists('devioz_parse_video')) {
 
                 <!-- Servicio 2: Cloud Architecture & DevOps -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="b24-service-card">
+                    <div class="ui-service-card">
                         <div>
-                            <div class="b24-service-icon bg-info-subtle text-info">
+                            <div class="ui-service-icon bg-info-subtle text-info">
                                 <i class="fa-solid fa-cloud"></i>
                             </div>
                             <h4 class="fw-bold text-navy mb-2 fs-5">Cloud & DevOps Automation</h4>
@@ -1295,9 +1295,9 @@ if (!function_exists('devioz_parse_video')) {
 
                 <!-- Servicio 3: Data Analytics & Realtime -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="b24-service-card">
+                    <div class="ui-service-card">
                         <div>
-                            <div class="b24-service-icon bg-warning-subtle text-warning">
+                            <div class="ui-service-icon bg-warning-subtle text-warning">
                                 <i class="fa-solid fa-chart-line"></i>
                             </div>
                             <h4 class="fw-bold text-navy mb-2 fs-5">Data Engineering & Analytics</h4>
@@ -1316,9 +1316,9 @@ if (!function_exists('devioz_parse_video')) {
 
                 <!-- Servicio 4: DevSecOps Shield & QA -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="b24-service-card">
+                    <div class="ui-service-card">
                         <div>
-                            <div class="b24-service-icon bg-success-subtle text-success">
+                            <div class="ui-service-icon bg-success-subtle text-success">
                                 <i class="fa-solid fa-shield-virus"></i>
                             </div>
                             <h4 class="fw-bold text-navy mb-2 fs-5">DevSecOps & QA Shield</h4>
@@ -1345,25 +1345,25 @@ if (!function_exists('devioz_parse_video')) {
     <section class="py-5 bg-white" id="metodologia">
         <div class="container-xl py-4">
             <div class="text-center">
-                <span class="b24-section-tag bg-success-subtle text-success">El Viaje de tu Proyecto • End-to-End</span>
-                <h2 class="b24-section-title">¿Cómo lo Hacemos y en qué Tiempos?</h2>
-                <p class="b24-section-desc">
+                <span class="ui-section-tag bg-success-subtle text-success">El Viaje de tu Proyecto • End-to-End</span>
+                <h2 class="ui-section-title">¿Cómo lo Hacemos y en qué Tiempos?</h2>
+                <p class="ui-section-desc">
                     Un proceso predecible, disciplinado y transparente. Desde el primer análisis conceptual hasta el despliegue en producción con monitoreo en vivo.
                 </p>
             </div>
 
-            <div class="b24-timeline-wrapper">
-                
+            <div class="ui-timeline-wrapper">
+
                 <!-- Fase 1 -->
-                <div class="b24-timeline-item row align-items-center">
-                    <div class="b24-timeline-dot">01</div>
+                <div class="ui-timeline-item row align-items-center">
+                    <div class="ui-timeline-dot">01</div>
                     <div class="col-lg-5 order-lg-1 text-lg-end pe-lg-5 mb-3 mb-lg-0">
                         <span class="badge bg-primary px-3 py-1.5 rounded-pill mb-2">Semanas 1 - 2</span>
                         <h4 class="fw-bold text-navy mb-1">Sprint 0: Diagnóstico, Arquitectura & Threat Modeling</h4>
                         <p class="text-muted small">Levantamiento de requerimientos funcionales, modelado de dominio y diseño de seguridad preventivo.</p>
                     </div>
                     <div class="col-lg-5 offset-lg-2 order-lg-2 ps-lg-5">
-                        <div class="b24-timeline-content">
+                        <div class="ui-timeline-content">
                             <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-diagram-project text-primary me-2"></i>Entregables Certificados:</h6>
                             <ul class="list-unstyled small text-secondary mb-3">
                                 <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Documento de Arquitectura de Software (SAD)</li>
@@ -1378,15 +1378,15 @@ if (!function_exists('devioz_parse_video')) {
                 </div>
 
                 <!-- Fase 2 -->
-                <div class="b24-timeline-item row align-items-center">
-                    <div class="b24-timeline-dot">02</div>
+                <div class="ui-timeline-item row align-items-center">
+                    <div class="ui-timeline-dot">02</div>
                     <div class="col-lg-5 order-lg-2 ps-lg-5 mb-3 mb-lg-0">
                         <span class="badge bg-info text-dark px-3 py-1.5 rounded-pill mb-2">Semanas 2 - 8</span>
                         <h4 class="fw-bold text-navy mb-1">Sprints Ágiles: Construcción Modular & CI/CD Continuo</h4>
                         <p class="text-muted small">Desarrollo iterativo quincenal con entregables funcionales y revisiones de código por pares.</p>
                     </div>
                     <div class="col-lg-5 order-lg-1 text-lg-end pe-lg-5">
-                        <div class="b24-timeline-content text-start">
+                        <div class="ui-timeline-content text-start">
                             <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-laptop-code text-info me-2"></i>Entregables Certificados:</h6>
                             <ul class="list-unstyled small text-secondary mb-3">
                                 <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Versiones incrementales desplegadas en Staging</li>
@@ -1401,15 +1401,15 @@ if (!function_exists('devioz_parse_video')) {
                 </div>
 
                 <!-- Fase 3 -->
-                <div class="b24-timeline-item row align-items-center">
-                    <div class="b24-timeline-dot">03</div>
+                <div class="ui-timeline-item row align-items-center">
+                    <div class="ui-timeline-dot">03</div>
                     <div class="col-lg-5 order-lg-1 text-lg-end pe-lg-5 mb-3 mb-lg-0">
                         <span class="badge bg-warning text-dark px-3 py-1.5 rounded-pill mb-2">Semana Previa a Go-Live</span>
                         <h4 class="fw-bold text-navy mb-1">Quality Gate: Certificación ISO 25010 & Auditoría OWASP</h4>
                         <p class="text-muted small">Inspección estricta de las 8 dimensiones de calidad, análisis de vulnerabilidades y pruebas de estrés.</p>
                     </div>
                     <div class="col-lg-5 offset-lg-2 order-lg-2 ps-lg-5">
-                        <div class="b24-timeline-content">
+                        <div class="ui-timeline-content">
                             <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-award text-warning me-2"></i>Entregables Certificados:</h6>
                             <ul class="list-unstyled small text-secondary mb-3">
                                 <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> QA Scorecard formal con calificación >9.0/10</li>
@@ -1424,15 +1424,15 @@ if (!function_exists('devioz_parse_video')) {
                 </div>
 
                 <!-- Fase 4 -->
-                <div class="b24-timeline-item row align-items-center mb-0">
-                    <div class="b24-timeline-dot">04</div>
+                <div class="ui-timeline-item row align-items-center mb-0">
+                    <div class="ui-timeline-dot">04</div>
                     <div class="col-lg-5 order-lg-2 ps-lg-5 mb-3 mb-lg-0">
                         <span class="badge bg-success px-3 py-1.5 rounded-pill mb-2">Lanzamiento & Continuo</span>
                         <h4 class="fw-bold text-navy mb-1">Despliegue Cloud, Handover & Soporte SLA 99.9%</h4>
                         <p class="text-muted small">Puesta en producción sin fricción, entrega completa de repositorios y garantía operativa.</p>
                     </div>
                     <div class="col-lg-5 order-lg-1 text-lg-end pe-lg-5">
-                        <div class="b24-timeline-content text-start">
+                        <div class="ui-timeline-content text-start">
                             <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-rocket text-success me-2"></i>Entregables Certificados:</h6>
                             <ul class="list-unstyled small text-secondary mb-3">
                                 <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Plataforma en Producción con monitoreo 24/7</li>
@@ -1456,18 +1456,18 @@ if (!function_exists('devioz_parse_video')) {
     <section class="py-5" style="background: #F8FAFC;" id="calidad">
         <div class="container-xl py-4">
             <div class="text-center">
-                <span class="b24-section-tag bg-info-subtle text-info">Gobernanza y Cumplimiento Normativo</span>
-                <h2 class="b24-section-title">Los 4 Pilares de Excelencia en Ingeniería</h2>
-                <p class="b24-section-desc">
+                <span class="ui-section-tag bg-info-subtle text-info">Gobernanza y Cumplimiento Normativo</span>
+                <h2 class="ui-section-title">Los 4 Pilares de Excelencia en Ingeniería</h2>
+                <p class="ui-section-desc">
                     Nuestros clientes corporativos confían en nosotros porque cada entrega está respaldada por normas internacionales auditables, garantizando longevidad, seguridad y cero deuda técnica.
                 </p>
             </div>
 
             <div class="row g-4">
-                
+
                 <!-- Pilar 1: ISO 25010 -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="b24-pillar-card pillar-iso25010">
+                    <div class="ui-pillar-card pillar-iso25010">
                         <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #10B981;">
                             <i class="fa-solid fa-cubes-stacked fs-5"></i>
                         </div>
@@ -1486,7 +1486,7 @@ if (!function_exists('devioz_parse_video')) {
 
                 <!-- Pilar 2: ISO 27001 -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="b24-pillar-card pillar-iso27001">
+                    <div class="ui-pillar-card pillar-iso27001">
                         <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #0284C7;">
                             <i class="fa-solid fa-lock fs-5"></i>
                         </div>
@@ -1505,7 +1505,7 @@ if (!function_exists('devioz_parse_video')) {
 
                 <!-- Pilar 3: OWASP Top 10 -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="b24-pillar-card pillar-owasp">
+                    <div class="ui-pillar-card pillar-owasp">
                         <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #8B5CF6;">
                             <i class="fa-solid fa-shield-halved fs-5"></i>
                         </div>
@@ -1524,7 +1524,7 @@ if (!function_exists('devioz_parse_video')) {
 
                 <!-- Pilar 4: TMMi Nivel 3 -->
                 <div class="col-md-6 col-lg-3">
-                    <div class="b24-pillar-card pillar-tmmi">
+                    <div class="ui-pillar-card pillar-tmmi">
                         <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #F59E0B;">
                             <i class="fa-solid fa-vial-circle-check fs-5"></i>
                         </div>
@@ -1548,7 +1548,7 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 7. ACTO 5: DEVIOZ REELS — DEMOSTRACIONES TÉCNICAS 16:9 EN VIVO         -->
     <!-- ===================================================================== -->
-    <section class="b24-reels-section" id="reels">
+    <section class="ui-reels-section" id="reels">
         <div class="container-xl">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
@@ -1565,27 +1565,27 @@ if (!function_exists('devioz_parse_video')) {
 
             <div class="row g-4">
                 <?php if (!empty($reelProjects)): ?>
-                    <?php 
+                    <?php
                     $reelIndex = 0;
-                    foreach ($reelProjects as $reel): 
+                    foreach ($reelProjects as $reel):
                         $videoData = devioz_parse_video((string)$reel->video_url);
                         $reelCover = $videoData['thumb'] ?: $reel->coverUrl();
                         $dev = $reel->developer();
                         $leadName = $dev ? $dev->name : 'Tech Lead Devioz';
                     ?>
                         <div class="col-6 col-md-4 col-lg-3">
-                            <div class="b24-reel-card js-reel-trigger" 
+                            <div class="ui-reel-card js-reel-trigger"
                                  data-reel-index="<?= $reelIndex ?>"
                                  data-title="<?= e($reel->name) ?>"
                                  data-video-url="<?= e($videoData['embed']) ?>"
                                  data-lead="<?= e($leadName) ?>"
                                  data-score="<?= $reel->final_score ? number_format((float)$reel->final_score, 1) : '9.6' ?>"
                                  data-client="<?= e($reel->clientName()) ?>">
-                                
+
                                 <!-- Caja de Poster Vertical Bilibili -->
-                                <div class="b24-reel-poster-box">
-                                    <div class="b24-reel-bg" style="background-image: url('<?= e($reelCover) ?>');"></div>
-                                    
+                                <div class="ui-reel-poster-box">
+                                    <div class="ui-reel-bg" style="background-image: url('<?= e($reelCover) ?>');"></div>
+
                                     <!-- Badges en las esquinas -->
                                     <span class="bili-badge-pink">
                                         <i class="fa-regular fa-clock" style="font-size: 0.65rem;"></i> Free
@@ -1595,7 +1595,7 @@ if (!function_exists('devioz_parse_video')) {
                                     </span>
 
                                     <!-- Overlay Liquid Glass al pasar el ratón (Hover) -->
-                                    <div class="b24-reel-hover-overlay">
+                                    <div class="ui-reel-hover-overlay">
                                         <div class="bili-overlay-meta">
                                             <span class="bili-tag-pill"><?= !empty($reel->tech_stack) ? e($reel->tech_stack[0]) : 'Software TI' ?></span>
                                             <div class="bili-duration-text mb-2">
@@ -1603,7 +1603,7 @@ if (!function_exists('devioz_parse_video')) {
                                             </div>
                                         </div>
                                         <!-- Botón Azul de Play de Bilibili -->
-                                        <button type="button" class="b24-reel-play-btn-blue">
+                                        <button type="button" class="ui-reel-play-btn-blue">
                                             <i class="fa-solid fa-play"></i> Play
                                         </button>
                                     </div>
@@ -1622,9 +1622,9 @@ if (!function_exists('devioz_parse_video')) {
 
                             </div>
                         </div>
-                    <?php 
+                    <?php
                         $reelIndex++;
-                    endforeach; 
+                    endforeach;
                     ?>
                 <?php else: ?>
                     <div class="col-12 text-center py-5">
@@ -1641,26 +1641,26 @@ if (!function_exists('devioz_parse_video')) {
     <section class="py-5 bg-white" id="portafolio">
         <div class="container-xl py-4">
             <div class="text-center">
-                <span class="b24-section-tag bg-primary-subtle text-primary">Proyectos Reales Entregados</span>
-                <h2 class="b24-section-title">Portafolio de Soluciones Certificadas</h2>
-                <p class="b24-section-desc">
+                <span class="ui-section-tag bg-primary-subtle text-primary">Proyectos Reales Entregados</span>
+                <h2 class="ui-section-title">Portafolio de Soluciones Certificadas</h2>
+                <p class="ui-section-desc">
                     Explora una selección de nuestras soluciones en producción. Cada proyecto cuenta con su respectiva ficha técnica, arquitectura auditada y conformidad ISO.
                 </p>
             </div>
 
             <!-- Filtros por Categoría -->
             <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" id="portfolioFilterContainer">
-                <button type="button" class="b24-portfolio-filter-btn active" data-filter="all">Todos los Proyectos</button>
-                <button type="button" class="b24-portfolio-filter-btn" data-filter="web">Web Enterprise</button>
-                <button type="button" class="b24-portfolio-filter-btn" data-filter="cloud">Cloud & DevOps</button>
-                <button type="button" class="b24-portfolio-filter-btn" data-filter="fintech">FinTech & Pagos</button>
-                <button type="button" class="b24-portfolio-filter-btn" data-filter="mobile">Móvil & Logística</button>
+                <button type="button" class="ui-portfolio-filter-btn active" data-filter="all">Todos los Proyectos</button>
+                <button type="button" class="ui-portfolio-filter-btn" data-filter="web">Web Enterprise</button>
+                <button type="button" class="ui-portfolio-filter-btn" data-filter="cloud">Cloud & DevOps</button>
+                <button type="button" class="ui-portfolio-filter-btn" data-filter="fintech">FinTech & Pagos</button>
+                <button type="button" class="ui-portfolio-filter-btn" data-filter="mobile">Móvil & Logística</button>
             </div>
 
             <!-- Grid de Proyectos -->
             <div class="row g-4" id="portfolioProjectsGrid">
                 <?php if (!empty($featuredProjects)): ?>
-                    <?php foreach ($featuredProjects as $proj): 
+                    <?php foreach ($featuredProjects as $proj):
                         // Preparar categorías para filtrado
                         $cat = 'web';
                         $lowName = strtolower($proj->name . ' ' . $proj->description);
@@ -1677,7 +1677,7 @@ if (!function_exists('devioz_parse_video')) {
                         $projCode = $proj->code ?: ('DEV-2026-' . sprintf('%03d', $proj->id));
                         $projScore = $proj->final_score ? number_format((float)$proj->final_score, 1) : '9.5';
                         $stack = is_array($proj->tech_stack) ? $proj->tech_stack : (json_decode((string)$proj->tech_stack, true) ?: ['PHP 8.2', 'MySQL', 'Docker', 'Bootstrap 5']);
-                        
+
                         // Datos para el modal público
                         $projectDataJson = htmlspecialchars(json_encode([
                             'id'          => $proj->id,
@@ -1695,11 +1695,11 @@ if (!function_exists('devioz_parse_video')) {
                         ]), ENT_QUOTES, 'UTF-8');
                     ?>
                         <div class="col-md-6 col-lg-4 js-portfolio-item" data-category="<?= $cat ?>">
-                            <div class="b24-project-card">
-                                
-                                <div class="b24-project-cover">
+                            <div class="ui-project-card">
+
+                                <div class="ui-project-cover">
                                     <img src="<?= e($proj->coverUrl()) ?>" alt="<?= e($proj->name) ?>" loading="lazy">
-                                    
+
                                     <div class="position-absolute top-0 end-0 m-2 badge bg-dark bg-opacity-75 text-white p-2 rounded-3 shadow">
                                         <i class="fa-solid fa-star text-warning me-1"></i>
                                         <span class="fw-bold"><?= $projScore ?></span> / 10
@@ -1716,7 +1716,7 @@ if (!function_exists('devioz_parse_video')) {
                                             <span class="font-mono text-muted small"><?= e($projCode) ?></span>
                                             <span class="badge bg-light text-secondary border small"><?= e($proj->categoryLabel()) ?></span>
                                         </div>
-                                        
+
                                         <h5 class="fw-bold text-navy mb-2 text-truncate" title="<?= e($proj->name) ?>">
                                             <?= e($proj->name) ?>
                                         </h5>
@@ -1728,10 +1728,10 @@ if (!function_exists('devioz_parse_video')) {
                                         <!-- Tech Stack Chips -->
                                         <div class="d-flex flex-wrap gap-1 mb-3">
                                             <?php foreach (array_slice($stack, 0, 3) as $tech): ?>
-                                                <span class="b24-tech-tag"><?= e($tech) ?></span>
+                                                <span class="ui-tech-tag"><?= e($tech) ?></span>
                                             <?php endforeach; ?>
                                             <?php if (count($stack) > 3): ?>
-                                                <span class="b24-tech-tag">+<?= count($stack) - 3 ?></span>
+                                                <span class="ui-tech-tag">+<?= count($stack) - 3 ?></span>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -1768,9 +1768,9 @@ if (!function_exists('devioz_parse_video')) {
     <section class="py-5" style="background: #FAFCFE;">
         <div class="container-xl py-4">
             <div class="text-center">
-                <span class="b24-section-tag bg-warning-subtle text-warning">Liderazgo & Opinión de Expertos</span>
-                <h2 class="b24-section-title">Confianza y Excelencia Técnica Comprobada</h2>
-                <p class="b24-section-desc">
+                <span class="ui-section-tag bg-warning-subtle text-warning">Liderazgo & Opinión de Expertos</span>
+                <h2 class="ui-section-title">Confianza y Excelencia Técnica Comprobada</h2>
+                <p class="ui-section-desc">
                     El testimonio de nuestros líderes técnicos y directores sobre el impacto del enfoque Devioz en la puntualidad, seguridad y calidad de los entregables.
                 </p>
             </div>
@@ -1851,7 +1851,7 @@ if (!function_exists('devioz_parse_video')) {
     <section class="py-5" style="background: linear-gradient(135deg, #172B4D 0%, #0F172A 100%); color: #fff;" id="contacto">
         <div class="container-xl py-4">
             <div class="row g-5 align-items-center">
-                
+
                 <!-- Columna Izquierda: Información de Contacto Directo -->
                 <div class="col-lg-5">
                     <span class="badge bg-warning text-dark fw-bold text-uppercase px-3 py-1.5 rounded-pill mb-3">
@@ -1947,7 +1947,7 @@ if (!function_exists('devioz_parse_video')) {
                                     <textarea class="form-control" name="contact_message" id="contactMessageTextarea" rows="3" placeholder="Describe brevemente el alcance, tecnologías deseadas o plazos estimados..." required></textarea>
                                 </div>
                                 <div class="col-12 pt-2">
-                                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-pill shadow-sm" style="background: var(--b24-cyan); border-color: var(--b24-cyan); font-size: 1rem;">
+                                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-pill shadow-sm" style="background: var(--ui-cyan); border-color: var(--ui-cyan); font-size: 1rem;">
                                         <span>ENVIAR SOLICITUD DE PROPUESTA</span>
                                         <i class="fa-solid fa-paper-plane ms-2"></i>
                                     </button>
@@ -1964,15 +1964,15 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 11. MEGA FOOTER INSTITUCIONAL (AUTÓNOMO)                              -->
     <!-- ===================================================================== -->
-    <footer class="b24-footer">
+    <footer class="ui-footer">
         <div class="container-xl">
             <div class="row g-4 mb-5">
-                
+
                 <div class="col-lg-4 col-md-6">
                     <div class="d-flex align-items-center gap-2 mb-3">
                         <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz Technology Solutions" width="30" height="30" class="rounded">
-                        <span class="fw-bold fs-5 text-white">Devioz<span style="color: var(--b24-cyan);">OS</span></span>
-                        <span class="b24-brand-badge">Enterprise Factory</span>
+                        <span class="fw-bold fs-5 text-white">Devioz<span style="color: var(--ui-cyan);">OS</span></span>
+                        <span class="ui-brand-badge">Enterprise Factory</span>
                     </div>
                     <p class="text-secondary small mb-3">
                         Devioz Technology Solutions: Empresa consultora especializada en ingeniería de software, arquitectura en la nube y aseguramiento métrico de calidad (QA).
@@ -1983,8 +1983,8 @@ if (!function_exists('devioz_parse_video')) {
                 </div>
 
                 <div class="col-lg-2 col-md-6 col-6">
-                    <h6 class="b24-footer-title">Navegación</h6>
-                    <ul class="b24-footer-list">
+                    <h6 class="ui-footer-title">Navegación</h6>
+                    <ul class="ui-footer-list">
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#servicios">Servicios Core</a></li>
                         <li><a href="#metodologia">Metodología</a></li>
@@ -1995,8 +1995,8 @@ if (!function_exists('devioz_parse_video')) {
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-6">
-                    <h6 class="b24-footer-title">Estándares & QA</h6>
-                    <ul class="b24-footer-list">
+                    <h6 class="ui-footer-title">Estándares & QA</h6>
+                    <ul class="ui-footer-list">
                         <li><a href="#calidad">ISO/IEC 25010:2023 (SQuaRE)</a></li>
                         <li><a href="#calidad">ISO/IEC 27001:2022 (ISMS)</a></li>
                         <li><a href="#calidad">OWASP Top 10 DevSecOps</a></li>
@@ -2006,7 +2006,7 @@ if (!function_exists('devioz_parse_video')) {
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="b24-footer-title">Área de Clientes</h6>
+                    <h6 class="ui-footer-title">Área de Clientes</h6>
                     <p class="text-muted small mb-3">Espacio exclusivo para empresas con proyectos en curso y consultores autorizados.</p>
                     <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3" id="btnFooterOpenAuthModal">
                         <i class="fa-regular fa-circle-user me-1"></i> Acceso a Portal de Clientes
@@ -2034,20 +2034,20 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 12. MODAL AUTÓNOMO: REPRODUCTOR DE REELS (16:9 LIGHTBOX)             -->
     <!-- ===================================================================== -->
-    <div class="b24-modal-overlay" id="reelPlayerModal" role="dialog" aria-modal="true" aria-labelledby="reelModalTitle">
-        <div class="b24-reel-dialog">
-            
+    <div class="ui-modal-overlay" id="reelPlayerModal" role="dialog" aria-modal="true" aria-labelledby="reelModalTitle">
+        <div class="ui-reel-dialog">
+
             <!-- Botón de Cierre del Reel -->
-            <button type="button" class="b24-close-reel-btn" id="btnCloseReelModal" aria-label="Cerrar reproductor">
+            <button type="button" class="ui-close-reel-btn" id="btnCloseReelModal" aria-label="Cerrar reproductor">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
             <!-- Caja de Reproducción (Vertical 16:9) -->
-            <div class="b24-reel-player-box">
-                <iframe id="reelPlayerIframe" 
-                        src="" 
-                        title="Devioz Reel Demo" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            <div class="ui-reel-player-box">
+                <iframe id="reelPlayerIframe"
+                        src=""
+                        title="Devioz Reel Demo"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
 
@@ -2077,9 +2077,9 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 13. MODAL AUTÓNOMO: FICHA TÉCNICA DEL PROYECTO (PUBLIC DOSSIER)      -->
     <!-- ===================================================================== -->
-    <div class="b24-modal-overlay" id="publicProjectModal" role="dialog" aria-modal="true" aria-labelledby="dossierModalTitle">
-        <div class="b24-dossier-dialog">
-            
+    <div class="ui-modal-overlay" id="publicProjectModal" role="dialog" aria-modal="true" aria-labelledby="dossierModalTitle">
+        <div class="ui-dossier-dialog">
+
             <div class="d-flex justify-content-between align-items-center p-3 p-md-4 border-bottom bg-light">
                 <div class="d-flex align-items-center gap-2">
                     <span class="badge bg-primary font-mono" id="dossierCode">DEV-2026-001</span>
@@ -2092,7 +2092,7 @@ if (!function_exists('devioz_parse_video')) {
 
             <div class="p-3 p-md-4" style="max-height: 75vh; overflow-y: auto;">
                 <div class="row g-4">
-                    
+
                     <!-- Columna Izquierda: Portada y Metadata -->
                     <div class="col-md-5">
                         <div class="rounded-3 overflow-hidden border mb-3" style="height: 180px;">
@@ -2102,7 +2102,7 @@ if (!function_exists('devioz_parse_video')) {
                         <div class="p-3 bg-light rounded-3 border mb-3">
                             <div class="small text-muted mb-1">EMPRESA / CLIENTE:</div>
                             <div class="fw-bold text-navy mb-2" id="dossierClient">Cliente Corporativo</div>
-                            
+
                             <div class="small text-muted mb-1">TECH LEAD ASIGNADO:</div>
                             <div class="fw-bold text-navy mb-2" id="dossierLead">Ingeniero Senior Devioz</div>
 
@@ -2147,7 +2147,7 @@ if (!function_exists('devioz_parse_video')) {
                         </div>
 
                         <div class="pt-3 border-top d-flex gap-2">
-                            <a href="#contacto" class="btn btn-primary rounded-pill w-100 fw-bold py-2 js-quote-similar-btn" style="background: var(--b24-cyan); border-color: var(--b24-cyan);">
+                            <a href="#contacto" class="btn btn-primary rounded-pill w-100 fw-bold py-2 js-quote-similar-btn" style="background: var(--ui-cyan); border-color: var(--ui-cyan);">
                                 <i class="fa-solid fa-paper-plane me-1"></i> Cotizar Solución Similar
                             </a>
                         </div>
@@ -2162,10 +2162,10 @@ if (!function_exists('devioz_parse_video')) {
     <!-- ===================================================================== -->
     <!-- 14. MODAL AUTÓNOMO: ACCESO AL PORTAL DE CLIENTES Y CONSULTORES        -->
     <!-- ===================================================================== -->
-    <div class="b24-modal-overlay" id="portalAuthModal" role="dialog" aria-modal="true" aria-labelledby="modalAuthTitle">
-        <div class="b24-modal-card" style="background: #fff; border-radius: 18px; width: 100%; max-width: 440px; box-shadow: 0 25px 60px rgba(0,0,0,0.3); overflow: hidden; position: relative;">
-            
-            <div class="b24-modal-header p-3 px-4 bg-light border-bottom d-flex align-items-center justify-content-between">
+    <div class="ui-modal-overlay" id="portalAuthModal" role="dialog" aria-modal="true" aria-labelledby="modalAuthTitle">
+        <div class="ui-modal-card" style="background: #fff; border-radius: 18px; width: 100%; max-width: 440px; box-shadow: 0 25px 60px rgba(0,0,0,0.3); overflow: hidden; position: relative;">
+
+            <div class="ui-modal-header p-3 px-4 bg-light border-bottom d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-2">
                     <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="24" height="24" class="rounded">
                     <h6 class="fw-bold mb-0 text-navy" id="modalAuthTitle">Portal de Clientes & Consultores</h6>
@@ -2209,7 +2209,7 @@ if (!function_exists('devioz_parse_video')) {
                         </label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold rounded-3 shadow-sm mb-3" style="background: var(--b24-cyan); border-color: var(--b24-cyan);">
+                    <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold rounded-3 shadow-sm mb-3" style="background: var(--ui-cyan); border-color: var(--ui-cyan);">
                         <span>Ingresar al Portal</span>
                         <i class="fa-solid fa-right-to-bracket ms-1"></i>
                     </button>
@@ -2363,7 +2363,7 @@ if (!function_exists('devioz_parse_video')) {
                     const stack = Array.isArray(data.techStack) ? data.techStack : [];
                     stack.forEach(tech => {
                         const span = document.createElement('span');
-                        span.className = 'b24-tech-tag';
+                        span.className = 'ui-tech-tag';
                         span.textContent = tech;
                         stackContainer.appendChild(span);
                     });
@@ -2458,7 +2458,7 @@ if (!function_exists('devioz_parse_video')) {
             });
 
             // 5. Filtrado Dinámico de Proyectos en Portafolio
-            const filterBtns = document.querySelectorAll('.b24-portfolio-filter-btn');
+            const filterBtns = document.querySelectorAll('.ui-portfolio-filter-btn');
             const projectCards = document.querySelectorAll('.js-portfolio-item');
 
             filterBtns.forEach(btn => {

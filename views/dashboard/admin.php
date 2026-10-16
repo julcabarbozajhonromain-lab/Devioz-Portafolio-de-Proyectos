@@ -14,7 +14,7 @@ declare(strict_types=1);
 /** @var array $statusStats */
 ?>
 
-<!-- Barra Superior de Acciones Rápidas (Estilo Bitrix24 CRM) -->
+<!-- Barra Superior de Acciones Rápidas (Estilo Devioz CRM) -->
 <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center gap-2">
         <?php if ($isLider): ?>

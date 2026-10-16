@@ -212,7 +212,7 @@ $router->get('/api/link-preview', [\App\Controllers\LinkPreviewController::class
 $router->post('/api/bot', [\App\Controllers\ApiController::class, 'bot']);
 
 // -----------------------------------------------------------------------------
-// Bitrix24 Suite: Chat Directo 1 a 1, Interconexión/Llamadas y Notificaciones
+// Devioz Suite: Chat Directo 1 a 1, Interconexión/Llamadas y Notificaciones
 // -----------------------------------------------------------------------------
 $router->get('/chat', [\App\Controllers\ChatController::class, 'index'], ['auth']);
 $router->get('/online', [\App\Controllers\ChatController::class, 'index'], ['auth']);

@@ -5,18 +5,18 @@ declare(strict_types=1);
 use App\Core\View;
 ?>
 <!DOCTYPE html>
-<html lang="es" data-theme="light" data-ui-mode="bitrix">
+<html lang="es" data-theme="light" data-ui-mode="devioz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?= csrf_token() ?>">
     <meta name="app-url" content="<?= url() ?>">
     <title><?= e(isset($title) ? $title . ' — Devioz OS' : 'Devioz OS — Plataforma Corporativa') ?></title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?= asset('images/devioz-icon.png') ?>">
 
-    <!-- Tipografía Bitrix24 Oficial: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif -->
+    <!-- Tipografía Devioz Oficial: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -198,7 +198,7 @@ use App\Core\View;
             </div>
         </div>
 
-        <!-- Pie con Input Pill y Botón Send circular Bitrix Blue -->
+        <!-- Pie con Input Pill y Botón Send circular color azul -->
         <div class="bot-window-footer">
             <form class="bot-input-pill-wrapper" id="deviozBotForm">
                 <input type="text" id="deviozBotInput" class="bot-input-field" placeholder="Pregúntame algo sobre proyectos o talento..." autocomplete="off">
@@ -215,17 +215,17 @@ use App\Core\View;
     </div>
 
     <!-- ========================================================================= -->
-    <!-- 4. SUITE DE COMUNICACIÓN E INTERCONEXIÓN BITRIX24 (CHAT, DOCK, MEET)      -->
+    <!-- 4. SUITE DE COMUNICACIÓN E INTERCONEXIÓN DEVIOZ (CHAT, DOCK, MEET)      -->
     <!-- ========================================================================= -->
-    <?= View::partial('partials/bitrix-suite') ?>
+    <?= View::partial('partials/communication-suite') ?>
 
     <!-- ========================================================================= -->
-    <!-- 5. BITRIX24 AIR ENTERPRISE SIDEPANEL SLIDER (CAJÓN DE INSPECCIÓN RÁPIDA)  -->
+    <!-- 5. Devioz SIDEPANEL SLIDER (CAJÓN DE INSPECCIÓN RÁPIDA)  -->
     <!-- ========================================================================= -->
     <?= View::partial('partials/sidepanel') ?>
 
     <!-- ========================================================================= -->
-    <!-- 6. SELECTOR DE TEMAS VISUALES BITRIX24 AIR                                -->
+    <!-- 6. SELECTOR DE TEMAS VISUALES Devioz                                -->
     <!-- ========================================================================= -->
     <?= View::partial('partials/theme-modal') ?>
 

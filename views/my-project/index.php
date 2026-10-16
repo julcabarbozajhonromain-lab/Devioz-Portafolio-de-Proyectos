@@ -11,7 +11,7 @@ declare(strict_types=1);
 /** @var int $progress */
 ?>
 
-<!-- Encabezado Corporativo del Proyecto (Estilo Bitrix24) -->
+<!-- Encabezado Corporativo del Proyecto (Estilo Devioz) -->
 <div class="card-custom p-4 mb-4">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
         <div>
@@ -33,18 +33,18 @@ declare(strict_types=1);
         </div>
     </div>
 
-    <!-- Barra de Progreso Bitrix -->
+    <!-- Barra de Progreso Devioz -->
     <div class="progress" style="height: 6px; border-radius: 999px; background: #E0E8ED;">
         <div class="progress-bar" style="width: <?= $progress ?>%; background: #00ACE3;"></div>
     </div>
 
-    <!-- Ficha de Contacto Directo del Lead / Administrador Asignado (Estilo Bitrix24) -->
+    <!-- Ficha de Contacto Directo del Lead / Administrador Asignado (Estilo Devioz) -->
     <div class="mt-3 pt-3 border-top d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3" style="border-color: #E0E8ED !important;">
         <div class="d-flex align-items-center gap-3">
             <div class="position-relative">
-                <img src="<?= e($assignedLead ? $assignedLead->avatarUrl() : asset('images/devioz-icon.png')) ?>" 
-                     alt="<?= e($assignedLead ? $assignedLead->name : 'Lead Técnico') ?>" 
-                     class="rounded-circle border" 
+                <img src="<?= e($assignedLead ? $assignedLead->avatarUrl() : asset('images/devioz-icon.png')) ?>"
+                     alt="<?= e($assignedLead ? $assignedLead->name : 'Lead Técnico') ?>"
+                     class="rounded-circle border"
                      width="42" height="42" style="object-fit: cover;">
                 <span class="position-absolute bottom-0 end-0 p-1 bg-success border border-white rounded-circle" title="En línea"></span>
             </div>
@@ -59,7 +59,7 @@ declare(strict_types=1);
             </div>
         </div>
 
-        <!-- Botones de Interconexión Bitrix24 -->
+        <!-- Botones de Interconexión Devioz -->
         <div class="d-flex align-items-center gap-2 flex-wrap">
             <button type="button" class="btn btn-sm btn-brand d-flex align-items-center gap-2" id="projectOpenChatBtn" data-contact-id="<?= $assignedLead ? $assignedLead->id : '' ?>">
                 <i class="fa-solid fa-comments"></i>
@@ -71,7 +71,7 @@ declare(strict_types=1);
             </button>
             <button type="button" class="btn btn-sm btn-outline-success d-flex align-items-center gap-2" id="projectLaunchVideoBtn" data-project-code="<?= e($project->code) ?>">
                 <i class="fa-solid fa-video"></i>
-                <span class="d-none d-sm-inline">Bitrix Meet</span>
+                <span class="d-none d-sm-inline">Devioz Meet</span>
             </button>
         </div>
     </div>
@@ -111,8 +111,8 @@ declare(strict_types=1);
                     <h5 class="fw-bold mb-0" style="color: #172B4D;">Cronograma de Hitos de Desarrollo</h5>
                     <span class="small text-secondary">Secuencia estricta de cumplimiento y ponderación</span>
                 </div>
-                <!-- Selector de Vistas Estilo Bitrix24: Lista / Gantt / Calendario -->
-                <div class="btn-group btn-group-sm rounded-pill p-1 shadow-sm bitrix-view-switcher" role="group" id="milestoneViewSwitcher" style="background: #EDF3F7; border: 1px solid #DBE2E8;">
+                <!-- Selector de Vistas Estilo Devioz: Lista / Gantt / Calendario -->
+                <div class="btn-group btn-group-sm rounded-pill p-1 shadow-sm devioz-view-switcher" role="group" id="milestoneViewSwitcher" style="background: #EDF3F7; border: 1px solid #DBE2E8;">
                     <button type="button" class="btn btn-sm rounded-pill px-3 fw-semibold active" id="viewModeTimelineBtn" data-view="timeline">
                         <i class="fa-solid fa-list-check me-1"></i> Lista
                     </button>
@@ -158,7 +158,7 @@ declare(strict_types=1);
 
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 pt-1">
                                     <div class="small">
-                                        Estado: 
+                                        Estado:
                                         <?php if ($m->status === 'completed'): ?>
                                             <span class="text-emerald fw-semibold">Completado el <?= format_date($m->completed_at) ?></span>
                                         <?php elseif ($m->status === 'in_progress'): ?>
@@ -170,11 +170,11 @@ declare(strict_types=1);
 
                                     <div class="d-flex gap-2">
                                         <!-- Botón Subir Entrega -->
-                                        <button type="button" 
-                                                class="btn btn-brand btn-sm" 
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#deliveryModal" 
-                                                data-milestone-id="<?= $m->id ?>" 
+                                        <button type="button"
+                                                class="btn btn-brand btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deliveryModal"
+                                                data-milestone-id="<?= $m->id ?>"
                                                 data-milestone-name="<?= e($m->name) ?>">
                                             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                                             <span>Subir Entrega</span>
@@ -197,9 +197,9 @@ declare(strict_types=1);
                 </div>
             </div>
 
-            <!-- VISTA 2: DIAGRAMA DE GANTT BITRIX24 -->
+            <!-- VISTA 2: DIAGRAMA DE GANTT DEVIOZ -->
             <div id="milestonesGanttView" class="d-none">
-                <div class="bitrix-gantt-container p-3 rounded-3" style="background: #F8FAFC; border: 1px solid #E2E8F0;">
+                <div class="devioz-gantt-container p-3 rounded-3" style="background: #F8FAFC; border: 1px solid #E2E8F0;">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <span class="small fw-bold text-secondary text-uppercase" style="font-size: 0.72rem; letter-spacing: 0.05em;">Diagrama de Cronograma Ponderado (Gantt)</span>
                         <div class="d-flex align-items-center gap-3 small text-secondary" style="font-size: 0.75rem;">
@@ -209,13 +209,13 @@ declare(strict_types=1);
                         </div>
                     </div>
 
-                    <div class="bitrix-gantt-chart">
-                        <?php foreach ($milestones as $index => $m): 
+                    <div class="devioz-gantt-chart">
+                        <?php foreach ($milestones as $index => $m):
                             $statusPercent = ($m->status === 'completed') ? 100 : (($m->status === 'in_progress') ? 50 : 0);
                             $barClass = ($m->status === 'completed') ? 'bg-success' : (($m->status === 'in_progress') ? 'bg-primary' : 'bg-secondary bg-opacity-25');
                             if ($m->isOverdue()) { $barClass = 'bg-danger'; }
                         ?>
-                            <div class="bitrix-gantt-row py-2 border-bottom" style="border-color: #E2E8F0 !important;">
+                            <div class="devioz-gantt-row py-2 border-bottom" style="border-color: #E2E8F0 !important;">
                                 <div class="row align-items-center g-2">
                                     <div class="col-md-4 col-12">
                                         <div class="d-flex align-items-center gap-2">
@@ -228,8 +228,8 @@ declare(strict_types=1);
                                     </div>
                                     <div class="col-md-6 col-9">
                                         <div class="progress" style="height: 14px; border-radius: 999px; background: #E2E8F0;">
-                                            <div class="progress-bar <?= $barClass ?> progress-bar-striped <?= $m->status === 'in_progress' ? 'progress-bar-animated' : '' ?>" 
-                                                 role="progressbar" 
+                                            <div class="progress-bar <?= $barClass ?> progress-bar-striped <?= $m->status === 'in_progress' ? 'progress-bar-animated' : '' ?>"
+                                                 role="progressbar"
                                                  style="width: <?= max(12, $statusPercent) ?>%; font-size: 0.65rem; font-weight: 700;">
                                                 <?= $statusPercent ?>%
                                             </div>
@@ -247,7 +247,7 @@ declare(strict_types=1);
                 </div>
             </div>
 
-            <!-- VISTA 3: CALENDARIO DE ENTREGAS BITRIX24 -->
+            <!-- VISTA 3: CALENDARIO DE ENTREGAS DEVIOZ -->
             <div id="milestonesCalendarView" class="d-none">
                 <div class="row g-3">
                     <?php foreach ($milestones as $index => $m): ?>
@@ -365,7 +365,7 @@ declare(strict_types=1);
                             <div class="d-flex justify-content-between align-items-center mb-1">
                                 <label for="hours_worked" class="form-label-custom mb-0">Horas Invertidas en la Sesión</label>
                                 <button type="button" class="btn btn-link p-0 text-decoration-none small" id="copyTrackerHoursBtn" style="font-size: 0.75rem; color: #00ACE3;">
-                                    <i class="fa-solid fa-stopwatch me-1"></i> Copiar de Jornada Bitrix
+                                    <i class="fa-solid fa-stopwatch me-1"></i> Copiar de Jornada Devioz
                                 </button>
                             </div>
                             <input type="number" step="0.5" min="0.5" max="12" name="hours_worked" id="hours_worked" class="form-control form-control-custom" value="3.5" required>

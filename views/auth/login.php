@@ -7,9 +7,9 @@ declare(strict_types=1);
 <div class="mb-4">
     <div class="d-flex align-items-center gap-2 mb-2 d-lg-none">
         <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="28" height="28" class="rounded">
-        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--b24-cyan);">OS</span></span>
+        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--ui-cyan);">OS</span></span>
     </div>
-    <h3 class="fw-bold mb-1" style="color: var(--b24-navy); letter-spacing: -0.5px;">Inicie sesión en Devioz OS</h3>
+    <h3 class="fw-bold mb-1" style="color: var(--ui-navy); letter-spacing: -0.5px;">Inicie sesión en Devioz OS</h3>
     <p class="text-secondary small mb-0">Ingrese sus credenciales para acceder al sistema operativo y portafolio</p>
 </div>
 
@@ -32,14 +32,14 @@ declare(strict_types=1);
             <span class="input-group-text bg-light border-end-0 text-muted" style="border-radius: 8px 0 0 8px;">
                 <i class="fa-regular fa-envelope"></i>
             </span>
-            <input type="email" 
-                   class="form-control form-control-custom border-start-0" 
-                   id="email" 
-                   name="email" 
-                   value="<?= e(old('email')) ?>" 
-                   placeholder="usuario@devioz.io" 
+            <input type="email"
+                   class="form-control form-control-custom border-start-0"
+                   id="email"
+                   name="email"
+                   value="<?= e(old('email')) ?>"
+                   placeholder="usuario@devioz.io"
                    autocomplete="email"
-                   required 
+                   required
                    autofocus
                    style="border-radius: 0 8px 8px 0;">
         </div>
@@ -57,18 +57,18 @@ declare(strict_types=1);
             <span class="input-group-text bg-light border-end-0 text-muted" style="border-radius: 8px 0 0 8px;">
                 <i class="fa-solid fa-key"></i>
             </span>
-            <input type="password" 
-                   class="form-control form-control-custom border-start-0 pe-5" 
-                   id="password" 
-                   name="password" 
-                   placeholder="••••••••" 
+            <input type="password"
+                   class="form-control form-control-custom border-start-0 pe-5"
+                   id="password"
+                   name="password"
+                   placeholder="••••••••"
                    autocomplete="current-password"
                    required
                    style="border-radius: 0 8px 8px 0;">
-            <button type="button" 
-                    class="btn-toggle-password" 
-                    data-target="password" 
-                    aria-label="Mostrar u ocultar contraseña" 
+            <button type="button"
+                    class="btn-toggle-password"
+                    data-target="password"
+                    aria-label="Mostrar u ocultar contraseña"
                     title="Mostrar contraseña"
                     tabindex="-1">
                 <i class="fa-regular fa-eye eye-open"></i>
@@ -85,8 +85,8 @@ declare(strict_types=1);
         </label>
     </div>
 
-    <!-- Botón de Envío Bitrix24 Cyan -->
-    <button type="submit" class="btn-b24-auth-submit" id="btnLoginSubmit">
+    <!-- Botón de Envío Devioz Cyan -->
+    <button type="submit" class="btn-ui-auth-submit" id="btnLoginSubmit">
         <span>Iniciar sesión</span>
         <i class="fa-solid fa-arrow-right"></i>
     </button>
@@ -128,7 +128,7 @@ declare(strict_types=1);
 <!-- Enlace para Registro de Nueva Cuenta -->
 <div class="text-center pt-2 border-top">
     <p class="text-secondary small mb-0">
-        ¿Aún no tiene una cuenta? 
-        <a href="<?= url('/register') ?>" class="fw-bold text-decoration-none" style="color: var(--b24-cyan);">Regístrese gratis</a>
+        ¿Aún no tiene una cuenta?
+        <a href="<?= url('/register') ?>" class="fw-bold text-decoration-none" style="color: var(--ui-cyan);">Regístrese gratis</a>
     </p>
 </div>

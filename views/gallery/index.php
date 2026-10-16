@@ -58,7 +58,7 @@ declare(strict_types=1);
                 <div class="card-body-custom flex-grow-1 d-flex flex-column justify-content-between p-3">
                     <div>
                         <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                            <span class="bx-client-badge" title="Empresa / Cliente">
+                            <span class="ui-client-badge" title="Empresa / Cliente">
                                 <i class="fa-solid fa-briefcase"></i>
                                 <span><?= e($p->clientName()) ?></span>
                             </span>
