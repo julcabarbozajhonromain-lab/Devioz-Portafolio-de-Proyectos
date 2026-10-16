@@ -25,8 +25,15 @@
     </section>
     <section class="card-enterprise p-3 p-lg-4 mb-4">
         <h2 class="h5">Herramientas y ejecuciones</h2><p class="text-secondary small">Estado informado por el auditor. La integración automática de herramientas se habilitará aparte; este formulario no ejecuta SonarQube ni escáneres.</p>
-        <?php foreach (['automated_tests' => 'Pruebas automatizadas', 'static_analysis' => 'Análisis estático (p. ej. SonarQube)', 'security_scan' => 'Análisis de seguridad (SAST / DAST / dependencias)'] as $key => $label): ?>
-            <div class="row g-2 mb-3"><div class="col-md-3"><label class="form-label" for="tool_<?= e($key) ?>"><?= e($label) ?></label><select class="form-select" id="tool_<?= e($key) ?>" name="tools[<?= e($key) ?>][status]"><option value="not_run">No ejecutado</option><option value="passed">Aprobado</option><option value="failed">Fallido</option><option value="error">Error al ejecutar</option></select></div><div class="col-md-9"><label class="form-label" for="tool_evidence_<?= e($key) ?>">Evidencia / resultado</label><input class="form-control" id="tool_evidence_<?= e($key) ?>" name="tools[<?= e($key) ?>][evidence]" placeholder="URL del pipeline, reporte, versión de herramienta, métricas y fecha"></div></div>
+        <?php foreach (['automated_tests' => 'Pruebas automatizadas', 'static_analysis' => 'Análisis estático (SonarQube)', 'security_scan' => 'Análisis de seguridad (SAST / DAST / dependencias)'] as $key => $label): ?>
+            <div class="row g-2 mb-3">
+                <?php if ($key === 'static_analysis'): ?>
+                    <div class="col-md-4"><label class="form-label" for="sonarqube_project_key"><?= e($label) ?></label><input class="form-control font-monospace" id="sonarqube_project_key" name="sonarqube_project_key" maxlength="200" placeholder="Project key en SonarQube"><div class="form-text">Se consulta el Quality Gate real al guardar. Si la integración no está configurada o no hay análisis, queda sin ejecutar.</div></div>
+                    <div class="col-md-8"><label class="form-label">Ejecución registrada</label><div class="form-control bg-light text-secondary">Obtenida por API al guardar; no se acepta un PASS manual.</div></div>
+                <?php else: ?>
+                    <div class="col-md-3"><label class="form-label" for="tool_<?= e($key) ?>"><?= e($label) ?></label><select class="form-select" id="tool_<?= e($key) ?>" name="tools[<?= e($key) ?>][status]"><option value="not_run">No ejecutado</option><option value="passed">Aprobado</option><option value="failed">Fallido</option><option value="error">Error al ejecutar</option></select></div><div class="col-md-9"><label class="form-label" for="tool_evidence_<?= e($key) ?>">Evidencia / resultado</label><input class="form-control" id="tool_evidence_<?= e($key) ?>" name="tools[<?= e($key) ?>][evidence]" placeholder="URL del pipeline, reporte, versión de herramienta, métricas y fecha"></div>
+                <?php endif; ?>
+            </div>
         <?php endforeach; ?>
     </section>
     <section class="card-enterprise p-3 p-lg-4 mb-4"><h2 class="h5">Hallazgos</h2><p class="small text-secondary">Incluye problemas observados; los hallazgos críticos y altos bloquean el dictamen.</p>

@@ -92,7 +92,9 @@ final class QualityAuditService
                 'label' => $label,
                 'status' => $status,
                 'evidence' => $evidence,
-                'source' => 'manual',
+                'source' => ($input['tools'][$key]['source'] ?? 'manual') === 'integration' ? 'integration' : 'manual',
+                'evidence_url' => trim((string)($input['tools'][$key]['evidence_url'] ?? '')),
+                'metrics' => $input['tools'][$key]['metrics'] ?? null,
             ];
             if ($status !== 'passed' || $evidence === '') {
                 $complete = false;

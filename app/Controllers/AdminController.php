@@ -12,6 +12,7 @@ use App\Models\Milestone;
 use App\Models\Project;
 use App\Models\User;
 use App\Services\QualityAuditService;
+use App\Services\SonarQubeService;
 use InvalidArgumentException;
 
 /**
@@ -448,6 +449,14 @@ class AdminController extends BaseController
             echo \App\Core\View::renderError(404);
             exit;
         }
+        $sonarResult = SonarQubeService::qualityGate((string)($_POST['sonarqube_project_key'] ?? ''));
+        $_POST['tools']['static_analysis'] = [
+            'status' => $sonarResult['status'],
+            'evidence' => $sonarResult['notes'],
+            'source' => 'integration',
+            'evidence_url' => $sonarResult['evidence_url'] ?? '',
+            'metrics' => $sonarResult['metrics'] ?? null,
+        ];
         try {
             $assessment = QualityAuditService::assess($_POST);
         } catch (InvalidArgumentException $exception) {
@@ -478,6 +487,9 @@ class AdminController extends BaseController
                 $db->insert('quality_tool_runs', [
                     'audit_id' => $auditId, 'tool_key' => $key, 'source' => 'manual', 'status' => $tool['status'],
                     'commit_sha' => $commitSha, 'notes' => $tool['evidence'] ?: null,
+                    'evidence_url' => $tool['evidence_url'] ?: null,
+                    'metrics' => $tool['metrics'] === null ? null : json_encode($tool['metrics'], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+                    'source' => $tool['source'],
                     'executed_by' => $this->auth->id(), 'executed_at' => $tool['status'] === 'not_run' ? null : date('Y-m-d H:i:s'),
                 ]);
             }
