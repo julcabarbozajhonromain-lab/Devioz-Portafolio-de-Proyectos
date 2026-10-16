@@ -183,6 +183,9 @@ $router->post('/admin/projects/{id}/unassign', [\App\Controllers\AdminController
 $router->post('/admin/projects/{id}/delete', [\App\Controllers\ProjectController::class, 'destroy'], ['auth', 'admin']);
 $router->get('/admin/evaluations', [\App\Controllers\AdminController::class, 'evaluations'], ['auth', 'admin']);
 $router->post('/admin/evaluations/{deliveryId}/grade', [\App\Controllers\AdminController::class, 'gradeDelivery'], ['auth', 'admin']);
+$router->get('/admin/quality-audits/create/{deliveryId}', [\App\Controllers\AdminController::class, 'createQualityAudit'], ['auth', 'admin']);
+$router->post('/admin/quality-audits/{deliveryId}', [\App\Controllers\AdminController::class, 'storeQualityAudit'], ['auth', 'admin']);
+$router->get('/admin/quality-audits/{auditId}', [\App\Controllers\AdminController::class, 'qualityAuditReport'], ['auth', 'admin']);
 
 // -----------------------------------------------------------------------------
 // Equipo, Galería y Devioz Reels (Shorts)
