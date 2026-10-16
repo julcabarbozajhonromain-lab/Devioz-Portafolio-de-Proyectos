@@ -9,10 +9,9 @@ declare(strict_types=1);
  *   - End-to-End Corporate Storytelling (La historia de innovación, calidad y entrega)
  *   - Zero-Leak Public Isolation (La landing es 100% autónoma para clientes y observadores)
  *   - Autonomous Modals: Devioz Reels 16:9 Lightbox & Dossier de Ficha Técnica
- *   - Estándares Internacionales: ISO/IEC 25010, ISO/IEC 27001, OWASP Top 10, TMMi Nivel 3
+ *   - Estándares Internacionales: ISO/IEC 25010, ISO/IEC 27001, OWASP Top 10, Pruebas de software
  *   - Identidad visual Devioz: esmeralda, menta y pizarra
  *
- * @var array<string, mixed> $stats
  * @var array<\App\Models\Project> $featuredProjects
  * @var array<\App\Models\Project> $reelProjects
  * @var string|null $title
@@ -55,8 +54,8 @@ if (!function_exists('devioz_parse_video')) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?= csrf_token() ?>">
     <meta name="app-url" content="<?= rtrim(url('/'), '/') ?>">
-    <meta name="description" content="Devioz Technology Solutions: Fábrica de Software de Misión Crítica, Arquitectura Cloud y Auditoría de Calidad bajo normas ISO/IEC 25010, ISO 27001 y OWASP Top 10.">
-    <meta name="keywords" content="Devioz, Consultoría TI, Fábrica de Software, Calidad de Software, ISO 25010, ISO 27001, OWASP Top 10, DevSecOps, Cloud DevOps, Reels TI">
+    <meta name="description" content="Devioz: consultor&iacute;a tecnol&oacute;gica, desarrollo de software e inteligencia artificial aplicada.">
+    <meta name="keywords" content="Devioz, consultoría tecnológica, desarrollo de software, inteligencia artificial, automatización, cloud, DevOps, seguridad y calidad de software">
     <meta name="author" content="Devioz Technology Solutions">
 
     <title><?= e($title ?? 'Devioz Technology Solutions — Fábrica de Software, Cloud & Aseguramiento de Calidad') ?></title>
@@ -971,6 +970,15 @@ if (!function_exists('devioz_parse_video')) {
                 display: none;
             }
         }
+        @media (max-width: 575.98px) {
+            .ui-hero-section { padding: 2.75rem 0 2rem; }
+            .ui-hero-title { font-size: clamp(2rem, 9vw, 2.65rem); letter-spacing: -1px; }
+            .ui-hero-services { justify-content: center; }
+            .ui-hero-services span { font-size: .76rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        }
     </style>
 </head>
 <body>
@@ -985,21 +993,14 @@ if (!function_exists('devioz_parse_video')) {
             <div class="d-flex align-items-center gap-3">
                 <a href="#inicio" class="ui-brand">
                     <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz Technology Solutions" width="34" height="34" class="rounded">
-                    <span>Devioz<span style="color: var(--ui-primary);">OS</span></span>
-                    <span class="ui-brand-badge">IT Factory & QA</span>
+                    <span>Devioz</span>
+                    <span class="ui-brand-badge">Tecnolog&iacute;a y consultor&iacute;a</span>
                 </a>
             </div>
 
             <!-- Menú de Navegación Suave (In-Page Anchors — Cero saltos internos) -->
             <nav class="d-none d-lg-flex align-items-center gap-1">
-                <a href="#servicios" class="ui-nav-link">Servicios</a>
-                <a href="#metodologia" class="ui-nav-link">Metodología</a>
-                <a href="#calidad" class="ui-nav-link">Estándares ISO</a>
-                <a href="#reels" class="ui-nav-link d-flex align-items-center gap-1.5">
-                    <i class="fa-solid fa-play text-danger" style="font-size: 0.72rem;"></i> Devioz Reels
-                </a>
-                <a href="#portafolio" class="ui-nav-link">Casos de Éxito</a>
-                <a href="#contacto" class="ui-nav-link">Contacto</a>
+                <a href="#servicios" class="ui-nav-link">Capacidades</a><a href="#metodologia" class="ui-nav-link">C&oacute;mo trabajamos</a><a href="#calidad" class="ui-nav-link">Calidad</a><a href="#reels" class="ui-nav-link">Demos</a><a href="#portafolio" class="ui-nav-link">Proyectos</a><a href="#contacto" class="ui-nav-link">Contacto</a>
             </nav>
 
             <!-- Acciones Derecha: Portal Clientes & Botón CTA -->
@@ -1013,12 +1014,12 @@ if (!function_exists('devioz_parse_video')) {
                 <!-- Botón de Acceso Exclusivo al Portal de Clientes/Consultores -->
                 <button type="button" class="btn-portal-client" id="btnOpenAuthModal" title="Acceso al Portal de Clientes y Consultores">
                     <i class="fa-regular fa-circle-user" style="font-size: 1.05rem; color: var(--ui-primary);"></i>
-                    <span class="d-none d-sm-inline">Portal Clientes</span>
+                    <span class="d-none d-sm-inline">Acceso al equipo</span>
                 </button>
 
                 <!-- Botón CTA Primario -->
                 <a href="#contacto" class="btn-ui-accent">
-                    <span>Cotizar Proyecto</span>
+                    <span>Hablemos</span>
                     <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
                 </a>
             </div>
@@ -1029,532 +1030,63 @@ if (!function_exists('devioz_parse_video')) {
     <!-- 2. ACTO 1: HERO & PROPUESTA DE VALOR CORPORATIVA                      -->
     <!-- ===================================================================== -->
     <section class="ui-hero-section" id="inicio">
-        <div class="container-xl">
-            <div class="row align-items-center g-5">
-
-                <div class="col-lg-6">
-                    <div class="ui-hero-badge">
-                        <i class="fa-solid fa-shield-halved text-info"></i>
-                        <span>Fábrica de Software Enterprise • ISO/IEC 25010 • OWASP DevSecOps</span>
-                    </div>
-
-                    <h1 class="ui-hero-title">
-                        Ingeniería de Software de Misión Crítica. Certificada de Extremo a Extremo.
-                    </h1>
-
-                    <p class="ui-hero-subtitle">
-                        En <strong>Devioz Technology Solutions</strong> diseñamos, construimos y aseguramos sistemas digitales corporativos. Transformamos requerimientos de alta complejidad en soluciones escalables auditadas bajo rigurosos Quality Gates.
-                    </p>
-
-                    <ul class="ui-hero-checklist">
-                        <li>
-                            <span class="check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span><strong>Arquitecturas Limpias y Resilientes:</strong> Microservicios, DDD y patrones Cloud-Native orientados a alta concurrencia.</span>
-                        </li>
-                        <li>
-                            <span class="check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span><strong>Calidad Certificada ISO/IEC 25010:</strong> Inspección de idoneidad funcional, mantenibilidad, latencia y fiabilidad.</span>
-                        </li>
-                        <li>
-                            <span class="check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span><strong>Blindaje Preventivo OWASP Top 10:</strong> Análisis estático y dinámico continuo (SAST/DAST) sin brechas de seguridad.</span>
-                        </li>
-                        <li>
-                            <span class="check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span><strong>Transparencia Absoluta:</strong> Demostraciones técnicas semanales en Devioz Reels 16:9 y seguimiento de hitos.</span>
-                        </li>
-                    </ul>
-
-                    <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
-                        <a href="#contacto" class="btn-ui-accent py-3 px-4" style="font-size: 0.95rem;">
-                            <span>SOLICITAR PROPUESTA TÉCNICA</span>
-                            <i class="fa-solid fa-bolt"></i>
-                        </a>
-
-                        <a href="#reels" class="btn-ui-primary py-3 px-4" style="font-size: 0.95rem;">
-                            <i class="fa-solid fa-play"></i>
-                            <span>Ver Demos en Vivo</span>
-                        </a>
-
-                        <a href="#metodologia" class="btn-ui-outline py-2.5 px-3">
-                            <i class="fa-solid fa-timeline"></i>
-                            <span>Conoce Nuestra Metodología</span>
-                        </a>
-                    </div>
-
-                    <div class="d-flex align-items-center gap-2 mt-4 text-muted small">
-                        <i class="fa-solid fa-lock text-success"></i>
-                        <span>Acuerdo de Confidencialidad NDA • SLA 99.9% de Disponibilidad • Propiedad Intelectual 100% del Cliente</span>
-                    </div>
+        <div class="container-xl"><div class="row align-items-center g-4 g-lg-5">
+            <div class="col-lg-6">
+                <div class="ui-hero-badge"><i class="fa-solid fa-sparkles text-success"></i><span>Ingenier&iacute;a de software &middot; IA aplicada &middot; Cloud y seguridad</span></div>
+                <h1 class="ui-hero-title">Tecnolog&iacute;a que resuelve problemas reales.</h1>
+                <p class="ui-hero-subtitle">Dise&ntilde;amos software a medida y soluciones de inteligencia artificial para ayudar a las organizaciones a trabajar mejor. Unimos ingenier&iacute;a, nube y seguridad desde el diagn&oacute;stico hasta la evoluci&oacute;n.</p>
+                <div class="ui-hero-services" aria-label="Capacidades Devioz">
+                    <span><i class="fa-solid fa-code"></i> Software a medida</span><span><i class="fa-solid fa-wand-magic-sparkles"></i> IA y automatizaci&oacute;n</span><span><i class="fa-solid fa-cloud"></i> Cloud, DevOps y seguridad</span>
                 </div>
-
-                <!-- Mockup Interactivo: Pipeline CI/CD & Quality Gate Devioz -->
-                <div class="col-lg-6">
-                    <div class="position-relative">
-
-                        <!-- Floating Badge 1: ISO 25010 -->
-                        <div class="ui-floating-badge badge-pos-1">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 38px; height: 38px; background: #10B981;">
-                                <i class="fa-solid fa-certificate"></i>
-                            </div>
-                            <div>
-                                <div class="text-muted" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">ISO 25010 Quality Gate</div>
-                                <div class="fw-bold text-dark" style="font-size: 0.92rem;">Score Promedio: <span class="text-success fw-bold"><?= e($stats['qa_avg_score'] ?? '9.6') ?> / 10</span></div>
-                            </div>
-                        </div>
-
-                        <!-- Floating Badge 2: OWASP Top 10 -->
-                        <div class="ui-floating-badge badge-pos-2">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 38px; height: 38px; background: #059669;">
-                                <i class="fa-solid fa-shield-virus"></i>
-                            </div>
-                            <div>
-                                <div class="text-muted" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">OWASP Shield & ISMS</div>
-                                <div class="fw-bold text-dark" style="font-size: 0.92rem;">0 Vulnerabilidades Críticas</div>
-                            </div>
-                        </div>
-
-                        <div class="ui-mockup-wrapper">
-                            <div class="ui-mockup-header">
-                                <div class="ui-window-dots">
-                                    <div class="ui-dot ui-dot-red"></div>
-                                    <div class="ui-dot ui-dot-yellow"></div>
-                                    <div class="ui-dot ui-dot-green"></div>
-                                </div>
-                                <div class="text-muted small fw-semibold font-mono" style="font-size: 0.75rem;">
-                                    <i class="fa-solid fa-lock text-success me-1"></i> devioz-pipeline-runner // release-candidate-v2.6
-                                </div>
-                                <span class="badge bg-success-subtle text-success small">STAGING CERTIFIED</span>
-                            </div>
-
-                            <div class="p-4" style="background: #F8FAFC;">
-                                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
-                                    <div>
-                                        <h6 class="fw-bold mb-0 text-navy">Quality Gate & Verificación de Entrega</h6>
-                                        <span class="text-muted small">Devioz Technology Solutions • Auditoría Automatizada</span>
-                                    </div>
-                                    <span class="badge bg-primary px-3 py-1.5 rounded-pill">Sprint de Producción</span>
-                                </div>
-
-                                <div class="row g-2 mb-3">
-                                    <div class="col-4">
-                                        <div class="p-2.5 bg-white rounded border text-center">
-                                            <div class="text-muted" style="font-size: 0.68rem; font-weight: 700;">PROYECTOS ACTIVOS</div>
-                                            <div class="fw-bold text-dark fs-5"><?= (int)($stats['total_projects'] ?? 24) ?></div>
-                                            <span class="badge bg-success-subtle text-success" style="font-size: 0.65rem;">En Ejecución</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="p-2.5 bg-white rounded border text-center">
-                                            <div class="text-muted" style="font-size: 0.68rem; font-weight: 700;">PROMEDIO QA</div>
-                                            <div class="fw-bold text-success fs-5"><?= e($stats['qa_avg_score'] ?? '9.6') ?></div>
-                                            <span class="badge bg-success-subtle text-success" style="font-size: 0.65rem;">ISO 25010 OK</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="p-2.5 bg-white rounded border text-center">
-                                            <div class="text-muted" style="font-size: 0.68rem; font-weight: 700;">SLA UPTIME</div>
-                                            <div class="fw-bold text-info fs-5"><?= e($stats['uptime_sla'] ?? '99.9%') ?></div>
-                                            <span class="badge bg-info-subtle text-info" style="font-size: 0.65rem;">Alta Disp.</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="bg-white p-3 rounded border">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <span class="fw-bold small text-dark"><i class="fa-solid fa-list-check me-1 text-primary"></i> Pipeline de Certificación y Pruebas Unitarias</span>
-                                        <span class="badge bg-success" style="font-size: 0.7rem;">Superado 100%</span>
-                                    </div>
-                                    <div class="progress mb-2" style="height: 6px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
-                                    </div>
-                                    <div class="d-flex justify-content-between text-muted font-mono" style="font-size: 0.72rem;">
-                                        <span>SonarQube & DAST: 0 vulnerabilidades detectadas</span>
-                                        <span class="fw-bold text-success">Build #482 PASSED (142ms)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+                <div class="d-flex flex-wrap align-items-center gap-3 pt-2"><a href="#contacto" class="btn-ui-accent py-3 px-4"><span>Conversemos sobre tu proyecto</span><i class="fa-solid fa-arrow-right"></i></a><a href="#portafolio" class="btn-ui-outline py-2.5 px-3"><span>Explorar proyectos</span></a></div>
+                <p class="ui-hero-note mt-4 mb-0"><i class="fa-solid fa-user-check text-success me-1"></i> Personas expertas, IA con supervisi&oacute;n y entregas con evidencia.</p>
             </div>
-        </div>
+            <div class="col-lg-6"><div class="ui-hero-visual"><img src="<?= asset('images/landing-engineering.svg') ?>" alt="Ilustraci&oacute;n del proceso Devioz: producto, IA aplicada y verificaci&oacute;n de calidad" width="960" height="720" fetchpriority="high"></div></div>
+        </div></div>
     </section>
 
     <!-- ===================================================================== -->
-    <!-- 3. CINTA DE MÉTRICAS & INDICADORES DE IMPACTO                         -->
+    <!-- 3. CAPACIDADES                                                       -->
     <!-- ===================================================================== -->
-    <section class="ui-metrics-ribbon">
-        <div class="container-xl">
-            <div class="row g-4 align-items-center">
-                <div class="col-6 col-md-3">
-                    <div class="ui-metric-card">
-                        <div class="ui-metric-num"><?= number_format((int)($stats['total_projects'] ?? 24)) ?>+</div>
-                        <div class="ui-metric-label">Soluciones Entregadas</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="ui-metric-card">
-                        <div class="ui-metric-num"><?= e($stats['uptime_sla'] ?? '99.9%') ?></div>
-                        <div class="ui-metric-label">Disponibilidad en Producción (SLA)</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="ui-metric-card">
-                        <div class="ui-metric-num"><?= e($stats['qa_avg_score'] ?? '9.6') ?>/10</div>
-                        <div class="ui-metric-label">Índice de Calidad ISO 25010</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="ui-metric-card">
-                        <div class="ui-metric-num">0</div>
-                        <div class="ui-metric-label">Vulnerabilidades Críticas OWASP</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trust Badges -->
-    <section class="ui-trust-section">
-        <div class="container-xl">
-            <div class="d-flex flex-wrap justify-content-center align-items-center gap-2.5">
-                <div class="ui-trust-badge-item">
-                    <i class="fa-solid fa-cube text-success"></i>
-                    <span>ISO/IEC 25010:2023 Calidad del Software</span>
-                </div>
-                <div class="ui-trust-badge-item">
-                    <i class="fa-solid fa-shield-halved text-primary"></i>
-                    <span>ISO/IEC 27001:2022 Seguridad ISMS</span>
-                </div>
-                <div class="ui-trust-badge-item">
-                    <i class="fa-solid fa-bug-slash text-danger"></i>
-                    <span>OWASP Top 10 DevSecOps</span>
-                </div>
-                <div class="ui-trust-badge-item">
-                    <i class="fa-solid fa-vial-circle-check text-warning"></i>
-                    <span>TMMi Nivel 3 Testing Riguroso</span>
-                </div>
-                <div class="ui-trust-badge-item">
-                    <i class="fa-solid fa-award text-info"></i>
-                    <span>Clean Architecture & SOLID Principles</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================================================================== -->
+    <section class="ui-metrics-ribbon" aria-label="Capacidades de Devioz"><div class="container-xl"><div class="row g-3 align-items-center">
+        <div class="col-6 col-md-3"><div class="ui-metric-card"><div class="ui-metric-num">01</div><div class="ui-metric-label">Software a medida</div></div></div>
+        <div class="col-6 col-md-3"><div class="ui-metric-card"><div class="ui-metric-num">02</div><div class="ui-metric-label">Inteligencia artificial</div></div></div>
+        <div class="col-6 col-md-3"><div class="ui-metric-card"><div class="ui-metric-num">03</div><div class="ui-metric-label">Cloud y DevOps</div></div></div>
+        <div class="col-6 col-md-3"><div class="ui-metric-card"><div class="ui-metric-num">04</div><div class="ui-metric-label">Seguridad y calidad</div></div></div>
+    </div></div></section>
     <!-- 4. ACTO 2: SERVICIOS TECNOLÓGICOS CORE                                -->
     <!-- ===================================================================== -->
-    <section class="py-5" style="background: #FAFCFE;" id="servicios">
-        <div class="container-xl py-4">
-            <div class="text-center">
-                <span class="ui-section-tag bg-primary-subtle text-primary">Capacidades & Especialización TI</span>
-                <h2 class="ui-section-title">Soluciones que Impulsan a Empresas Exigentes</h2>
-                <p class="ui-section-desc">
-                    Diseñamos y operamos productos digitales con ingeniería de punta, garantizando que cada componente técnico aporte valor medible y escalabilidad a tu negocio.
-                </p>
-            </div>
-
-            <div class="row g-4">
-
-                <!-- Servicio 1: Software Factory Enterprise -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="ui-service-card">
-                        <div>
-                            <div class="ui-service-icon bg-primary-subtle text-primary">
-                                <i class="fa-solid fa-code"></i>
-                            </div>
-                            <h4 class="fw-bold text-navy mb-2 fs-5">Software Factory Enterprise</h4>
-                            <p class="text-secondary small mb-3">
-                                Desarrollo de plataformas web transaccionales, APIs de alta concurrencia y portales corporativos bajo Arquitectura Hexagonal y Domain-Driven Design (DDD).
-                            </p>
-                            <ul class="list-unstyled small text-muted mb-4">
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-success me-1.5"></i> Microservicios RESTful & GraphQL</li>
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-success me-1.5"></i> Pasarelas de Pago & Facturación</li>
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-success me-1.5"></i> Rendimiento sub-100ms optimizado</li>
-                            </ul>
-                        </div>
-                        <a href="#contacto" class="btn btn-sm btn-outline-primary rounded-pill w-100 fw-bold">Consultar Servicio</a>
-                    </div>
-                </div>
-
-                <!-- Servicio 2: Cloud Architecture & DevOps -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="ui-service-card">
-                        <div>
-                            <div class="ui-service-icon bg-info-subtle text-info">
-                                <i class="fa-solid fa-cloud"></i>
-                            </div>
-                            <h4 class="fw-bold text-navy mb-2 fs-5">Cloud & DevOps Automation</h4>
-                            <p class="text-secondary small mb-3">
-                                Infraestructura como código con Terraform, contenedores Docker y orquestación con Kubernetes para despliegues continuos sin caídas de servicio.
-                            </p>
-                            <ul class="list-unstyled small text-muted mb-4">
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-info me-1.5"></i> Pipelines CI/CD con GitHub Actions</li>
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-info me-1.5"></i> Despliegues Zero-Downtime Blue/Green</li>
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-info me-1.5"></i> Optimización de costos en AWS/GCP/Azure</li>
-                            </ul>
-                        </div>
-                        <a href="#contacto" class="btn btn-sm btn-outline-info rounded-pill w-100 fw-bold">Consultar Servicio</a>
-                    </div>
-                </div>
-
-                <!-- Servicio 3: Data Analytics & Realtime -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="ui-service-card">
-                        <div>
-                            <div class="ui-service-icon bg-warning-subtle text-warning">
-                                <i class="fa-solid fa-chart-line"></i>
-                            </div>
-                            <h4 class="fw-bold text-navy mb-2 fs-5">Data Engineering & Analytics</h4>
-                            <p class="text-secondary small mb-3">
-                                Cuadros de mando ejecutivos interactivos, pipelines de datos en tiempo real e integración de modelos predictivos para toma de decisiones informada.
-                            </p>
-                            <ul class="list-unstyled small text-muted mb-4">
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-warning me-1.5"></i> Dashboards Ejecutivos en Tiempo Real</li>
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-warning me-1.5"></i> Procesamiento de Eventos y Telemetría</li>
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-warning me-1.5"></i> Conexión con bases de datos SQL y NoSQL</li>
-                            </ul>
-                        </div>
-                        <a href="#contacto" class="btn btn-sm btn-outline-warning rounded-pill w-100 fw-bold">Consultar Servicio</a>
-                    </div>
-                </div>
-
-                <!-- Servicio 4: DevSecOps Shield & QA -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="ui-service-card">
-                        <div>
-                            <div class="ui-service-icon bg-success-subtle text-success">
-                                <i class="fa-solid fa-shield-virus"></i>
-                            </div>
-                            <h4 class="fw-bold text-navy mb-2 fs-5">DevSecOps & QA Shield</h4>
-                            <p class="text-secondary small mb-3">
-                                Aseguramiento de la calidad y auditoría de ciberseguridad continua. Pruebas automatizadas de regresión, estrés y mitigación activa de vulnerabilidades.
-                            </p>
-                            <ul class="list-unstyled small text-muted mb-4">
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-success me-1.5"></i> Quality Gate bajo ISO/IEC 25010</li>
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-success me-1.5"></i> Escaneo de Brechas OWASP Top 10</li>
-                                <li class="mb-1.5"><i class="fa-solid fa-check text-success me-1.5"></i> Pruebas E2E y Pruebas de Carga</li>
-                            </ul>
-                        </div>
-                        <a href="#contacto" class="btn btn-sm btn-outline-success rounded-pill w-100 fw-bold">Consultar Servicio</a>
-                    </div>
-                </div>
-
-            </div>
+    <section class="py-5" style="background:#FAFCFE" id="servicios"><div class="container-xl py-4">
+        <div class="text-center"><span class="ui-section-tag bg-primary-subtle text-primary">Lo que hacemos</span><h2 class="ui-section-title">Capacidades para llevar ideas a producto</h2><p class="ui-section-desc">Acompa&ntilde;amos a los equipos a resolver necesidades concretas con tecnolog&iacute;a, colaboraci&oacute;n y decisiones transparentes.</p></div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3"><article class="ui-service-card h-100"><div class="ui-service-icon bg-primary-subtle text-primary"><i class="fa-solid fa-code"></i></div><h3 class="h5 fw-bold text-navy">Software a medida</h3><p class="text-secondary small">Aplicaciones web, plataformas internas e integraciones dise&ntilde;adas seg&uacute;n los procesos de cada organizaci&oacute;n.</p><a href="#contacto" class="btn btn-sm btn-outline-primary rounded-pill w-100 fw-bold mt-auto">Conversemos</a></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-service-card h-100"><div class="ui-service-icon bg-info-subtle text-info"><i class="fa-solid fa-brain"></i></div><h3 class="h5 fw-bold text-navy">IA y automatizaci&oacute;n</h3><p class="text-secondary small">Identificamos oportunidades para aplicar IA y automatizar tareas con controles, supervisi&oacute;n humana y objetivos claros.</p><a href="#contacto" class="btn btn-sm btn-outline-info rounded-pill w-100 fw-bold mt-auto">Conversemos</a></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-service-card h-100"><div class="ui-service-icon bg-warning-subtle text-warning"><i class="fa-solid fa-cloud"></i></div><h3 class="h5 fw-bold text-navy">Cloud y DevOps</h3><p class="text-secondary small">Apoyamos la arquitectura, los flujos de entrega y la operaci&oacute;n de soluciones en entornos cloud.</p><a href="#contacto" class="btn btn-sm btn-outline-warning rounded-pill w-100 fw-bold mt-auto">Conversemos</a></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-service-card h-100"><div class="ui-service-icon bg-success-subtle text-success"><i class="fa-solid fa-shield-halved"></i></div><h3 class="h5 fw-bold text-navy">Seguridad y calidad</h3><p class="text-secondary small">Integramos revisiones, pruebas y controles adecuados al riesgo y a los criterios de aceptaci&oacute;n acordados.</p><a href="#contacto" class="btn btn-sm btn-outline-success rounded-pill w-100 fw-bold mt-auto">Conversemos</a></article></div>
         </div>
-    </section>
-
-    <!-- ===================================================================== -->
+    </div></section>
     <!-- 5. ACTO 3: METODOLOGÍA CRONOLÓGICA ("CÓMO LO HACEMOS Y TIEMPOS")       -->
     <!-- ===================================================================== -->
-    <section class="py-5 bg-white" id="metodologia">
-        <div class="container-xl py-4">
-            <div class="text-center">
-                <span class="ui-section-tag bg-success-subtle text-success">El Viaje de tu Proyecto • End-to-End</span>
-                <h2 class="ui-section-title">¿Cómo lo Hacemos y en qué Tiempos?</h2>
-                <p class="ui-section-desc">
-                    Un proceso predecible, disciplinado y transparente. Desde el primer análisis conceptual hasta el despliegue en producción con monitoreo en vivo.
-                </p>
-            </div>
-
-            <div class="ui-timeline-wrapper">
-
-                <!-- Fase 1 -->
-                <div class="ui-timeline-item row align-items-center">
-                    <div class="ui-timeline-dot">01</div>
-                    <div class="col-lg-5 order-lg-1 text-lg-end pe-lg-5 mb-3 mb-lg-0">
-                        <span class="badge bg-primary px-3 py-1.5 rounded-pill mb-2">Semanas 1 - 2</span>
-                        <h4 class="fw-bold text-navy mb-1">Sprint 0: Diagnóstico, Arquitectura & Threat Modeling</h4>
-                        <p class="text-muted small">Levantamiento de requerimientos funcionales, modelado de dominio y diseño de seguridad preventivo.</p>
-                    </div>
-                    <div class="col-lg-5 offset-lg-2 order-lg-2 ps-lg-5">
-                        <div class="ui-timeline-content">
-                            <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-diagram-project text-primary me-2"></i>Entregables Certificados:</h6>
-                            <ul class="list-unstyled small text-secondary mb-3">
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Documento de Arquitectura de Software (SAD)</li>
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Matriz de Riesgos y Modelado de Amenazas OWASP</li>
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Prototipos de alta fidelidad UX/UI en Figma</li>
-                            </ul>
-                            <div class="p-2 bg-light rounded text-muted small font-mono">
-                                <i class="fa-solid fa-tag text-primary me-1"></i> Hito: Aprobación de Arquitectura & Backlog
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fase 2 -->
-                <div class="ui-timeline-item row align-items-center">
-                    <div class="ui-timeline-dot">02</div>
-                    <div class="col-lg-5 order-lg-2 ps-lg-5 mb-3 mb-lg-0">
-                        <span class="badge bg-info text-dark px-3 py-1.5 rounded-pill mb-2">Semanas 2 - 8</span>
-                        <h4 class="fw-bold text-navy mb-1">Sprints Ágiles: Construcción Modular & CI/CD Continuo</h4>
-                        <p class="text-muted small">Desarrollo iterativo quincenal con entregables funcionales y revisiones de código por pares.</p>
-                    </div>
-                    <div class="col-lg-5 order-lg-1 text-lg-end pe-lg-5">
-                        <div class="ui-timeline-content text-start">
-                            <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-laptop-code text-info me-2"></i>Entregables Certificados:</h6>
-                            <ul class="list-unstyled small text-secondary mb-3">
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Versiones incrementales desplegadas en Staging</li>
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Demos ejecutivas en video en Devioz Reels (60s)</li>
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Cobertura de pruebas unitarias superior al 85%</li>
-                            </ul>
-                            <div class="p-2 bg-light rounded text-muted small font-mono">
-                                <i class="fa-solid fa-tag text-info me-1"></i> Hito: Demostraciones funcionales cada 14 días
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fase 3 -->
-                <div class="ui-timeline-item row align-items-center">
-                    <div class="ui-timeline-dot">03</div>
-                    <div class="col-lg-5 order-lg-1 text-lg-end pe-lg-5 mb-3 mb-lg-0">
-                        <span class="badge bg-warning text-dark px-3 py-1.5 rounded-pill mb-2">Semana Previa a Go-Live</span>
-                        <h4 class="fw-bold text-navy mb-1">Quality Gate: Certificación ISO 25010 & Auditoría OWASP</h4>
-                        <p class="text-muted small">Inspección estricta de las 8 dimensiones de calidad, análisis de vulnerabilidades y pruebas de estrés.</p>
-                    </div>
-                    <div class="col-lg-5 offset-lg-2 order-lg-2 ps-lg-5">
-                        <div class="ui-timeline-content">
-                            <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-award text-warning me-2"></i>Entregables Certificados:</h6>
-                            <ul class="list-unstyled small text-secondary mb-3">
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> QA Scorecard formal con calificación >9.0/10</li>
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Reporte de Cero Vulnerabilidades Críticas</li>
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Pruebas de estrés y benchmarking de concurrencia</li>
-                            </ul>
-                            <div class="p-2 bg-light rounded text-muted small font-mono">
-                                <i class="fa-solid fa-tag text-warning me-1"></i> Hito: Dictamen Formal de Aprobación QA
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fase 4 -->
-                <div class="ui-timeline-item row align-items-center mb-0">
-                    <div class="ui-timeline-dot">04</div>
-                    <div class="col-lg-5 order-lg-2 ps-lg-5 mb-3 mb-lg-0">
-                        <span class="badge bg-success px-3 py-1.5 rounded-pill mb-2">Lanzamiento & Continuo</span>
-                        <h4 class="fw-bold text-navy mb-1">Despliegue Cloud, Handover & Soporte SLA 99.9%</h4>
-                        <p class="text-muted small">Puesta en producción sin fricción, entrega completa de repositorios y garantía operativa.</p>
-                    </div>
-                    <div class="col-lg-5 order-lg-1 text-lg-end pe-lg-5">
-                        <div class="ui-timeline-content text-start">
-                            <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-rocket text-success me-2"></i>Entregables Certificados:</h6>
-                            <ul class="list-unstyled small text-secondary mb-3">
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Plataforma en Producción con monitoreo 24/7</li>
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Transferencia de Repositorios Git y Documentación OpenAPI</li>
-                                <li class="mb-1"><i class="fa-solid fa-circle-check text-success me-1.5"></i> Soporte de ingeniería y mantenimiento evolutivo</li>
-                            </ul>
-                            <div class="p-2 bg-light rounded text-muted small font-mono">
-                                <i class="fa-solid fa-tag text-success me-1"></i> Hito: Sistema 100% en Vivo y Operativo
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+    <section class="py-5 bg-white" id="metodologia"><div class="container-xl py-4">
+        <div class="text-center"><span class="ui-section-tag bg-success-subtle text-success">Un proceso colaborativo</span><h2 class="ui-section-title">De la idea a una soluci&oacute;n que evoluciona</h2><p class="ui-section-desc">Acordamos alcance, prioridades y entregables seg&uacute;n el contexto de cada proyecto. El equipo comparte avances y decisiones durante todo el proceso.</p></div>
+        <div class="row g-4 mt-2">
+            <div class="col-md-6 col-lg-3"><article class="ui-service-card h-100"><span class="badge bg-primary-subtle text-primary mb-3">01 &middot; Alinear</span><h3 class="h5 fw-bold text-navy">Entender el problema</h3><p class="text-secondary small mb-0">Conversamos con las personas involucradas, identificamos necesidades, restricciones y criterios de &eacute;xito.</p></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-service-card h-100"><span class="badge bg-info-subtle text-info mb-3">02 &middot; Dise&ntilde;ar</span><h3 class="h5 fw-bold text-navy">Definir una soluci&oacute;n</h3><p class="text-secondary small mb-0">Priorizamos el alcance y acordamos arquitectura, experiencia, riesgos y plan de trabajo.</p></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-service-card h-100"><span class="badge bg-warning-subtle text-warning mb-3">03 &middot; Construir</span><h3 class="h5 fw-bold text-navy">Entregar por etapas</h3><p class="text-secondary small mb-0">Construimos incrementos revisables, compartimos demostraciones y ajustamos con retroalimentaci&oacute;n.</p></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-service-card h-100"><span class="badge bg-success-subtle text-success mb-3">04 &middot; Evolucionar</span><h3 class="h5 fw-bold text-navy">Verificar y mejorar</h3><p class="text-secondary small mb-0">Validamos los criterios acordados, preparamos la puesta en marcha y planificamos el mantenimiento.</p></article></div>
         </div>
-    </section>
-
-    <!-- ===================================================================== -->
+    </div></section>
     <!-- 6. ACTO 4: LOS 4 PILARES DE CALIDAD Y NORMATIVAS INTERNACIONALES      -->
     <!-- ===================================================================== -->
-    <section class="py-5" style="background: #F8FAFC;" id="calidad">
-        <div class="container-xl py-4">
-            <div class="text-center">
-                <span class="ui-section-tag bg-info-subtle text-info">Gobernanza y Cumplimiento Normativo</span>
-                <h2 class="ui-section-title">Los 4 Pilares de Excelencia en Ingeniería</h2>
-                <p class="ui-section-desc">
-                    Nuestros clientes corporativos confían en nosotros porque cada entrega está respaldada por normas internacionales auditables, garantizando longevidad, seguridad y cero deuda técnica.
-                </p>
-            </div>
-
-            <div class="row g-4">
-
-                <!-- Pilar 1: ISO 25010 -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="ui-pillar-card pillar-iso25010">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #10B981;">
-                            <i class="fa-solid fa-cubes-stacked fs-5"></i>
-                        </div>
-                        <h5 class="fw-bold text-navy mb-1">ISO/IEC 25010:2023</h5>
-                        <div class="badge bg-success-subtle text-success mb-3">Calidad del Software</div>
-                        <p class="text-secondary small mb-3">
-                            Marco integral que evalúa 8 dimensiones críticas: idoneidad funcional, eficiencia de rendimiento, fiabilidad, usabilidad, mantenibilidad y portabilidad.
-                        </p>
-                        <ul class="list-unstyled text-muted small mb-0">
-                            <li class="mb-1"><i class="fa-solid fa-check text-success me-1"></i> Latencia garantizada &lt;120ms</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-success me-1"></i> Principios SOLID y Clean Code</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-success me-1"></i> Scorecard ponderado 0 a 10 pts</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Pilar 2: ISO 27001 -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="ui-pillar-card pillar-iso27001">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #059669;">
-                            <i class="fa-solid fa-lock fs-5"></i>
-                        </div>
-                        <h5 class="fw-bold text-navy mb-1">ISO/IEC 27001:2022</h5>
-                        <div class="badge bg-primary-subtle text-primary mb-3">Seguridad de la Información</div>
-                        <p class="text-secondary small mb-3">
-                            Gestión rigurosa de seguridad (ISMS), arquitectura Zero-Trust, control de acceso basado en roles (RBAC) y cifrado integral de datos en reposo y en tránsito.
-                        </p>
-                        <ul class="list-unstyled text-muted small mb-0">
-                            <li class="mb-1"><i class="fa-solid fa-check text-primary me-1"></i> Cifrado AES-256 y TLS 1.3</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-primary me-1"></i> Trazabilidad inmutable de logs</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-primary me-1"></i> Protección de datos personales</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Pilar 3: OWASP Top 10 -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="ui-pillar-card pillar-owasp">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #8B5CF6;">
-                            <i class="fa-solid fa-shield-halved fs-5"></i>
-                        </div>
-                        <h5 class="fw-bold text-navy mb-1">OWASP Top 10 Guard</h5>
-                        <div class="badge bg-purple-subtle text-purple mb-3" style="background: #F3E8FF; color: #7E22CE;">DevSecOps Shield</div>
-                        <p class="text-secondary small mb-3">
-                            Blindaje continuo contra inyecciones SQL (PDO parametrizado), XSS, CSRF, fallos criptográficos, SSRF y desbordamientos en todo el código fuente.
-                        </p>
-                        <ul class="list-unstyled text-muted small mb-0">
-                            <li class="mb-1"><i class="fa-solid fa-check text-purple me-1" style="color: #7E22CE;"></i> Tokens CSRF estrictos por sesión</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-purple me-1" style="color: #7E22CE;"></i> Sanitización contextual e()</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-purple me-1" style="color: #7E22CE;"></i> Escaneo estático en CI/CD</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Pilar 4: TMMi Nivel 3 -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="ui-pillar-card pillar-tmmi">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 text-white" style="width: 48px; height: 48px; background: #F59E0B;">
-                            <i class="fa-solid fa-vial-circle-check fs-5"></i>
-                        </div>
-                        <h5 class="fw-bold text-navy mb-1">TMMi Nivel 3 & QA</h5>
-                        <div class="badge bg-warning-subtle text-warning mb-3">Madurez en Pruebas</div>
-                        <p class="text-secondary small mb-3">
-                            Modelo estructurado de pruebas integrado al ciclo de vida del software. Pirámide de pruebas automatizadas, pruebas de integración y Quality Gates inquebrantables.
-                        </p>
-                        <ul class="list-unstyled text-muted small mb-0">
-                            <li class="mb-1"><i class="fa-solid fa-check text-warning me-1"></i> Auditoría previa a producción</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-warning me-1"></i> Rúbricas ponderadas de aceptación</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-warning me-1"></i> Cobertura de regresión certificada</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
+    <section class="py-5" style="background:#F8FAFC" id="calidad"><div class="container-xl py-4">
+        <div class="text-center"><span class="ui-section-tag bg-info-subtle text-info">Calidad proporcional al riesgo</span><h2 class="ui-section-title">Calidad que se puede explicar y comprobar</h2><p class="ui-section-desc">Usamos modelos y buenas pr&aacute;cticas como referencia. Para cada iniciativa acordamos controles pertinentes y presentamos evidencias; esto no implica una certificaci&oacute;n externa.</p></div>
+        <div class="row g-4 mt-2">
+            <div class="col-md-6 col-lg-3"><article class="ui-pillar-card h-100"><h3 class="h5 fw-bold text-navy">Calidad del producto</h3><span class="badge bg-success-subtle text-success mb-3">ISO/IEC 25010 como referencia</span><p class="text-secondary small">Revisamos atributos relevantes como funcionalidad, rendimiento, usabilidad, fiabilidad, mantenibilidad y compatibilidad.</p><p class="small text-muted mb-0">Evidencia: criterios de aceptaci&oacute;n, revisiones y resultados de pruebas acordadas.</p></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-pillar-card h-100"><h3 class="h5 fw-bold text-navy">Seguridad desde el dise&ntilde;o</h3><span class="badge bg-primary-subtle text-primary mb-3">ISO/IEC 27001 como referencia</span><p class="text-secondary small">Identificamos activos y riesgos, y definimos controles de acceso, protecci&oacute;n de datos y registro seg&uacute;n el contexto.</p><p class="small text-muted mb-0">Evidencia: decisiones, riesgos y controles implementados en el alcance.</p></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-pillar-card h-100"><h3 class="h5 fw-bold text-navy">Riesgos de aplicaciones</h3><span class="badge bg-light text-dark mb-3">OWASP como gu&iacute;a</span><p class="text-secondary small">Consideramos riesgos comunes de aplicaciones web y seleccionamos revisiones o pruebas adecuadas al producto.</p><p class="small text-muted mb-0">Evidencia: hallazgos, prioridad, mitigaci&oacute;n y pendientes aceptados.</p></article></div>
+            <div class="col-md-6 col-lg-3"><article class="ui-pillar-card h-100"><h3 class="h5 fw-bold text-navy">Pruebas y aceptaci&oacute;n</h3><span class="badge bg-warning-subtle text-warning mb-3">Plan seg&uacute;n alcance</span><p class="text-secondary small">Combinamos validaci&oacute;n funcional, pruebas automatizadas cuando corresponda y revisi&oacute;n con usuarios.</p><p class="small text-muted mb-0">Evidencia: casos ejecutados, resultados y dictamen de entrega.</p></article></div>
         </div>
-    </section>
-
-    <!-- ===================================================================== -->
+    </div></section>
     <!-- 7. ACTO 5: DEVIOZ REELS — DEMOSTRACIONES TÉCNICAS 16:9 EN VIVO         -->
     <!-- ===================================================================== -->
     <section class="ui-reels-section" id="reels">
@@ -1562,10 +1094,10 @@ if (!function_exists('devioz_parse_video')) {
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
                     <span class="badge bg-danger px-3 py-1.5 rounded-pill mb-2 text-uppercase fw-bold" style="font-size: 0.75rem;">
-                        <i class="fa-solid fa-video me-1"></i> Demos Técnicas en 60 Segundos
+                        <i class="fa-solid fa-video me-1"></i> Demostraciones de proyectos
                     </span>
-                    <h2 class="display-6 fw-bold mb-1 text-white">Devioz Reels: Míralo en Acción</h2>
-                    <p class="text-white-50 mb-0 small">Demostraciones en formato vertical 16:9 mostrando la arquitectura, interactividad y calidad real de nuestros sistemas.</p>
+                    <h2 class="display-6 fw-bold mb-1 text-white">Proyectos en acci&oacute;n</h2>
+                    <p class="text-white-50 mb-0 small">Videos compartidos para mostrar avances y funcionalidades de proyectos.</p>
                 </div>
                 <div class="mt-3 mt-md-0 text-white-50 small">
                     <i class="fa-solid fa-circle-info text-info me-1"></i> Haz clic en cualquier reel para reproducir la demostración en pantalla completa sin salir de la página.
@@ -1588,7 +1120,7 @@ if (!function_exists('devioz_parse_video')) {
                                  data-title="<?= e($reel->name) ?>"
                                  data-video-url="<?= e($videoData['embed']) ?>"
                                  data-lead="<?= e($leadName) ?>"
-                                 data-score="<?= $reel->final_score ? number_format((float)$reel->final_score, 1) : '9.6' ?>"
+
                                  data-client="<?= e($reel->clientName()) ?>">
 
                                 <!-- Caja de Poster Vertical Bilibili -->
@@ -1607,9 +1139,7 @@ if (!function_exists('devioz_parse_video')) {
                                     <div class="ui-reel-hover-overlay">
                                         <div class="bili-overlay-meta">
                                             <span class="bili-tag-pill"><?= !empty($reel->tech_stack) ? e($reel->tech_stack[0]) : 'Software TI' ?></span>
-                                            <div class="bili-duration-text mb-2">
-                                                <i class="fa-solid fa-star text-warning me-1"></i> QA <?= $reel->final_score ? number_format((float)$reel->final_score, 1) : '9.6' ?>/10
-                                            </div>
+
                                         </div>
                                         <!-- Botón Azul de Play de Bilibili -->
                                         <button type="button" class="ui-reel-play-btn-blue">
@@ -1650,8 +1180,8 @@ if (!function_exists('devioz_parse_video')) {
     <section class="py-5 bg-white" id="portafolio">
         <div class="container-xl py-4">
             <div class="text-center">
-                <span class="ui-section-tag bg-primary-subtle text-primary">Proyectos Reales Entregados</span>
-                <h2 class="ui-section-title">Portafolio de Soluciones Certificadas</h2>
+                <span class="ui-section-tag bg-primary-subtle text-primary">Proyectos publicados</span>
+                <h2 class="ui-section-title">Proyectos seleccionados</h2>
                 <p class="ui-section-desc">
                     Explora una selección de nuestras soluciones en producción. Cada proyecto cuenta con su respectiva ficha técnica, arquitectura auditada y conformidad ISO.
                 </p>
@@ -1684,7 +1214,7 @@ if (!function_exists('devioz_parse_video')) {
                         $dev = $proj->developer();
                         $leadDev = $dev ? $dev->name : 'Tech Lead Devioz';
                         $projCode = $proj->code ?: ('DEV-2026-' . sprintf('%03d', $proj->id));
-                        $projScore = $proj->final_score ? number_format((float)$proj->final_score, 1) : '9.5';
+                        $projScore = null;
                         $stack = is_array($proj->tech_stack) ? $proj->tech_stack : (json_decode((string)$proj->tech_stack, true) ?: ['PHP 8.2', 'MySQL', 'Docker', 'Bootstrap 5']);
 
                         // Datos para el modal público
@@ -1698,7 +1228,7 @@ if (!function_exists('devioz_parse_video')) {
                             'score'       => $projScore,
                             'cover'       => $proj->coverUrl(),
                             'lead'        => $leadDev,
-                            'description' => $proj->description ?: 'Plataforma empresarial diseñada bajo arquitectura limpia con microservicios y alta concurrencia, certificada bajo la norma ISO/IEC 25010.',
+                            'description' => $proj->description ?: 'Conoce el alcance y las capacidades de este proyecto.',
                             'techStack'   => $stack,
                             'progress'    => $proj->progressPercentage(),
                         ]), ENT_QUOTES, 'UTF-8');
@@ -1709,10 +1239,7 @@ if (!function_exists('devioz_parse_video')) {
                                 <div class="ui-project-cover">
                                     <img src="<?= e($proj->coverUrl()) ?>" alt="<?= e($proj->name) ?>" loading="lazy">
 
-                                    <div class="position-absolute top-0 end-0 m-2 badge bg-dark bg-opacity-75 text-white p-2 rounded-3 shadow">
-                                        <i class="fa-solid fa-star text-warning me-1"></i>
-                                        <span class="fw-bold"><?= $projScore ?></span> / 10
-                                    </div>
+
 
                                     <div class="position-absolute bottom-0 start-0 m-2">
                                         <span class="badge bg-success text-white text-nowrap"><?= e($proj->statusLabel()) ?></span>
@@ -1772,274 +1299,27 @@ if (!function_exists('devioz_parse_video')) {
     </section>
 
     <!-- ===================================================================== -->
-    <!-- 9. ACTO 7: TESTIMONIOS & LIDERAZGO EN INGENIERÍA                      -->
-    <!-- ===================================================================== -->
-    <section class="py-5" style="background: #FAFCFE;">
-        <div class="container-xl py-4">
-            <div class="text-center">
-                <span class="ui-section-tag bg-warning-subtle text-warning">Liderazgo & Opinión de Expertos</span>
-                <h2 class="ui-section-title">Confianza y Excelencia Técnica Comprobada</h2>
-                <p class="ui-section-desc">
-                    El testimonio de nuestros líderes técnicos y directores sobre el impacto del enfoque Devioz en la puntualidad, seguridad y calidad de los entregables.
-                </p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="p-4 bg-white rounded-4 border shadow-sm h-100 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="text-warning mb-3">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                            <p class="text-secondary fst-italic mb-4">
-                                "La implementación del Quality Gate bajo ISO/IEC 25010 nos permite certificar a cada cliente que el software no solo funciona, sino que es escalable, mantenible y seguro ante cualquier auditoría."
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 pt-3 border-top">
-                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width: 44px; height: 44px;">
-                                ER
-                            </div>
-                            <div>
-                                <h6 class="fw-bold text-navy mb-0">Ing. Elena Rostova</h6>
-                                <span class="text-muted small">Directora de QA & Auditoría de Software • Devioz</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="p-4 bg-white rounded-4 border shadow-sm h-100 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="text-warning mb-3">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                            <p class="text-secondary fst-italic mb-4">
-                                "Devioz Reels redujo a la mitad el tiempo de feedback con los clientes. En 60 segundos visualizan los avances clave de cada sprint antes de la reunión de entrega formal."
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 pt-3 border-top">
-                            <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold" style="width: 44px; height: 44px;">
-                                CR
-                            </div>
-                            <div>
-                                <h6 class="fw-bold text-navy mb-0">Lic. Carlos Ramírez</h6>
-                                <span class="text-muted small">Tech Lead & Arquitecto Cloud • Devioz</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="p-4 bg-white rounded-4 border shadow-sm h-100 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="text-warning mb-3">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                            <p class="text-secondary fst-italic mb-4">
-                                "El seguimiento riguroso de cada hito y la transferencia incondicional de propiedad intelectual hacen que nuestros clientes se sientan con el control total de su activo digital."
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 pt-3 border-top">
-                            <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center fw-bold" style="width: 44px; height: 44px;">
-                                MV
-                            </div>
-                            <div>
-                                <h6 class="fw-bold text-navy mb-0">Ing. Martín Valdivia</h6>
-                                <span class="text-muted small">Director de Operaciones & Clientes • Devioz</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="py-5" style="background:#FAFCFE"><div class="container-xl py-4">
+        <div class="text-center"><span class="ui-section-tag bg-success-subtle text-success">Nuestra forma de colaborar</span><h2 class="ui-section-title">Una relaci&oacute;n de trabajo clara y cercana</h2><p class="ui-section-desc">La confianza se construye compartiendo contexto, decisiones y avances durante el proyecto.</p></div>
+        <div class="row g-4 mt-2">
+            <div class="col-md-4"><article class="ui-pillar-card h-100"><div class="ui-service-icon bg-primary-subtle text-primary"><i class="fa-solid fa-comments"></i></div><h3 class="h5 fw-bold text-navy">Comunicaci&oacute;n abierta</h3><p class="text-secondary small mb-0">Acordamos objetivos y mantenemos visibles el progreso, los riesgos y las decisiones pendientes.</p></article></div>
+            <div class="col-md-4"><article class="ui-pillar-card h-100"><div class="ui-service-icon bg-success-subtle text-success"><i class="fa-solid fa-user-check"></i></div><h3 class="h5 fw-bold text-navy">IA con criterio humano</h3><p class="text-secondary small mb-0">La IA puede acelerar tareas, mientras las personas revisan resultados y conservan la responsabilidad de las decisiones.</p></article></div>
+            <div class="col-md-4"><article class="ui-pillar-card h-100"><div class="ui-service-icon bg-warning-subtle text-warning"><i class="fa-solid fa-clipboard-check"></i></div><h3 class="h5 fw-bold text-navy">Calidad con evidencia</h3><p class="text-secondary small mb-0">Relacionamos cada entrega con el alcance acordado, sus criterios de aceptaci&oacute;n y las verificaciones realizadas.</p></article></div>
         </div>
-    </section>
-
-    <!-- ===================================================================== -->
+    </div></section>
     <!-- 10. ACTO 8: CONTACTO DIRECTO & SOLICITUD DE PROPUESTA TÉCNICA         -->
     <!-- ===================================================================== -->
-    <section class="py-5" style="background: linear-gradient(135deg, #1F2937 0%, #0F172A 100%); color: #fff;" id="contacto">
-        <div class="container-xl py-4">
-            <div class="row g-5 align-items-center">
-
-                <!-- Columna Izquierda: Información de Contacto Directo -->
-                <div class="col-lg-5">
-                    <span class="badge bg-warning text-dark fw-bold text-uppercase px-3 py-1.5 rounded-pill mb-3">
-                        Inicia tu Próximo Proyecto
-                    </span>
-                    <h2 class="display-6 fw-bold mb-3 text-white">
-                        Hablemos de tus Objetivos Tecnológicos
-                    </h2>
-                    <p class="text-light opacity-75 mb-4" style="line-height: 1.7;">
-                        ¿Tienes en mente un sistema de misión crítica, una migración cloud o requieres certificar la calidad de tu código actual? Nuestro equipo de ingenieros senior evaluará tu requerimiento de inmediato.
-                    </p>
-
-                    <div class="d-flex flex-column gap-3 mb-4">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="rounded-circle bg-white bg-opacity-10 d-flex align-items-center justify-content-center text-info" style="width: 44px; height: 44px;">
-                                <i class="fa-solid fa-envelope fs-5"></i>
-                            </div>
-                            <div>
-                                <div class="text-white-50 small">Correo Corporativo</div>
-                                <div class="fw-bold text-white">contacto@devioz.io</div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="rounded-circle bg-white bg-opacity-10 d-flex align-items-center justify-content-center text-success" style="width: 44px; height: 44px;">
-                                <i class="fa-brands fa-whatsapp fs-5"></i>
-                            </div>
-                            <div>
-                                <div class="text-white-50 small">Atención Inmediata WhatsApp</div>
-                                <div class="fw-bold text-white">+51 987 654 321</div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="rounded-circle bg-white bg-opacity-10 d-flex align-items-center justify-content-center text-warning" style="width: 44px; height: 44px;">
-                                <i class="fa-solid fa-location-dot fs-5"></i>
-                            </div>
-                            <div>
-                                <div class="text-white-50 small">Hub Central de Ingeniería</div>
-                                <div class="fw-bold text-white">Lima, Perú • Presencia Regional</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
-                        <i class="fa-solid fa-file-pdf text-danger me-2"></i>
-                        <span class="text-light small">¿Prefieres un documento ejecutivo? Descarga nuestro <strong>Dossier Corporativo de Capacidades (PDF)</strong> directamente con nosotros.</span>
-                    </div>
-                </div>
-
-                <!-- Columna Derecha: Formulario Público de Propuesta -->
-                <div class="col-lg-7">
-                    <div class="bg-white rounded-4 p-4 p-md-5 text-dark shadow-lg">
-                        <h4 class="fw-bold text-navy mb-1">Solicitar Cotización o Diagnóstico</h4>
-                        <p class="text-muted small mb-4">Completa el formulario y un Tech Lead te responderá en menos de 24 horas laborables.</p>
-
-                        <!-- Mensaje de Éxito en Formulario -->
-                        <div class="alert alert-success d-none" id="contactSuccessAlert" role="alert">
-                            <i class="fa-solid fa-circle-check me-2"></i>
-                            <strong>¡Solicitud enviada con éxito!</strong> Tu requerimiento ha sido registrado con el ticket <span class="font-mono fw-bold" id="contactTicketNum">#DEV-REQ-2026-081</span>. Nos pondremos en contacto contigo a la brevedad.
-                        </div>
-
-                        <form id="publicContactForm">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label small fw-bold text-secondary">Nombre y Apellido *</label>
-                                    <input type="text" class="form-control" name="contact_name" placeholder="Ej: Carlos Mendoza" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label small fw-bold text-secondary">Empresa u Organización *</label>
-                                    <input type="text" class="form-control" name="contact_company" placeholder="Ej: Corporativo Andino" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label small fw-bold text-secondary">Correo Corporativo *</label>
-                                    <input type="email" class="form-control" name="contact_email" placeholder="carlos@empresa.com" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label small fw-bold text-secondary">Teléfono / WhatsApp</label>
-                                    <input type="tel" class="form-control" name="contact_phone" placeholder="+51 987 654 321">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label small fw-bold text-secondary">Tipo de Servicio Requerido *</label>
-                                    <select class="form-select" name="contact_service" id="contactServiceSelect" required>
-                                        <option value="factory">Software Factory & Desarrollo a Medida</option>
-                                        <option value="cloud">Arquitectura Cloud, DevOps & CI/CD</option>
-                                        <option value="qa">Auditoría de Calidad ISO 25010 & DevSecOps</option>
-                                        <option value="data">Data Engineering & Analytics en Tiempo Real</option>
-                                        <option value="consulting">Consultoría Estratégica & Asesoría TI</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label small fw-bold text-secondary">Descripción del Proyecto o Necesidad *</label>
-                                    <textarea class="form-control" name="contact_message" id="contactMessageTextarea" rows="3" placeholder="Describe brevemente el alcance, tecnologías deseadas o plazos estimados..." required></textarea>
-                                </div>
-                                <div class="col-12 pt-2">
-                                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-pill shadow-sm" style="background: var(--ui-primary); border-color: var(--ui-primary); font-size: 1rem;">
-                                        <span>ENVIAR SOLICITUD DE PROPUESTA</span>
-                                        <i class="fa-solid fa-paper-plane ms-2"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================================================================== -->
+    <section class="py-5" style="background:linear-gradient(135deg,#172334 0%,#0F172A 100%);color:#fff" id="contacto"><div class="container-xl py-4"><div class="row g-5 align-items-center">
+        <div class="col-lg-7"><span class="badge bg-success-subtle text-success fw-bold text-uppercase px-3 py-2 rounded-pill mb-3">Hablemos de tu proyecto</span><h2 class="display-6 fw-bold mb-3 text-white">Construyamos algo que le sirva a tu equipo.</h2><p class="text-light opacity-75 mb-0" style="line-height:1.7">Cu&eacute;ntanos qu&eacute; quieres mejorar, qu&eacute; obst&aacute;culos enfrenta tu organizaci&oacute;n y qu&eacute; resultado esperas. Podemos explorar juntos el siguiente paso.</p></div>
+        <div class="col-lg-5"><div class="bg-white rounded-4 p-4 p-md-5 text-dark shadow-lg"><div class="ui-service-icon bg-success-subtle text-success mb-3"><i class="fa-brands fa-whatsapp"></i></div><h3 class="h4 fw-bold text-navy">Inicia una conversaci&oacute;n</h3><p class="text-secondary">Escr&iacute;benos y coordinaremos una primera conversaci&oacute;n sobre el contexto y alcance.</p><a class="btn-ui-accent w-100 justify-content-center py-3" href="https://wa.me/51969072449" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i><span>Conversar por WhatsApp</span></a><p class="small text-muted mt-3 mb-0">El canal de contacto se abre en una nueva pesta&ntilde;a.</p></div></div>
+    </div></div></section>
     <!-- 11. MEGA FOOTER INSTITUCIONAL (AUTÓNOMO)                              -->
     <!-- ===================================================================== -->
-    <footer class="ui-footer">
-        <div class="container-xl">
-            <div class="row g-4 mb-5">
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="d-flex align-items-center gap-2 mb-3">
-                        <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz Technology Solutions" width="30" height="30" class="rounded">
-                        <span class="fw-bold fs-5 text-white">Devioz<span style="color: var(--ui-primary);">OS</span></span>
-                        <span class="ui-brand-badge">Enterprise Factory</span>
-                    </div>
-                    <p class="text-secondary small mb-3">
-                        Devioz Technology Solutions: Empresa consultora especializada en ingeniería de software, arquitectura en la nube y aseguramiento métrico de calidad (QA).
-                    </p>
-                    <div class="text-muted small">
-                        © 2026 Devioz Technology Solutions. Todos los derechos reservados.
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-6 col-6">
-                    <h6 class="ui-footer-title">Navegación</h6>
-                    <ul class="ui-footer-list">
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#servicios">Servicios Core</a></li>
-                        <li><a href="#metodologia">Metodología</a></li>
-                        <li><a href="#calidad">Estándares ISO</a></li>
-                        <li><a href="#reels">Devioz Reels</a></li>
-                        <li><a href="#portafolio">Casos de Éxito</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-6">
-                    <h6 class="ui-footer-title">Estándares & QA</h6>
-                    <ul class="ui-footer-list">
-                        <li><a href="#calidad">ISO/IEC 25010:2023 (SQuaRE)</a></li>
-                        <li><a href="#calidad">ISO/IEC 27001:2022 (ISMS)</a></li>
-                        <li><a href="#calidad">OWASP Top 10 DevSecOps</a></li>
-                        <li><a href="#calidad">TMMi Nivel 3 Testing Riguroso</a></li>
-                        <li><a href="#calidad">Acuerdo SLA 99.9% Uptime</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <h6 class="ui-footer-title">Área de Clientes</h6>
-                    <p class="text-muted small mb-3">Espacio exclusivo para empresas con proyectos en curso y consultores autorizados.</p>
-                    <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3" id="btnFooterOpenAuthModal">
-                        <i class="fa-regular fa-circle-user me-1"></i> Acceso a Portal de Clientes
-                    </button>
-                    <div class="mt-3">
-                        <span class="badge bg-secondary text-light small font-mono">v3.4.12-enterprise // compliant</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="pt-4 border-top border-secondary border-opacity-25 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 text-muted small">
-                <div>
-                    Devioz Technology Solutions cumple con normativas internacionales de protección de datos, confidencialidad bajo acuerdos NDA y seguridad de la información.
-                </div>
-                <div class="d-flex gap-3">
-                    <a href="https://github.com" target="_blank" class="text-secondary"><i class="fa-brands fa-github fs-5"></i></a>
-                    <a href="https://linkedin.com" target="_blank" class="text-secondary"><i class="fa-brands fa-linkedin fs-5"></i></a>
-                    <a href="https://youtube.com" target="_blank" class="text-secondary"><i class="fa-brands fa-youtube fs-5"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+    <footer class="ui-footer"><div class="container-xl py-4"><div class="row g-4 align-items-start">
+        <div class="col-lg-5"><div class="d-flex align-items-center gap-2 mb-3"><img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz" width="30" height="30" class="rounded"><span class="fw-bold fs-5 text-white">Devioz</span></div><p class="text-secondary small mb-0">Consultor&iacute;a tecnol&oacute;gica, desarrollo de software e inteligencia artificial aplicada.</p></div>
+        <div class="col-lg-4"><h2 class="ui-footer-title">Explora</h2><div class="d-flex flex-wrap gap-3"><a href="#servicios">Capacidades</a><a href="#metodologia">Proceso</a><a href="#calidad">Calidad</a><a href="#portafolio">Proyectos</a></div></div>
+        <div class="col-lg-3"><h2 class="ui-footer-title">Enlaces</h2><div class="d-flex flex-wrap gap-3"><a href="https://pe.linkedin.com/company/devioz-ti" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.devioz.com/" target="_blank" rel="noopener noreferrer">Sitio Devioz</a><button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3" id="btnFooterOpenAuthModal">Acceso al equipo</button></div></div>
+    </div><div class="pt-4 mt-4 border-top border-secondary border-opacity-25 text-muted small">&copy; <?= date('Y') ?> Devioz</div></div></footer>
     <!-- ===================================================================== -->
     <!-- 12. MODAL AUTÓNOMO: REPRODUCTOR DE REELS (16:9 LIGHTBOX)             -->
     <!-- ===================================================================== -->
@@ -2064,7 +1344,7 @@ if (!function_exists('devioz_parse_video')) {
             <div class="p-3 bg-dark text-white border-top border-secondary border-opacity-25">
                 <div class="d-flex justify-content-between align-items-center mb-1">
                     <span class="badge bg-primary" id="reelModalClient">Cliente Corporativo</span>
-                    <span class="badge bg-warning text-dark font-mono fw-bold" id="reelModalScore">9.8 / 10</span>
+                    <span class="badge bg-secondary text-white font-mono fw-bold d-none" id="reelModalScore"></span>
                 </div>
                 <h6 class="fw-bold mb-1 text-white text-truncate" id="reelModalTitle">Demostración Técnica Devioz</h6>
                 <div class="text-white-50 small d-flex justify-content-between align-items-center">
@@ -2115,18 +1395,12 @@ if (!function_exists('devioz_parse_video')) {
                             <div class="small text-muted mb-1">TECH LEAD ASIGNADO:</div>
                             <div class="fw-bold text-navy mb-2" id="dossierLead">Ingeniero Senior Devioz</div>
 
-                            <div class="small text-muted mb-1">ESTADO OPERACIONAL:</div>
+                            <div class="small text-muted mb-1">ESTADO DEL PROYECTO:</div>
                             <div id="dossierStatusBadge"><span class="badge bg-success">En Producción</span></div>
                         </div>
 
-                        <!-- Tarjeta de Score ISO 25010 -->
-                        <div class="p-3 bg-success-subtle rounded-3 border border-success-subtle text-center">
-                            <div class="text-success small fw-bold">CALIDAD ISO/IEC 25010</div>
-                            <div class="display-6 fw-bold text-success my-1" id="dossierScore">9.8</div>
-                            <div class="small text-muted">Auditoría Superada sin Observaciones</div>
-                        </div>
+                        <div class="p-3 bg-light rounded-3 border mb-3"><div class="small fw-bold text-navy mb-1">Informaci&oacute;n del proyecto</div><p class="small text-muted mb-0">La ficha resume los datos y tecnolog&iacute;as registrados para este proyecto.</p></div>
                     </div>
-
                     <!-- Columna Derecha: Descripción, Stack y Métricas -->
                     <div class="col-md-7">
                         <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-align-left text-primary me-2"></i>Objetivo y Descripción de la Solución</h6>
@@ -2137,22 +1411,6 @@ if (!function_exists('devioz_parse_video')) {
                         <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-layer-group text-primary me-2"></i>Stack Tecnológico Implementado</h6>
                         <div class="d-flex flex-wrap gap-1.5 mb-4" id="dossierTechStackContainer">
                             <!-- Inyectado dinámicamente -->
-                        </div>
-
-                        <h6 class="fw-bold text-navy mb-2"><i class="fa-solid fa-shield-halved text-primary me-2"></i>Garantías de Ingeniería Devioz</h6>
-                        <div class="row g-2 mb-4">
-                            <div class="col-6">
-                                <div class="p-2 border rounded text-center bg-white">
-                                    <div class="text-muted" style="font-size: 0.7rem;">CIBERSEGURIDAD</div>
-                                    <div class="fw-bold text-dark small">OWASP Top 10 OK</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="p-2 border rounded text-center bg-white">
-                                    <div class="text-muted" style="font-size: 0.7rem;">DISPONIBILIDAD</div>
-                                    <div class="fw-bold text-dark small">SLA 99.9% Uptime</div>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="pt-3 border-top d-flex gap-2">
@@ -2177,7 +1435,7 @@ if (!function_exists('devioz_parse_video')) {
             <div class="ui-modal-header p-3 px-4 bg-light border-bottom d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-2">
                     <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="24" height="24" class="rounded">
-                    <h6 class="fw-bold mb-0 text-navy" id="modalAuthTitle">Portal de Clientes & Consultores</h6>
+                    <h6 class="fw-bold mb-0 text-navy" id="modalAuthTitle">Acceso al equipo Devioz</h6>
                 </div>
                 <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" id="btnCloseAuthModal" style="width: 30px; height: 30px;" aria-label="Cerrar ventana">
                     <i class="fa-solid fa-xmark"></i>
@@ -2219,7 +1477,7 @@ if (!function_exists('devioz_parse_video')) {
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold rounded-3 shadow-sm mb-3" style="background: var(--ui-primary); border-color: var(--ui-primary);">
-                        <span>Ingresar al Portal</span>
+                        <span>Ingresar</span>
                         <i class="fa-solid fa-right-to-bracket ms-1"></i>
                     </button>
                 </form>
@@ -2288,8 +1546,7 @@ if (!function_exists('devioz_parse_video')) {
             const reelIframe = document.getElementById('reelPlayerIframe');
             const reelTitle = document.getElementById('reelModalTitle');
             const reelClient = document.getElementById('reelModalClient');
-            const reelScore = document.getElementById('reelModalScore');
-            const reelLead = document.getElementById('reelModalLead');
+                        const reelLead = document.getElementById('reelModalLead');
             const btnCloseReel = document.getElementById('btnCloseReelModal');
             const btnPrevReel = document.getElementById('btnPrevReel');
             const btnNextReel = document.getElementById('btnNextReel');
@@ -2309,13 +1566,11 @@ if (!function_exists('devioz_parse_video')) {
                 const videoUrl = card.getAttribute('data-video-url') || '';
                 const title = card.getAttribute('data-title') || 'Demostración Técnica';
                 const client = card.getAttribute('data-client') || 'Cliente Corporativo';
-                const score = card.getAttribute('data-score') || '9.6';
-                const lead = card.getAttribute('data-lead') || 'Tech Lead Devioz';
+                                const lead = card.getAttribute('data-lead') || 'Tech Lead Devioz';
 
                 if (reelTitle) reelTitle.textContent = title;
                 if (reelClient) reelClient.textContent = client;
-                if (reelScore) reelScore.textContent = score + ' / 10';
-                if (reelLead) reelLead.innerHTML = '<i class="fa-solid fa-user-tie text-info me-1"></i> ' + lead;
+                                if (reelLead) reelLead.innerHTML = '<i class="fa-solid fa-user-tie text-info me-1"></i> ' + lead;
                 if (reelIframe) reelIframe.src = videoUrl;
 
                 reelModal.classList.add('active');
@@ -2353,7 +1608,6 @@ if (!function_exists('devioz_parse_video')) {
                 const coverEl = document.getElementById('dossierCoverImg');
                 const clientEl = document.getElementById('dossierClient');
                 const leadEl = document.getElementById('dossierLead');
-                const scoreEl = document.getElementById('dossierScore');
                 const descEl = document.getElementById('dossierDescription');
                 const stackContainer = document.getElementById('dossierTechStackContainer');
                 const statusBadgeEl = document.getElementById('dossierStatusBadge');
@@ -2363,7 +1617,6 @@ if (!function_exists('devioz_parse_video')) {
                 if (coverEl) coverEl.src = data.cover || '';
                 if (clientEl) clientEl.textContent = data.client || 'Cliente Corporativo';
                 if (leadEl) leadEl.textContent = data.lead || 'Tech Lead Devioz';
-                if (scoreEl) scoreEl.textContent = data.score || '9.6';
                 if (descEl) descEl.textContent = data.description || '';
                 if (statusBadgeEl) statusBadgeEl.innerHTML = '<span class="badge bg-success text-white">' + (data.status || 'En Producción') + '</span>';
 
@@ -2383,10 +1636,8 @@ if (!function_exists('devioz_parse_video')) {
                 if (quoteBtn) {
                     quoteBtn.onclick = function() {
                         closeDossier();
-                        const textarea = document.getElementById('contactMessageTextarea');
-                        if (textarea) {
-                            textarea.value = 'Hola Devioz, deseo solicitar una cotización o propuesta técnica similar a la solución "' + (data.name || '') + '" (' + (data.code || '') + ').';
-                        }
+                        const message = 'Hola Devioz, me interesa conversar sobre una solucion similar a ' + (data.name || 'este proyecto') + ' (' + (data.code || '') + ').';
+                        window.open('https://wa.me/51969072449?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
                     };
                 }
 
@@ -2488,26 +1739,6 @@ if (!function_exists('devioz_parse_video')) {
                     });
                 });
             });
-
-            // 6. Formulario Público de Contacto con Generación de Ticket
-            const contactForm = document.getElementById('publicContactForm');
-            const contactSuccessAlert = document.getElementById('contactSuccessAlert');
-            const contactTicketEl = document.getElementById('contactTicketNum');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-
-                    const randomTicket = 'DEV-REQ-2026-' + Math.floor(100 + Math.random() * 900);
-                    if (contactTicketEl) contactTicketEl.textContent = '#' + randomTicket;
-                    if (contactSuccessAlert) contactSuccessAlert.classList.remove('d-none');
-
-                    contactForm.reset();
-
-                    // Scroll suave hacia la confirmación
-                    contactSuccessAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                });
-            }
 
         })();
     </script>
