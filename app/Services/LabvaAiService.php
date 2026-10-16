@@ -400,17 +400,24 @@ PROMPT;
         $tech = is_array($project->tech_stack) ? implode(', ', $project->tech_stack) : 'No especificado';
         $client = $project->clientName();
         $audit = null;
+        $auditFindings = [];
         try {
             $audit = Database::getInstance()->fetch(
                 'SELECT id, status, gate_status, score, criteria, feedback, release_version, commit_sha FROM quality_audits WHERE project_id = :project_id ORDER BY created_at DESC, id DESC LIMIT 1',
                 ['project_id' => $project->id]
             );
+            if ($audit) {
+                $auditFindings = Database::getInstance()->fetchAll(
+                    'SELECT severity, title, description, status FROM quality_audit_findings WHERE audit_id = :audit_id ORDER BY FIELD(severity, "critical", "high", "medium", "low", "info")',
+                    ['audit_id' => $audit['id']]
+                );
+            }
         } catch (\Throwable) {
             // The audit tables may not be installed yet; never invent a result.
         }
         $score = $audit && $audit['score'] !== null ? $audit['score'] . '/100 (auditoría interna)' : 'Sin medición QA verificada';
         $auditContext = $audit
-            ? json_encode(['status' => $audit['status'], 'gate_status' => $audit['gate_status'], 'score' => $audit['score'], 'criteria' => json_decode((string)$audit['criteria'], true), 'feedback' => $audit['feedback'], 'release' => $audit['release_version'], 'commit' => $audit['commit_sha']], JSON_UNESCAPED_UNICODE)
+            ? json_encode(['status' => $audit['status'], 'gate_status' => $audit['gate_status'], 'score' => $audit['score'], 'criteria' => json_decode((string)$audit['criteria'], true), 'findings' => $auditFindings, 'feedback' => $audit['feedback'], 'release' => $audit['release_version'], 'commit' => $audit['commit_sha']], JSON_UNESCAPED_UNICODE)
             : 'No existe una auditoría registrada. No hay métricas, ejecuciones de herramientas ni hallazgos verificados disponibles.';
 
         $systemPrompt = <<<PROMPT
