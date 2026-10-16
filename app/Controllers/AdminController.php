@@ -413,8 +413,110 @@ class AdminController extends BaseController
     /**
      * Guarda el dictamen de calidad y QA score de una entrega
      */
+    public function createQualityAudit(string $deliveryId): string
+    {
+        $delivery = Database::getInstance()->fetch(
+            "SELECT d.*, p.name AS project_name, p.code AS project_code, m.name AS milestone_name, dev.name AS developer_name
+             FROM deliveries d JOIN projects p ON p.id = d.project_id LEFT JOIN milestones m ON m.id = d.milestone_id
+             JOIN users dev ON dev.id = p.developer_id WHERE d.id = :id AND d.status = 'pending'",
+            ['id' => $deliveryId]
+        );
+        if (!$delivery) {
+            echo \\App\\Core\\View::renderError(404);
+            exit;
+        }
+        return $this->view('admin/quality-audit-form', [
+            'title' => 'Nueva auditoría QA — Devioz', 'delivery' => $delivery,
+            'isoCriteria' => QualityAuditService::isoCriteria(), 'owaspCriteria' => QualityAuditService::owaspCriteria(),
+        ]);
+    }
+
+    public function storeQualityAudit(string $deliveryId): void
+    {
+        $db = Database::getInstance();
+        $delivery = $db->fetch("SELECT * FROM deliveries WHERE id = :id AND status = 'pending'", ['id' => $deliveryId]);
+        if (!$delivery) {
+            echo \\App\\Core\\View::renderError(404);
+            exit;
+        }
+        try {
+            $assessment = QualityAuditService::assess($_POST);
+        } catch (InvalidArgumentException $exception) {
+            Session::flash('error', $exception->getMessage());
+            redirect("/admin/quality-audits/create/{$deliveryId}");
+        }
+
+        $db->beginTransaction();
+        try {
+            $commitSha = trim((string)($_POST['commit_sha'] ?? '')) ?: null;
+            $auditId = $db->insert('quality_audits', [
+                'project_id' => $delivery['project_id'], 'delivery_id' => $delivery['id'], 'evaluator_id' => $this->auth->id(),
+                'standard_version' => QualityAuditService::STANDARD_VERSION,
+                'release_version' => trim((string)($_POST['release_version'] ?? '')) ?: null,
+                'commit_sha' => $commitSha, 'status' => $assessment['status'], 'gate_status' => $assessment['gate_status'],
+                'score' => $assessment['score'],
+                'criteria' => json_encode($assessment['criteria'], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+                'feedback' => trim((string)($_POST['feedback'] ?? '')) ?: null, 'reviewed_at' => date('Y-m-d H:i:s'),
+            ]);
+            foreach ($assessment['findings'] as $finding) {
+                $db->insert('quality_audit_findings', [
+                    'audit_id' => $auditId, 'severity' => $finding['severity'], 'title' => $finding['title'],
+                    'description' => $finding['description'], 'evidence' => trim((string)($finding['evidence'] ?? '')) ?: null,
+                    'status' => 'open',
+                ]);
+            }
+            foreach ($assessment['criteria']['tools'] as $key => $tool) {
+                $db->insert('quality_tool_runs', [
+                    'audit_id' => $auditId, 'tool_key' => $key, 'source' => 'manual', 'status' => $tool['status'],
+                    'commit_sha' => $commitSha, 'notes' => $tool['evidence'] ?: null,
+                    'executed_by' => $this->auth->id(), 'executed_at' => $tool['status'] === 'not_run' ? null : date('Y-m-d H:i:s'),
+                ]);
+            }
+            $feedback = trim((string)($_POST['feedback'] ?? ''));
+            $passed = $assessment['gate_status'] === 'passed';
+            $db->update('deliveries', [
+                'score' => $assessment['score'] === null ? null : $assessment['score'] / 10,
+                'feedback' => $feedback ?: ($passed ? 'Auditoría QA aprobada con evidencia registrada.' : 'QA requiere correcciones o evidencias adicionales. Revisa el informe de auditoría.'),
+                'status' => $passed ? 'approved' : 'rejected', 'reviewed_by' => $this->auth->id(), 'reviewed_at' => date('Y-m-d H:i:s'),
+            ], '`id` = :id', ['id' => $deliveryId]);
+            if ($passed && !empty($delivery['milestone_id'])) {
+                $db->update('milestones', ['status' => 'completed', 'completed_at' => date('Y-m-d H:i:s')], '`id` = :id', ['id' => $delivery['milestone_id']]);
+            }
+            $db->commit();
+        } catch (\\Throwable $exception) {
+            $db->rollBack();
+            throw $exception;
+        }
+        AuditLog::record('quality.audit_created', 'QualityAudit', $auditId, [
+            'project_id' => (int)$delivery['project_id'], 'gate_status' => $assessment['gate_status'], 'score' => $assessment['score'],
+        ]);
+        Session::flash($assessment['gate_status'] === 'passed' ? 'success' : 'info', 'Auditoría guardada. Dictamen: ' . $assessment['gate_status'] . '.');
+        redirect("/admin/quality-audits/{$auditId}");
+    }
+
+    public function qualityAuditReport(string $auditId): string
+    {
+        $db = Database::getInstance();
+        $audit = $db->fetch(
+            "SELECT qa.*, p.name AS project_name, p.code AS project_code, u.name AS evaluator_name, d.title AS delivery_title
+             FROM quality_audits qa JOIN projects p ON p.id = qa.project_id JOIN users u ON u.id = qa.evaluator_id
+             LEFT JOIN deliveries d ON d.id = qa.delivery_id WHERE qa.id = :id", ['id' => $auditId]
+        );
+        if (!$audit) {
+            echo \\App\\Core\\View::renderError(404);
+            exit;
+        }
+        $audit['criteria'] = json_decode((string)$audit['criteria'], true) ?: [];
+        $audit['findings'] = $db->fetchAll('SELECT * FROM quality_audit_findings WHERE audit_id = :id ORDER BY FIELD(severity, "critical", "high", "medium", "low", "info")', ['id' => $auditId]);
+        $audit['toolRuns'] = $db->fetchAll('SELECT * FROM quality_tool_runs WHERE audit_id = :id ORDER BY tool_key', ['id' => $auditId]);
+        return $this->view('admin/quality-audit-report', ['title' => 'Informe QA ' . $audit['project_code'], 'audit' => $audit]);
+    }
+
     public function gradeDelivery(string $deliveryId): void
     {
+        redirect("/admin/quality-audits/create/{$deliveryId}");
+        return;
+
         $db = Database::getInstance();
         $deliveryRow = $db->fetch("SELECT * FROM deliveries WHERE id = :id", ['id' => $deliveryId]);
 
