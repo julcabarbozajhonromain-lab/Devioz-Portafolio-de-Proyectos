@@ -495,10 +495,13 @@ class AdminController extends BaseController
             }
             $feedback = trim((string)($_POST['feedback'] ?? ''));
             $passed = $assessment['gate_status'] === 'passed';
+            $deliveryStatus = $passed ? 'approved' : ($assessment['gate_status'] === 'pending' ? 'pending' : 'rejected');
             $db->update('deliveries', [
                 'score' => $assessment['score'] === null ? null : $assessment['score'] / 10,
                 'feedback' => $feedback ?: ($passed ? 'Auditoría QA aprobada con evidencia registrada.' : 'QA requiere correcciones o evidencias adicionales. Revisa el informe de auditoría.'),
-                'status' => $passed ? 'approved' : 'rejected', 'reviewed_by' => $this->auth->id(), 'reviewed_at' => date('Y-m-d H:i:s'),
+                'status' => $deliveryStatus,
+                'reviewed_by' => $deliveryStatus === 'pending' ? null : $this->auth->id(),
+                'reviewed_at' => $deliveryStatus === 'pending' ? null : date('Y-m-d H:i:s'),
             ], '`id` = :id', ['id' => $deliveryId]);
             if ($passed && !empty($delivery['milestone_id'])) {
                 $db->update('milestones', ['status' => 'completed', 'completed_at' => date('Y-m-d H:i:s')], '`id` = :id', ['id' => $delivery['milestone_id']]);
