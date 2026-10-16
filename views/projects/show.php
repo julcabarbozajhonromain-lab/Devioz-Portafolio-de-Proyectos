@@ -15,94 +15,11 @@ $assignedBy = $project->assignedBy();
 $reviewedBy = $project->reviewedBy();
 
 // Cálculo de Métricas de Calidad ISO/IEC 25010 & OWASP Top 10
-$rawScore = (float)($project->final_score ?: 94.0);
-$baseScore = $rawScore <= 10.0 ? ($rawScore * 10.0) : $rawScore;
-$isCertified = $project->status === 'approved' || $project->status === 'completed' || $baseScore >= 60.0;
-
-$isoMetrics = [
-    [
-        'id' => 'functional',
-        'name' => 'Adecuación Funcional',
-        'std' => 'ISO/IEC 25010 §4.2.1',
-        'score' => min(100.0, round($baseScore * 1.02, 1)),
-        'desc' => 'Completitud y exactitud de reglas de negocio para ' . ($project->clientName() ?: 'Cliente Corporativo'),
-        'color' => '#10B981',
-        'icon' => 'fa-clipboard-check'
-    ],
-    [
-        'id' => 'performance',
-        'name' => 'Eficiencia de Desempeño',
-        'std' => 'ISO/IEC 25010 §4.2.2',
-        'score' => min(100.0, round($baseScore * 0.98, 1)),
-        'desc' => 'Latencia de respuesta TTFB < 150ms y concurrencia optimizada',
-        'color' => '#16A34A',
-        'icon' => 'fa-gauge-high'
-    ],
-    [
-        'id' => 'compatibility',
-        'name' => 'Compatibilidad & APIs',
-        'std' => 'ISO/IEC 25010 §4.2.3',
-        'score' => min(100.0, round($baseScore * 0.99, 1)),
-        'desc' => 'Interoperabilidad RESTful, OpenAPI 3.0 y contratos de datos validados',
-        'color' => '#3b82f6',
-        'icon' => 'fa-network-wired'
-    ],
-    [
-        'id' => 'usability',
-        'name' => 'Usabilidad y experiencia de usuario',
-        'std' => 'ISO/IEC 25010 §4.2.4',
-        'score' => min(100.0, round($baseScore * 0.97, 1)),
-        'desc' => 'Estándar ergonómico Devioz, WCAG 2.1 AA y flujos guiados',
-        'color' => '#8b5cf6',
-        'icon' => 'fa-wand-magic-sparkles'
-    ],
-    [
-        'id' => 'reliability',
-        'name' => 'Fiabilidad & Resiliencia',
-        'std' => 'ISO/IEC 25010 §4.2.5',
-        'score' => min(100.0, round($baseScore * 1.01, 1)),
-        'desc' => 'Tolerancia a fallos, transacciones ACID con PDO y log auditado',
-        'color' => '#06b6d4',
-        'icon' => 'fa-server'
-    ],
-    [
-        'id' => 'security',
-        'name' => 'Seguridad & AppSec',
-        'std' => 'ISO/IEC 25010 §4.2.6',
-        'score' => min(100.0, round($baseScore * 1.03, 1)),
-        'desc' => 'OWASP Top 10 mitigado, Argon2id, RBAC estricto y tokens anti-CSRF',
-        'color' => '#10b981',
-        'icon' => 'fa-shield-halved'
-    ],
-    [
-        'id' => 'maintainability',
-        'name' => 'Mantenibilidad & QA',
-        'std' => 'ISO/IEC 25010 §4.2.7',
-        'score' => min(100.0, round($baseScore * 0.96, 1)),
-        'desc' => 'Arquitectura desacoplada PSR-12, bajo acoplamiento y Clean Code',
-        'color' => '#f59e0b',
-        'icon' => 'fa-code-branch'
-    ],
-    [
-        'id' => 'portability',
-        'name' => 'Portabilidad & PaaS Ready',
-        'std' => 'ISO/IEC 25010 §4.2.8',
-        'score' => min(100.0, round($baseScore * 1.00, 1)),
-        'desc' => 'Arquitectura 12-Factor, contenedores Docker y despliegue agnóstico en PaaS',
-        'color' => '#ec4899',
-        'icon' => 'fa-cloud-arrow-up'
-    ],
-];
-
-$owaspChecklist = [
-    ['code' => 'A01:2021', 'name' => 'Broken Access Control', 'desc' => 'RBAC por perfiles y mitigación estricta de IDOR', 'status' => 'Conforme'],
-    ['code' => 'A02:2021', 'name' => 'Cryptographic Failures', 'desc' => 'Argon2id + TLS 1.3 + Secretos aislados en .env', 'status' => 'Conforme'],
-    ['code' => 'A03:2021', 'name' => 'Injection (SQL/NoSQL/OS)', 'desc' => '100% PDO con Prepared Statements parametrizados', 'status' => 'Conforme'],
-    ['code' => 'A04:2021', 'name' => 'Insecure Design', 'desc' => 'Arquitectura por capas MVC y principio de menor privilegio', 'status' => 'Conforme'],
-    ['code' => 'A05:2021', 'name' => 'Security Misconfiguration', 'desc' => 'Cabeceras CSP, X-Frame-Options, HSTS y CSRF activo', 'status' => 'Conforme'],
-    ['code' => 'A07:2021', 'name' => 'Identification & Auth', 'desc' => 'SSO OAuth2 (Google & GitHub) + Regeneración de sesión', 'status' => 'Conforme'],
-];
-?>
+$latestQualityAudit = $latestQualityAudit ?? null;
+$isCertified = $latestQualityAudit && $latestQualityAudit['gate_status'] === 'passed' && $latestQualityAudit['status'] === 'passed';
+$baseScore = $latestQualityAudit['score'] ?? null;
+$isoMetrics = [];
+$owaspChecklist = [];?>
 
 <!-- Encabezado Corporativo del Proyecto (Estilo Devioz) -->
 <div class="card-custom p-4 mb-4 project-header-card">
@@ -166,146 +83,20 @@ $owaspChecklist = [
     <div class="col-lg-8">
 
         <!-- ========================================================================= -->
-        <!-- 1. SUITE DE CALIDAD DE SOFTWARE ISO/IEC 25010 & OWASP TOP 10              -->
-        <!-- ========================================================================= -->
-        <div class="card-custom p-4 mb-4" style="border-top: 4px solid #10B981;">
-            <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom" style="border-color: #DBE2E8 !important;">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(16, 185, 129, 0.12); color: #10B981;">
-                        <i class="fa-solid fa-shield-halved fs-6"></i>
-                    </div>
-                    <div>
-                        <h5 class="fw-bold mb-0" style="color: #1F2937; font-size: 1.05rem;">Auditoría de Calidad ISO/IEC 25010 & Seguridad OWASP</h5>
-                        <div class="text-secondary small" style="font-size: 0.75rem;">Dictamen técnico emitido bajo estándares internacionales de ingeniería de software</div>
-                    </div>
-                </div>
-                <div class="text-end">
-                    <span class="badge" style="background: rgba(22, 163, 74, 0.15); color: #4d8600; font-weight: 700; font-size: 0.85rem; padding: 6px 10px;">
-                        Score Global: <?= number_format($baseScore, 1) ?>/100
-                    </span>
-                </div>
-            </div>
-
-            <!-- Matriz y Radar de 8 Atributos ISO/IEC 25010 -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold small mb-0 text-uppercase" style="letter-spacing: 0.04em; color: #5E6C84;">
-                    <i class="fa-solid fa-chart-simple me-1 text-primary"></i> Atributos de Calidad del Producto (ISO/IEC 25010 SQuaRE)
-                </h6>
-                <span class="badge" style="background: rgba(16, 185, 129, 0.1); color: #10B981; font-size: 0.72rem;">
-                    <i class="fa-solid fa-crosshairs me-1"></i> Radar Multidimensional
-                </span>
-            </div>
-
-            <div class="row g-4 align-items-center mb-4">
-                <!-- Columna Izquierda: Spider / Radar Chart Interactivo -->
-                <div class="col-xl-5 col-lg-12">
-                    <div class="p-3 rounded text-center position-relative" style="background: #F8FAFB; border: 1px solid #E0E8ED;">
-                        <div class="d-flex justify-content-between align-items-center mb-2 px-1">
-                            <span class="small fw-bold text-dark" style="font-size: 0.78rem;">
-                                <i class="fa-solid fa-radar me-1 text-primary"></i> Perfil SQuaRE
-                            </span>
-                            <span class="badge bg-success-subtle text-success font-monospace" style="font-size: 0.65rem;">SonarQube: PASS</span>
-                        </div>
-                        <div style="position: relative; height: 260px; width: 100%; max-width: 320px; margin: 0 auto;">
-                            <canvas id="isoRadarCanvas"></canvas>
-                        </div>
-                        <div class="d-flex justify-content-center gap-3 mt-2" style="font-size: 0.72rem;">
-                            <span class="d-flex align-items-center gap-1">
-                                <span class="rounded-circle d-inline-block" style="width: 8px; height: 8px; background: #10B981;"></span>
-                                <span class="text-secondary">Proyecto: <strong><?= number_format($baseScore, 1) ?>%</strong></span>
-                            </span>
-                            <span class="d-flex align-items-center gap-1">
-                                <span class="rounded-circle d-inline-block" style="width: 8px; height: 8px; background: #16A34A;"></span>
-                                <span class="text-secondary">Línea Base: <strong>100%</strong></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Columna Derecha: Cartillas Inteligentes de las 8 Dimensiones (3D Flip Cards) -->
-                <div class="col-xl-7 col-lg-12">
-                    <div class="row g-2">
-                        <?php foreach ($isoMetrics as $idx => $iso): ?>
-                            <div class="col-sm-6">
-                                <div class="iso-flip-card iso-dimension-card" data-iso-idx="<?= $idx ?>" title="Pasa el cursor para ver el dictamen técnico">
-                                    <div class="iso-flip-card-inner">
-                                        <!-- Cara Delantera: Icono, Nombre y Porcentaje Limpio + Barra Fina -->
-                                        <div class="iso-flip-card-front" style="border-left: 4px solid <?= e($iso['color']) ?> !important;">
-                                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                                <div class="d-flex align-items-center gap-2 min-w-0">
-                                                    <span class="iso-icon-badge" style="background: <?= e($iso['color']) ?>18; color: <?= e($iso['color']) ?>;">
-                                                        <i class="fa-solid <?= e($iso['icon']) ?>"></i>
-                                                    </span>
-                                                    <span class="fw-bold small text-truncate" style="color: #0F172A; font-size: 0.78rem;" title="<?= e($iso['name']) ?>">
-                                                        <?= e($iso['name']) ?>
-                                                    </span>
-                                                </div>
-                                                <span class="fw-bold font-monospace ms-2 flex-shrink-0" style="color: <?= e($iso['color']) ?>; font-size: 0.88rem;">
-                                                    <?= e((string)$iso['score']) ?>%
-                                                </span>
-                                            </div>
-
-                                            <div class="progress mt-2 mb-0" style="height: 5px; background-color: #E2E8F0; border-radius: 9999px;">
-                                                <div class="progress-bar rounded-pill" role="progressbar" style="width: <?= e((string)$iso['score']) ?>%; background-color: <?= e($iso['color']) ?>;" aria-valuenow="<?= e((string)$iso['score']) ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Cara Posterior: Especificación Técnica y Auditoría de Calidad -->
-                                        <div class="iso-flip-card-back" style="border-left: 4px solid <?= e($iso['color']) ?> !important;">
-                                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                                <span class="fw-bold d-flex align-items-center gap-1 text-truncate" style="color: <?= e($iso['color']) ?>; font-size: 0.72rem;">
-                                                    <i class="fa-solid <?= e($iso['icon']) ?>"></i>
-                                                    <span class="text-truncate"><?= e($iso['name']) ?></span>
-                                                </span>
-                                                <span class="badge bg-success-subtle text-success py-0 px-1 font-monospace" style="font-size: 0.62rem;">
-                                                    <i class="fa-solid fa-check me-1"></i><?= e((string)$iso['score']) ?>%
-                                                </span>
-                                            </div>
-
-                                            <p class="iso-flip-desc mb-0" title="<?= e($iso['desc']) ?>">
-                                                <?= e($iso['desc']) ?>
-                                            </p>
-
-                                            <div class="d-flex justify-content-between align-items-center mt-auto pt-1 border-top border-light-subtle" style="font-size: 0.62rem;">
-                                                <span class="font-monospace text-muted"><?= e($iso['std']) ?></span>
-                                                <span class="text-success fw-semibold d-flex align-items-center gap-1">
-                                                    <i class="fa-solid fa-shield-halved" style="font-size: 0.58rem;"></i> Conforme
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Checklist de Seguridad OWASP Top 10 -->
-            <h6 class="fw-bold small mb-2 text-uppercase" style="letter-spacing: 0.04em; color: #5E6C84;">
-                <i class="fa-solid fa-lock me-1 text-success"></i> Controles de Mitigación OWASP Top 10 & PaaS Hardening
-            </h6>
-            <div class="row g-2">
-                <?php foreach ($owaspChecklist as $owasp): ?>
-                    <div class="col-sm-6 col-xl-4">
-                        <div class="p-2 rounded d-flex align-items-center justify-content-between owasp-control-card" style="background: #FFFFFF; border: 1px solid #E2E8F0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);">
-                            <div class="min-w-0 pe-2">
-                                <div class="d-flex align-items-center gap-1 mb-1">
-                                    <span class="badge font-monospace px-2 py-1" style="background: #F1F5F9; color: #1E293B !important; border: 1px solid #CBD5E1; font-size: 0.65rem; font-weight: 700;"><?= e($owasp['code']) ?></span>
-                                    <span class="fw-bold text-truncate small" style="color: #0F172A; font-size: 0.76rem;"><?= e($owasp['name']) ?></span>
-                                </div>
-                                <div class="text-truncate" style="color: #64748B; font-size: 0.67rem;" title="<?= e($owasp['desc']) ?>"><?= e($owasp['desc']) ?></div>
-                            </div>
-                            <span class="badge rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 22px; height: 22px; background: #ECFDF5; color: #10B981; border: 1px solid #A7F3D0;" title="Mitigación Validada">
-                                <i class="fa-solid fa-check" style="font-size: 0.65rem;"></i>
-                            </span>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- ========================================================================= -->
+        <section class="card-custom p-4 mb-4">
+            <h5 class="fw-bold mb-1">Auditoría de calidad y seguridad</h5>
+            <p class="text-secondary small">ISO/IEC 25010:2023 · OWASP Top 10:2025 · Dictamen interno basado en evidencias</p>
+            <div class="alert alert-info small">Esta revisión interna no es una certificación ISO ni garantiza ausencia de defectos.</div>
+            <?php if (!$latestQualityAudit): ?>
+                <p class="text-secondary mb-0">No existe todavía un dictamen QA basado en evidencias para este proyecto.</p>
+            <?php else: ?>
+                <div class="row g-3 mb-3"><div class="col-md-4"><span class="small text-secondary">Compuerta</span><div class="fw-bold"><?= e($latestQualityAudit['gate_status']) ?></div></div><div class="col-md-4"><span class="small text-secondary">Score documentado</span><div class="fw-bold"><?= $latestQualityAudit['score'] !== null ? number_format((float)$latestQualityAudit['score'], 1) . '/100' : 'No disponible' ?></div></div><div class="col-md-4"><span class="small text-secondary">Release / commit</span><div><?= e($latestQualityAudit['release_version'] ?: 'Sin versión') ?> · <code><?= e($latestQualityAudit['commit_sha'] ?: 'sin SHA') ?></code></div></div></div>
+                <h6 class="fw-bold">ISO/IEC 25010:2023 · atributos evaluados</h6><div class="table-responsive mb-3"><table class="table table-sm"><thead><tr><th>Atributo</th><th>Valoración</th><th>Evidencia</th></tr></thead><tbody><?php foreach (($latestQualityAudit['criteria']['iso'] ?? []) as $item): ?><tr><td><?= e($item['label']) ?></td><td><?= isset($item['rating']) && $item['rating'] !== null ? (int)$item['rating'] . '/4' : 'Sin evaluar' ?></td><td><?= e($item['evidence'] ?: 'Sin evidencia') ?></td></tr><?php endforeach; ?></tbody></table></div>
+                <h6 class="fw-bold">OWASP Top 10</h6><div class="table-responsive mb-3"><table class="table table-sm"><thead><tr><th>Categoría</th><th>Resultado</th><th>Evidencia</th></tr></thead><tbody><?php foreach (($latestQualityAudit['criteria']['owasp']['items'] ?? []) as $item): ?><tr><td><?= e($item['label']) ?></td><td><?= e($item['result']) ?></td><td><?= e($item['evidence'] ?: 'Sin evidencia') ?></td></tr><?php endforeach; ?></tbody></table></div>
+                <?php if (!empty($latestQualityAudit['findings'])): ?><h6 class="fw-bold">Hallazgos abiertos</h6><ul><?php foreach ($latestQualityAudit['findings'] as $finding): ?><li><strong><?= e(strtoupper($finding['severity'])) ?> · <?= e($finding['title']) ?>:</strong> <?= e($finding['description']) ?> (<?= e($finding['status']) ?>)</li><?php endforeach; ?></ul><?php endif; ?>
+                <p class="small text-secondary mb-0"><?= nl2br(e($latestQualityAudit['feedback'] ?: 'Sin conclusión adicional.')) ?></p>
+            <?php endif; ?>
+        </section>
         <!-- 2. DESCRIPCIÓN GENERAL Y PATRONES DE ARQUITECTURA                         -->
         <!-- ========================================================================= -->
         <div class="card-custom p-4 mb-4">
@@ -553,8 +344,8 @@ $owaspChecklist = [
             </p>
             <div class="d-flex justify-content-center gap-2 flex-wrap">
                 <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">ISO 25010</span>
-                <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">OWASP Verified</span>
-                <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">SonarQube Clean</span>
+                        <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">OWASP: sin validar</span>
+                        <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">SonarQube: sin validar</span>
             </div>
         </div>
 
@@ -568,10 +359,10 @@ $owaspChecklist = [
                     <?= csrf_field() ?>
                     <div class="mb-2">
                         <label class="form-label-custom small">Score de Calidad QA (0 - 100)</label>
-                        <input type="number" step="0.5" min="0" max="100" name="final_score" class="form-control form-control-custom py-1" value="<?= $project->final_score ?: '95.0' ?>" required>
+                        <div class="small text-secondary mb-2">La aprobación utiliza el score del último Quality Gate aprobado; no se puede establecer manualmente.</div>
                     </div>
-                    <button type="submit" class="btn btn-brand btn-sm w-100 justify-content-center" data-confirm="¿Confirmas que deseas APROBAR este proyecto y certificar el dictamen QA en la galería?">
-                        Aprobar Hito Final & Certificar
+                    <button type="submit" class="btn btn-brand btn-sm w-100 justify-content-center" <?= !$isCertified ? 'disabled title="Se requiere un Quality Gate aprobado"' : '' ?> data-confirm="¿Confirmas aprobar el proyecto según el dictamen QA registrado?">
+                        Aprobar proyecto con Quality Gate aprobado
                     </button>
                 </form>
 
