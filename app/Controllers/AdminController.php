@@ -7,7 +7,6 @@ namespace App\Controllers;
 use App\Core\Database;
 use App\Core\Session;
 use App\Models\AuditLog;
-use App\Models\Evaluation;
 use App\Models\Message;
 use App\Models\Milestone;
 use App\Models\Project;
@@ -432,7 +431,7 @@ class AdminController extends BaseController
             ['id' => $deliveryId]
         );
         if (!$delivery) {
-            echo \\App\\Core\\View::renderError(404);
+            echo \App\Core\View::renderError(404);
             exit;
         }
         return $this->view('admin/quality-audit-form', [
@@ -446,7 +445,7 @@ class AdminController extends BaseController
         $db = Database::getInstance();
         $delivery = $db->fetch("SELECT * FROM deliveries WHERE id = :id AND status = 'pending'", ['id' => $deliveryId]);
         if (!$delivery) {
-            echo \\App\\Core\\View::renderError(404);
+            echo \App\Core\View::renderError(404);
             exit;
         }
         try {
@@ -493,7 +492,7 @@ class AdminController extends BaseController
                 $db->update('milestones', ['status' => 'completed', 'completed_at' => date('Y-m-d H:i:s')], '`id` = :id', ['id' => $delivery['milestone_id']]);
             }
             $db->commit();
-        } catch (\\Throwable $exception) {
+        } catch (\Throwable $exception) {
             $db->rollBack();
             throw $exception;
         }
@@ -513,7 +512,7 @@ class AdminController extends BaseController
              LEFT JOIN deliveries d ON d.id = qa.delivery_id WHERE qa.id = :id", ['id' => $auditId]
         );
         if (!$audit) {
-            echo \\App\\Core\\View::renderError(404);
+            echo \App\Core\View::renderError(404);
             exit;
         }
         $audit['criteria'] = json_decode((string)$audit['criteria'], true) ?: [];
@@ -525,68 +524,6 @@ class AdminController extends BaseController
     public function gradeDelivery(string $deliveryId): void
     {
         redirect("/admin/quality-audits/create/{$deliveryId}");
-        return;
-
-        $db = Database::getInstance();
-        $deliveryRow = $db->fetch("SELECT * FROM deliveries WHERE id = :id", ['id' => $deliveryId]);
-
-        if (!$deliveryRow) {
-            echo \App\Core\View::renderError(404);
-            exit;
-        }
-
-        $score = (float)($_POST['score'] ?? 0);
-        $feedback = trim((string)($_POST['feedback'] ?? ''));
-        // Soporta tanto escala 0-10 (>= 6.0) como escala 0-100 (>= 60.0)
-        $status = ($score >= 60.0 || ($score >= 6.0 && $score <= 10.0)) ? 'approved' : 'rejected';
-
-        $validator = $this->validate($_POST, [
-            'score'    => 'required|numeric',
-            'feedback' => 'required|min:5',
-        ]);
-
-        if ($validator->fails()) {
-            redirect('/admin/evaluations');
-        }
-
-        $db->update(
-            'deliveries',
-            [
-                'score'       => $score,
-                'feedback'    => $feedback,
-                'status'      => $status,
-                'reviewed_by' => $this->auth->id(),
-                'reviewed_at' => date('Y-m-d H:i:s'),
-            ],
-            '`id` = :id',
-            ['id' => $deliveryId]
-        );
-
-        // Si fue aprobada, marcar el hito correspondiente como completado
-        if ($status === 'approved' && !empty($deliveryRow['milestone_id'])) {
-            $db->update(
-                'milestones',
-                [
-                    'status'       => 'completed',
-                    'completed_at' => date('Y-m-d H:i:s'),
-                ],
-                '`id` = :mid',
-                ['mid' => $deliveryRow['milestone_id']]
-            );
-        }
-
-        // Registrar dictamen formal de auditoría
-        Evaluation::create([
-            'project_id'   => $deliveryRow['project_id'],
-            'delivery_id'  => $deliveryRow['id'],
-            'evaluator_id' => $this->auth->id(),
-            'score'        => $score,
-            'criteria'     => ['qa_score' => $score],
-            'feedback'     => $feedback,
-            'evaluated_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        Session::flash('success', "Dictamen emitido con éxito. Score de Calidad QA: {$score}");
-        redirect('/admin/evaluations');
     }
+
 }
