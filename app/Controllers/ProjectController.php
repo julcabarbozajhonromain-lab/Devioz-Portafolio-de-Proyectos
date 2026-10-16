@@ -12,6 +12,7 @@ use App\Models\Milestone;
 use App\Models\Project;
 use App\Models\User;
 use App\Policies\ProjectPolicy;
+use App\Services\ProjectStatusTransition;
 
 /**
  * Devioz OS — Controlador de Gestión de Proyectos
@@ -353,7 +354,15 @@ class ProjectController extends BaseController
             }
         }
 
-        $project->update($data);
+        $statusChange = $data['status'] ?? null;
+        unset($data['status']);
+        if ($statusChange !== null && !ProjectStatusTransition::apply($project, (string)$statusChange)) {
+            Session::flash('error', 'El cambio de estado solicitado no estÃ¡ permitido.');
+            redirect("/projects/{$project->id}/edit");
+        }
+        if ($data !== []) {
+            $project->update($data);
+        }
 
         AuditLog::record('project.updated', 'Project', (int)$project->id, [
             'code' => $project->code,
@@ -376,10 +385,12 @@ class ProjectController extends BaseController
             exit;
         }
 
-        $project->update([
-            'status'       => 'pending_review',
+        if (!ProjectStatusTransition::apply($project, 'pending_review', [
             'submitted_at' => date('Y-m-d H:i:s'),
-        ]);
+        ])) {
+            Session::flash('error', 'El estado actual del proyecto no permite enviarlo a revisiÃ³n.');
+            redirect($this->auth->isDeveloper() ? '/my-project' : "/projects/{$project->id}");
+        }
 
         AuditLog::record('project.submitted', 'Project', (int)$project->id, [
             'code' => $project->code,

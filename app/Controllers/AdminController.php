@@ -12,6 +12,7 @@ use App\Models\Milestone;
 use App\Models\Project;
 use App\Models\User;
 use App\Services\QualityAuditService;
+use App\Services\ProjectStatusTransition;
 use App\Services\SonarQubeService;
 use InvalidArgumentException;
 
@@ -52,7 +53,7 @@ class AdminController extends BaseController
             return array_map(fn($r) => new Project($r), $rows);
         };
 
-        $pendingProjects  = $fetchProjectsByStatus(['pending_review', 'assigned']);
+        $pendingProjects  = $fetchProjectsByStatus('pending_review');
         $inReviewProjects = $fetchProjectsByStatus('in_review');
         $approvedProjects = $fetchProjectsByStatus('approved');
         $rejectedProjects = $fetchProjectsByStatus('rejected');
@@ -79,8 +80,11 @@ class AdminController extends BaseController
         $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
         $newStatus = (string)($input['status'] ?? '');
 
-        $allowedStatuses = ['assigned', 'in_progress', 'pending_review', 'in_review', 'approved', 'rejected', 'completed', 'archived'];
-        if (!in_array($newStatus, $allowedStatuses, true)) {
+        if (!in_array($newStatus, ['pending_review', 'in_review', 'approved', 'rejected'], true)) {
+            $this->json(['error' => 'Estado destino no valido para el tablero QA'], 422);
+        }
+
+        if (!ProjectStatusTransition::allows((string)$project->status, $newStatus)) {
             $this->json(['error' => 'Estado destino no válido'], 422);
         }
 
@@ -109,10 +113,13 @@ class AdminController extends BaseController
             $data['rejected_at'] = date('Y-m-d H:i:s');
         }
 
-        $project->update($data);
+        $fromStatus = (string)$project->status;
+        if (!ProjectStatusTransition::apply($project, $newStatus, $data)) {
+            $this->json(['error' => 'El estado cambiÃ³ en otra operaciÃ³n. Recarga el tablero.'], 409);
+        }
 
         AuditLog::record('project.status_changed', 'Project', (int)$project->id, [
-            'from' => $project->status,
+            'from' => $fromStatus,
             'to'   => $newStatus,
         ]);
 
@@ -141,13 +148,15 @@ class AdminController extends BaseController
         }
         $score = (float)$audit['score'];
 
-        $project->update([
-            'status'               => 'approved',
+        if (!ProjectStatusTransition::apply($project, 'approved', [
             'approved_by'          => $this->auth->id(),
             'approved_at'          => date('Y-m-d H:i:s'),
             'final_score'          => $score,
             'is_public_in_gallery' => 1,
-        ]);
+        ])) {
+            Session::flash('error', 'El estado actual no permite aprobar este proyecto.');
+            redirect('/admin/review');
+        }
 
         // Notificar al desarrollador
         Message::create([
@@ -186,12 +195,14 @@ class AdminController extends BaseController
             redirect('/admin/review');
         }
 
-        $project->update([
-            'status'           => 'rejected',
+        if (!ProjectStatusTransition::apply($project, 'rejected', [
             'rejection_reason' => $reason,
             'rejected_at'      => date('Y-m-d H:i:s'),
             'reviewed_by'      => $this->auth->id(),
-        ]);
+        ])) {
+            Session::flash('error', 'El estado actual no permite observar este proyecto.');
+            redirect('/admin/review');
+        }
 
         Message::create([
             'sender_id'   => $this->auth->id(),
@@ -215,11 +226,13 @@ class AdminController extends BaseController
     {
         $project = Project::find((int)$id);
         if ($project) {
-            $project->update([
-                'status'      => 'archived',
+            if (ProjectStatusTransition::apply($project, 'archived', [
                 'archived_at' => date('Y-m-d H:i:s'),
-            ]);
-            Session::flash('info', "Proyecto {$project->code} archivado.");
+            ])) {
+                Session::flash('info', "Proyecto {$project->code} archivado.");
+            } else {
+                Session::flash('error', 'El estado actual del proyecto no permite archivarlo.');
+            }
         }
 
         redirect('/admin/review');
@@ -330,6 +343,12 @@ class AdminController extends BaseController
             $updateData['status'] = 'assigned';
         }
 
+        $statusChange = $updateData['status'] ?? null;
+        unset($updateData['status']);
+        if ($statusChange !== null && !ProjectStatusTransition::apply($project, $statusChange)) {
+            Session::flash('error', 'No se pudo reasignar porque el estado del proyecto cambiÃ³. Recarga la pÃ¡gina.');
+            redirect('/admin/assignments');
+        }
         $project->update($updateData);
 
         AuditLog::record('project.reassigned', 'Project', (int)$project->id, [
@@ -361,11 +380,12 @@ class AdminController extends BaseController
         $oldDevId = $project->developer_id;
         $oldDev = $oldDevId ? User::find((int)$oldDevId) : null;
 
-        // Desasignar: developer_id a NULL, status a 'draft'
-        $project->update([
-            'developer_id' => null,
-            'status'       => 'draft',
-        ]);
+        // Liberar al desarrollador y devolver el proyecto al pool mediante la transiciÃ³n autorizada.
+        if (!ProjectStatusTransition::apply($project, 'draft')) {
+            Session::flash('error', 'El estado actual del proyecto no permite desasignarlo.');
+            redirect('/admin/assignments');
+        }
+        $project->update(['developer_id' => null]);
 
         AuditLog::record('project.unassigned', 'Project', (int)$project->id, [
             'code'             => $project->code,

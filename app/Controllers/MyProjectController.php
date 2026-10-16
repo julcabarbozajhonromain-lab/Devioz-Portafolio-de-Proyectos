@@ -16,6 +16,7 @@ use App\Models\Milestone;
 use App\Models\Project;
 use App\Models\User;
 use App\Policies\ProjectPolicy;
+use App\Services\ProjectStatusTransition;
 
 /**
  * Devioz OS — Controlador del Espacio de Trabajo del Desarrollador (Mi Proyecto)
@@ -81,7 +82,10 @@ class MyProjectController extends BaseController
         // Verificar si todos los hitos están completados
         $remaining = Milestone::count("`project_id` = :pid AND `status` != 'completed'", ['pid' => $project->id]);
         if ($remaining === 0) {
-            $project->update(['status' => 'pending_review']);
+            if (!ProjectStatusTransition::apply($project, 'pending_review')) {
+                Session::flash('error', 'Los hitos se completaron, pero el estado actual no permite enviar el proyecto a revisiÃ³n.');
+                redirect('/my-project');
+            }
             Session::flash('success', "¡Felicitaciones! Has completado todos los hitos. Tu proyecto ha entrado a revisión final.");
         } else {
             Session::flash('success', "Hito '{$milestone->name}' marcado como completado.");
@@ -167,7 +171,10 @@ class MyProjectController extends BaseController
 
         // Cambiar estado del proyecto a 'in_progress' o 'pending_review'
         if ($project->status === 'assigned') {
-            $project->update(['status' => 'in_progress']);
+            if (!ProjectStatusTransition::apply($project, 'in_progress')) {
+                Session::flash('error', 'El estado del proyecto cambiÃ³ mientras se enviaba la entrega.');
+                redirect('/my-project');
+            }
         }
 
         // Notificar al administrador supervisor
