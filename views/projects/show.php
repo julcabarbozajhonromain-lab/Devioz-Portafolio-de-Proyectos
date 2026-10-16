@@ -36,7 +36,7 @@ $owaspChecklist = [];?>
 
                 <?php if ($isCertified): ?>
                     <span class="badge bg-success-subtle text-success border border-success-subtle py-1 px-2" style="font-size: 0.78rem;">
-                        <i class="fa-solid fa-certificate me-1"></i> ISO/IEC 25010 & OWASP Top 10 Verified
+                        <i class="fa-solid fa-certificate me-1"></i> Auditoría QA aprobada
                     </span>
                 <?php endif; ?>
 
@@ -207,7 +207,7 @@ $owaspChecklist = [];?>
                     <div class="d-flex flex-wrap gap-2">
                         <button type="button" class="copilot-chip-btn" data-copilot-mode="audit_iso25010">
                             <i class="fa-solid fa-chart-radar text-primary"></i>
-                            <span>Auditoría ISO 25010</span>
+                            <span>Auditoría ISO 25010: marco de referencia</span>
                         </button>
                         <button type="button" class="copilot-chip-btn" data-copilot-mode="security_owasp">
                             <i class="fa-solid fa-shield-halved text-success"></i>
@@ -333,22 +333,10 @@ $owaspChecklist = [];?>
             </div>
         </div>
 
-        <!-- Sello de Certificación Devioz Enterprise -->
-        <div class="card-custom p-3 mb-4 text-center" style="background: linear-gradient(135deg, #F8FAFB 0%, #FFFFFF 100%); border: 1px solid #DBE2E8;">
-            <div class="d-inline-flex p-3 rounded-circle mb-2" style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
-                <i class="fa-solid fa-certificate fs-3"></i>
-            </div>
-            <h6 class="fw-bold mb-1" style="color: #1F2937;">Devioz Quality Assurance</h6>
-            <p class="text-secondary small mb-3" style="font-size: 0.75rem;">
-                Gobernanza bajo marco <strong>ISO/IEC 25010</strong>, mitigación <strong>OWASP Top 10</strong> y gestión de seguridad <strong>ISO/IEC 27001</strong>.
-            </p>
-            <div class="d-flex justify-content-center gap-2 flex-wrap">
-                <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">ISO 25010</span>
-                        <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">OWASP: sin validar</span>
-                        <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">SonarQube: sin validar</span>
-            </div>
+        <div class="card-custom p-3 mb-4">
+            <h6 class="fw-bold mb-2">Estado del Quality Gate</h6>
+            <?php if ($latestQualityAudit): ?><div class="fw-semibold"><?= e($latestQualityAudit['gate_status']) ?></div><div class="small text-secondary">Dictamen interno · <?= format_date($latestQualityAudit['created_at']) ?></div><?php else: ?><p class="small text-secondary mb-0">No hay una auditoría QA registrada.</p><?php endif; ?>
         </div>
-
         <!-- Acciones de Administración (Si es Admin) -->
         <?php if (auth()->isAdmin()): ?>
             <div class="card-custom p-3 mb-4">

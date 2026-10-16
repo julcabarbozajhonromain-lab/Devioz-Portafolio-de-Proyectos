@@ -399,7 +399,19 @@ PROMPT;
         $devName = $dev ? $dev->name : 'No asignado';
         $tech = is_array($project->tech_stack) ? implode(', ', $project->tech_stack) : 'No especificado';
         $client = $project->clientName();
-        $score = $project->final_score ? "{$project->final_score}/100" : 'Evaluación pendiente';
+        $audit = null;
+        try {
+            $audit = Database::getInstance()->fetch(
+                'SELECT id, status, gate_status, score, criteria, feedback, release_version, commit_sha FROM quality_audits WHERE project_id = :project_id ORDER BY created_at DESC, id DESC LIMIT 1',
+                ['project_id' => $project->id]
+            );
+        } catch (\Throwable) {
+            // The audit tables may not be installed yet; never invent a result.
+        }
+        $score = $audit && $audit['score'] !== null ? $audit['score'] . '/100 (auditoría interna)' : 'Sin medición QA verificada';
+        $auditContext = $audit
+            ? json_encode(['status' => $audit['status'], 'gate_status' => $audit['gate_status'], 'score' => $audit['score'], 'criteria' => json_decode((string)$audit['criteria'], true), 'feedback' => $audit['feedback'], 'release' => $audit['release_version'], 'commit' => $audit['commit_sha']], JSON_UNESCAPED_UNICODE)
+            : 'No existe una auditoría registrada. No hay métricas, ejecuciones de herramientas ni hallazgos verificados disponibles.';
 
         $systemPrompt = <<<PROMPT
 Eres CoPilot LABVA AI, el asistente técnico especializado de ingeniería de software de Devioz OS.
@@ -416,19 +428,21 @@ DATOS DEL PROYECTO ACTUAL:
 - Desarrollador Responsable: {$devName}
 - Repositorio: {$project->repository_url}
 - Demo URL: {$project->live_url}
+- Último registro QA y evidencias (fuente de verdad): {$auditContext}
 
 REGLAS DE RESPUESTA ESTRICTAS:
-1. Responde SIEMPRE en español en un formato técnico, formal, exhaustivo y estructurado (Markdown).
-2. CERO EMOJIS bajo cualquier circunstancia.
-3. Utiliza negritas, viñetas de punto (•) y bloques de código cuando sugieras código o configuraciones.
-4. Concéntrate en recomendaciones aplicables, arquitectura limpia (Clean Code), gobernanza ISO 25010 y mitigación OWASP Top 10.
+1. Responde siempre en español, con estructura clara y recomendaciones prácticas.
+2. No inventes puntuaciones, ejecuciones de herramientas, coberturas, hallazgos, conformidad ni certificaciones. Usa solo datos explícitos del contexto.
+3. Distingue hechos registrados de hipótesis y recomendaciones. Si falta evidencia, dilo y solicita la medición concreta necesaria.
+4. ISO/IEC 25010 y OWASP Top 10 son marcos de evaluación; no declares que el proyecto está certificado por ellos.
+5. CoPilot solo recomienda; nunca cambia el dictamen, resuelve hallazgos ni aprueba el Quality Gate.
 PROMPT;
 
         $userPrompt = match ($mode) {
-            'audit_iso25010' => "Genera un dictamen de auditoría de calidad técnica bajo la norma internacional ISO/IEC 25010 para este proyecto. Evalúa las 8 dimensiones clave (Adecuación Funcional, Rendimiento, Compatibilidad, Usabilidad, Fiabilidad, Seguridad, Mantenibilidad, Portabilidad), analiza el stack ({$tech}) y provee 3 recomendaciones prioritarias de optimización.",
-            'security_owasp' => "Elabora una auditoría AppSec según OWASP Top 10 específica para la arquitectura y stack ({$tech}) de este proyecto para el cliente {$client}. Detalla vectores de riesgo prioritarios (Control de Acceso, Inyección SQL/XSS, Fallos Criptográficos, Secretos) y proporciona las directivas técnicas de defensa en profundidad.",
-            'sonar_qa'       => "Realiza una evaluación de Quality Gate según directrices de SonarQube / Clean Code para este proyecto. Evalúa complejidad ciclomática sugerida, deuda técnica, metas de cobertura de pruebas unitarias/integración (80% target) y cumplimiento de estándares PSR-12 / ESLint.",
-            'release_notes'  => "Redacta el Dossier Formal de Release y Acta de Entrega Técnica para el cliente corporativo {$client}. Incluye resumen ejecutivo del software, tecnologías certificadas, funcionalidades clave, dictamen QA y consideraciones de despliegue en entorno Cloud/PaaS.",
+            'audit_iso25010' => "Revisa el registro de evidencias disponible para {$project->code} frente a ISO/IEC 25010:2023. Resume lo evaluado, identifica atributos sin evidencia y recomienda verificaciones. No emitas certificación ni inventes puntuaciones.",
+            'security_owasp' => "Revisa el registro disponible frente a OWASP Top 10:2025 para {$project->code}. Separa categorías revisadas, hallazgos registrados y aspectos desconocidos. Propón pruebas defensivas sin afirmar que fueron ejecutadas.",
+            'sonar_qa'       => "Informa si existe una ejecución SonarQube en las evidencias disponibles para {$project->code}. Si no existe, no generes métricas ni PASS: enumera cómo conectar la ejecución real y qué reporte adjuntar.",
+            'release_notes'  => "Prepara un borrador de release para {$project->code} usando únicamente datos registrados. Marca explícitamente datos pendientes (versión, commit, pruebas, seguridad, despliegue) y no declares certificaciones ni entregas realizadas sin evidencia.",
             default          => !empty($message) ? $message : "Brinda un diagnóstico general del estado de arquitectura y recomendaciones para la siguiente etapa de este proyecto."
         };
 
@@ -470,6 +484,26 @@ PROMPT;
      */
     private function generateLocalCopilotReport(Project $project, string $mode, string $userQuery): string
     {
+        $audit = null;
+        try {
+            $audit = Database::getInstance()->fetch(
+                'SELECT id, status, gate_status, score, criteria, feedback, release_version, commit_sha FROM quality_audits WHERE project_id = :project_id ORDER BY created_at DESC, id DESC LIMIT 1',
+                ['project_id' => $project->id]
+            );
+        } catch (\Throwable) {
+            // Missing audit storage means no verified QA data is available.
+        }
+        $summary = $audit
+            ? "**Registro QA #{$audit['id']}:** estado `{$audit['status']}`, compuerta `{$audit['gate_status']}`, score " . ($audit['score'] === null ? 'no disponible' : $audit['score'] . '/100') . ".\n\n"
+                . '**Versión / commit:** ' . ($audit['release_version'] ?: 'no informado') . ' / `' . ($audit['commit_sha'] ?: 'no informado') . "`.\n\n"
+                . 'El resultado corresponde al alcance manual documentado; revisa el informe y sus evidencias antes de tomar una decisión.'
+            : 'No hay auditorías ni evidencias QA registradas para este proyecto. No se han ejecutado pruebas, escáneres ni análisis de código desde CoPilot.';
+        return "**Asistencia CoPilot basada en datos registrados**\n\n"
+            . '**Proyecto:** ' . $project->name . ' (`' . $project->code . "`)\n\n"
+            . $summary . "\n\n"
+            . '**Alcance del motor local:** no ejecuta SonarQube, pruebas, análisis SAST/DAST ni auditorías ISO/OWASP. No genera PASS, métricas ni certificaciones.**\n\n'
+            . 'Consulta: ' . ($userQuery !== '' ? $userQuery : 'Solicita evidencias concretas, métricas de herramientas o pruebas de retest para continuar.');
+
         $techArray = is_array($project->tech_stack) ? $project->tech_stack : (json_decode($project->tech_stack ?? '[]', true) ?: []);
         $techStr = !empty($techArray) ? implode(', ', $techArray) : 'Arquitectura Web Enterprise';
         $client = $project->clientName();
