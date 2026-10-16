@@ -84,6 +84,16 @@ class AdminController extends BaseController
             $this->json(['error' => 'Estado destino no válido'], 422);
         }
 
+        if ($newStatus === 'approved') {
+            $approvedAudit = Database::getInstance()->fetch(
+                "SELECT id FROM quality_audits WHERE project_id = :project_id AND status = 'passed' AND gate_status = 'passed' ORDER BY reviewed_at DESC, id DESC LIMIT 1",
+                ['project_id' => $project->id]
+            );
+            if (!$approvedAudit) {
+                $this->json(['error' => 'Se requiere una auditoría QA aprobada con evidencias antes de aprobar el proyecto.'], 409);
+            }
+        }
+
         $data = [
             'status'      => $newStatus,
             'reviewed_by' => $this->auth->id(),
