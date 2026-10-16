@@ -487,115 +487,26 @@ PROMPT;
         $audit = null;
         try {
             $audit = Database::getInstance()->fetch(
-                'SELECT id, status, gate_status, score, criteria, feedback, release_version, commit_sha FROM quality_audits WHERE project_id = :project_id ORDER BY created_at DESC, id DESC LIMIT 1',
+                'SELECT id, status, gate_status, score, release_version, commit_sha FROM quality_audits WHERE project_id = :project_id ORDER BY created_at DESC, id DESC LIMIT 1',
                 ['project_id' => $project->id]
             );
         } catch (\Throwable) {
-            // Missing audit storage means no verified QA data is available.
+            // Without the audit storage, there are no verified QA results to report.
         }
-        $summary = $audit
-            ? "**Registro QA #{$audit['id']}:** estado `{$audit['status']}`, compuerta `{$audit['gate_status']}`, score " . ($audit['score'] === null ? 'no disponible' : $audit['score'] . '/100') . ".\n\n"
-                . '**Versión / commit:** ' . ($audit['release_version'] ?: 'no informado') . ' / `' . ($audit['commit_sha'] ?: 'no informado') . "`.\n\n"
-                . 'El resultado corresponde al alcance manual documentado; revisa el informe y sus evidencias antes de tomar una decisión.'
-            : 'No hay auditorías ni evidencias QA registradas para este proyecto. No se han ejecutado pruebas, escáneres ni análisis de código desde CoPilot.';
-        return "**Asistencia CoPilot basada en datos registrados**\n\n"
-            . '**Proyecto:** ' . $project->name . ' (`' . $project->code . "`)\n\n"
-            . $summary . "\n\n"
-            . '**Alcance del motor local:** no ejecuta SonarQube, pruebas, análisis SAST/DAST ni auditorías ISO/OWASP. No genera PASS, métricas ni certificaciones.**\n\n'
-            . 'Consulta: ' . ($userQuery !== '' ? $userQuery : 'Solicita evidencias concretas, métricas de herramientas o pruebas de retest para continuar.');
 
-        $techArray = is_array($project->tech_stack) ? $project->tech_stack : (json_decode($project->tech_stack ?? '[]', true) ?: []);
-        $techStr = !empty($techArray) ? implode(', ', $techArray) : 'Arquitectura Web Enterprise';
-        $client = $project->clientName();
-        $code = $project->code;
-        $score = $project->final_score ? "{$project->final_score}/100" : '94.0/100 (Dictamen Preliminar)';
-
-        switch ($mode) {
-            case 'audit_iso25010':
-                return "**Dictamen de Auditoría ISO/IEC 25010 — Devioz OS Quality Assurance**\n\n"
-                    . "**Proyecto:** {$project->name} (`{$code}`)\n"
-                    . "**Cliente:** {$client} &bull; **Stack Certificado:** `{$techStr}`\n"
-                    . "**Puntuación Global Estimada:** `{$score}` (Umbral de Aprobación >= 80.0)\n\n"
-                    . "**Evaluación Dimensional:**\n"
-                    . "• **Adecuación Funcional (§4.2.1):** 96% de completitud en reglas de negocio requeridas por {$client}. Cobertura de casos de uso y validación de endpoints completada.\n"
-                    . "• **Eficiencia de Desempeño (§4.2.2):** Latencia TTFB proyectada < 120ms. Se recomienda asegurar índices compuestos en MySQL para consultas filtradas.\n"
-                    . "• **Compatibilidad (§4.2.3):** Cumplimiento de contratos RESTful JSON y compatibilidad multi-navegador bajo directrices Devioz.\n"
-                    . "• **Usabilidad & Accesibilidad (§4.2.4):** Interfaces con contraste accesible (WCAG 2.1 AA) y navegación reactiva por teclado.\n"
-                    . "• **Fiabilidad & Resiliencia (§4.2.5):** Manejo global de excepciones, rollback transaccional con PDO y registros auditables.\n"
-                    . "• **Seguridad (§4.2.6):** Mitigación activa de OWASP Top 10, autenticación cifrada y control de acceso RBAC estricto.\n"
-                    . "• **Mantenibilidad (§4.2.7):** Estructura modular MVC, separación de responsabilidades y bajo acoplamiento.\n"
-                    . "• **Portabilidad (§4.2.8):** Aislamiento de variables de entorno mediante `.env` y configuración preparada para contenedores Docker/PaaS.\n\n"
-                    . "**Recomendaciones Prioritarias:**\n"
-                    . "1. Ejecutar suites de pruebas automatizadas para validar edge cases en entradas de usuario.\n"
-                    . "2. Activar caché de consultas estáticas en redis/memoria para reducir I/O en la base de datos.\n"
-                    . "3. Consolidar el dossier de entrega formal antes de la sustentación técnica.";
-
-            case 'security_owasp':
-                return "**Informe de Mitigación OWASP Top 10 (AppSec Governance)**\n\n"
-                    . "**Proyecto:** {$project->name} (`{$code}`) &bull; **Cliente:** {$client}\n"
-                    . "**Arquitectura Evaluada:** `{$techStr}`\n\n"
-                    . "**Análisis de Controles de Seguridad:**\n"
-                    . "• **A01:2021 — Broken Access Control:** Verificación estricta de sesión y permisos por rol (Admin, Tech Lead, Dev). Mitigación de IDOR mediante validación de pertenencia en consultas SQL.\n"
-                    . "• **A02:2021 — Cryptographic Failures:** Almacenamiento de credenciales mediante algoritmos de hashing modernos (Argon2id / Bcrypt costo >= 12). Cero almacenamiento de contraseñas en texto claro.\n"
-                    . "• **A03:2021 — Injection (SQL & XSS):** 100% de consultas construidas con PDO Prepared Statements y bindParams. Todas las salidas en vistas sanitizadas con `htmlspecialchars(..., ENT_QUOTES, 'UTF-8')`.\n"
-                    . "• **A05:2021 — Security Misconfiguration:** Configurar cabeceras de respuesta HTTP estrictas:\n"
-                    . "  ```http\n"
-                    . "  X-Frame-Options: SAMEORIGIN\n"
-                    . "  X-Content-Type-Options: nosniff\n"
-                    . "  Referrer-Policy: strict-origin-when-cross-origin\n"
-                    . "  ```\n"
-                    . "• **A07:2021 — Identification and Authentication Failures:** Tokens anti-CSRF únicos por sesión en todas las peticiones con mutación de estado (POST/PUT/DELETE).\n\n"
-                    . "**Estado del Dictamen:** Conforme para despliegue en staging y pruebas de penetración controladas.";
-
-            case 'sonar_qa':
-                return "**Reporte de Quality Gate & SonarQube Compliance**\n\n"
-                    . "**Objetivo:** Aprobación del Quality Gate Institucional de Devioz OS\n"
-                    . "**Proyecto:** {$project->name} (`{$code}`)\n\n"
-                    . "**Métricas del Quality Gate:**\n"
-                    . "• **Confiabilidad:** 0 Bugs Críticos detectados (Rating A).\n"
-                    . "• **Seguridad:** 0 Vulnerabilidades de nivel Alto (Rating A).\n"
-                    . "• **Mantenibilidad:** Deuda técnica proyectada < 3.5% (Rating A).\n"
-                    . "• **Cobertura de Pruebas (Coverage Target):** Meta mínima del 80% en lógica de negocio de controladores y servicios.\n"
-                    . "• **Duplicación de Código:** Menor al 2.8% en módulos core.\n\n"
-                    . "**Directrices de Clean Code Aplicadas:**\n"
-                    . "• Tipado estricto habilitado (`declare(strict_types=1);`) en capas core.\n"
-                    . "• Principio de Responsabilidad Única (SRP) en controladores y modelos.\n"
-                    . "• Complejidad ciclomática recomendada: <= 8 ramas por método.";
-
-            case 'release_notes':
-                return "**Dossier de Release & Acta de Entrega Técnica**\n\n"
-                    . "**Versión:** 1.0.0-GA &bull; **Fecha:** " . date('d/m/Y') . "\n"
-                    . "**Cliente:** {$client}\n"
-                    . "**Proyecto:** {$project->name} (`{$code}`)\n\n"
-                    . "**1. Resumen Ejecutivo:**\n"
-                    . "Se certifica la culminación y puesta en producción del software desarrollado por Devioz Technology Solutions para {$client}. El producto ha superado las pruebas de integración y validación funcional.\n\n"
-                    . "**2. Ficha Técnica y Stack:**\n"
-                    . "• **Entorno:** `{$techStr}`\n"
-                    . "• **Base de Datos:** MySQL / MariaDB con transacciones ACID.\n"
-                    . "• **Interfaz:** Devioz Responsive UI.\n\n"
-                    . "**3. Hitos Verificados y Entregables:**\n"
-                    . "• Arquitectura base y modelado de datos aprobado.\n"
-                    . "• Módulos operativos y lógica de negocio implementada.\n"
-                    . "• Auditoría de seguridad y pruebas de desempeño conformes.\n\n"
-                    . "**4. Estado de Certificación:**\n"
-                    . "Aprobado por el Comité de Aseguramiento de Calidad de Devioz OS.";
-
-            default:
-                if (!empty($userQuery)) {
-                    return "**CoPilot LABVA AI — Análisis Técnico:**\n\n"
-                        . "Respecto a la consulta *'{$userQuery}'* sobre el proyecto **{$project->name}** (`{$code}`):\n\n"
-                        . "• **Arquitectura y Stack:** El proyecto está estructurado sobre `{$techStr}`, permitiendo escalabilidad horizontal y modularidad.\n"
-                        . "• **Estado Actual:** {$project->statusLabel()} con un avance registrado del {$project->progressPercentage()}%.\n"
-                        . "• **Recomendación Operativa:** Para asegurar la certificación de entrega hacia {$client}, se sugiere finalizar los hitos pendientes y verificar la cobertura de pruebas unitarias antes del corte de sprint.\n\n"
-                        . "¿Deseas generar la auditoría de seguridad OWASP o el reporte de métricas ISO 25010?";
-                }
-
-                return "**CoPilot LABVA AI Activo:**\n\n"
-                    . "El proyecto **{$project->name}** (`{$code}`) para **{$client}** se encuentra en estado **{$project->statusLabel()}**.\n\n"
-                    . "Puedes seleccionar las acciones rápidas arriba para auditar estándares ISO 25010, verificar vulnerabilidades OWASP o generar el acta de entrega formal.";
+        $reply = "**CoPilot Devioz · análisis basado en registros**\n\n"
+            . '**Proyecto:** ' . $project->name . ' (`' . $project->code . "`)\n\n";
+        if ($audit) {
+            $reply .= '**Auditoría QA #' . $audit['id'] . ':** estado `' . $audit['status'] . '`, compuerta `' . $audit['gate_status'] . '`, score ' . ($audit['score'] === null ? 'no disponible' : $audit['score'] . '/100') . ".\n\n"
+                . '**Release / commit:** ' . ($audit['release_version'] ?: 'sin informar') . ' / `' . ($audit['commit_sha'] ?: 'sin informar') . "`.\n\n";
+        } else {
+            $reply .= "No existe una auditoría QA registrada para este proyecto.\n\n";
         }
+
+        return $reply
+            . "El motor local no ejecuta pruebas, SonarQube, SAST/DAST ni análisis ISO/OWASP. No genera métricas ni PASS. CoPilot puede proponer verificaciones, pero la corrección debe validarse ejecutando la herramienta y registrando una nueva auditoría.\n\n"
+            . 'Consulta: ' . ($userQuery !== '' ? $userQuery : 'No se recibió una pregunta específica.');
     }
-
     /**
      * Limpia emojis residuales para cumplir la política de cero emojis
      */
