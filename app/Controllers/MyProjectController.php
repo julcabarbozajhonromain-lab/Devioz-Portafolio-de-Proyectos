@@ -276,6 +276,12 @@ class MyProjectController extends BaseController
             redirect('/my-project');
         }
 
+        $project = Project::find($projectId);
+        if (!$project || (!$this->auth->isAdmin() && (int)$project->developer_id !== $this->auth->id())) {
+            echo \App\Core\View::renderError(403, "No tienes permiso para comentar en este proyecto.");
+            exit;
+        }
+
         Comment::create([
             'project_id' => $projectId,
             'user_id'    => $user->id,
