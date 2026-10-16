@@ -87,8 +87,8 @@ class ProjectController extends BaseController
             exit;
         }
 
-        // Si es developer, solo puede ver el suyo a menos que esté aprobado en galería pública
-        if ($this->auth->isDeveloper() && (int)$project->developer_id !== $this->auth->id() && !$project->is_public_in_gallery) {
+        // La publicación en galería solo habilita la ficha pública, no los datos internos.
+        if (!$this->auth->isAdmin() && (int)$project->developer_id !== $this->auth->id()) {
             echo \App\Core\View::renderError(403, "No tienes permiso para ver los detalles de este proyecto.");
             exit;
         }
@@ -379,6 +379,11 @@ class ProjectController extends BaseController
 
     public function wizard(string $id): string
     {
+        if (!$this->auth->isAdmin()) {
+            echo \App\Core\View::renderError(403, "Solo los administradores pueden usar el asistente de edición.");
+            exit;
+        }
+
         $project = Project::find((int)$id);
         if (!$project) {
             echo \App\Core\View::renderError(404);
@@ -423,7 +428,7 @@ class ProjectController extends BaseController
             exit;
         }
 
-        if ($this->auth->isDeveloper() && (int)$project->developer_id !== $this->auth->id() && !$project->is_public_in_gallery) {
+        if (!$this->auth->isAdmin() && (int)$project->developer_id !== $this->auth->id()) {
             http_response_code(403);
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['success' => false, 'error' => 'Acceso restringido']);
