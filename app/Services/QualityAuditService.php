@@ -10,6 +10,7 @@ use InvalidArgumentException;
 final class QualityAuditService
 {
     public const STANDARD_VERSION = 'ISO/IEC 25010:2023';
+    public const MINIMUM_SCORE = 80.0;
 
     public static function isoCriteria(): array
     {
@@ -130,10 +131,10 @@ final class QualityAuditService
         if ($hasBlocker) {
             $gateStatus = 'blocked';
             $auditStatus = 'blocked';
-        } elseif ($anyFailedTool || ($score !== null && $score < 80) || $anyOwaspFinding) {
+        } elseif ($anyFailedTool || ($score !== null && $score < self::MINIMUM_SCORE) || $anyOwaspFinding) {
             $gateStatus = 'failed';
             $auditStatus = 'needs_changes';
-        } elseif ($complete && $allToolsPassed && $allOwaspReviewed && $score !== null && $score >= 80) {
+        } elseif ($complete && $allToolsPassed && $allOwaspReviewed && $score !== null && $score >= self::MINIMUM_SCORE) {
             $gateStatus = 'passed';
             $auditStatus = 'passed';
         } else {
