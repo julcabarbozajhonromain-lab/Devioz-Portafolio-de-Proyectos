@@ -35,7 +35,12 @@ class HomeController extends BaseController
         $featuredProjects = Project::whereRaw('1=1', [], 'final_score DESC, views_count DESC, id DESC', 9);
 
         // Proyectos con demostración de video para la sección inmersiva de Reels
-        $reelProjects = Project::whereRaw("video_url IS NOT NULL AND video_url != ''", [], 'final_score DESC, id DESC', 8);
+        $reelProjects = Project::whereRaw(
+            "video_url IS NOT NULL AND TRIM(video_url) != '' AND is_public_in_gallery = 1 AND status IN ('approved', 'completed') AND deleted_at IS NULL",
+            [],
+            'final_score DESC, id DESC',
+            8
+        );
 
         return $this->view('home/index', [
             'title'            => 'Devioz Technology Solutions — Fábrica de Software, Cloud & Aseguramiento de Calidad',
@@ -51,7 +56,12 @@ class HomeController extends BaseController
     public function reels(): string
     {
         // Buscar proyectos con video disponible
-        $reels = Project::whereRaw("video_url IS NOT NULL AND video_url != ''", [], 'updated_at DESC', 50);
+        $reels = Project::whereRaw(
+            "video_url IS NOT NULL AND TRIM(video_url) != '' AND is_public_in_gallery = 1 AND status IN ('approved', 'completed') AND deleted_at IS NULL",
+            [],
+            'updated_at DESC',
+            50
+        );
 
         return $this->view('gallery/reels', [
             'title' => 'Devioz Reels — Demostraciones Técnicas 16:9',
