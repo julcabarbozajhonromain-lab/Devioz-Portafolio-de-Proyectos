@@ -15,6 +15,7 @@ use App\Models\Message;
 use App\Models\Milestone;
 use App\Models\Project;
 use App\Models\User;
+use App\Policies\ProjectPolicy;
 
 /**
  * Devioz OS — Controlador del Espacio de Trabajo del Desarrollador (Mi Proyecto)
@@ -62,7 +63,7 @@ class MyProjectController extends BaseController
         }
 
         $project = $milestone->project();
-        if (!$project || (int)$project->developer_id !== $this->auth->id()) {
+        if (!$project || !ProjectPolicy::allows($this->user(), 'complete_milestone', $project)) {
             echo \App\Core\View::renderError(403, "No puedes modificar hitos de un proyecto que no te pertenece.");
             exit;
         }
@@ -98,7 +99,7 @@ class MyProjectController extends BaseController
         }
 
         $project = $milestone->project();
-        if (!$project || (int)$project->developer_id !== $this->auth->id()) {
+        if (!$project || !ProjectPolicy::allows($this->user(), 'submit_delivery', $project)) {
             echo \App\Core\View::renderError(403);
             exit;
         }
@@ -277,7 +278,7 @@ class MyProjectController extends BaseController
         }
 
         $project = Project::find($projectId);
-        if (!$project || (!$this->auth->isAdmin() && (int)$project->developer_id !== $this->auth->id())) {
+        if (!$project || !ProjectPolicy::allows($user, 'comment', $project)) {
             echo \App\Core\View::renderError(403, "No tienes permiso para comentar en este proyecto.");
             exit;
         }

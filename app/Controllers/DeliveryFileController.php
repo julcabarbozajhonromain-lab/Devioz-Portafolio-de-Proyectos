@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\Delivery;
+use App\Policies\ProjectPolicy;
 
 class DeliveryFileController extends BaseController
 {
@@ -17,7 +18,7 @@ class DeliveryFileController extends BaseController
         }
 
         $project = $delivery->project();
-        if (!$project || (!$this->auth->isAdmin() && (int)$project->developer_id !== $this->auth->id())) {
+        if (!$project || !ProjectPolicy::allows($this->user(), 'download', $project)) {
             echo \App\Core\View::renderError(403, "No tienes permiso para descargar este archivo.");
             exit;
         }

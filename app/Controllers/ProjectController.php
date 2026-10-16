@@ -11,6 +11,7 @@ use App\Models\AuditLog;
 use App\Models\Milestone;
 use App\Models\Project;
 use App\Models\User;
+use App\Policies\ProjectPolicy;
 
 /**
  * Devioz OS — Controlador de Gestión de Proyectos
@@ -88,7 +89,7 @@ class ProjectController extends BaseController
         }
 
         // La publicación en galería solo habilita la ficha pública, no los datos internos.
-        if (!$this->auth->isAdmin() && (int)$project->developer_id !== $this->auth->id()) {
+        if (!ProjectPolicy::allows($this->user(), 'view', $project)) {
             echo \App\Core\View::renderError(403, "No tienes permiso para ver los detalles de este proyecto.");
             exit;
         }
@@ -370,8 +371,7 @@ class ProjectController extends BaseController
             exit;
         }
 
-        // Si es developer, debe ser su propio proyecto
-        if ($this->auth->isDeveloper() && (int)$project->developer_id !== $this->auth->id()) {
+        if (!ProjectPolicy::allows($this->user(), 'submit', $project)) {
             echo \App\Core\View::renderError(403);
             exit;
         }
@@ -440,7 +440,7 @@ class ProjectController extends BaseController
             exit;
         }
 
-        if (!$this->auth->isAdmin() && (int)$project->developer_id !== $this->auth->id()) {
+        if (!ProjectPolicy::allows($this->user(), 'preview', $project)) {
             http_response_code(403);
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['success' => false, 'error' => 'Acceso restringido']);
@@ -503,6 +503,13 @@ class ProjectController extends BaseController
             http_response_code(404);
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['success' => false, 'error' => 'Proyecto no encontrado']);
+            exit;
+        }
+
+        if (!ProjectPolicy::allows($this->user(), 'copilot', $project)) {
+            http_response_code(403);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['success' => false, 'error' => 'Acceso restringido a este proyecto.']);
             exit;
         }
 
