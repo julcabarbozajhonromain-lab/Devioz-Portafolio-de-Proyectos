@@ -99,6 +99,17 @@ class ProjectController extends BaseController
         $checkIns = $project->checkIns();
         $comments = $project->comments();
         $files = $project->files();
+        $latestQualityAudit = Database::getInstance()->fetch(
+            'SELECT * FROM quality_audits WHERE project_id = :project_id ORDER BY created_at DESC, id DESC LIMIT 1',
+            ['project_id' => $project->id]
+        );
+        if ($latestQualityAudit) {
+            $latestQualityAudit['criteria'] = json_decode((string)$latestQualityAudit['criteria'], true) ?: [];
+            $latestQualityAudit['findings'] = Database::getInstance()->fetchAll(
+                'SELECT severity, title, description, status FROM quality_audit_findings WHERE audit_id = :id ORDER BY FIELD(severity, "critical", "high", "medium", "low", "info")',
+                ['id' => $latestQualityAudit['id']]
+            );
+        }
 
         return $this->view('projects/show', [
             'title'       => "{$project->name} — Devioz OS",
@@ -109,6 +120,7 @@ class ProjectController extends BaseController
             'checkIns'    => $checkIns,
             'comments'    => $comments,
             'files'       => $files,
+            'latestQualityAudit' => $latestQualityAudit,
         ]);
     }
 
