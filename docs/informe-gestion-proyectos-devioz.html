@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dise&ntilde;o de un sistema web para la gesti&oacute;n de proyectos en Devioz</title>
+<style>
+@page { size: A4; margin: 17mm 18mm 18mm; }
+* { box-sizing: border-box; }
+body { margin:0; color:#243247; font:10pt/1.52 Arial,Helvetica,sans-serif; }
+h1,h2,h3,p { margin-top:0; }
+h1 { color:#102b46; font-size:27pt; line-height:1.12; margin-bottom:12px; }
+h2 { color:#0d5263; font-size:17pt; border-bottom:2px solid #bfe7dc; padding-bottom:6px; margin:0 0 12px; }
+h3 { color:#123f5d; font-size:11.5pt; margin:14px 0 5px; }
+p { margin-bottom:9px; }
+ul,ol { margin:4px 0 10px; padding-left:20px; }
+li { margin:3px 0; }
+.cover { height:297mm; min-height:297mm; page-break-after:always; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(145deg,#0d2339,#114c5d 72%,#11a884); color:white; padding:22mm 18mm; margin:-17mm -18mm -18mm; }
+.brand { font-size:12pt; letter-spacing:3px; font-weight:bold; color:#8ce4cc; }
+.cover h1 { color:white; font-size:31pt; max-width:145mm; margin:25mm 0 10px; }
+.cover .subtitle { color:#d7f6ee; font-size:14pt; max-width:132mm; }
+.cover .rule { width:38mm; height:4px; background:#47dbad; margin:20px 0; }
+.cover .meta { color:#d8e9f0; font-size:9pt; }
+.cover .cover-note { border-left:3px solid #55dfb5; padding:8px 12px; background:#ffffff12; max-width:145mm; }
+.page { page-break-after:always; }
+.continued { page-break-after:auto; }
+.page:last-child { page-break-after:auto; }
+.eyebrow { color:#079b79; font-size:8pt; font-weight:bold; letter-spacing:1.4px; text-transform:uppercase; margin-bottom:5px; }
+.lead { font-size:12pt; color:#43566a; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:12px 0; }
+.card { border:1px solid #dae5eb; border-radius:8px; padding:10px 12px; background:#f7fafb; break-inside:avoid; }
+.card strong { color:#0d796a; }
+.callout { border-left:4px solid #12a782; background:#effaf6; padding:10px 13px; margin:11px 0; break-inside:avoid; }
+.warning { border-left-color:#e6a23c; background:#fff8e9; }
+table { width:100%; border-collapse:collapse; margin:9px 0 12px; font-size:8.8pt; }
+th { background:#12334e; color:#fff; text-align:left; padding:7px; }
+td { border-bottom:1px solid #dfe7ec; padding:6px 7px; vertical-align:top; }
+tr { break-inside:avoid; }
+.flow { display:flex; align-items:stretch; gap:5px; margin:13px 0; }
+.step { background:#eef6f8; border:1px solid #d3e4e8; border-radius:7px; padding:8px 6px; text-align:center; flex:1; font-size:8.2pt; font-weight:bold; color:#16445b; }
+.arrow { align-self:center; color:#13a782; font-size:15pt; font-weight:bold; }
+.small { color:#617184; font-size:8.4pt; }
+.tag { display:inline-block; padding:3px 7px; border-radius:99px; background:#e7f5f1; color:#087a68; font-size:8pt; font-weight:bold; margin:2px; }
+.tag.future { background:#fff3dd; color:#946111; }
+.footer { border-top:1px solid #dce5ea; padding-top:7px; margin-top:15px; color:#718090; font-size:8pt; }
+.diagram { border:1px solid #dce7eb; border-radius:9px; padding:10px; margin:12px 0; background:#fbfdfd; }
+.diagram svg { width:100%; height:auto; display:block; }
+.metric { display:flex; gap:8px; }
+.metric .card { flex:1; }
+.metric b { display:block; font-size:14pt; color:#0e8d76; }
+.sources { font-size:8pt; color:#627486; }
+</style>
+</head>
+<body>
+<section class="cover">
+  <div>
+    <div class="brand">DEVIOZ &nbsp; / &nbsp; INFORME DEL PROYECTO</div>
+    <div class="rule"></div>
+    <h1>Dise&ntilde;o de un sistema web para la gesti&oacute;n de proyectos en la empresa Devioz</h1>
+    <p class="subtitle">Propuesta funcional y t&eacute;cnica para gestionar el ciclo de trabajo, las personas, las entregas y la calidad del software.</p>
+  </div>
+  <div>
+    <div class="cover-note">Una visi&oacute;n clara de lo que el sistema ya resuelve, el valor que busca crear y los pasos necesarios para convertirlo en una plataforma de gesti&oacute;n de proyectos confiable y escalable.</div>
+    <p class="meta" style="margin-top:18px">Versi&oacute;n 1.0 &nbsp; | &nbsp; 16 de octubre de 2026<br>Documento de orientaci&oacute;n del producto y su arquitectura</p>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Resumen ejecutivo</div>
+  <h2>El proyecto en una mirada</h2>
+  <p class="lead"><b>Devioz</b> plantea una plataforma web para organizar y dar seguimiento a los proyectos de software de la empresa, desde su registro y asignaci&oacute;n hasta las entregas, revisi&oacute;n de calidad y publicaci&oacute;n de resultados.</p>
+  <p>La aplicaci&oacute;n existente ya ofrece una base funcional: administraci&oacute;n de proyectos, asignaci&oacute;n a desarrolladores, hitos, entregas con evidencias, check-ins, colaboraci&oacute;n, un tablero de revisi&oacute;n y auditor&iacute;as QA. El objetivo de este dise&ntilde;o es ordenar esas capacidades alrededor de un proceso comprensible, con permisos y criterios de salida verificables.</p>
+  <div class="callout"><b>Alcance real:</b> el c&oacute;digo actual tiene roles de administrador y desarrollador. El portal de clientes, contratos, facturaci&oacute;n, aprobaci&oacute;n contractual y despliegue automatizado son capacidades futuras; no deben presentarse como funciones terminadas.</div>
+  <h3>&iquest;Qu&eacute; es el sistema?</h3>
+  <p>Es una aplicaci&oacute;n web interna de gesti&oacute;n de proyectos y pr&aacute;cticas de desarrollo. Los administradores crean y asignan proyectos, establecen hitos y revisan las entregas. Los desarrolladores trabajan desde su espacio de proyecto, comparten avances y presentan evidencias. El equipo de revisi&oacute;n registra observaciones y dict&aacute;menes de calidad.</p>
+  <h3>Prop&oacute;sito y objetivos</h3>
+  <ul>
+    <li>Unificar la informaci&oacute;n del proyecto, responsable, cronograma, avances y entregables.</li>
+    <li>Hacer visible el estado del trabajo y los bloqueos sin depender de conversaciones dispersas.</li>
+    <li>Establecer una revisi&oacute;n de calidad con criterios, evidencias, responsables y trazabilidad.</li>
+    <li>Dar a la direcci&oacute;n una base verificable para priorizar, acompa&ntilde;ar y mejorar el proceso.</li>
+  </ul>
+  <h3>Usuarios principales</h3>
+  <table><tr><th>Perfil</th><th>Necesidad</th><th>Capacidades actuales</th></tr>
+    <tr><td>Administrador / l&iacute;der</td><td>Organizar cartera, asignar responsables y controlar revisiones.</td><td>Proyectos, asignaciones, tablero QA, auditor&iacute;as y configuraci&oacute;n.</td></tr>
+    <tr><td>Desarrollador</td><td>Entender el trabajo, reportar avance y presentar entregables.</td><td>Espacio de proyecto, hitos, entregas, check-ins y colaboraci&oacute;n.</td></tr>
+    <tr><td>Cliente (futuro)</td><td>Consultar avances y aceptar entregables con trazabilidad.</td><td>Sin acceso propio implementado actualmente.</td></tr>
+  </table>
+  <div class="footer">Devioz &bull; Dise&ntilde;o del sistema web de gesti&oacute;n de proyectos</div>
+</section>
+
+<section class="page continued">
+  <div class="eyebrow">Valor y operaci&oacute;n</div>
+  <h2>&iquest;C&oacute;mo aporta valor a Devioz?</h2>
+  <table><tr><th>Valor</th><th>Aplicaci&oacute;n en el trabajo</th></tr>
+    <tr><td><b>Visibilidad</b></td><td>Tableros y fichas concentran estado, responsable, hitos y entregas.</td></tr>
+    <tr><td><b>Responsabilidad clara</b></td><td>La asignaci&oacute;n y los permisos vinculan acciones con roles y proyectos.</td></tr>
+    <tr><td><b>Seguimiento verificable</b></td><td>Entregas, comentarios, check-ins, observaciones y auditor&iacute;as dejan registro.</td></tr>
+    <tr><td><b>Mejora de calidad</b></td><td>La revisi&oacute;n QA organiza criterios, hallazgos y evidencias antes de aprobar.</td></tr>
+    <tr><td><b>Aprendizaje del equipo</b></td><td>La colaboraci&oacute;n y el CoPilot pueden ayudar a compartir contexto y orientar mejoras.</td></tr>
+  </table>
+  <h3>Flujo principal del proyecto</h3>
+  <div class="flow"><div class="step">Registro y<br>planificaci&oacute;n</div><div class="arrow">&#8250;</div><div class="step">Asignaci&oacute;n y<br>trabajo</div><div class="arrow">&#8250;</div><div class="step">Hitos y<br>entregas</div><div class="arrow">&#8250;</div><div class="step">Revisi&oacute;n<br>QA</div><div class="arrow">&#8250;</div><div class="step">Aprobaci&oacute;n y<br>publicaci&oacute;n</div></div>
+  <p class="small">El ciclo mostrado refleja las capacidades actuales de gesti&oacute;n y revisi&oacute;n. Aceptaci&oacute;n del cliente y despliegue requieren flujos adicionales.</p>
+  <h3>M&oacute;dulos que forman la experiencia</h3>
+  <div class="grid">
+    <div class="card"><strong>Cartera de proyectos</strong><br>Registro, ficha, estado, responsable, cliente informado, enlaces y stack tecnol&oacute;gico.</div>
+    <div class="card"><strong>Planificaci&oacute;n</strong><br>Hitos, fechas, ponderaci&oacute;n y avance visible del trabajo.</div>
+    <div class="card"><strong>Entregas y evidencias</strong><br>Archivos, documentaci&oacute;n, enlaces de demostraci&oacute;n y comentarios de revisi&oacute;n.</div>
+    <div class="card"><strong>Calidad y QA</strong><br>Auditor&iacute;as, score interno, controles de seguridad, hallazgos y compuerta de aprobaci&oacute;n.</div>
+    <div class="card"><strong>Colaboraci&oacute;n</strong><br>Check-ins, mensajes, comentarios, espacios sociales y galer&iacute;a de proyectos publicados.</div>
+    <div class="card"><strong>CoPilot Devioz</strong><br>Asistencia conversacional para consultar informaci&oacute;n y apoyar la lectura de auditor&iacute;as.</div>
+  </div>
+  <div class="footer">Los m&oacute;dulos y permisos deben evolucionar con reglas de negocio expl&iacute;citas y auditables.</div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Dise&ntilde;o t&eacute;cnico</div>
+  <h2>Arquitectura y tecnolog&iacute;a</h2>
+  <p>La aplicaci&oacute;n est&aacute; construida como una aplicaci&oacute;n web MVC en PHP. Las rutas HTTP llegan a controladores, estos coordinan modelos y servicios, y las vistas presentan la interfaz. MySQL/MariaDB conserva proyectos, usuarios, hitos, entregas y registros de QA.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 820 230" role="img" aria-label="Capas principales de la arquitectura Devioz">
+      <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#10a17d"/></marker></defs>
+      <rect x="12" y="48" width="165" height="112" rx="12" fill="#e9f6f2" stroke="#a9d9cc"/><text x="94" y="83" text-anchor="middle" font-size="16" font-weight="bold" fill="#13445b">Personas</text><text x="94" y="110" text-anchor="middle" font-size="13" fill="#334">Admin &bull; Dev</text><text x="94" y="132" text-anchor="middle" font-size="12" fill="#556">Navegador web</text>
+      <rect x="225" y="48" width="165" height="112" rx="12" fill="#eff5fb" stroke="#c9d9e8"/><text x="307" y="83" text-anchor="middle" font-size="16" font-weight="bold" fill="#13445b">Presentaci&oacute;n</text><text x="307" y="110" text-anchor="middle" font-size="13" fill="#334">Vistas &bull; CSS</text><text x="307" y="132" text-anchor="middle" font-size="12" fill="#556">JavaScript</text>
+      <rect x="438" y="48" width="165" height="112" rx="12" fill="#eff5fb" stroke="#c9d9e8"/><text x="520" y="83" text-anchor="middle" font-size="16" font-weight="bold" fill="#13445b">Aplicaci&oacute;n</text><text x="520" y="110" text-anchor="middle" font-size="13" fill="#334">Rutas &bull; Controladores</text><text x="520" y="132" text-anchor="middle" font-size="12" fill="#556">Pol&iacute;ticas &bull; Servicios</text>
+      <rect x="651" y="48" width="157" height="112" rx="12" fill="#fff5e6" stroke="#efd7a8"/><text x="729" y="83" text-anchor="middle" font-size="16" font-weight="bold" fill="#13445b">Datos e integraciones</text><text x="729" y="110" text-anchor="middle" font-size="13" fill="#334">MySQL / MariaDB</text><text x="729" y="132" text-anchor="middle" font-size="12" fill="#556">Groq / Gemini / Sonar</text>
+      <line x1="178" y1="104" x2="215" y2="104" stroke="#10a17d" stroke-width="3" marker-end="url(#a)"/><line x1="391" y1="104" x2="428" y2="104" stroke="#10a17d" stroke-width="3" marker-end="url(#a)"/><line x1="604" y1="104" x2="641" y2="104" stroke="#10a17d" stroke-width="3" marker-end="url(#a)"/>
+      <text x="410" y="204" text-anchor="middle" font-size="13" fill="#5b6a79">PHP 8.2 &bull; PDO &bull; Apache / XAMPP &bull; estructura MVC</text>
+    </svg>
+  </div>
+  <h3>Tecnolog&iacute;as principales</h3>
+  <table><tr><th>Capa</th><th>Base observada</th><th>Uso</th></tr>
+    <tr><td>Servidor</td><td>PHP 8.2, MVC propio, PDO</td><td>Reglas de aplicaci&oacute;n, rutas, acceso a datos y sesiones.</td></tr>
+    <tr><td>Datos</td><td>MySQL / MariaDB</td><td>Usuarios, proyectos, hitos, entregas, auditor&iacute;as y actividad.</td></tr>
+    <tr><td>Interfaz</td><td>HTML, CSS, Bootstrap, JavaScript</td><td>Paneles adaptables, interacciones, gr&aacute;ficas y tablero Kanban.</td></tr>
+    <tr><td>Integraciones</td><td>Groq, Gemini; SonarQube opcional</td><td>Asistencia IA con alternativa local y consulta de Quality Gate cuando se configura.</td></tr>
+    <tr><td>Entorno</td><td>Apache / XAMPP</td><td>Desarrollo y operaci&oacute;n local; despliegue productivo requiere configuraci&oacute;n segura.</td></tr>
+  </table>
+  <div class="callout warning"><b>Nota de alcance:</b> la transcripci&oacute;n audiovisual con Whisper, la anal&iacute;tica de habilidades y un pipeline de despliegue no forman parte demostrada de este sistema de gesti&oacute;n de proyectos.</div>
+  <div class="footer">Arquitectura actual resumida desde la estructura y configuraci&oacute;n del repositorio.</div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Inteligencia, calidad y personas</div>
+  <h2>IA y seguimiento con criterio</h2>
+  <h3>Uso de inteligencia artificial</h3>
+  <p>CoPilot Devioz puede responder consultas de ingenier&iacute;a y utilizar el contexto del proyecto o de la &uacute;ltima auditor&iacute;a. El servicio de IA intenta Groq y luego Gemini cuando hay credenciales configuradas; si no obtiene respuesta, dispone de un motor local de conocimiento. Es un apoyo para resumir, explorar datos y proponer acciones.</p>
+  <div class="callout"><b>Control humano:</b> la IA no sustituye la revisi&oacute;n del equipo ni debe aprobar proyectos por s&iacute; sola. Las sugerencias necesitan evidencia, verificaci&oacute;n t&eacute;cnica y aprobaci&oacute;n del responsable.</div>
+  <h3>Calidad y medici&oacute;n</h3>
+  <p>El proceso QA organiza una revisi&oacute;n interna con atributos de calidad, controles de seguridad, hallazgos y evidencias. Un score es una se&ntilde;al para priorizar, no una certificaci&oacute;n oficial ni una garant&iacute;a aislada de que el producto sea correcto. Una aprobaci&oacute;n requiere pasar las condiciones configuradas en la compuerta de calidad.</p>
+  <div class="metric">
+    <div class="card"><b>Entrega</b>Requisitos, demo, archivos y referencia del commit.</div>
+    <div class="card"><b>Verificaci&oacute;n</b>Pruebas, seguridad, calidad est&aacute;tica y evidencia.</div>
+    <div class="card"><b>Dictamen</b>Hallazgos, score, responsable y decisi&oacute;n trazable.</div>
+  </div>
+  <h3>Seguimiento del proyecto</h3>
+  <ul>
+    <li><b>Progreso:</b> hitos completados frente al plan y fechas objetivo.</li>
+    <li><b>Flujo:</b> proyectos en asignaci&oacute;n, trabajo, revisi&oacute;n, aprobaci&oacute;n u observaci&oacute;n.</li>
+    <li><b>Calidad:</b> auditor&iacute;as aprobadas, hallazgos abiertos, evidencia faltante y tiempo de correcci&oacute;n.</li>
+    <li><b>Equipo:</b> carga de trabajo, bloqueos, participaci&oacute;n y necesidades de acompa&ntilde;amiento.</li>
+  </ul>
+  <p class="small">Los indicadores deben definirse con f&oacute;rmula, fuente de datos, frecuencia y responsable. Evitar rankings basados solo en velocidad; usar m&eacute;tricas para mejorar el sistema y detectar bloqueos, no para vigilar de forma punitiva.</p>
+  <h3>Experiencia y motivaci&oacute;n</h3>
+  <p>Una experiencia eficaz reduce la carga mental: cada persona debe ver primero lo que le corresponde hacer, conocer el siguiente paso, recibir retroalimentaci&oacute;n clara y poder personalizar el entorno. La interfaz puede usar progreso visible, hitos peque&ntilde;os, reconocimiento y espacios de comunidad, sin convertir la gamificaci&oacute;n en competencia obligatoria ni esconder informaci&oacute;n importante.</p>
+  <div class="footer">La IA y las m&eacute;tricas acompa&ntilde;an decisiones humanas; no deben convertirse en certificaci&oacute;n autom&aacute;tica de personas.</div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Direcci&oacute;n del producto</div>
+  <h2>Qu&eacute; consolidar y c&oacute;mo evolucionar</h2>
+  <h3>Fortalezas actuales</h3>
+  <ul>
+    <li>Existe un flujo de proyectos con asignaciones, hitos, entregas y seguimiento.</li>
+    <li>Hay distinci&oacute;n de roles y controles de pertenencia al proyecto.</li>
+    <li>Se incorpor&oacute; un flujo QA con evidencias e integraci&oacute;n opcional de SonarQube.</li>
+    <li>La interfaz integra trabajo, colaboraci&oacute;n y presentaci&oacute;n de resultados.</li>
+  </ul>
+  <h3>Prioridades recomendadas</h3>
+  <table><tr><th>Etapa</th><th>Trabajo propuesto</th><th>Resultado esperado</th></tr>
+    <tr><td>1. Base confiable</td><td>Definir reglas de negocio, permisos, transiciones, auditor&iacute;a de cambios y migraciones seguras.</td><td>Menos cambios ambiguos y mayor trazabilidad.</td></tr>
+    <tr><td>2. Entrega controlada</td><td>Establecer criterios de entrada a QA, plantilla de evidencias y criterios de aceptaci&oacute;n.</td><td>Revisiones consistentes y retrabajo visible.</td></tr>
+    <tr><td>3. Automatizaci&oacute;n</td><td>Conectar CI, pruebas, an&aacute;lisis de seguridad y Quality Gate con el commit evaluado.</td><td>Se&ntilde;ales de calidad reproducibles antes del dictamen.</td></tr>
+    <tr><td>4. Ciclo de cliente</td><td>Crear organizaciones, membres&iacute;as, portal de cliente y aceptaci&oacute;n formal.</td><td>Colaboraci&oacute;n segura con clientes y decisiones documentadas.</td></tr>
+    <tr><td>5. Release y operaci&oacute;n</td><td>Versiones, aprobaci&oacute;n de despliegue, monitoreo, rollback y cierre.</td><td>Trazabilidad del c&oacute;digo hasta producci&oacute;n.</td></tr>
+  </table>
+  <h3>Visi&oacute;n del proyecto</h3>
+  <p>Consolidar Devioz como un espacio digital donde cada proyecto tenga un rumbo visible, cada persona entienda su contribuci&oacute;n y cada decisi&oacute;n importante se sostenga con informaci&oacute;n y evidencia. La plataforma debe acompa&ntilde;ar desde la planificaci&oacute;n hasta la entrega y, gradualmente, integrar a clientes y operaci&oacute;n sin perder cercan&iacute;a ni claridad.</p>
+  <div class="callout"><b>Definici&oacute;n de &eacute;xito:</b> proyectos con responsables y criterios claros; entregas aceptadas con menos ciclos de correcci&oacute;n; riesgos detectados temprano; usuarios que entienden qu&eacute; hacer; y decisiones de calidad respaldadas por evidencia.</div>
+  <p class="sources"><b>Base del informe:</b> estructura del repositorio Devioz, esquema de datos, flujo QA, pol&iacute;ticas de acceso y estados del proyecto. Capacidades futuras se identifican como propuestas, no como funciones ya disponibles.</p>
+  <div class="footer">Fin del informe &bull; Devioz &bull; Versi&oacute;n 1.0</div>
+</section>
+</body>
+</html>
