@@ -24,10 +24,16 @@ class DeliveryFileController extends BaseController
 
         $files = $delivery->files;
         $file = $files[(int)$fileIndex] ?? null;
-        $expectedPrefix = '/uploads/deliveries/' . (int)$project->id . '/';
         $storedPath = is_array($file) ? (string)($file['path'] ?? '') : '';
-
-        if ($storedPath === '' || !str_starts_with($storedPath, $expectedPrefix)) {
+        $projectDirectory = 'deliveries/' . (int)$project->id . '/';
+        if (str_starts_with($storedPath, '/private-uploads/' . $projectDirectory)) {
+            $storageRoot = (string)config('app.upload.private_path');
+            $expectedPrefix = '/private-uploads/' . $projectDirectory;
+        } elseif (str_starts_with($storedPath, '/uploads/' . $projectDirectory)) {
+            // Compatibilidad con entregas almacenadas antes de habilitar el disco privado.
+            $storageRoot = (string)config('app.upload.path');
+            $expectedPrefix = '/uploads/' . $projectDirectory;
+        } else {
             echo \App\Core\View::renderError(404, "El archivo solicitado no existe.");
             exit;
         }
@@ -38,8 +44,8 @@ class DeliveryFileController extends BaseController
             exit;
         }
 
-        $uploadRoot = realpath((string)config('app.upload.path'));
-        $filePath = $uploadRoot === false ? false : realpath($uploadRoot . '/deliveries/' . (int)$project->id . '/' . $storedName);
+        $uploadRoot = realpath($storageRoot);
+        $filePath = $uploadRoot === false ? false : realpath($uploadRoot . '/' . $projectDirectory . $storedName);
         $deliveryDirectory = $uploadRoot === false ? '' : realpath($uploadRoot . '/deliveries/' . (int)$project->id);
 
         if ($filePath === false || $deliveryDirectory === false || !is_file($filePath)

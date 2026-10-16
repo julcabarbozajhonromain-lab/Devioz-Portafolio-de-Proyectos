@@ -132,7 +132,7 @@ class MyProjectController extends BaseController
                         'size'     => $_FILES['delivery_files']['size'][$i],
                     ];
                     try {
-                        $meta = Uploader::upload($fileItem, "deliveries/{$project->id}");
+                        $meta = Uploader::upload($fileItem, "deliveries/{$project->id}", null, true);
                         $uploadedFiles[] = [
                             'original_name' => $meta['original_name'],
                             'path'          => $meta['path'],

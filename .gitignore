@@ -19,6 +19,7 @@ public/uploads/*
 !public/uploads/deliveries/
 public/uploads/deliveries/*
 !public/uploads/deliveries/.htaccess
+/storage/private/
 
 # IDE and OS Files
 .idea/

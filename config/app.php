@@ -18,6 +18,7 @@ return [
         'max_size' => (int)(getenv('UPLOAD_MAX_SIZE') ?: 524288000), // 500 MB en bytes
         'allowed_types' => explode(',', getenv('UPLOAD_ALLOWED_TYPES') ?: 'pdf,zip,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,webp,gif'),
         'path' => dirname(__DIR__) . '/public/uploads',
+        'private_path' => getenv('UPLOAD_PRIVATE_PATH') ?: dirname(__DIR__) . '/storage/private/uploads',
     ],
 
     // Configuración de Inteligencia Artificial para LABVA (Groq + Gemini + Local Fallback)

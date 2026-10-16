@@ -33,9 +33,10 @@ final class Uploader
      * @param array $file Estructura $_FILES['campo']
      * @param string $subDirectory Subcarpeta dentro de public/uploads/ (ej: 'deliveries', 'covers')
      * @param int|null $maxSizeBytes Tamaño máximo permitido (por defecto 500MB)
+     * @param bool $private Guarda el archivo en almacenamiento fuera de public/
      * @return array Metadatos del archivo persistido
      */
-    public static function upload(array $file, string $subDirectory = 'files', ?int $maxSizeBytes = null): array
+    public static function upload(array $file, string $subDirectory = 'files', ?int $maxSizeBytes = null, bool $private = false): array
     {
         if (!isset($file['error']) || is_array($file['error'])) {
             throw new RuntimeException("Estructura de archivo inválida.");
@@ -95,11 +96,22 @@ final class Uploader
         $sanitizedName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $originalName);
         $storedName = sprintf('%s_%s.%s', $sanitizedName, bin2hex(random_bytes(8)), $originalExt);
 
-        $uploadRoot = config('app.upload.path', dirname(__DIR__, 2) . '/public/uploads');
+        $uploadRoot = $private
+            ? config('app.upload.private_path', dirname(__DIR__, 2) . '/storage/private/uploads')
+            : config('app.upload.path', dirname(__DIR__, 2) . '/public/uploads');
         $targetDirectory = rtrim($uploadRoot, '/\\') . '/' . trim($subDirectory, '/\\');
 
         if (!is_dir($targetDirectory) && !mkdir($targetDirectory, 0755, true) && !is_dir($targetDirectory)) {
             throw new RuntimeException("No se pudo crear el directorio de destino: {$targetDirectory}");
+        }
+
+        if ($private) {
+            $publicRoot = realpath(dirname(__DIR__, 2) . '/public');
+            $resolvedTarget = realpath($targetDirectory);
+            if ($publicRoot !== false && $resolvedTarget !== false
+                && str_starts_with(strtolower($resolvedTarget . DIRECTORY_SEPARATOR), strtolower($publicRoot . DIRECTORY_SEPARATOR))) {
+                throw new RuntimeException("El almacenamiento privado debe estar fuera del directorio public/.");
+            }
         }
 
         $destinationPath = $targetDirectory . '/' . $storedName;
@@ -108,12 +120,12 @@ final class Uploader
             throw new RuntimeException("Fallo al mover el archivo al directorio de almacenamiento.");
         }
 
-        $relativePath = '/uploads/' . trim($subDirectory, '/') . '/' . $storedName;
+        $relativePath = ($private ? '/private-uploads/' : '/uploads/') . trim($subDirectory, '/') . '/' . $storedName;
 
         return [
             'original_name' => $file['name'],
             'stored_name'   => $storedName,
-            'disk'          => 'local',
+            'disk'          => $private ? 'private-local' : 'local',
             'path'          => $relativePath,
             'full_path'     => $destinationPath,
             'mime_type'     => $mimeType,

@@ -120,7 +120,7 @@ Ingresa en tu navegador web a:
      DB_PASSWORD=TuPasswordSeguro
      ```
 6. **Permisos de Escritura:**
-   - Asegura permisos `0755` para la carpeta `public/uploads` y sus subdirectorios (`covers`, `deliveries`, `files`).
+   - Asegura permisos de escritura para `public/uploads` y `storage/private/uploads`. Las entregas se guardan fuera del directorio web y se descargan desde la aplicación con autorización.
 
 ---
 
