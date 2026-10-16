@@ -121,7 +121,15 @@ class AdminController extends BaseController
             exit;
         }
 
-        $score = !empty($_POST['final_score']) ? (float)$_POST['final_score'] : 100.0;
+        $audit = Database::getInstance()->fetch(
+            "SELECT * FROM quality_audits WHERE project_id = :project_id AND gate_status = 'passed' AND status = 'passed' ORDER BY reviewed_at DESC, id DESC LIMIT 1",
+            ['project_id' => $project->id]
+        );
+        if (!$audit || $audit['score'] === null) {
+            Session::flash('error', 'No se puede aprobar el proyecto: requiere una auditoría QA aprobada con evidencias.');
+            redirect('/admin/review');
+        }
+        $score = (float)$audit['score'];
 
         $project->update([
             'status'               => 'approved',
@@ -382,16 +390,23 @@ class AdminController extends BaseController
             "SELECT d.*, p.name as project_name, p.code as project_code, m.name as milestone_name, dev.name as developer_name
              FROM deliveries d
              JOIN projects p ON d.project_id = p.id
-             JOIN milestones m ON d.milestone_id = m.id
+             LEFT JOIN milestones m ON d.milestone_id = m.id
              JOIN users dev ON p.developer_id = dev.id
              WHERE d.status = 'pending'
              ORDER BY d.submitted_at ASC"
+        );
+
+        $qualityAudits = $db->fetchAll(
+            "SELECT qa.*, p.name AS project_name, p.code AS project_code, u.name AS evaluator_name
+             FROM quality_audits qa JOIN projects p ON p.id = qa.project_id JOIN users u ON u.id = qa.evaluator_id
+             ORDER BY qa.created_at DESC LIMIT 100"
         );
 
         return $this->view('admin/evaluations', [
             'title'             => 'Auditorías Técnicas & QA — Devioz',
             'evaluations'       => $evaluations,
             'pendingDeliveries' => $pendingDeliveries,
+            'qualityAudits'     => $qualityAudits,
         ]);
     }
 
