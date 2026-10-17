@@ -34,7 +34,7 @@ class LabvaAiService
     /**
      * Responde una consulta de usuario utilizando el mejor proveedor disponible con fallback.
      */
-    public function ask(string $message): array
+    public function ask(string $message, User $currentUser): array
     {
         $message = trim($message);
         if ($message === '') {
@@ -44,7 +44,7 @@ class LabvaAiService
             ];
         }
 
-        $systemPrompt = $this->buildSystemContext();
+        $systemPrompt = $this->buildSystemContext($currentUser);
 
         // 1. Intentar con Groq API si tiene API Key configurada
         if (!empty($this->groqKey)) {
@@ -71,7 +71,7 @@ class LabvaAiService
         }
 
         // 3. Fallback Garantizado: Motor de Conocimiento Local (Base de datos MySQL en vivo)
-        $localReply = $this->resolveLocalKnowledge($message);
+        $localReply = $this->resolveLocalKnowledge($message, $currentUser);
         return [
             'reply' => $this->sanitizeText($localReply),
             'provider' => 'local',
@@ -105,7 +105,8 @@ class LabvaAiService
                 'Authorization: Bearer ' . $this->groqKey,
             ],
             CURLOPT_TIMEOUT => 6,
-            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
         ]);
 
         $response = curl_exec($ch);
@@ -128,7 +129,7 @@ class LabvaAiService
      */
     private function callGemini(string $userMessage, string $systemPrompt): ?string
     {
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$this->geminiModel}:generateContent?key={$this->geminiKey}";
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$this->geminiModel}:generateContent";
         $fullPrompt = "INSTRUCCIONES DEL SISTEMA:\n{$systemPrompt}\n\nCONSULTA DEL USUARIO:\n{$userMessage}";
 
         $payload = [
@@ -149,9 +150,10 @@ class LabvaAiService
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => json_encode($payload),
-            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+            CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'x-goog-api-key: ' . $this->geminiKey],
             CURLOPT_TIMEOUT => 6,
-            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
         ]);
 
         $response = curl_exec($ch);
@@ -172,21 +174,17 @@ class LabvaAiService
     /**
      * Construye un contexto en tiempo real con la base de datos de Devioz OS
      */
-    private function buildSystemContext(): string
+    private function buildSystemContext(User $currentUser): string
     {
-        $currentUser = function_exists('auth') && auth()->check() ? auth()->user() : null;
-        $userName = $currentUser ? $currentUser->name : 'Usuario';
-        $userRole = $currentUser ? $currentUser->role : 'Invitado';
-        $userSede = $currentUser ? ($currentUser->sede ?: 'General') : 'General';
-
-        // Proyectos
-        $totalProjects = Project::count();
-        $approvedCount = Project::count("status = 'approved'");
-        $inReviewCount = Project::count("status = 'in_review' OR status = 'pending_review'");
-        $inProgressCount = Project::count("status = 'in_progress'");
+        $scope = $this->projectScope($currentUser);
+        $isAdmin = $currentUser->isAdmin();
+        $totalProjects = Project::count($scope['where'], $scope['params']);
+        $approvedCount = Project::count("({$scope['where']}) AND status = 'approved'", $scope['params']);
+        $inReviewCount = Project::count("({$scope['where']}) AND (status = 'in_review' OR status = 'pending_review')", $scope['params']);
+        $inProgressCount = Project::count("({$scope['where']}) AND status = 'in_progress'", $scope['params']);
 
         // Listado de proyectos activos
-        $projects = Project::whereRaw('deleted_at IS NULL', [], 'id ASC', 20);
+        $projects = Project::whereRaw($scope['where'], $scope['params'], 'id ASC', 20);
         $projSummaries = [];
         foreach ($projects as $p) {
             $dev = $p->developer();
@@ -199,30 +197,34 @@ class LabvaAiService
 
         // Desarrolladores libres
         $db = Database::getInstance();
-        $stmt = $db->query("
-            SELECT u.name, u.sede, u.email
+        $stmt = $isAdmin ? $db->query("
+            SELECT u.name, u.sede
             FROM users u
             WHERE u.role = 'developer' AND u.active = 1
               AND u.id NOT IN (SELECT developer_id FROM projects WHERE deleted_at IS NULL AND status != 'rejected')
             ORDER BY u.name ASC LIMIT 10
-        ");
-        $freeDevs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        ") : null;
+        $freeDevs = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
         $freeDevsStr = empty($freeDevs)
             ? "Todos los desarrolladores tienen asignación en curso."
             : implode(', ', array_map(fn($d) => "{$d['name']} ({$d['sede']})", $freeDevs));
 
+        if (!$isAdmin) {
+            $freeDevsStr = 'Dato disponible solo para administracion.';
+        }
+
         // Top 5 ranking
-        $topProjects = Project::whereRaw("final_score IS NOT NULL AND deleted_at IS NULL", [], "final_score DESC", 5);
+        $topProjects = Project::whereRaw("({$scope['where']}) AND final_score IS NOT NULL", $scope['params'], "final_score DESC", 5);
         $rankingStr = implode("\n", array_map(function ($tp, $idx) {
             $d = $tp->developer();
             $dn = $d ? $d->name : 'Dev';
-            return ($idx + 1) . ". {$tp->name} ({$tp->code}) - Nota: {$tp->final_score}/10 - Dev: {$dn} ({$tp->sede})";
+            return ($idx + 1) . ". {$tp->name} ({$tp->code}) - Nota: {$tp->final_score}/100 - Dev: {$dn} ({$tp->sede})";
         }, $topProjects, array_keys($topProjects)));
 
         return <<<PROMPT
 Eres LABVA, el sistema de inteligencia artificial y asistente técnico de Devioz OS.
 Tu diseño y personalidad están inspirados en la estética analítica y minimalista de xAI (Grok): eres rápido, preciso, conciso, resolutivo y directo.
-Tienes acceso a datos corporativos actualizados en tiempo real del ecosistema de desarrollo y proyectos de Devioz.
+Tienes acceso únicamente a información que el rol consultante puede ver. No reveles ni infieras datos fuera de ese alcance.
 
 REGLAS DE RESPUESTA ESTRICTAS:
 1. Responde SIEMPRE en español con tono profesional, técnico y analítico.
@@ -232,7 +234,7 @@ REGLAS DE RESPUESTA ESTRICTAS:
 5. Puedes sugerir enlaces internos cuando sea pertinente: /projects/{id}, /gallery, /admin/assignments, /my-project.
 
 DATOS EN TIEMPO REAL DE DEVIOZ:
-- Usuario consultando: {$userName} (Rol: {$userRole}, Sede: {$userSede})
+- Alcance autorizado: {$totalProjects} proyectos visibles para el rol {$currentUser->role}
 - Proyectos totales: {$totalProjects} (Aprobados: {$approvedCount}, En Revisión: {$inReviewCount}, En Progreso: {$inProgressCount})
 - Desarrolladores disponibles sin proyecto: {$freeDevsStr}
 - Cuadro de honor (Top ranking de notas):
@@ -252,8 +254,10 @@ PROMPT;
     /**
      * Motor de resolución local inteligente (Fallback sin conexión a internet ni API keys)
      */
-    private function resolveLocalKnowledge(string $rawQuery): string
+    private function resolveLocalKnowledge(string $rawQuery, User $currentUser): string
     {
+        $scope = $this->projectScope($currentUser);
+        $isAdmin = $currentUser->isAdmin();
         $q = strtolower(trim($rawQuery));
         $q = str_replace(
             ['á', 'é', 'í', 'ó', 'ú', 'ñ', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', '¿', '?', '¡', '!', ',', '.', ';'],
@@ -274,7 +278,7 @@ PROMPT;
 
         // 2. Ranking de notas
         if (str_contains($q, 'ranking') || str_contains($q, 'mejor') || str_contains($q, 'top') || str_contains($q, 'destacado') || str_contains($q, 'cuadro de honor')) {
-            $topProjects = Project::whereRaw("final_score IS NOT NULL AND deleted_at IS NULL", [], "final_score DESC", 5);
+            $topProjects = Project::whereRaw("({$scope['where']}) AND final_score IS NOT NULL", $scope['params'], "final_score DESC", 5);
             if (!empty($topProjects)) {
                 $lines = [];
                 foreach ($topProjects as $idx => $p) {
@@ -291,6 +295,9 @@ PROMPT;
 
         // 3. Desarrolladores libres / sin proyecto
         if (str_contains($q, 'practicante') || str_contains($q, 'desarrollador') || str_contains($q, 'sin proyecto') || str_contains($q, 'libre') || str_contains($q, 'disponible') || str_contains($q, 'desocupado')) {
+            if (!$isAdmin) {
+                return "Por permisos, la disponibilidad y los datos del equipo completo solo pueden consultarse con un rol de administraciÃ³n.";
+            }
             $db = Database::getInstance();
             $stmt = $db->query("
                 SELECT u.name, u.sede, u.email
@@ -313,14 +320,14 @@ PROMPT;
 
         // 4. Estado global de proyectos y métricas
         if (str_contains($q, 'cuantos proyectos') || str_contains($q, 'proyectos activos') || str_contains($q, 'estado de proyecto') || str_contains($q, 'resumen') || str_contains($q, 'proyectos')) {
-            $total = Project::count('deleted_at IS NULL');
-            $approved = Project::count("status = 'approved' AND deleted_at IS NULL");
-            $inReview = Project::count("(status = 'in_review' OR status = 'pending_review') AND deleted_at IS NULL");
-            $inProgress = Project::count("status = 'in_progress' AND deleted_at IS NULL");
-            $assigned = Project::count("status = 'assigned' AND deleted_at IS NULL");
-            $devsCount = User::count("role = 'developer' AND active = 1");
+            $total = Project::count($scope['where'], $scope['params']);
+            $approved = Project::count("({$scope['where']}) AND status = 'approved'", $scope['params']);
+            $inReview = Project::count("({$scope['where']}) AND (status = 'in_review' OR status = 'pending_review')", $scope['params']);
+            $inProgress = Project::count("({$scope['where']}) AND status = 'in_progress'", $scope['params']);
+            $assigned = Project::count("({$scope['where']}) AND status = 'assigned'", $scope['params']);
+            $devsCount = $isAdmin ? User::count("role = 'developer' AND active = 1") : null;
 
-            return "**Estado Global de Proyectos en Devioz OS:**\n\n"
+            return ($isAdmin ? "**Estado Global de Proyectos en Devioz OS:**\n\n" : "**Estado de tus proyectos asignados:**\n\n")
                 . "• **Total de Proyectos:** {$total}\n"
                 . "• **Aprobados:** {$approved}\n"
                 . "• **En Revisión:** {$inReview}\n"
@@ -334,7 +341,8 @@ PROMPT;
         if (preg_match('/(?:dev[-_ ]?2026[-_ ]?0*([1-9]\d*)|prj[-_ ]?0*([1-9]\d*)|proyecto\s+0*([1-9]\d*))/i', $q, $matches)) {
             $num = $matches[1] ?: ($matches[2] ?? $matches[3]);
             $codePattern = sprintf('DEV-2026-%03d', (int)$num);
-            $project = Project::findBy('code', $codePattern);
+            $projectsByCode = Project::whereRaw("({$scope['where']}) AND code = ?", array_merge($scope['params'], [$codePattern]), 'id ASC', 1);
+            $project = $projectsByCode[0] ?? null;
             if ($project) {
                 return $this->formatProjectSummary($project);
             }
@@ -360,7 +368,7 @@ PROMPT;
 
         // 7. Búsqueda general por nombre de proyecto
         $term = '%' . trim($rawQuery) . '%';
-        $foundProj = Project::whereRaw("name LIKE ? OR description LIKE ?", [$term, $term], "updated_at DESC", 1);
+        $foundProj = Project::whereRaw("({$scope['where']}) AND (name LIKE ? OR description LIKE ?)", array_merge($scope['params'], [$term, $term]), "updated_at DESC", 1);
         if (!empty($foundProj)) {
             return $this->formatProjectSummary($foundProj[0]);
         }
@@ -372,6 +380,23 @@ PROMPT;
             . "• Desarrolladores disponibles (*'desarrolladores libres'*)\n"
             . "• Ranking de score QA (*'mejores proyectos'*)\n"
             . "• Normativas (*'horarios de check-in'* o *'escala de qa'*)";
+    }
+
+    /** Returns the project visibility boundary for the authenticated role. */
+    private function projectScope(User $user): array
+    {
+        if ($user->isAdmin()) {
+            return ['where' => 'deleted_at IS NULL', 'params' => []];
+        }
+
+        if ($user->isDeveloper()) {
+            return [
+                'where' => 'deleted_at IS NULL AND developer_id = ?',
+                'params' => [$user->id],
+            ];
+        }
+
+        return ['where' => '1 = 0', 'params' => []];
     }
 
     private function formatProjectSummary(Project $project): string

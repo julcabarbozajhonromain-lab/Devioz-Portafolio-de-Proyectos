@@ -75,6 +75,11 @@ class ApiController extends BaseController
      */
     public function bot(): never
     {
+        $currentUser = $this->user();
+        if ($currentUser === null) {
+            $this->json(['error' => 'Debes iniciar sesión para consultar LABVA.'], 401);
+        }
+
         $raw = file_get_contents('php://input');
         $body = json_decode($raw, true);
         if (!is_array($body) && !empty($raw)) {
@@ -86,12 +91,16 @@ class ApiController extends BaseController
         }
         $message = trim((string)($body['message'] ?? ''));
 
+        if (mb_strlen($message) > 2000) {
+            $this->json(['error' => 'La consulta no puede superar los 2000 caracteres.'], 422);
+        }
+
         if ($message === '') {
             $this->json(['reply' => 'Hola, soy LABVA. Escribe una consulta sobre proyectos, desarrolladores, sedes o requerimientos técnicos.']);
         }
 
         $aiService = new \App\Services\LabvaAiService();
-        $response = $aiService->ask($message);
+        $response = $aiService->ask($message, $currentUser);
         $this->json([
             'reply'    => $response['reply'],
             'provider' => $response['provider'] ?? 'local',
