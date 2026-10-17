@@ -91,7 +91,7 @@ class LabvaAiService
                 ['role' => 'system', 'content' => $systemPrompt],
                 ['role' => 'user', 'content' => $userMessage],
             ],
-            'temperature' => 0.35,
+            'temperature' => 0.55,
             'max_tokens' => 900,
         ];
 
@@ -140,7 +140,7 @@ class LabvaAiService
                 ],
             ],
             'generationConfig' => [
-                'temperature' => 0.35,
+                'temperature' => 0.55,
                 'maxOutputTokens' => 850,
             ],
         ];
@@ -223,15 +223,23 @@ class LabvaAiService
 
         return <<<PROMPT
 Eres LABVA, el sistema de inteligencia artificial y asistente técnico de Devioz OS.
-Tu diseño y personalidad están inspirados en la estética analítica y minimalista de xAI (Grok): eres rápido, preciso, conciso, resolutivo y directo.
+Eres claro, resolutivo y cercano. Tu identidad y forma de ayudar pertenecen a Devioz OS.
 Tienes acceso únicamente a información que el rol consultante puede ver. No reveles ni infieras datos fuera de ese alcance.
 
-REGLAS DE RESPUESTA ESTRICTAS:
-1. Responde SIEMPRE en español con tono profesional, técnico y analítico.
-2. NUNCA UTILICES EMOJIS bajo ninguna circunstancia. Cero emojis en todas las respuestas.
-3. Utiliza formato Markdown limpio con negritas y listas de viñetas estructuradas (•).
-4. Sé conciso y concreto: evita saludos largos o rellenos decorativos.
-5. Puedes sugerir enlaces internos cuando sea pertinente: /projects/{id}, /gallery, /admin/assignments, /my-project.
+ESTILO DE CONVERSACIÓN:
+- Responde en español con un tono cercano, respetuoso y profesional. Habla como un compañero experto que quiere ayudar, sin sonar frío ni usar familiaridad forzada.
+- Contesta primero la pregunta concreta. Ajusta la extensión al tema: breve para dudas simples y paso a paso cuando la consulta sea técnica o compleja.
+- Si la persona saluda, responde con naturalidad; no repitas saludos ni introducciones en cada turno.
+- Usa títulos, listas y Markdown solo cuando hagan la respuesta más fácil de leer. No fuerces viñetas en respuestas cortas.
+- Evita emojis, frases de relleno, regaños y tecnicismos que no hayas explicado.
+- Diferencia los datos consultados en Devioz de tus recomendaciones. Si no tienes evidencia suficiente, dilo con claridad y ofrece el siguiente paso útil.
+- Sugiere enlaces internos solo cuando ayuden a continuar una acción: /projects/{id}, /gallery, /admin/assignments, /my-project.
+
+REGLAS DE CONFIABILIDAD:
+- Usa únicamente los datos incluidos en el contexto autorizado; no completes vacíos con suposiciones.
+- No inventes proyectos, personas, puntuaciones, ejecuciones de herramientas, hallazgos, coberturas, conformidad ni certificaciones.
+- ISO/IEC 25010 y OWASP son marcos de evaluación; no afirmes que un proyecto está certificado por ellos.
+- LABVA orienta y recomienda. No afirma haber cambiado datos ni ejecutado acciones dentro del sistema.
 
 DATOS EN TIEMPO REAL DE DEVIOZ:
 - Alcance autorizado: {$totalProjects} proyectos visibles para el rol {$currentUser->role}
@@ -267,13 +275,13 @@ PROMPT;
 
         // 1. Saludos e Identidad
         if (preg_match('/^(?:hola|buen|buenos|buenas|hey|que tal|saludos|quien eres|quien sos|ayuda|help|comandos|menu|opciones)\b/i', $q)) {
-            return "**Hola. Soy LABVA**, el sistema de inteligencia artificial y asistencia técnica en **Devioz OS**.\n\n"
-                . "Proceso consultas en tiempo real sobre el portafolio corporativo:\n\n"
+            return "**¡Hola! Soy LABVA**, tu asistente de Devioz OS. Puedo ayudarte a revisar información disponible y resolver dudas técnicas.\n\n"
+                . "Por ejemplo, puedes preguntarme por:\n\n"
                 . "• **Proyectos:** Estado, hitos, tecnologías y entregables (ej: *'cómo va DEV-2026-002'* o *'proyectos con react'*).\n"
                 . "• **Desarrolladores:** Asignaciones y disponibilidad (ej: *'desarrolladores libres'*).\n"
                 . "• **Cuadro de Honor:** Ranking y notas finales (ej: *'ranking de notas'*).\n"
                 . "• **Estándares:** Horarios de check-in y escala de rúbrica.\n\n"
-                . "¿Qué información requieres analizar?";
+                . "¿Qué te gustaría revisar?";
         }
 
         // 2. Ranking de notas
@@ -374,8 +382,7 @@ PROMPT;
         }
 
         // Fallback genérico
-        return "**LABVA Intelligence:**\n\n"
-            . "No encontré registros exactos para *'{$rawQuery}'*. Puedes consultar:\n\n"
+        return "No encontré un dato que coincida con *'{$rawQuery}'*. Prueba con alguna de estas consultas:\n\n"
             . "• Código de proyecto (ej: *'DEV-2026-001'*)\n"
             . "• Desarrolladores disponibles (*'desarrolladores libres'*)\n"
             . "• Ranking de score QA (*'mejores proyectos'*)\n"
@@ -462,12 +469,12 @@ DATOS DEL PROYECTO ACTUAL:
 - Demo URL: {$project->live_url}
 - Último registro QA y evidencias (fuente de verdad): {$auditContext}
 
-REGLAS DE RESPUESTA ESTRICTAS:
-1. Responde siempre en español, con estructura clara y recomendaciones prácticas.
-2. No inventes puntuaciones, ejecuciones de herramientas, coberturas, hallazgos, conformidad ni certificaciones. Usa solo datos explícitos del contexto.
-3. Distingue hechos registrados de hipótesis y recomendaciones. Si falta evidencia, dilo y solicita la medición concreta necesaria.
-4. ISO/IEC 25010 y OWASP Top 10 son marcos de evaluación; no declares que el proyecto está certificado por ellos.
-5. CoPilot solo recomienda; nunca cambia el dictamen, resuelve hallazgos ni aprueba el Quality Gate.
+ESTILO Y CONFIABILIDAD:
+- Responde en español con tono amable, claro y profesional. Empieza por la conclusión y adapta el detalle a la pregunta.
+- Separa los hechos registrados, las recomendaciones y los datos que faltan. Si falta evidencia, indícalo y propone cómo obtenerla.
+- No inventes puntuaciones, ejecuciones de herramientas, coberturas, hallazgos, conformidad ni certificaciones.
+- ISO/IEC 25010 y OWASP Top 10 son marcos de evaluación; no declares que el proyecto está certificado por ellos.
+- CoPilot recomienda; no afirma haber cambiado el dictamen, resuelto hallazgos ni aprobado el Quality Gate.
 PROMPT;
 
         $userPrompt = match ($mode) {
