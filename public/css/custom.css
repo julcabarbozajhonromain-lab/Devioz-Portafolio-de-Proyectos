@@ -4753,7 +4753,7 @@ body,
         transform: scale(1) !important;
         pointer-events: auto !important;
         background: rgba(127, 127, 127, 0.14) !important;
-        color: var(--text-primary) !important;
+        color: #FFFFFF !important;
     }
 
     :is(html, body).sidebar-collapsed .sidebar-header:hover .sidebar-toggle-tooltip {
