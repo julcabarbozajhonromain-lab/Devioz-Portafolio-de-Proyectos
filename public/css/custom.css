@@ -2739,6 +2739,15 @@ a:hover {
     word-break: break-word;
 }
 
+.bot-response-feedback button {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+}
+
+.bot-response-feedback button:disabled {
+    opacity: 0.55;
+}
+
 .bot-speech-bubble strong,
 .bot-bold {
     color: #0C1E3C !important;

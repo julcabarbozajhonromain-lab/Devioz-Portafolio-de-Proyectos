@@ -127,11 +127,74 @@ class ApiController extends BaseController
         $history[] = ['role' => 'assistant', 'content' => (string)$response['reply']];
         Session::set($conversationKey, array_slice($history, -8));
 
+        $responseId = bin2hex(random_bytes(16));
+        $responseIdsKey = "labva_response_ids_{$userId}";
+        $responseIds = Session::get($responseIdsKey, []);
+        $responseIds = is_array($responseIds) ? $responseIds : [];
+        $responseIds[] = $responseId;
+        Session::set($responseIdsKey, array_slice($responseIds, -50));
+
         $this->json([
             'reply'    => $response['reply'],
             'provider' => $response['provider'] ?? 'local',
             'model'    => $response['model'] ?? 'Devioz Knowledge Engine',
             'conversation_id' => $conversationId,
+            'response_id' => $responseId,
+        ]);
+    }
+
+    /** Stores one authenticated user's rating for a response generated in this session. */
+    public function botFeedback(): never
+    {
+        $currentUser = $this->user();
+        if ($currentUser === null) {
+            $this->json(['error' => 'Debes iniciar sesión para valorar una respuesta.'], 401);
+        }
+
+        $body = json_decode((string)file_get_contents('php://input'), true);
+        if (!is_array($body)) {
+            $body = $_POST;
+        }
+
+        $responseId = $body['response_id'] ?? '';
+        $rating = $body['rating'] ?? '';
+        if (!is_string($responseId) || !preg_match('/^[a-f0-9]{32}$/', $responseId)
+            || !in_array($rating, ['helpful', 'not_helpful'], true)) {
+            $this->json(['error' => 'La valoración enviada no es válida.'], 422);
+        }
+
+        $responseIds = Session::get('labva_response_ids_' . (int)$currentUser->id, []);
+        if (!is_array($responseIds) || !in_array($responseId, $responseIds, true)) {
+            $this->json(['error' => 'No se encontró esa respuesta para tu sesión.'], 404);
+        }
+
+        Database::getInstance()->query(
+            'INSERT INTO labva_feedback (user_id, response_id, rating) VALUES (:user_id, :response_id, :rating) '
+            . 'ON DUPLICATE KEY UPDATE rating = VALUES(rating), updated_at = CURRENT_TIMESTAMP',
+            ['user_id' => $currentUser->id, 'response_id' => $responseId, 'rating' => $rating]
+        );
+
+        $this->json(['message' => 'Gracias por valorar la respuesta.']);
+    }
+
+    /** Returns a 30-day usefulness summary for administrators. */
+    public function botFeedbackSummary(): never
+    {
+        $summary = Database::getInstance()->fetch(
+            "SELECT COUNT(*) AS total, "
+            . "SUM(rating = 'helpful') AS helpful, "
+            . "SUM(rating = 'not_helpful') AS not_helpful "
+            . "FROM labva_feedback WHERE created_at >= DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 30 DAY)"
+        ) ?? ['total' => 0, 'helpful' => 0, 'not_helpful' => 0];
+
+        $total = (int)$summary['total'];
+        $helpful = (int)$summary['helpful'];
+        $this->json([
+            'period_days' => 30,
+            'total' => $total,
+            'helpful' => $helpful,
+            'not_helpful' => (int)$summary['not_helpful'],
+            'helpful_rate' => $total > 0 ? round(($helpful / $total) * 100, 1) : null,
         ]);
     }
 

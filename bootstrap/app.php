@@ -213,6 +213,8 @@ $router->get('/api/projects/{id}/preview', [\App\Controllers\ProjectController::
 $router->post('/api/projects/{id}/copilot', [\App\Controllers\ProjectController::class, 'copilotApi'], ['auth']);
 $router->get('/api/link-preview', [\App\Controllers\LinkPreviewController::class, 'preview'], ['auth']);
 $router->post('/api/bot', [\App\Controllers\ApiController::class, 'bot'], ['auth']);
+$router->post('/api/bot/feedback', [\App\Controllers\ApiController::class, 'botFeedback'], ['auth']);
+$router->get('/api/bot/feedback/summary', [\App\Controllers\ApiController::class, 'botFeedbackSummary'], ['auth', 'admin']);
 
 // -----------------------------------------------------------------------------
 // Devioz Suite: Chat Directo 1 a 1, Interconexión/Llamadas y Notificaciones

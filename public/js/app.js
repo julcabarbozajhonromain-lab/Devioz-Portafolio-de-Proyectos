@@ -1108,7 +1108,7 @@ function initDeviozBot() {
             if (loaderEl) loaderEl.remove();
             isSearching = false;
             setLabvaState('happy');
-            appendMessage(data.reply || 'No pude encontrar información para esa consulta.', 'bot');
+            appendMessage(data.reply || 'No pude encontrar información para esa consulta.', 'bot', data.response_id);
             setTimeout(() => {
                 if (!isSearching) setLabvaState('idle');
             }, 1400);
@@ -1160,7 +1160,7 @@ function initDeviozBot() {
         return html;
     }
 
-    function appendMessage(text, sender) {
+    function appendMessage(text, sender, responseId = null) {
         if (sender === 'user') {
             const bubble = document.createElement('div');
             bubble.className = 'bot-msg-user-bubble';
@@ -1177,6 +1177,58 @@ function initDeviozBot() {
             const bubble = document.createElement('div');
             bubble.className = 'bot-speech-bubble';
             bubble.innerHTML = formatBotMarkdown(text);
+
+            if (typeof responseId === 'string' && /^[a-f0-9]{32}$/.test(responseId)) {
+                const feedback = document.createElement('div');
+                feedback.className = 'd-flex align-items-center flex-wrap gap-2 mt-3 pt-2 border-top bot-response-feedback';
+
+                const prompt = document.createElement('span');
+                prompt.className = 'small text-secondary';
+                prompt.textContent = '¿Te resultó útil?';
+                feedback.appendChild(prompt);
+
+                const status = document.createElement('span');
+                status.className = 'small text-secondary';
+
+                [
+                    { rating: 'helpful', label: 'Sí', icon: 'fa-thumbs-up' },
+                    { rating: 'not_helpful', label: 'No', icon: 'fa-thumbs-down' },
+                ].forEach(option => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'btn btn-sm btn-outline-secondary rounded-pill';
+                    button.setAttribute('aria-label', option.rating === 'helpful' ? 'Valorar respuesta como útil' : 'Valorar respuesta como no útil');
+                    button.innerHTML = `<i class="fa-regular ${option.icon}" aria-hidden="true"></i> ${option.label}`;
+                    button.addEventListener('click', () => {
+                        feedback.querySelectorAll('button').forEach(item => { item.disabled = true; });
+                        status.textContent = 'Registrando…';
+
+                        fetch(appUrl('/api/bot/feedback'), {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                            },
+                            body: JSON.stringify({ response_id: responseId, rating: option.rating })
+                        })
+                        .then(response => response.json().then(data => ({ ok: response.ok, data })))
+                        .then(result => {
+                            if (!result.ok) throw new Error(result.data.error || 'No se pudo registrar la valoración.');
+                            prompt.textContent = 'Gracias por tu valoración.';
+                            feedback.querySelectorAll('button').forEach(item => item.remove());
+                            status.remove();
+                        })
+                        .catch(() => {
+                            status.textContent = 'No se pudo guardar. Inténtalo otra vez.';
+                            feedback.querySelectorAll('button').forEach(item => { item.disabled = false; });
+                        });
+                    });
+                    feedback.appendChild(button);
+                });
+
+                feedback.appendChild(status);
+                bubble.appendChild(feedback);
+            }
 
             row.appendChild(orbEl);
             row.appendChild(bubble);
