@@ -34,7 +34,7 @@ class LabvaAiService
     /**
      * Responde una consulta de usuario utilizando el mejor proveedor disponible con fallback.
      */
-    public function ask(string $message, User $currentUser): array
+    public function ask(string $message, User $currentUser, array $history = []): array
     {
         $message = trim($message);
         if ($message === '') {
@@ -45,10 +45,11 @@ class LabvaAiService
         }
 
         $systemPrompt = $this->buildSystemContext($currentUser);
+        $history = $this->normalizeConversationHistory($history);
 
         // 1. Intentar con Groq API si tiene API Key configurada
         if (!empty($this->groqKey)) {
-            $groqReply = $this->callGroq($message, $systemPrompt);
+            $groqReply = $this->callGroq($message, $systemPrompt, $history);
             if ($groqReply !== null && trim($groqReply) !== '') {
                 return [
                     'reply' => $this->sanitizeText($groqReply),
@@ -60,7 +61,7 @@ class LabvaAiService
 
         // 2. Intentar con Gemini API si Groq falló o no está configurado
         if (!empty($this->geminiKey)) {
-            $geminiReply = $this->callGemini($message, $systemPrompt);
+            $geminiReply = $this->callGemini($message, $systemPrompt, $history);
             if ($geminiReply !== null && trim($geminiReply) !== '') {
                 return [
                     'reply' => $this->sanitizeText($geminiReply),
@@ -82,15 +83,17 @@ class LabvaAiService
     /**
      * Llamada a Groq Cloud API (OpenAI compatible endpoint, ultra veloz)
      */
-    private function callGroq(string $userMessage, string $systemPrompt): ?string
+    private function callGroq(string $userMessage, string $systemPrompt, array $history): ?string
     {
         $url = 'https://api.groq.com/openai/v1/chat/completions';
+        $messages = [['role' => 'system', 'content' => $systemPrompt]];
+        foreach ($history as $turn) {
+            $messages[] = $turn;
+        }
+        $messages[] = ['role' => 'user', 'content' => $userMessage];
         $payload = [
             'model' => $this->groqModel,
-            'messages' => [
-                ['role' => 'system', 'content' => $systemPrompt],
-                ['role' => 'user', 'content' => $userMessage],
-            ],
+            'messages' => $messages,
             'temperature' => 0.55,
             'max_tokens' => 900,
         ];
@@ -127,18 +130,21 @@ class LabvaAiService
     /**
      * Llamada a Google Gemini API (generateContent endpoint)
      */
-    private function callGemini(string $userMessage, string $systemPrompt): ?string
+    private function callGemini(string $userMessage, string $systemPrompt, array $history): ?string
     {
         $url = "https://generativelanguage.googleapis.com/v1beta/models/{$this->geminiModel}:generateContent";
-        $fullPrompt = "INSTRUCCIONES DEL SISTEMA:\n{$systemPrompt}\n\nCONSULTA DEL USUARIO:\n{$userMessage}";
+        $contents = [];
+        foreach ($history as $turn) {
+            $contents[] = [
+                'role' => $turn['role'] === 'assistant' ? 'model' : 'user',
+                'parts' => [['text' => $turn['content']]],
+            ];
+        }
+        $contents[] = ['role' => 'user', 'parts' => [['text' => $userMessage]]];
 
         $payload = [
-            'contents' => [
-                [
-                    'role' => 'user',
-                    'parts' => [['text' => $fullPrompt]],
-                ],
-            ],
+            'systemInstruction' => ['parts' => [['text' => $systemPrompt]]],
+            'contents' => $contents,
             'generationConfig' => [
                 'temperature' => 0.55,
                 'maxOutputTokens' => 850,
@@ -257,6 +263,29 @@ ESTÁNDARES TÉCNICOS Y OPERATIVOS:
 - Sedes autorizadas: San Isidro, Villa, Lima Norte, Lima Centro.
 - Política de asignación: 1 desarrollador titular por proyecto.
 PROMPT;
+    }
+
+    /** Keeps only short, valid user and assistant turns from the server-side session. */
+    private function normalizeConversationHistory(array $history): array
+    {
+        $normalized = [];
+        foreach (array_slice($history, -8) as $turn) {
+            if (!is_array($turn) || !in_array($turn['role'] ?? null, ['user', 'assistant'], true)) {
+                continue;
+            }
+            $content = trim((string)($turn['content'] ?? ''));
+            if ($content === '') {
+                continue;
+            }
+            if (function_exists('mb_substr')) {
+                $content = mb_substr($content, 0, 1200);
+            } else {
+                $content = substr($content, 0, 1200);
+            }
+            $normalized[] = ['role' => $turn['role'], 'content' => $content];
+        }
+
+        return $normalized;
     }
 
     /**

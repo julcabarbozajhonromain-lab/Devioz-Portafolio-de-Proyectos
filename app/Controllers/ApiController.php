@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Core\Database;
+use App\Core\Session;
 use App\Models\CheckIn;
 use App\Models\Delivery;
 use App\Models\Milestone;
@@ -99,12 +100,38 @@ class ApiController extends BaseController
             $this->json(['reply' => 'Hola, soy LABVA. Escribe una consulta sobre proyectos, desarrolladores, sedes o requerimientos técnicos.']);
         }
 
+        $conversationId = $body['conversation_id'] ?? '';
+        if (!is_string($conversationId) || !preg_match('/^[a-f0-9]{32}$/', $conversationId)) {
+            $conversationId = bin2hex(random_bytes(16));
+        }
+
+        $userId = (int)$currentUser->id;
+        $conversationKey = "labva_conversation_{$userId}_{$conversationId}";
+        $conversationIndexKey = "labva_conversations_{$userId}";
+        $conversationIds = Session::get($conversationIndexKey, []);
+        $conversationIds = is_array($conversationIds) ? $conversationIds : [];
+        if (!in_array($conversationId, $conversationIds, true)) {
+            $conversationIds[] = $conversationId;
+            while (count($conversationIds) > 3) {
+                $expiredId = array_shift($conversationIds);
+                Session::forget("labva_conversation_{$userId}_{$expiredId}");
+            }
+            Session::set($conversationIndexKey, $conversationIds);
+        }
+
+        $history = Session::get($conversationKey, []);
+        $history = is_array($history) ? array_slice($history, -8) : [];
         $aiService = new \App\Services\LabvaAiService();
-        $response = $aiService->ask($message, $currentUser);
+        $response = $aiService->ask($message, $currentUser, $history);
+        $history[] = ['role' => 'user', 'content' => $message];
+        $history[] = ['role' => 'assistant', 'content' => (string)$response['reply']];
+        Session::set($conversationKey, array_slice($history, -8));
+
         $this->json([
             'reply'    => $response['reply'],
             'provider' => $response['provider'] ?? 'local',
             'model'    => $response['model'] ?? 'Devioz Knowledge Engine',
+            'conversation_id' => $conversationId,
         ]);
     }
 

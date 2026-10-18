@@ -920,6 +920,14 @@ function initDeviozBot() {
     if (!windowEl || !form) return;
 
     let isSearching = false;
+    const conversationId = (() => {
+        const bytes = new Uint8Array(16);
+        if (window.crypto?.getRandomValues) {
+            window.crypto.getRandomValues(bytes);
+            return Array.from(bytes, value => value.toString(16).padStart(2, '0')).join('');
+        }
+        return `${Date.now().toString(16)}${Math.random().toString(16).slice(2)}`.padEnd(32, '0').slice(0, 32);
+    })();
 
     const labvaMiniOrbSvg = `
         <div class="labva-orb-container state-idle flex-shrink-0" style="width: 28px; height: 28px; margin-top: 2px;">
@@ -1058,6 +1066,7 @@ function initDeviozBot() {
     });
 
     function askBot(userMessage) {
+        if (isSearching) return;
         appendMessage(userMessage, 'user');
         isSearching = true;
         setLabvaState('searching');
@@ -1091,7 +1100,7 @@ function initDeviozBot() {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': csrfToken
             },
-            body: JSON.stringify({ message: userMessage })
+            body: JSON.stringify({ message: userMessage, conversation_id: conversationId })
         })
         .then(res => res.json())
         .then(data => {
