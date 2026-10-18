@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Core\View;
+$appName = (string) config('app.name', 'Devioz 24');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-theme="light" data-ui-mode="devioz">
@@ -11,7 +12,7 @@ use App\Core\View;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?= csrf_token() ?>">
     <meta name="app-url" content="<?= url() ?>">
-    <title><?= e(isset($title) ? $title . ' — Devioz OS' : 'Devioz OS — Plataforma Corporativa') ?></title>
+    <title><?= e(isset($title) ? $title . ' — ' . $appName : $appName . ' — Plataforma Corporativa') ?></title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?= asset('images/devioz-icon.png') ?>">
@@ -62,7 +63,7 @@ use App\Core\View;
         <!-- Contenedor Principal -->
         <div class="main-wrapper">
             <!-- Barra Superior (Topbar) -->
-            <?= View::partial('partials/navbar', ['title' => $title ?? 'Devioz OS']) ?>
+            <?= View::partial('partials/navbar', ['title' => $title ?? $appName]) ?>
 
             <!-- Área de Contenido Dinámico -->
             <main class="main-content" id="main-content" tabindex="-1">
@@ -162,7 +163,7 @@ use App\Core\View;
                         <span>LABVA</span>
                         <span class="badge" style="background-color: #10B981; font-size: 0.6rem; padding: 2px 6px;">AI</span>
                     </div>
-                    <div class="bot-header-status" id="labvaStatusText"><span class="bot-status-dot-inline">●</span> En línea &bull; Asistente Devioz OS</div>
+                    <div class="bot-header-status" id="labvaStatusText"><span class="bot-status-dot-inline">●</span> En línea &bull; Asistente <?= e($appName) ?></div>
                 </div>
             </div>
             <button type="button" class="btn-close-bot" id="deviozBotClose" aria-label="Cerrar chat">
@@ -185,7 +186,7 @@ use App\Core\View;
                     </svg>
                 </div>
                 <div class="bot-speech-bubble" id="botInitialBubble">
-                    ¡Hola! Soy <strong>LABVA</strong>, el asistente de inteligencia operativa en Devioz OS. ¿En qué te puedo apoyar hoy? Puedes consultarme sobre proyectos activos, auditorías QA o talento técnico corporativo.
+                    ¡Hola! Soy <strong>LABVA</strong>, el asistente de inteligencia operativa en <?= e($appName) ?>. ¿En qué te puedo apoyar hoy? Puedes consultarme sobre proyectos activos, auditorías QA o talento técnico corporativo.
                 </div>
             </div>
 

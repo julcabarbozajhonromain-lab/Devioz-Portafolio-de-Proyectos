@@ -7,7 +7,7 @@ declare(strict_types=1);
  */
 
 return [
-    'name' => getenv('APP_NAME') ?: 'Devioz OS',
+    'name' => getenv('APP_NAME') ?: 'Devioz 24',
     'env' => getenv('APP_ENV') ?: 'local',
     'debug' => filter_var(getenv('APP_DEBUG') ?: 'false', FILTER_VALIDATE_BOOL),
     'url' => getenv('APP_URL') ?: 'http://localhost/Devioz-Portafolio-de-Proyectos/public',

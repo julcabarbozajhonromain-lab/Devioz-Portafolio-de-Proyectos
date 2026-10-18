@@ -119,9 +119,9 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
     <!-- Centro / Derecha: Buscador Global Command Palette + Botón Verde + Perfil -->
     <div class="d-flex align-items-center gap-2 flex-shrink-0" id="topbarRightArea">
         <!-- Buscador Global Estilizado Devioz (Ctrl + K) -->
-        <button type="button" class="btn gl-topbar-search d-flex align-items-center gap-2" id="commandPaletteTrigger" title="Búsqueda Rápida en Devioz OS (Ctrl + K)">
+        <button type="button" class="btn gl-topbar-search d-flex align-items-center gap-2" id="commandPaletteTrigger" title="Búsqueda Rápida en Devioz 24 (Ctrl + K)">
             <i class="fa-solid fa-magnifying-glass search-icon-lupa"></i>
-            <span class="d-none d-xl-inline search-label">Buscar en Devioz OS...</span>
+            <span class="d-none d-xl-inline search-label">Buscar en Devioz 24...</span>
             <kbd class="gl-topbar-kbd d-none d-xxl-inline">Ctrl K</kbd>
         </button>
 

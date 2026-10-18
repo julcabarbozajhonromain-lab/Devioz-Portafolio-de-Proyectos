@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 <footer class="footer d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
     <div>
-        <span class="fw-semibold text-dark">Devioz OS</span> — Plataforma Corporativa de Gestión de Proyectos &copy; <?= date('Y') ?>
+        <span class="fw-semibold text-dark">Devioz 24</span> — Plataforma Corporativa de Gestión de Proyectos &copy; <?= date('Y') ?>
     </div>
     <div class="d-flex align-items-center gap-3">
         <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #10B981; font-size: 0.72rem; font-weight: 600;">Enterprise Suite</span>

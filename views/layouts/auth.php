@@ -10,7 +10,7 @@ use App\Core\View;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="app-url" content="<?= rtrim(url('/'), '/') ?>">
-    <title><?= e($title ?? 'Iniciar Sesión — Devioz OS') ?></title>
+    <title><?= e($title ?? 'Iniciar Sesión — Devioz 24') ?></title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?= asset('images/devioz-icon.png') ?>">
@@ -65,7 +65,7 @@ use App\Core\View;
         .auth-overlay {
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle at 75% 50%, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.55) 100%);
+            background: linear-gradient(90deg, rgba(7, 16, 34, 0.78) 0%, rgba(7, 16, 34, 0.56) 48%, rgba(7, 16, 34, 0.35) 100%);
             backdrop-filter: blur(1.5px);
             -webkit-backdrop-filter: blur(1.5px);
             z-index: 1;
@@ -200,6 +200,18 @@ use App\Core\View;
             font-weight: 600;
             max-width: 440px;
             color: #FFFFFF;
+        }
+
+        /* El tema global claro oscurece los encabezados; el hero de acceso va sobre una foto. */
+        body.auth-auth-page .auth-aside-title,
+        body.auth-auth-page .auth-aside-subtitle,
+        body.auth-auth-page .auth-feature-pill,
+        body.auth-auth-page .auth-feature-pill span {
+            color: #FFFFFF !important;
+        }
+
+        body.auth-auth-page .auth-aside-title {
+            text-shadow: 0 3px 18px rgba(0, 0, 0, 0.72);
         }
 
         /* Tarjeta Isla de Autenticación (Estilo Devioz Island Card) */
@@ -434,8 +446,8 @@ use App\Core\View;
         <!-- Header Superior -->
         <header class="auth-header">
             <a href="<?= url('/') ?>" class="auth-brand">
-                <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="32" height="32" class="rounded">
-                <span>Devioz<span style="color: var(--ui-primary);">OS</span></span>
+                <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz 24" width="36" height="36" class="rounded">
+                <span>Devioz<span style="color: var(--ui-primary);"> 24</span></span>
                 <span class="auth-brand-tag d-none d-sm-inline">Su espacio de trabajo ideal</span>
             </a>
 
@@ -515,7 +527,7 @@ use App\Core\View;
             </div>
 
             <div>
-                <span>© 2026 Devioz OS • Devioz Technology Solutions</span>
+                <span>© 2026 Devioz 24 • Devioz Technology Solutions</span>
             </div>
         </footer>
 

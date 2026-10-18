@@ -22,7 +22,7 @@ class AuthController extends BaseController
         }
 
         return $this->view('auth/login', [
-            'title' => 'Iniciar Sesión — Devioz OS',
+            'title' => 'Iniciar Sesión — Devioz 24',
         ], 'auth');
     }
 
@@ -60,7 +60,7 @@ class AuthController extends BaseController
         }
 
         return $this->view('auth/register', [
-            'title' => 'Registro de Desarrollador — Devioz OS',
+            'title' => 'Registro de Desarrollador — Devioz 24',
         ], 'auth');
     }
 

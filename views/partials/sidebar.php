@@ -18,9 +18,9 @@ $isComunidadActive = str_contains($currentUri, '/reels') || str_contains($curren
 <aside class="sidebar" id="mainSidebar">
     <!-- Header de la Barra Lateral (Estilo ChatGPT: Logo <-> Botón de Despliegue en Hover) -->
     <div class="sidebar-header" id="sidebarHeader">
-        <a href="<?= url('/dashboard') ?>" class="sidebar-brand text-decoration-none p-0 d-flex align-items-center" title="Devioz OS">
-            <img src="<?= asset('images/devioz-logo.webp') ?>" alt="Devioz OS" class="sidebar-logo-full">
-            <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" class="sidebar-logo-icon">
+        <a href="<?= url('/dashboard') ?>" class="sidebar-brand text-decoration-none p-0 d-flex align-items-center" title="Devioz 24">
+            <img src="<?= asset('images/devioz-logo.webp') ?>" alt="Devioz 24" class="sidebar-logo-full">
+            <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz 24" class="sidebar-logo-icon">
         </a>
         <button type="button" class="sidebar-collapse-btn d-none d-lg-flex" id="sidebarCollapseBtn" title="Cerrar barra lateral (Ctrl+B)" aria-label="Cerrar barra lateral">
             <i class="fa-solid fa-chevron-left"></i>

@@ -6,10 +6,10 @@ declare(strict_types=1);
 <!-- Cabecera de la Tarjeta Isla -->
 <div class="mb-4">
     <div class="d-flex align-items-center gap-2 mb-2 d-lg-none">
-        <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="28" height="28" class="rounded">
-        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--ui-primary);">OS</span></span>
+        <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz 24" width="30" height="30" class="rounded">
+        <span class="fw-bold text-navy fs-5">Devioz<span style="color: var(--ui-primary);"> 24</span></span>
     </div>
-    <h3 class="fw-bold mb-1" style="color: var(--ui-navy); letter-spacing: -0.5px;">Inicie sesión en Devioz OS</h3>
+    <h3 class="fw-bold mb-1" style="color: var(--ui-navy); letter-spacing: -0.5px;">Inicie sesión en Devioz 24</h3>
     <p class="text-secondary small mb-0">Ingrese sus credenciales para acceder al sistema operativo y portafolio</p>
 </div>
 
