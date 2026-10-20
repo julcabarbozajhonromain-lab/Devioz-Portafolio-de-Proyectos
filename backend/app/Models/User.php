@@ -87,7 +87,7 @@ class User extends Model
             }
 
             $clean = ltrim($this->avatar, '/');
-            $fullPath = dirname(__DIR__, 2) . '/public/' . $clean;
+            $fullPath = DEVIOZ_PUBLIC . '/' . $clean;
             if (file_exists($fullPath)) {
                 return asset($this->avatar);
             }

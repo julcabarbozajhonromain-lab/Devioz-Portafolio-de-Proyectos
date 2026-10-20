@@ -97,8 +97,8 @@ final class Uploader
         $storedName = sprintf('%s_%s.%s', $sanitizedName, bin2hex(random_bytes(8)), $originalExt);
 
         $uploadRoot = $private
-            ? config('app.upload.private_path', dirname(__DIR__, 2) . '/storage/private/uploads')
-            : config('app.upload.path', dirname(__DIR__, 2) . '/public/uploads');
+            ? config('app.upload.private_path', DEVIOZ_BACKEND . '/storage/private/uploads')
+            : config('app.upload.path', DEVIOZ_PUBLIC . '/uploads');
         $targetDirectory = rtrim($uploadRoot, '/\\') . '/' . trim($subDirectory, '/\\');
 
         if (!is_dir($targetDirectory) && !mkdir($targetDirectory, 0755, true) && !is_dir($targetDirectory)) {
@@ -106,7 +106,7 @@ final class Uploader
         }
 
         if ($private) {
-            $publicRoot = realpath(dirname(__DIR__, 2) . '/public');
+            $publicRoot = realpath(DEVIOZ_PUBLIC);
             $resolvedTarget = realpath($targetDirectory);
             if ($publicRoot !== false && $resolvedTarget !== false
                 && str_starts_with(strtolower($resolvedTarget . DIRECTORY_SEPARATOR), strtolower($publicRoot . DIRECTORY_SEPARATOR))) {

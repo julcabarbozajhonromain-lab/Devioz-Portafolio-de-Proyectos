@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 /**
  * Devioz Classic — Instalador y Migrador CLI Automatizado
- * Uso: php bin/setup.php
+ * Uso: php backend/bin/setup.php
  */
 
 echo "\n=======================================================\n";
 echo "  DEVIOZ CLASSIC — INSTALADOR AUTOMÁTICO DE BASE DE DATOS\n";
 echo "=======================================================\n\n";
 
-$envFile = dirname(__DIR__) . '/.env';
+$projectRoot = dirname(__DIR__, 2);
+$envFile = $projectRoot . '/.env';
 if (file_exists($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
@@ -49,7 +50,7 @@ $pdo->exec("USE `{$dbName}`;");
 echo "      [OK] Base de datos '{$dbName}' seleccionada.\n";
 
 echo "[3/4] Ejecutando estructura DDL (database/schema.sql)...\n";
-$schemaFile = dirname(__DIR__) . '/database/schema.sql';
+$schemaFile = $projectRoot . '/database/schema.sql';
 if (!file_exists($schemaFile)) {
     echo "      [ERROR] No se encontró database/schema.sql\n";
     exit(1);
@@ -57,10 +58,10 @@ if (!file_exists($schemaFile)) {
 
 $schemaSql = file_get_contents($schemaFile);
 $pdo->exec($schemaSql);
-echo "      [OK] 10 tablas creadas con éxito con motor InnoDB.\n";
+echo "      [OK] Esquema importado con motor InnoDB.\n";
 
 echo "[4/4] Sembrando datos iniciales reales (database/seed.sql)...\n";
-$seedFile = dirname(__DIR__) . '/database/seed.sql';
+$seedFile = $projectRoot . '/database/seed.sql';
 if (!file_exists($seedFile)) {
     echo "      [ERROR] No se encontró database/seed.sql\n";
     exit(1);

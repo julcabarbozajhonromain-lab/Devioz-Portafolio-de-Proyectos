@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 /**
- * Migra adjuntos de entregas desde public/uploads a storage privado.
- * Uso: php bin/migrate_delivery_uploads.php [--apply]
+ * Migra adjuntos de entregas desde frontend/public/uploads a almacenamiento privado.
+ * Uso: php backend/bin/migrate_delivery_uploads.php [--apply]
  * Sin --apply solo informa el resultado; los archivos originales nunca se eliminan.
  */
 
@@ -20,7 +20,14 @@ if ($unknownOptions !== []) {
 }
 
 $apply = in_array('--apply', $argv, true);
-$projectRoot = dirname(__DIR__);
+$projectRoot = dirname(__DIR__, 2);
+$backendRoot = $projectRoot . '/backend';
+define('DEVIOZ_ROOT', $projectRoot);
+define('DEVIOZ_BACKEND', $backendRoot);
+define('DEVIOZ_FRONTEND', $projectRoot . '/frontend');
+define('DEVIOZ_PUBLIC', DEVIOZ_FRONTEND . '/public');
+define('DEVIOZ_VIEWS', DEVIOZ_FRONTEND . '/views');
+define('DEVIOZ_DATABASE', $projectRoot . '/database');
 
 spl_autoload_register(static function (string $class) use ($projectRoot): void {
     $prefix = 'App\\';
@@ -28,12 +35,12 @@ spl_autoload_register(static function (string $class) use ($projectRoot): void {
         return;
     }
 
-    $classFile = $projectRoot . '/app/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
+    $classFile = $backendRoot . '/app/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
     if (is_file($classFile)) {
         require_once $classFile;
     }
 });
-require_once $projectRoot . '/app/Helpers/functions.php';
+require_once $backendRoot . '/app/Helpers/functions.php';
 
 $envFile = $projectRoot . '/.env';
 if (is_file($envFile)) {
@@ -48,15 +55,15 @@ if (is_file($envFile)) {
 }
 
 $pdo = \App\Core\Database::getInstance()->getConnection();
-$publicRoot = realpath($projectRoot . '/public/uploads');
+$publicRoot = realpath(DEVIOZ_PUBLIC . '/uploads');
 $privateRoot = rtrim((string)config('app.upload.private_path'), '/\\');
 
 if ($publicRoot === false) {
-    fwrite(STDERR, "No existe el directorio public/uploads.\n");
+    fwrite(STDERR, "No existe el directorio frontend/public/uploads.\n");
     exit(1);
 }
 
-$publicBase = realpath($projectRoot . '/public');
+$publicBase = realpath(DEVIOZ_PUBLIC);
 $privateCanonical = realpath($privateRoot);
 $privateForCheck = $privateCanonical !== false ? $privateCanonical : $privateRoot;
 if ($publicBase !== false && str_starts_with(
@@ -219,5 +226,5 @@ fwrite(STDOUT, sprintf(
 ));
 
 if (!$apply && $counts['ready'] > 0) {
-    fwrite(STDOUT, "Para copiar los archivos y actualizar sus referencias ejecute: php bin/migrate_delivery_uploads.php --apply\n");
+    fwrite(STDOUT, "Para copiar los archivos y actualizar sus referencias ejecute: php backend/bin/migrate_delivery_uploads.php --apply\n");
 }

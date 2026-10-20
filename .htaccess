@@ -1,5 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteRule ^$ public/ [L]
-    RewriteRule (.*) public/$1 [L]
+
+    # Los assets mantienen la URL existente /public/... pero ahora viven en frontend/public.
+    RewriteRule ^public/(css|js|images|assets|uploads)/(.*)$ frontend/public/$1/$2 [END]
+
+    # Punto de entrada compatible con SCRIPT_NAME y la URL /public existente.
+    RewriteRule ^(.*)$ public/index.php [END]
 </IfModule>

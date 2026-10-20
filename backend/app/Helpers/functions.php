@@ -45,7 +45,7 @@ if (!function_exists('config')) {
         $file = $parts[0];
         
         if (!isset($configs[$file])) {
-            $filePath = dirname(__DIR__, 2) . "/config/{$file}.php";
+            $filePath = DEVIOZ_BACKEND . "/config/{$file}.php";
             if (file_exists($filePath)) {
                 $configs[$file] = require $filePath;
             } else {
@@ -89,7 +89,7 @@ if (!function_exists('asset')) {
         }
 
         $cleanPath = ltrim($path, '/');
-        $fullPath = dirname(__DIR__, 2) . "/public/{$cleanPath}";
+        $fullPath = DEVIOZ_PUBLIC . "/{$cleanPath}";
         $version = file_exists($fullPath) ? (string)filemtime($fullPath) : '1';
         
         return url($cleanPath) . "?v={$version}";

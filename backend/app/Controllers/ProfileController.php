@@ -138,7 +138,7 @@ class ProfileController extends BaseController
 
             // Eliminar imagen anterior si era un archivo subido en uploads/avatars/
             if (!empty($user->avatar) && str_starts_with($user->avatar, '/uploads/avatars/')) {
-                $oldPath = dirname(__DIR__, 2) . '/public' . $user->avatar;
+                $oldPath = DEVIOZ_PUBLIC . $user->avatar;
                 if (file_exists($oldPath)) {
                     @unlink($oldPath);
                 }
@@ -165,7 +165,7 @@ class ProfileController extends BaseController
         }
 
         if (!empty($user->avatar) && str_starts_with($user->avatar, '/uploads/avatars/')) {
-            $oldPath = dirname(__DIR__, 2) . '/public' . $user->avatar;
+            $oldPath = DEVIOZ_PUBLIC . $user->avatar;
             if (file_exists($oldPath)) {
                 @unlink($oldPath);
             }

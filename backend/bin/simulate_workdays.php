@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Simula 4 días completos de trabajo y más de 20 asignaciones de proyectos con standups,
  * hitos, entregables y evaluaciones técnicas.
  *
- * Uso: php bin/simulate_workdays.php
+ * Uso: php backend/bin/simulate_workdays.php
  */
 
 require dirname(__DIR__) . '/bootstrap/app.php';

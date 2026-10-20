@@ -7,9 +7,18 @@ declare(strict_types=1);
  */
 
 // 1. Autoloader PSR-4 Nativo (Funciona con o sin composer dump-autoload)
+if (!defined('DEVIOZ_ROOT')) {
+    define('DEVIOZ_ROOT', dirname(__DIR__, 2));
+    define('DEVIOZ_BACKEND', dirname(__DIR__));
+    define('DEVIOZ_FRONTEND', DEVIOZ_ROOT . '/frontend');
+    define('DEVIOZ_PUBLIC', DEVIOZ_FRONTEND . '/public');
+    define('DEVIOZ_VIEWS', DEVIOZ_FRONTEND . '/views');
+    define('DEVIOZ_DATABASE', DEVIOZ_ROOT . '/database');
+}
+
 spl_autoload_register(function (string $class) {
     $prefix = 'App\\';
-    $baseDir = dirname(__DIR__) . '/app/';
+    $baseDir = DEVIOZ_BACKEND . '/app/';
 
     $len = strlen($prefix);
     if (strncmp($prefix, $class, $len) !== 0) {
@@ -25,13 +34,13 @@ spl_autoload_register(function (string $class) {
 });
 
 // 2. Cargar Helpers Globales
-$helpersFile = dirname(__DIR__) . '/app/Helpers/functions.php';
+$helpersFile = DEVIOZ_BACKEND . '/app/Helpers/functions.php';
 if (file_exists($helpersFile)) {
     require_once $helpersFile;
 }
 
 // 3. Cargador de Archivo de Entorno .env
-$envFile = dirname(__DIR__) . '/.env';
+$envFile = DEVIOZ_ROOT . '/.env';
 if (file_exists($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
@@ -71,7 +80,7 @@ set_error_handler(function (int $errno, string $errstr, string $errfile, int $er
 
 // Manejador global de excepciones (500) con log estructurado y protección de trazas
 set_exception_handler(function (\Throwable $e) {
-    $logDir = dirname(__DIR__) . '/storage/logs';
+    $logDir = DEVIOZ_BACKEND . '/storage/logs';
     if (!is_dir($logDir)) {
         @mkdir($logDir, 0775, true);
     }

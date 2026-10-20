@@ -4,22 +4,22 @@
 .env.production
 
 # Storage and Logs
-storage/logs/*
-!storage/logs/.gitkeep
-storage/framework/cache/*
-!storage/framework/cache/.gitkeep
+backend/storage/logs/*
+!backend/storage/logs/.gitkeep
+backend/storage/framework/cache/*
+!backend/storage/framework/cache/.gitkeep
 *.log
 
 # Composer Dependencies
 vendor/
 
 # User Uploads
-public/uploads/*
-!public/uploads/.gitkeep
-!public/uploads/deliveries/
-public/uploads/deliveries/*
-!public/uploads/deliveries/.htaccess
-/storage/private/
+frontend/public/uploads/*
+!frontend/public/uploads/.gitkeep
+!frontend/public/uploads/deliveries/
+frontend/public/uploads/deliveries/*
+!frontend/public/uploads/deliveries/.htaccess
+/backend/storage/private/
 
 # IDE and OS Files
 .idea/

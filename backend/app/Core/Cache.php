@@ -16,7 +16,7 @@ final class Cache
     private static function init(): void
     {
         if (self::$cachePath === null) {
-            self::$cachePath = dirname(__DIR__, 2) . '/storage/framework/cache';
+            self::$cachePath = DEVIOZ_BACKEND . '/storage/framework/cache';
             if (!is_dir(self::$cachePath)) {
                 @mkdir(self::$cachePath, 0775, true);
             }

@@ -16,7 +16,7 @@ final class View
 
     public static function init(): void
     {
-        self::$viewsPath = dirname(__DIR__, 2) . '/views';
+        self::$viewsPath = DEVIOZ_VIEWS;
     }
 
     /**
