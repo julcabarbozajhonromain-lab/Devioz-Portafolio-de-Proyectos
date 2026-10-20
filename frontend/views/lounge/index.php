@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Devioz OS — Vista de Dev Lounge (Comunidad Técnica de Consultoría)
+ * Devioz 24 — Vista de Dev Lounge (Comunidad Técnica de Consultoría)
  * Enlaces con vista previa OpenGraph, debates con comentarios, reacciones interactivas y categorías especializadas.
  */
 ?>

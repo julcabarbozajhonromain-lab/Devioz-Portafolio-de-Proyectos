@@ -1434,7 +1434,7 @@ if (!function_exists('devioz_parse_video')) {
 
             <div class="ui-modal-header p-3 px-4 bg-light border-bottom d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-2">
-                    <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz OS" width="24" height="24" class="rounded">
+                    <img src="<?= asset('images/devioz-icon.png') ?>" alt="Devioz 24" width="24" height="24" class="rounded">
                     <h6 class="fw-bold mb-0 text-navy" id="modalAuthTitle">Acceso al equipo Devioz</h6>
                 </div>
                 <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" id="btnCloseAuthModal" style="width: 30px; height: 30px;" aria-label="Cerrar ventana">

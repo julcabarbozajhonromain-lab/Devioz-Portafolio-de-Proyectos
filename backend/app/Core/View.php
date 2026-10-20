@@ -7,7 +7,7 @@ namespace App\Core;
 use RuntimeException;
 
 /**
- * Devioz OS — Motor Ligero de Plantillas y Vistas (View Engine)
+ * Devioz 24 — Motor Ligero de Plantillas y Vistas (View Engine)
  * Soporta layouts anidados, buffers de salida y partials sin dependencias externas.
  */
 final class View
@@ -114,7 +114,7 @@ final class View
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error {$code} — Devioz OS</title>
+    <title>Error {$code} — Devioz 24</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background: #EEF2F4; color: #1F2937; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; display: grid; place-items: center; min-height: 100vh; }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 /**
- * Devioz OS — Controlador para Previsualización Automática de Enlaces (Open Graph)
+ * Devioz 24 — Controlador para Previsualización Automática de Enlaces (Open Graph)
  */
 class LinkPreviewController extends BaseController
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Usuario (Administradores y Desarrolladores)
+ * Devioz 24 — Modelo de Usuario (Administradores y Desarrolladores)
  */
 class User extends Model
 {

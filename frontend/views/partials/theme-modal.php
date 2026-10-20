@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 /**
- * Devioz OS — Modal Selector de Temas Visuales
- * Selector de temas y fondos personalizables de Devioz OS
+ * Devioz 24 — Modal Selector de Temas Visuales
+ * Selector de temas y fondos personalizables de Devioz 24
  */
 ?>
 <div class="modal fade" id="deviozThemeModal" tabindex="-1" aria-labelledby="deviozThemeModalLabel" aria-hidden="true">

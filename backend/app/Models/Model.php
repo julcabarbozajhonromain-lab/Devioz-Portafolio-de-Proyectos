@@ -8,7 +8,7 @@ use App\Core\Database;
 use RuntimeException;
 
 /**
- * Devioz OS — Modelo Base Activo (Active Record / Data Mapper Híbrido)
+ * Devioz 24 — Modelo Base Activo (Active Record / Data Mapper Híbrido)
  * Proporciona métodos CRUD, relaciones tipadas (belongsTo, hasMany, hasOne) y casting automático.
  */
 abstract class Model

@@ -43,7 +43,7 @@ declare(strict_types=1);
                             <span class="input-group-text bg-light border-end-0 text-muted" style="font-size: 0.85rem;">
                                 <i class="fa-solid fa-barcode"></i>
                             </span>
-                            <input type="text" name="code" id="code" class="form-control form-control-custom font-monospace fw-bold border-start-0" value="<?= e($nextCode ?? old('code', 'DEV-' . date('Y') . '-001')) ?>" readonly style="background-color: #F8FAFC !important; color: #059669 !important; cursor: not-allowed;" title="Código generado automáticamente por Devioz OS">
+                            <input type="text" name="code" id="code" class="form-control form-control-custom font-monospace fw-bold border-start-0" value="<?= e($nextCode ?? old('code', 'DEV-' . date('Y') . '-001')) ?>" readonly style="background-color: #F8FAFC !important; color: #059669 !important; cursor: not-allowed;" title="Código generado automáticamente por Devioz 24">
                         </div>
                     </div>
 

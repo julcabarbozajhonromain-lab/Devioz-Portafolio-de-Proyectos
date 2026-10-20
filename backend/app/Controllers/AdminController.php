@@ -17,7 +17,7 @@ use App\Services\SonarQubeService;
 use InvalidArgumentException;
 
 /**
- * Devioz OS — Controlador de Administración y Gestión TI
+ * Devioz 24 — Controlador de Administración y Gestión TI
  */
 class AdminController extends BaseController
 {
@@ -59,7 +59,7 @@ class AdminController extends BaseController
         $rejectedProjects = $fetchProjectsByStatus('rejected');
 
         return $this->view('admin/review', [
-            'title'            => 'Tablero Kanban de Revisión — Devioz OS',
+            'title'            => 'Tablero Kanban de Revisión — Devioz 24',
             'pendingProjects'  => $pendingProjects,
             'inReviewProjects' => $inReviewProjects,
             'approvedProjects' => $approvedProjects,
@@ -284,7 +284,7 @@ class AdminController extends BaseController
         );
 
         return $this->view('admin/assignments', [
-            'title'              => 'Panel de Asignación de Proyectos — Devioz OS',
+            'title'              => 'Panel de Asignación de Proyectos — Devioz 24',
             'unassigned'         => array_map(fn($r) => new User($r), $unassigned),
             'assigned'           => $assigned,
             'unassignedProjects' => $unassignedProjects,

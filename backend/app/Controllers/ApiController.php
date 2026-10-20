@@ -14,7 +14,7 @@ use App\Models\User;
 use PDO;
 
 /**
- * Devioz OS — Controlador de APIs Internas
+ * Devioz 24 — Controlador de APIs Internas
  * Proporciona endpoints para Búsqueda Global Spotlight (Ctrl+K) y el Asistente Virtual Devioz Bot
  */
 class ApiController extends BaseController
@@ -216,7 +216,7 @@ class ApiController extends BaseController
 
         // 1. Saludos, Identidad y Ayuda
         if (preg_match('/^(?:hola|buen|buenos|buenas|hey|que tal|saludos|quien eres|quien sos|ayuda|help|comandos|menu|opciones)\b/i', $q)) {
-            return "**¡Hola{$userGreetingName}! Soy LABVA**, tu asistente técnica en **Devioz OS**.\n\n"
+            return "**¡Hola{$userGreetingName}! Soy LABVA**, tu asistente técnica en **Devioz 24**.\n\n"
                 . "Puedo ayudarte con información en tiempo real sobre el portafolio corporativo:\n\n"
                 . "• **Proyectos:** Consulta estado, hitos o tecnologías (ej: *'cómo va DEV-2026-005'* o *'proyectos con react'*).\n"
                 . "• **Desarrolladores:** Consulta su proyecto actual o historial (ej: *'información de Richar Lopez'*).\n"
@@ -411,7 +411,7 @@ class ApiController extends BaseController
             $assigned = Project::count("status = 'assigned'");
             $devsCount = User::count("role = 'developer' AND active = 1");
 
-            return "**Estado Global de Proyectos en Devioz OS:**\n\n"
+            return "**Estado Global de Proyectos en Devioz 24:**\n\n"
                 . "• **Total de Proyectos:** {$total}\n"
                 . "• **Aprobados:** {$approved}\n"
                 . "• **En Revisión:** {$inReview}\n"

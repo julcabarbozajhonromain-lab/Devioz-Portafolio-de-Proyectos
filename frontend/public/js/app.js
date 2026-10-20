@@ -1,5 +1,5 @@
 /**
- * DEVIOZ OS — JavaScript Enterprise Suite v3.0 (Devioz UI/UX Architecture)
+ * DEVIOZ 24 — JavaScript Enterprise Suite v3.0 (Devioz UI/UX Architecture)
  * Video Lightbox, Reels (Shorts), Command Palette (Ctrl+K), LABVA AI, Modales & Kanban
  */
 
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             if (typeof fn === 'function') fn();
         } catch (e) {
-            console.warn(`[Devioz OS] Error inicializando módulo ${name}:`, e);
+            console.warn(`[Devioz 24] Error inicializando módulo ${name}:`, e);
         }
     });
 });
@@ -957,7 +957,7 @@ function initDeviozBot() {
             } else if (state === 'happy') {
                 statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #16A34A;">●</span> Respuesta lista';
             } else {
-                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #16A34A;">●</span> En línea &bull; Asistente Devioz OS';
+                statusEl.innerHTML = '<span class="bot-status-dot-inline" style="color: #16A34A;">●</span> En línea &bull; Asistente Devioz 24';
             }
         }
     }
@@ -2020,7 +2020,7 @@ function initStatsChart() {
             }
         })
         .catch((err) => {
-            console.warn('[Devioz OS] Usando estadísticas base para gráfica:', err);
+            console.warn('[Devioz 24] Usando estadísticas base para gráfica:', err);
             renderChart(null, null);
         });
 }

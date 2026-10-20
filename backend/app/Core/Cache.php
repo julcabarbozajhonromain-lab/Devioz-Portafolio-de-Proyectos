@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core;
 
 /**
- * Devioz OS — Sistema de Almacenamiento en Caché de Alto Rendimiento (File & In-Memory Cache)
+ * Devioz 24 — Sistema de Almacenamiento en Caché de Alto Rendimiento (File & In-Memory Cache)
  * Permite caching de catálogos, sedes, estadísticas y consultas recurrentes para evitar sobrecarga de BD.
  */
 final class Cache

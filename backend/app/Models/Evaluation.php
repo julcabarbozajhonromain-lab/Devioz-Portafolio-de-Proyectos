@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Auditoría y Dictamen de Calidad QA
+ * Devioz 24 — Modelo de Auditoría y Dictamen de Calidad QA
  */
 class Evaluation extends Model
 {

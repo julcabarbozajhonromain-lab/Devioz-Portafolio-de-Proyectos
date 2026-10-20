@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 /**
- * Devioz OS — CLI Artisan & Maintenance Console
+ * Devioz 24 — CLI Artisan & Maintenance Console
  * Provee compatibilidad para comandos de optimización, mantenimiento y caché.
  */
 
@@ -16,7 +16,7 @@ require_once __DIR__ . '/backend/bootstrap/app.php';
 $argv = $_SERVER['argv'] ?? [];
 $command = $argv[1] ?? 'list';
 
-echo "\n\033[36mDevioz OS Enterprise Suite CLI v3.0\033[0m\n\n";
+echo "\n\033[36mDevioz 24 Enterprise Suite CLI v3.0\033[0m\n\n";
 
 switch ($command) {
     case 'optimize:clear':

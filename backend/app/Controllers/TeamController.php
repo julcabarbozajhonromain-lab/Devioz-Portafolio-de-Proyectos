@@ -8,7 +8,7 @@ use App\Core\Database;
 use App\Models\User;
 
 /**
- * Devioz OS — Directorio de Equipo y Desarrolladores
+ * Devioz 24 — Directorio de Equipo y Desarrolladores
  */
 class TeamController extends BaseController
 {
@@ -50,7 +50,7 @@ class TeamController extends BaseController
         $members = $db->fetchAll($sql, $params);
 
         return $this->view('team/index', [
-            'title'   => 'Directorio del Equipo — Devioz OS',
+            'title'   => 'Directorio del Equipo — Devioz 24',
             'members' => $members,
             'search'  => $search,
             'sede'    => $sede,

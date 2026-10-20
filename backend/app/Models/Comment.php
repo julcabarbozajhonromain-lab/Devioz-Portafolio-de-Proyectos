@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Comentario e Hilos de Proyecto
+ * Devioz 24 — Modelo de Comentario e Hilos de Proyecto
  */
 class Comment extends Model
 {

@@ -28,7 +28,7 @@ $appName = (string) config('app.name', 'Devioz 24');
     <!-- Bootstrap 5.3.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <!-- Estilos Customizados Devioz OS v3.0 -->
+    <!-- Estilos Customizados Devioz 24 v3.0 -->
     <link rel="stylesheet" href="<?= asset('css/custom.css') ?>">
 
     <!-- Pre-hidratación inmediata de Sidebar y Tema Visual para evitar parpadeos -->
@@ -210,7 +210,7 @@ $appName = (string) config('app.name', 'Devioz 24');
                 </button>
             </form>
             <div class="bot-footer-caption">
-                DEVIOZ OS AI &bull; ASISTENCIA TÉCNICA Y OPERATIVA
+                DEVIOZ 24 AI &bull; ASISTENCIA TÉCNICA Y OPERATIVA
             </div>
         </div>
     </div>

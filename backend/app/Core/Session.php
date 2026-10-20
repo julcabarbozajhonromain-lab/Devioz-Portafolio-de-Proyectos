@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core;
 
 /**
- * Devioz OS — Gestor Seguro de Sesiones, Mensajes Flash y Tokens CSRF
+ * Devioz 24 — Gestor Seguro de Sesiones, Mensajes Flash y Tokens CSRF
  */
 final class Session
 {

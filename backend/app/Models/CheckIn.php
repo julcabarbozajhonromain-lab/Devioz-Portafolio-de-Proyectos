@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Check-In Diario (Daily Standup)
+ * Devioz 24 — Modelo de Check-In Diario (Daily Standup)
  */
 class CheckIn extends Model
 {

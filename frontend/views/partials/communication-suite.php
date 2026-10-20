@@ -93,7 +93,7 @@ if (!$currentUser) return;
             </button>
         </form>
         <div class="text-center text-muted" style="font-size: 0.65rem; margin-top: 4px;">
-            DEVIOZ OS &bull; COMUNICACIÓN OFICIAL CIFRADA
+            DEVIOZ 24 &bull; COMUNICACIÓN OFICIAL CIFRADA
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Devioz OS — Vista de Configuración de Cuenta y Perfil
+ * Devioz 24 — Vista de Configuración de Cuenta y Perfil
  * Estilo Visual: Devioz SaaS Moderno (Light Palette, Clean Tabs, Enriched Panels)
  */
 

@@ -10,7 +10,7 @@ use App\Models\User;
 use PDO;
 
 /**
- * Devioz OS — LABVA AI Service
+ * Devioz 24 — LABVA AI Service
  * Sistema de Inteligencia Artificial Dual-Provider con Fallback Automático:
  * 1. Groq Cloud LPU API (Llama 3.3 70B / 3.1 8B — ultra rápido y estable)
  * 2. Google Gemini API (Gemini 1.5 Flash — respaldo secundario)
@@ -178,7 +178,7 @@ class LabvaAiService
     }
 
     /**
-     * Construye un contexto en tiempo real con la base de datos de Devioz OS
+     * Construye un contexto en tiempo real con la base de datos de Devioz 24
      */
     private function buildSystemContext(User $currentUser): string
     {
@@ -228,8 +228,8 @@ class LabvaAiService
         }, $topProjects, array_keys($topProjects)));
 
         return <<<PROMPT
-Eres LABVA, el sistema de inteligencia artificial y asistente técnico de Devioz OS.
-Eres claro, resolutivo y cercano. Tu identidad y forma de ayudar pertenecen a Devioz OS.
+Eres LABVA, el sistema de inteligencia artificial y asistente técnico de Devioz 24.
+Eres claro, resolutivo y cercano. Tu identidad y forma de ayudar pertenecen a Devioz 24.
 Tienes acceso únicamente a información que el rol consultante puede ver. No reveles ni infieras datos fuera de ese alcance.
 
 ESTILO DE CONVERSACIÓN:
@@ -304,7 +304,7 @@ PROMPT;
 
         // 1. Saludos e Identidad
         if (preg_match('/^(?:hola|buen|buenos|buenas|hey|que tal|saludos|quien eres|quien sos|ayuda|help|comandos|menu|opciones)\b/i', $q)) {
-            return "**¡Hola! Soy LABVA**, tu asistente de Devioz OS. Puedo ayudarte a revisar información disponible y resolver dudas técnicas.\n\n"
+            return "**¡Hola! Soy LABVA**, tu asistente de Devioz 24. Puedo ayudarte a revisar información disponible y resolver dudas técnicas.\n\n"
                 . "Por ejemplo, puedes preguntarme por:\n\n"
                 . "• **Proyectos:** Estado, hitos, tecnologías y entregables (ej: *'cómo va DEV-2026-002'* o *'proyectos con react'*).\n"
                 . "• **Desarrolladores:** Asignaciones y disponibilidad (ej: *'desarrolladores libres'*).\n"
@@ -364,7 +364,7 @@ PROMPT;
             $assigned = Project::count("({$scope['where']}) AND status = 'assigned'", $scope['params']);
             $devsCount = $isAdmin ? User::count("role = 'developer' AND active = 1") : null;
 
-            return ($isAdmin ? "**Estado Global de Proyectos en Devioz OS:**\n\n" : "**Estado de tus proyectos asignados:**\n\n")
+            return ($isAdmin ? "**Estado Global de Proyectos en Devioz 24:**\n\n" : "**Estado de tus proyectos asignados:**\n\n")
                 . "• **Total de Proyectos:** {$total}\n"
                 . "• **Aprobados:** {$approved}\n"
                 . "• **En Revisión:** {$inReview}\n"
@@ -482,7 +482,7 @@ PROMPT;
             : 'No existe una auditoría registrada. No hay métricas, ejecuciones de herramientas ni hallazgos verificados disponibles.';
 
         $systemPrompt = <<<PROMPT
-Eres CoPilot LABVA AI, el asistente técnico especializado de ingeniería de software de Devioz OS.
+Eres CoPilot LABVA AI, el asistente técnico especializado de ingeniería de software de Devioz 24.
 Tu función es auditar, analizar y brindar recomendaciones de arquitectura, seguridad (OWASP) y calidad (ISO/IEC 25010) para el proyecto en curso.
 
 DATOS DEL PROYECTO ACTUAL:

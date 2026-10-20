@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 /**
- * Devioz Classic — Instalador y Migrador CLI Automatizado
+ * Devioz 24 — Instalador y Migrador CLI Automatizado
  * Uso: php backend/bin/setup.php
  */
 
 echo "\n=======================================================\n";
-echo "  DEVIOZ CLASSIC — INSTALADOR AUTOMÁTICO DE BASE DE DATOS\n";
+echo "  DEVIOZ 24 — INSTALADOR AUTOMÁTICO DE BASE DE DATOS\n";
 echo "=======================================================\n\n";
 
 $projectRoot = dirname(__DIR__, 2);
@@ -27,7 +27,7 @@ if (file_exists($envFile)) {
 
 $host = getenv('DB_HOST') ?: '127.0.0.1';
 $port = (int)(getenv('DB_PORT') ?: 3306);
-$dbName = getenv('DB_DATABASE') ?: 'devioz_classic';
+$dbName = getenv('DB_DATABASE') ?: 'devioz_24';
 $user = getenv('DB_USERNAME') ?: 'root';
 $pass = getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '';
 

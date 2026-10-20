@@ -10,7 +10,7 @@ use App\Models\LoungeReaction;
 use App\Models\User;
 
 /**
- * Devioz OS — Controlador de Dev Lounge (Comunidad de Consultoría Tecnológica)
+ * Devioz 24 — Controlador de Dev Lounge (Comunidad de Consultoría Tecnológica)
  * Intercambio de arquitectura cloud, data pipelines, DevOps, snippets, links enriquecidos y debate técnico.
  */
 class LoungeController extends BaseController

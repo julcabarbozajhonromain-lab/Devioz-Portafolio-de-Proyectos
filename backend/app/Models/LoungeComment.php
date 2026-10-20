@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Comentarios en Publicaciones del Dev Lounge
+ * Devioz 24 — Modelo de Comentarios en Publicaciones del Dev Lounge
  */
 class LoungeComment extends Model
 {

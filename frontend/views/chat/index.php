@@ -98,7 +98,7 @@ $directCount = count($contacts);
                             <span class="chat-time text-muted">Hoy</span>
                         </div>
                         <div class="chat-snippet text-truncate">
-                            ¡Hola! Soy su asistente de Devioz OS. Puedo ofrecerle ayuda para...
+                            ¡Hola! Soy su asistente de Devioz 24. Puedo ofrecerle ayuda para...
                         </div>
                     </div>
                 </div>
@@ -288,7 +288,7 @@ $directCount = count($contacts);
                                 <strong>Soporte de Devioz &bull; CoPilot</strong>
                             </div>
                             <div class="msg-body">
-                                <p class="mb-2">¡Hola! Soy el asistente de <strong>Devioz OS</strong>.</p>
+                                <p class="mb-2">¡Hola! Soy el asistente de <strong>Devioz 24</strong>.</p>
                                 <p class="mb-2">Puedo ofrecerle ayuda técnica para:</p>
                                 <ul class="mb-3 ps-3">
                                     <li>Auditar estándares de calidad de software <strong>ISO/IEC 25010</strong></li>
@@ -321,7 +321,7 @@ $directCount = count($contacts);
                                     <div class="attachment-body">
                                         <div class="fw-bold text-dark small mb-1">Asistente de IA en los chats corporativos</div>
                                         <div class="text-secondary small">
-                                            En los chats de Devioz OS cuentas con un copiloto de ingeniería de software diseñado para acelerar tus revisiones de código y dictámenes de QA.
+                                            En los chats de Devioz 24 cuentas con un copiloto de ingeniería de software diseñado para acelerar tus revisiones de código y dictámenes de QA.
                                         </div>
                                     </div>
                                 </div>

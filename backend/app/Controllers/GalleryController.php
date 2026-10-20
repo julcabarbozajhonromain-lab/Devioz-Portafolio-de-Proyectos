@@ -8,7 +8,7 @@ use App\Core\Database;
 use App\Models\Project;
 
 /**
- * Devioz OS — Galería y Portafolio Público de Proyectos
+ * Devioz 24 — Galería y Portafolio Público de Proyectos
  */
 class GalleryController extends BaseController
 {
@@ -44,7 +44,7 @@ class GalleryController extends BaseController
         $projects = array_map(fn($r) => new Project($r), $rows);
 
         return $this->view('gallery/index', [
-            'title'    => 'Galería Pública de Proyectos — Devioz OS',
+            'title'    => 'Galería Pública de Proyectos — Devioz 24',
             'projects' => $projects,
             'search'   => $search,
             'sede'     => $sede,

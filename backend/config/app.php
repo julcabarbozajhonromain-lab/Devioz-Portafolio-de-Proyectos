@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Devioz OS — Configuración General de la Aplicación
+ * Devioz 24 — Configuración General de la Aplicación
  */
 
 return [

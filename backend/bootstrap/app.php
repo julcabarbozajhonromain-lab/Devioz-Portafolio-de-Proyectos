@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Devioz OS — Archivo de Arranque y Bootstrap de la Aplicación
+ * Devioz 24 — Archivo de Arranque y Bootstrap de la Aplicación
  */
 
 // 1. Autoloader PSR-4 Nativo (Funciona con o sin composer dump-autoload)
@@ -59,7 +59,7 @@ if (file_exists($envFile)) {
     }
 }
 
-// 4. Configuración de Zona Horaria y Manejadores Globales de Error (Devioz OS Enterprise)
+// 4. Configuración de Zona Horaria y Manejadores Globales de Error (Devioz 24 Enterprise)
 date_default_timezone_set(config('app.timezone', 'America/Lima'));
 
 if (config('app.debug', false)) {

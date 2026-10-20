@@ -11,7 +11,7 @@ use App\Core\View;
 use App\Models\User;
 
 /**
- * Devioz OS — Controlador Base
+ * Devioz 24 — Controlador Base
  */
 abstract class BaseController
 {

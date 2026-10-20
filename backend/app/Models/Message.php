@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Mensajería Interna y Notificaciones
+ * Devioz 24 — Modelo de Mensajería Interna y Notificaciones
  */
 class Message extends Model
 {

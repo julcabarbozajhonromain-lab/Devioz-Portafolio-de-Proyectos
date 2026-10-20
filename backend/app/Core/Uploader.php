@@ -7,7 +7,7 @@ namespace App\Core;
 use RuntimeException;
 
 /**
- * Devioz OS — Gestor de Almacenamiento Seguro de Archivos (Uploads)
+ * Devioz 24 — Gestor de Almacenamiento Seguro de Archivos (Uploads)
  */
 final class Uploader
 {

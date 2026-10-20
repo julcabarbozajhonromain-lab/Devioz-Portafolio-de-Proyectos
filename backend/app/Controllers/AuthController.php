@@ -11,7 +11,7 @@ use App\Models\AuditLog;
 use App\Models\User;
 
 /**
- * Devioz OS — Controlador de Autenticación y Registro
+ * Devioz 24 — Controlador de Autenticación y Registro
  */
 class AuthController extends BaseController
 {

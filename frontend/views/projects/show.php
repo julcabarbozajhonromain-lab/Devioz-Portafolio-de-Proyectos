@@ -607,7 +607,7 @@ $owaspChecklist = [];?>
                     actionsBar.classList.add('d-flex');
                 }
                 if (engineInfo) {
-                    engineInfo.textContent = `Modelo: ${data.model || 'Devioz OS'} (${data.provider || 'local'})`;
+                    engineInfo.textContent = `Modelo: ${data.model || 'Devioz 24'} (${data.provider || 'local'})`;
                 }
             })
             .catch(err => {

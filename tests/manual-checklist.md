@@ -1,4 +1,4 @@
-# 🧪 Checklist de Pruebas y Aseguramiento de Calidad (QA) — Devioz Classic
+# 🧪 Checklist de Pruebas y Aseguramiento de Calidad (QA) — Devioz 24
 
 Este documento describe la suite de pruebas funcionales, de seguridad y de experiencia de usuario (UX) para validar que el sistema cumple al 100% con los requerimientos académicos antes de su puesta en producción.
 

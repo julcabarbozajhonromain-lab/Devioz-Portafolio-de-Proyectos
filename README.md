@@ -1,6 +1,6 @@
-# 🚀 DEVIOZ CLASSIC — Sistema de Gestión de Prácticas Profesionales
+# 🚀 DEVIOZ 24 — Plataforma de Gestión de Proyectos de Software
 
-**Devioz Classic** es una plataforma académica de nivel empresarial diseñada para la gestión, seguimiento, revisión y acreditación de prácticas profesionales universitarias e institucionales. 
+**Devioz 24** es una plataforma para organizar proyectos de software, coordinar equipos, revisar entregables y dar seguimiento a la calidad durante el ciclo de desarrollo.
 
 El sistema implementa una arquitectura **MVC (Model-View-Controller)** estricta desarrollada en **PHP 8.2 puro**, **MySQL**, **Bootstrap 5**, **CSS3 personalizado** y **JavaScript Vanilla**, prescindiendo intencionalmente de frameworks pesados o pipelines de compilación en Node.js para garantizar un desempeño ultraligero y máxima portabilidad en servidores compartidos (cPanel) y entornos locales (XAMPP).
 
@@ -10,7 +10,7 @@ El sistema implementa una arquitectura **MVC (Model-View-Controller)** estricta 
 
 El proyecto original concebido en Laravel + Inertia/Vue presentaba fricciones severas en entornos de producción tradicionales: consumo excesivo de memoria RAM (40 a 80 MB por petición), roturas en las cadenas de compilación de NPM en servidores sin Node, carpetas `vendor` y `node_modules` de más de 150 MB y lentitud en hostings compartidos económicos.
 
-**Devioz Classic resuelve estas limitaciones de raíz:**
+**Devioz 24 resuelve estas limitaciones de raíz:**
 - **Consumo Mínimo de Recursos:** Huella de memoria inferior a **4 MB de RAM** por request y tiempos de respuesta de **10 a 25 milisegundos**.
 - **Despliegue Cero-Compilación (Zero Build Steps):** No requiere `npm run build`, Vite ni Webpack. Todo el CSS y JS nativo se sirve de forma directa con cache-busting automático.
 - **Portabilidad Universal:** Compatible de inmediato con cualquier hosting cPanel estándar con PHP 8.2+ y Apache, así como entornos locales XAMPP, WampServer o contenedores Docker básicos.
@@ -65,13 +65,13 @@ Desde la consola o mediante **phpMyAdmin** (`http://localhost/phpmyadmin`):
    ```
 2. Importa la semilla de datos iniciales:
    ```bash
-   mysql -u root devioz_classic < C:\xampp\htdocs\Devioz-Portafolio-de-Proyectos\database\seed.sql
+   mysql -u root devioz_24 < C:\xampp\htdocs\Devioz-Portafolio-de-Proyectos\database\seed.sql
    ```
 
 ### Paso 4: Configuración de Entorno (.env)
 Verifica que el archivo `.env` en la raíz contenga los parámetros de conexión:
 ```env
-APP_NAME="Devioz Classic"
+APP_NAME="Devioz 24"
 APP_ENV=local
 APP_DEBUG=true
 APP_URL=http://localhost/Devioz-Portafolio-de-Proyectos/public
@@ -79,7 +79,7 @@ APP_TIMEZONE=America/Lima
 
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=devioz_classic
+DB_DATABASE=devioz_24
 DB_USERNAME=root
 DB_PASSWORD=
 ```

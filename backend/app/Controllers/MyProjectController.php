@@ -19,7 +19,7 @@ use App\Policies\ProjectPolicy;
 use App\Services\ProjectStatusTransition;
 
 /**
- * Devioz OS — Controlador del Espacio de Trabajo del Desarrollador (Mi Proyecto)
+ * Devioz 24 — Controlador del Espacio de Trabajo del Desarrollador (Mi Proyecto)
  */
 class MyProjectController extends BaseController
 {
@@ -30,7 +30,7 @@ class MyProjectController extends BaseController
 
         if (!$project) {
             return $this->view('my-project/empty', [
-                'title' => 'Mi Proyecto — Devioz OS',
+                'title' => 'Mi Proyecto — Devioz 24',
             ]);
         }
 

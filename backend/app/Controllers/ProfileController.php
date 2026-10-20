@@ -10,7 +10,7 @@ use App\Models\AuditLog;
 use App\Models\User;
 
 /**
- * Devioz OS — Controlador de Perfil y Configuración de Cuenta
+ * Devioz 24 — Controlador de Perfil y Configuración de Cuenta
  * Permite la actualización de datos personales, modificación de contraseña y subida de avatar.
  */
 class ProfileController extends BaseController
@@ -23,7 +23,7 @@ class ProfileController extends BaseController
         }
 
         return $this->view('profile/index', [
-            'title' => 'Configuración de Cuenta y Perfil — Devioz OS',
+            'title' => 'Configuración de Cuenta y Perfil — Devioz 24',
             'user'  => $user,
         ]);
     }

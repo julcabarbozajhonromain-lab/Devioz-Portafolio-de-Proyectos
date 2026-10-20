@@ -7,7 +7,7 @@ namespace App\Models;
 use App\Core\Auth;
 
 /**
- * Devioz OS — Modelo de Trazabilidad y Auditoría de Seguridad
+ * Devioz 24 — Modelo de Trazabilidad y Auditoría de Seguridad
  */
 class AuditLog extends Model
 {

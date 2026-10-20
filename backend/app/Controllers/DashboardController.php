@@ -11,7 +11,7 @@ use App\Models\Project;
 use App\Models\User;
 
 /**
- * Devioz OS — Controlador del Panel de Control (Dashboard)
+ * Devioz 24 — Controlador del Panel de Control (Dashboard)
  */
 class DashboardController extends BaseController
 {
@@ -128,7 +128,7 @@ class DashboardController extends BaseController
         );
 
         return $this->view('dashboard/developer', [
-            'title'           => 'Mi Panel — Devioz OS',
+            'title'           => 'Mi Panel — Devioz 24',
             'project'         => $activeProject,
             'milestones'      => $milestones,
             'deliveries'      => $deliveries,

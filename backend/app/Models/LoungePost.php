@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Publicación en Dev Lounge (Muro de Comunidad de Consultoría)
+ * Devioz 24 — Modelo de Publicación en Dev Lounge (Muro de Comunidad de Consultoría)
  */
 class LoungePost extends Model
 {

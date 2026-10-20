@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Devioz OS — Catálogo de Sustentaciones en Video (Devioz Reels)
+ * Devioz 24 — Catálogo de Sustentaciones en Video (Devioz Reels)
  * Estilo Bilibili ("Bibi") con Vidrio Líquido (Liquid Glass), Botón Azul Play al Hover y Modal Cinema
  */
 ?>

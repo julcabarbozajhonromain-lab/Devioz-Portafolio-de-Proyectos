@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Archivo Técnico Adjunto
+ * Devioz 24 — Modelo de Archivo Técnico Adjunto
  */
 class ProjectFile extends Model
 {

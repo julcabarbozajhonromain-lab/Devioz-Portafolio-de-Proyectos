@@ -9,7 +9,7 @@ $currentUri = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '/';
 ?>
 
 <header class="topbar">
-    <!-- Izquierda: Botón Hamburguesa para Móvil (Sin texto Devioz OS, estilo oficial Devioz) -->
+    <!-- Izquierda: Botón Hamburguesa para Móvil (Sin texto Devioz 24, estilo oficial Devioz) -->
     <div class="d-flex align-items-center flex-shrink-0" id="topbarLeftArea">
         <button type="button" class="sidebar-nav-toggle-btn flex-shrink-0 d-lg-none me-2" id="sidebarToggleBtn" aria-label="Abrir barra lateral" title="Abrir barra lateral">
             <i class="fa-solid fa-bars text-white"></i>

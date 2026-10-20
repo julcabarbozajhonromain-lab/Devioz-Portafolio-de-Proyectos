@@ -15,7 +15,7 @@ use App\Policies\ProjectPolicy;
 use App\Services\ProjectStatusTransition;
 
 /**
- * Devioz OS — Controlador de Gestión de Proyectos
+ * Devioz 24 — Controlador de Gestión de Proyectos
  */
 class ProjectController extends BaseController
 {
@@ -71,7 +71,7 @@ class ProjectController extends BaseController
         ];
 
         return $this->view('projects/index', [
-            'title'        => 'Gestión de Proyectos & SDLC — Devioz OS',
+            'title'        => 'Gestión de Proyectos & SDLC — Devioz 24',
             'projects'     => $projects,
             'search'       => $search,
             'status'       => $status,
@@ -114,7 +114,7 @@ class ProjectController extends BaseController
         }
 
         return $this->view('projects/show', [
-            'title'       => "{$project->name} — Devioz OS",
+            'title'       => "{$project->name} — Devioz 24",
             'project'     => $project,
             'milestones'  => $milestones,
             'deliveries'  => $deliveries,
@@ -152,7 +152,7 @@ class ProjectController extends BaseController
         $nextCode = Project::generateNextCode();
 
         return $this->view('projects/create', [
-            'title'      => 'Asignar Nuevo Proyecto — Devioz OS',
+            'title'      => 'Asignar Nuevo Proyecto — Devioz 24',
             'developers' => $availableDevelopers,
             'nextCode'   => $nextCode,
         ]);
@@ -289,7 +289,7 @@ class ProjectController extends BaseController
         $developers = User::whereRaw("role = 'developer' AND active = 1 AND deleted_at IS NULL", [], 'name ASC');
 
         return $this->view('projects/edit', [
-            'title'      => "Editar {$project->code} — Devioz OS",
+            'title'      => "Editar {$project->code} — Devioz 24",
             'project'    => $project,
             'developers' => $developers,
         ]);

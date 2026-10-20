@@ -7,7 +7,7 @@ namespace App\Core;
 use RuntimeException;
 
 /**
- * Devioz OS — Enrutador HTTP Ligero con Soporte de Middleware y Parámetros Dinámicos
+ * Devioz 24 — Enrutador HTTP Ligero con Soporte de Middleware y Parámetros Dinámicos
  */
 final class Router
 {

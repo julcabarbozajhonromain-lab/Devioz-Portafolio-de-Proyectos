@@ -10,7 +10,7 @@ use PDOStatement;
 use RuntimeException;
 
 /**
- * Devioz OS — Gestor Singleton de Conexión y Consultas a Base de Datos (PDO)
+ * Devioz 24 — Gestor Singleton de Conexión y Consultas a Base de Datos (PDO)
  * Garantiza el uso estricto de Prepared Statements en toda la aplicación.
  */
 final class Database
@@ -27,7 +27,7 @@ final class Database
             'mysql:host=%s;port=%d;dbname=%s;charset=%s',
             $config['host'] ?? '127.0.0.1',
             $config['port'] ?? 3306,
-            $config['database'] ?? 'devioz_classic',
+            $config['database'] ?? 'devioz_24',
             $config['charset'] ?? 'utf8mb4'
         );
 

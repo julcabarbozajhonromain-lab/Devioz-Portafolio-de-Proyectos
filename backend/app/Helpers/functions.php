@@ -6,7 +6,7 @@ use App\Core\Auth;
 use App\Core\Session;
 
 /**
- * Devioz OS — Funciones Helper Globales
+ * Devioz 24 — Funciones Helper Globales
  */
 
 if (!function_exists('e')) {
@@ -314,7 +314,7 @@ if (!function_exists('getReelThumbnail')) {
 
 if (!function_exists('cache')) {
     /**
-     * Helper de acceso a la caché de Devioz OS.
+     * Helper de acceso a la caché de Devioz 24.
      */
     function cache(?string $key = null, mixed $value = null, int $ttl = 3600): mixed
     {

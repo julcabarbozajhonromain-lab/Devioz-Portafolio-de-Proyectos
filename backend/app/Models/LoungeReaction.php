@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Reacciones Interactivas en Dev Lounge
+ * Devioz 24 — Modelo de Reacciones Interactivas en Dev Lounge
  */
 class LoungeReaction extends Model
 {

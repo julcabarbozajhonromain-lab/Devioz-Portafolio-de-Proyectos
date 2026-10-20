@@ -7,7 +7,7 @@ namespace App\Core;
 use App\Models\User;
 
 /**
- * Devioz OS — Sistema Centralizado de Autenticación y Autorización
+ * Devioz 24 — Sistema Centralizado de Autenticación y Autorización
  */
 final class Auth
 {

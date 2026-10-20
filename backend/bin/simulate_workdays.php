@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Devioz Classic — Simulador de Ciclo Operativo (CLI)
+ * Devioz 24 — Simulador de Ciclo Operativo (CLI)
  * Simula 4 días completos de trabajo y más de 20 asignaciones de proyectos con standups,
  * hitos, entregables y evaluaciones técnicas.
  *
@@ -17,7 +17,7 @@ use App\Core\Database;
 $pdo = Database::getInstance()->getConnection();
 
 echo "\n=======================================================\n";
-echo "  DEVIOZ CLASSIC — SIMULADOR OPERATIVO CORPORATIVO\n";
+echo "  DEVIOZ 24 — SIMULADOR OPERATIVO CORPORATIVO\n";
 echo "  Simulación de 4 Días de Trabajo y >20 Asignaciones\n";
 echo "=======================================================\n\n";
 

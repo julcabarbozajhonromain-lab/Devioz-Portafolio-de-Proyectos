@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Proyecto Corporativo
+ * Devioz 24 — Modelo de Proyecto Corporativo
  */
 class Project extends Model
 {

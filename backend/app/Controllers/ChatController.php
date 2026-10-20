@@ -49,7 +49,7 @@ class ChatController extends BaseController
         );
 
         return $this->view('chat/index', [
-            'title' => 'Chats & Messenger — Devioz OS',
+            'title' => 'Chats & Messenger — Devioz 24',
             'currentUser' => $user,
             'contacts' => $contacts,
             'selectedContactId' => $selectedContactId,

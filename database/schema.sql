@@ -1,5 +1,5 @@
 -- ==============================================================================
--- DEVIOZ CLASSIC — Sistema de Gestión de Prácticas Profesionales
+-- DEVIOZ 24 — Plataforma de Gestión de Proyectos de Software
 -- Database Schema v1.0.0 (MySQL 8.0+ / MariaDB 10.4+)
 -- Engine: InnoDB | Charset: utf8mb4 | Collation: utf8mb4_unicode_ci
 -- ==============================================================================
@@ -8,8 +8,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "-05:00"; -- America/Lima
 
-CREATE DATABASE IF NOT EXISTS `devioz_classic` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `devioz_classic`;
+CREATE DATABASE IF NOT EXISTS `devioz_24` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `devioz_24`;
 
 -- ------------------------------------------------------------------------------
 -- 1. Tabla: users

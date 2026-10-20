@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Entrega de Avance (Delivery)
+ * Devioz 24 — Modelo de Entrega de Avance (Delivery)
  */
 class Delivery extends Model
 {

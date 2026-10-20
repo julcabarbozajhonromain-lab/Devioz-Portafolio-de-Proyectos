@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 /**
- * Devioz OS — Modelo de Hito de Proyecto (Milestone)
+ * Devioz 24 — Modelo de Hito de Proyecto (Milestone)
  */
 class Milestone extends Model
 {

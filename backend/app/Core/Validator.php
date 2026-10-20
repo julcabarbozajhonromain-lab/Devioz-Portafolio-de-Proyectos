@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core;
 
 /**
- * Devioz OS — Validador Declarativo de Formularios y Peticiones
+ * Devioz 24 — Validador Declarativo de Formularios y Peticiones
  */
 final class Validator
 {

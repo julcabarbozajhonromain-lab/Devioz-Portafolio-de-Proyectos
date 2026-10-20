@@ -1,5 +1,5 @@
 /* ==============================================================================
- * DEVIOZ OS — Hoja de Estilos Corporativa (Estándar Devioz Enterprise)
+ * DEVIOZ 24 — Hoja de Estilos Corporativa (Estándar Devioz Enterprise)
  * Tipografía: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
  * Paleta: Esmeralda #10B981, pizarra #1F2937 y superficies #F3F4F6
  * Bordes: #E5E7EB | Sombras: 0 1px 3px rgba(31, 41, 55, 0.05)
@@ -2631,7 +2631,7 @@ a:hover {
     transform: translateY(0) scale(1);
 }
 
-/* Cabecera Corporativa Azul Noche Devioz OS */
+/* Cabecera Corporativa Azul Noche Devioz 24 */
 .bot-window-header {
     padding: 0.85rem 1.15rem;
     background: #1F2937 !important;
@@ -6749,7 +6749,7 @@ body,
  * 4. LIGHT WARM GLASSMORPHISM & DEVIOZ WORKSPACE WALLPAPER ENGINE
  * ============================================================================== */
 /* ==============================================================================
- * 4. DEVIOZ CORPORATE DESIGN SYSTEM — DEVIOZ OS
+ * 4. DEVIOZ CORPORATE DESIGN SYSTEM — DEVIOZ 24
  * ============================================================================== */
 .sidebar,
 .sidebar .sidebar-header,
@@ -7526,7 +7526,7 @@ input[type="search"],
 }
 
 /* ========================================================================= */
-/* FIX GLOBAL: CONSISTENCIA, ENMARCADO Y CONTENCIÓN DE BOTONES (DEVIOZ OS) */
+/* FIX GLOBAL: CONSISTENCIA, ENMARCADO Y CONTENCIÓN DE BOTONES (DEVIOZ 24) */
 /* ========================================================================= */
 .btn {
     display: inline-flex;
@@ -9095,7 +9095,7 @@ body.theme-light {
 }
 
 /* ==============================================================================
- * DEVIOZ OS — TIPOGRAFÍA DE ALTO CONTRASTE (ESTÁNDAR Devioz WALLPAPER)
+ * DEVIOZ 24 — TIPOGRAFÍA DE ALTO CONTRASTE (ESTÁNDAR Devioz WALLPAPER)
  * Fuera de las tarjetas: Texto blanco puro (#FFFFFF) con sombra sutil contra el fondo.
  * Dentro de las tarjetas: Texto oscuro (#1F2937) de máxima legibilidad corporativa.
  * ============================================================================== */
@@ -9242,7 +9242,7 @@ body.theme-light {
 }
 
 /* ==============================================================================
- * Devioz OS — superficies translúcidas
+ * Devioz 24 — superficies translúcidas
  * Reemplazo de los fondos grises y opacos por vidrio esmerilado translúcido
  * ============================================================================== */
 
@@ -9419,7 +9419,7 @@ body.theme-light {
 }
 
 /* ==============================================================================
- * DEVIOZ OS — HOJA DE TRABAJO AMPLIA AL 100% DE ZOOM
+ * DEVIOZ 24 — HOJA DE TRABAJO AMPLIA AL 100% DE ZOOM
  * Permite que tablas, tableros y formularios respiren sin recortes ni márgenes excesivos
  * ============================================================================== */
 .main-content, .content-wrapper {

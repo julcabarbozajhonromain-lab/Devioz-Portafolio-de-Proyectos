@@ -1,10 +1,10 @@
 -- ==============================================================================
--- DEVIOZ CLASSIC — Datos Iniciales y Semilla de Pruebas (Seed Data)
+-- DEVIOZ 24 — Datos Iniciales y Semilla de Pruebas (Seed Data)
 -- Users: 2 Admins + 34 Developers reales distribuidos por sedes
 -- Local development seed only; never use sample accounts in production.
 -- ==============================================================================
 
-USE `devioz_classic`;
+USE `devioz_24`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -443,7 +443,7 @@ INSERT INTO `comments` (`id`, `project_id`, `user_id`, `content`, `created_at`) 
 INSERT INTO `messages` (`id`, `sender_id`, `receiver_id`, `project_id`, `subject`, `body`, `type`, `priority`, `read_at`, `created_at`) VALUES
 (
     1, 1, 9, 1,
-    'Bienvenido a Devioz Classic — Asignación de Proyecto DEV-2026-001',
+    'Bienvenido a Devioz 24 — Asignación de Proyecto DEV-2026-001',
     'Estimado Jhon, se te ha asignado el proyecto "Sistema de Gestión Web". Por favor revisa los hitos iniciales en tu panel y realiza tu primer check-in hoy.',
     'general',
     'normal',

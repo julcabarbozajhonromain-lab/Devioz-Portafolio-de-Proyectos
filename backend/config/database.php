@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 /**
- * Devioz Classic — Configuración de Conexión a Base de Datos (PDO)
+ * Devioz 24 — Configuración de Conexión a Base de Datos (PDO)
  */
 
 return [
     'driver' => 'mysql',
     'host' => getenv('DB_HOST') ?: '127.0.0.1',
     'port' => (int)(getenv('DB_PORT') ?: 3306),
-    'database' => getenv('DB_DATABASE') ?: 'devioz_classic',
+    'database' => getenv('DB_DATABASE') ?: 'devioz_24',
     'username' => getenv('DB_USERNAME') ?: 'root',
     'password' => getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '',
     'charset' => 'utf8mb4',

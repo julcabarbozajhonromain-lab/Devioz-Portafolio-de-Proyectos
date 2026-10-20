@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Devioz OS — Punto de Entrada Principal (Front Controller)
+ * Devioz 24 — Punto de Entrada Principal (Front Controller)
  */
 
 define('DEVIOZ_START', microtime(true));
