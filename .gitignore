@@ -21,6 +21,9 @@ frontend/public/uploads/deliveries/*
 !frontend/public/uploads/deliveries/.htaccess
 /backend/storage/private/
 
+# Local database exports can contain sensitive project and user data
+/database/backups/
+
 # IDE and OS Files
 .idea/
 .vscode/
