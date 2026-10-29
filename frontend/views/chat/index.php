@@ -506,6 +506,7 @@ $directCount = count($contacts);
                         </button>
                     </div>
                 </form>
+                <div id="deviozChatActionStatus" class="small px-3 pt-2" role="status" aria-live="polite"></div>
             </footer>
 
         </main>

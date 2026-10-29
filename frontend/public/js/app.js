@@ -2074,6 +2074,7 @@ function initDeviozSuite() {
     const requestCallForm = document.getElementById('deviozRequestCallForm');
     const callRequestReason = document.getElementById('callRequestReason');
     const callRequestQuickSelect = document.getElementById('callRequestQuickSelect');
+    const callRequestFeedback = document.getElementById('callRequestFeedback');
 
     // Elementos de Notificaciones
     const notifCountBadge = document.getElementById('topbarNotificationsCount');
@@ -2363,10 +2364,21 @@ function initDeviozSuite() {
     }
 
     if (requestCallForm) {
-        requestCallForm.addEventListener('submit', (e) => {
+        requestCallForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!activeContactId) {
+                if (callRequestFeedback) {
+                    callRequestFeedback.className = 'small text-danger';
+                    callRequestFeedback.textContent = 'Selecciona un contacto o inicia la solicitud desde un proyecto asignado.';
+                }
+                return;
+            }
             const reason = callRequestReason ? callRequestReason.value.trim() : '';
 
+            if (callRequestFeedback) {
+                callRequestFeedback.className = 'small text-secondary';
+                callRequestFeedback.textContent = 'Enviando invitación y creando la sala…';
+            }
             fetch(`${baseUrl}/api/chat/request-call`, {
                 method: 'POST',
                 headers: {
@@ -2379,7 +2391,13 @@ function initDeviozSuite() {
                     reason: reason || 'Revisión técnica urgente'
                 })
             })
-            .then(res => res.json())
+            .then(async res => {
+                const data = await res.json();
+                if (!res.ok || !data.success || !data.room_url) {
+                    throw new Error(data.message || data.error || 'No se pudo enviar la solicitud.');
+                }
+                return data;
+            })
             .then(data => {
                 if (data.success) {
                     const modal = bootstrap.Modal.getInstance(requestCallModalEl);
@@ -2396,7 +2414,13 @@ function initDeviozSuite() {
                     }
                 }
             })
-            .catch(err => console.error('Error enviando solicitud de llamada:', err));
+            .catch(err => {
+                console.error('Error enviando solicitud de llamada:', err);
+                if (callRequestFeedback) {
+                    callRequestFeedback.className = 'small text-danger';
+                    callRequestFeedback.textContent = err.message || 'No se pudo enviar la solicitud.';
+                }
+            });
         });
     }
 
@@ -2441,7 +2465,9 @@ function initDeviozSuite() {
                         item.addEventListener('click', () => {
                             const cId = item.getAttribute('data-contact-id');
                             const action = item.getAttribute('data-action');
-                            if (action === '#chat-open' || cId) {
+                            if (action && action.startsWith('https://meet.jit.si/')) {
+                                launchDeviozVideoMeet(action);
+                            } else if (action === '#chat-open' || cId) {
                                 openChat(cId);
                             } else if (action && !action.startsWith('#')) {
                                 window.location.href = action;
@@ -3396,6 +3422,7 @@ function initDeviozMessenger() {
     const chatBotBadge = document.getElementById('activeChatBotBadge');
     const composerForm = document.getElementById('deviozComposerForm');
     const messageInput = document.getElementById('deviozMessageInput');
+    const actionStatus = document.getElementById('deviozChatActionStatus');
     const searchInput = document.getElementById('deviozChatSearchInput');
     const searchClear = document.getElementById('deviozChatSearchClear');
     const videocallBtn = document.getElementById('chatHeaderVideocallBtn');
@@ -3405,9 +3432,16 @@ function initDeviozMessenger() {
     const categoryHeader = document.querySelector('.devioz-chat-category-header');
     const chipButtons = document.querySelectorAll('.ui-msg-chip[data-read-filter]');
 
+    function setActionStatus(message, isError = false) {
+        if (!actionStatus) return;
+        actionStatus.textContent = message;
+        actionStatus.className = `small px-3 pt-2 ${isError ? 'text-danger' : 'text-secondary'}`;
+    }
+
     function switchChatView(type, contactId = null, title = '', subtitle = '', avatarUrl = '', isBot = false) {
         activeChannelType = type;
         activeContactId = contactId;
+        setActionStatus('');
 
         if (mainEl) mainEl.classList.remove('is-empty');
 
@@ -3447,8 +3481,14 @@ function initDeviozMessenger() {
         if (!contactId || !directMessagesContainer) return;
         if (directLoadingIndicator) directLoadingIndicator.classList.remove('d-none');
 
-        fetch(appUrl(`/api/chat/conversation?contact_id=${contactId}`))
-            .then(res => res.json())
+        return fetch(appUrl(`/api/chat/conversation?contact_id=${encodeURIComponent(contactId)}`))
+            .then(async res => {
+                const data = await res.json();
+                if (!res.ok || !data.success) {
+                    throw new Error(data.message || data.error || 'No se pudo cargar la conversación.');
+                }
+                return data;
+            })
             .then(data => {
                 if (directLoadingIndicator) directLoadingIndicator.classList.add('d-none');
                 directMessagesContainer.innerHTML = '';
@@ -3470,6 +3510,10 @@ function initDeviozMessenger() {
             .catch(err => {
                 console.error(err);
                 if (directLoadingIndicator) directLoadingIndicator.classList.add('d-none');
+                directMessagesContainer.innerHTML = `
+                    <div class="alert alert-danger small m-3" role="alert">
+                        No se pudo cargar esta conversación. ${escapeHtml(err.message)}
+                    </div>`;
             });
     }
 
@@ -3615,10 +3659,48 @@ function initDeviozMessenger() {
 
     // Formulario de envío
     if (composerForm && messageInput) {
-        composerForm.addEventListener('submit', (e) => {
+        composerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const text = messageInput.value.trim();
             if (!text) return;
+
+            if (activeChannelType === 'direct') {
+                if (!activeContactId) {
+                    setActionStatus('Selecciona un contacto antes de enviar el mensaje.', true);
+                    return;
+                }
+
+                const sendButton = composerForm.querySelector('[type="submit"]');
+                if (sendButton) sendButton.disabled = true;
+                setActionStatus('Enviando mensaje…');
+                try {
+                    const response = await fetch(appUrl('/api/chat/send'), {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                        },
+                        body: JSON.stringify({
+                            receiver_id: activeContactId,
+                            body: text
+                        })
+                    });
+                    const data = await response.json();
+                    if (!response.ok || !data.success) {
+                        throw new Error(data.message || data.error || 'El servidor rechazó el mensaje.');
+                    }
+
+                    messageInput.value = '';
+                    setActionStatus('Mensaje enviado y guardado.');
+                    await loadDirectConversation(activeContactId);
+                } catch (error) {
+                    console.error('Error enviando mensaje directo:', error);
+                    setActionStatus(error.message || 'No se pudo enviar el mensaje. Intenta nuevamente.', true);
+                } finally {
+                    if (sendButton) sendButton.disabled = false;
+                }
+                return;
+            }
 
             messageInput.value = '';
             const now = new Date();
@@ -3711,19 +3793,6 @@ function initDeviozMessenger() {
                         </div>`;
                     gContainer.appendChild(bubble);
                 }
-            } else if (activeChannelType === 'direct' && activeContactId) {
-                appendDirectBubble(text, true, timeStr);
-                fetch(appUrl('/api/chat/send'), {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-                    },
-                    body: JSON.stringify({
-                        receiver_id: activeContactId,
-                        body: text
-                    })
-                }).catch(err => console.error(err));
             }
         });
 
@@ -3747,11 +3816,42 @@ function initDeviozMessenger() {
     });
 
     if (videocallBtn) {
-        videocallBtn.addEventListener('click', () => {
-            if (typeof launchDeviozVideoMeet === 'function') {
-                launchDeviozVideoMeet();
-            } else {
-                window.open('https://meet.jit.si/Devioz-Meet-Room', '_blank');
+        videocallBtn.addEventListener('click', async () => {
+            if (activeChannelType !== 'direct' || !activeContactId) {
+                setActionStatus('Abre una conversación directa y selecciona a la persona antes de iniciar la videollamada.', true);
+                return;
+            }
+
+            const meetingTab = window.open('about:blank', '_blank');
+            if (!meetingTab) {
+                setActionStatus('El navegador bloqueó la ventana de la reunión. Permite ventanas emergentes para este sitio.', true);
+                return;
+            }
+
+            setActionStatus('Enviando la invitación y preparando la sala Jitsi…');
+            try {
+                const response = await fetch(appUrl('/api/chat/request-call'), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                    },
+                    body: JSON.stringify({
+                        receiver_id: activeContactId,
+                        reason: 'Videollamada directa desde Messenger'
+                    })
+                });
+                const data = await response.json();
+                if (!response.ok || !data.success || !data.room_url) {
+                    throw new Error(data.message || data.error || 'No se pudo crear la sala de llamada.');
+                }
+
+                meetingTab.location.href = data.room_url;
+                setActionStatus('Invitación enviada. La otra persona puede abrir la sala desde su notificación.');
+            } catch (error) {
+                meetingTab.close();
+                console.error('Error iniciando videollamada:', error);
+                setActionStatus(error.message || 'No se pudo iniciar la videollamada.', true);
             }
         });
     }

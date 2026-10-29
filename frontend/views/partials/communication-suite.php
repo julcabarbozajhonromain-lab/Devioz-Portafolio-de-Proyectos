@@ -154,6 +154,7 @@ if (!$currentUser) return;
                         </select>
                         <textarea class="form-control form-control-custom w-100" id="callRequestReason" rows="2" placeholder="Describe brevemente el bloqueo técnico o requerimiento..."></textarea>
                     </div>
+                    <div id="callRequestFeedback" class="small" role="status" aria-live="polite"></div>
                 </div>
                 <div class="modal-footer border-top py-2 px-4">
                     <button type="button" class="btn btn-ghost btn-sm" data-bs-dismiss="modal">Cancelar</button>

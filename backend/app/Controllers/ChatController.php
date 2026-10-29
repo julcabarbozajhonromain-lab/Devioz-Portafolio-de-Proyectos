@@ -9,6 +9,14 @@ use PDO;
 
 class ChatController extends BaseController
 {
+    private function canCommunicate(User $sender, User $receiver): bool
+    {
+        // Administrators supervise every site; developers and leads stay within their site.
+        return $sender->isAdmin()
+            || $receiver->isAdmin()
+            || ($sender->sede !== null && $sender->sede === $receiver->sede);
+    }
+
     public function index(): string
     {
         $user = $this->user();
@@ -124,6 +132,9 @@ class ChatController extends BaseController
         if ($contactId > 0) {
             $contact = User::find($contactId);
         }
+        if ($contactId > 0 && (!$contact || !$contact->active || $contact->deleted_at !== null)) {
+            $this->json(['success' => false, 'message' => 'El contacto no está disponible.'], 404);
+        }
         if (!$contact && $user->isDeveloper()) {
             if ($project && $project->assignedBy()) {
                 $contact = $project->assignedBy();
@@ -132,18 +143,37 @@ class ChatController extends BaseController
             }
         }
 
-        if ($contact && $user->sede !== $contact->sede) {
+        if ($contact && !$this->canCommunicate($user, $contact)) {
             $this->json(['error' => 'Violacion de seguridad 007: Inter-sede bloqueada.'], 403);
         }
 
-        // Logic omitted for brevity, assuming standard chat load
-        $messages = []; // we should actually fetch messages
-        $stmt = $db->getConnection()->prepare("SELECT m.*, u.name as sender_name FROM messages m LEFT JOIN users u ON m.sender_id = u.id WHERE (m.sender_id = :uid AND m.receiver_id = :cid) OR (m.sender_id = :cid AND m.receiver_id = :uid) ORDER BY m.created_at ASC LIMIT 50");
-        $stmt->execute(['uid' => $user->id, 'cid' => $contact ? $contact->id : 0]);
+        $messages = [];
+        $stmt = $db->getConnection()->prepare(
+            "SELECT m.*, u.name AS sender_name
+             FROM messages m
+             LEFT JOIN users u ON m.sender_id = u.id
+             WHERE (m.sender_id = :sender_a AND m.receiver_id = :receiver_a)
+                OR (m.sender_id = :sender_b AND m.receiver_id = :receiver_b)
+             ORDER BY m.created_at ASC, m.id ASC
+             LIMIT 100"
+        );
+        $contactIdForQuery = $contact ? (int)$contact->id : 0;
+        $stmt->execute([
+            'sender_a' => $user->id,
+            'receiver_a' => $contactIdForQuery,
+            'sender_b' => $contactIdForQuery,
+            'receiver_b' => $user->id,
+        ]);
         $messages = $stmt->fetchAll();
 
         // mark read
-        $db->query("UPDATE messages SET read_at = NOW() WHERE receiver_id = :uid AND sender_id = :cid AND read_at IS NULL", ['uid' => $user->id, 'cid' => $contact ? $contact->id : 0]);
+        if ($contact) {
+            $db->query(
+                "UPDATE messages SET read_at = NOW()
+                 WHERE receiver_id = :uid AND sender_id = :cid AND read_at IS NULL",
+                ['uid' => $user->id, 'cid' => $contactIdForQuery]
+            );
+        }
 
         $unreadStmt = $db->getConnection()->prepare("SELECT COUNT(*) FROM messages WHERE receiver_id = :uid AND read_at IS NULL");
         $unreadStmt->execute(['uid' => $user->id]);
@@ -155,6 +185,11 @@ class ChatController extends BaseController
                 'name' => $contact->name,
                 'role_label' => $contact->role === 'admin' ? 'Lead Técnico & Auditor QA' : 'Desarrollador',
                 'avatar' => $contact->avatarUrl(),
+            ] : null,
+            'project' => $project ? [
+                'id' => (int)$project->id,
+                'code' => $project->code,
+                'name' => $project->name,
             ] : null,
             'messages' => array_map(function($m) use ($user) {
                 return [
@@ -181,15 +216,19 @@ class ChatController extends BaseController
             $this->json(['success' => false, 'message' => 'Faltan datos'], 422);
         }
         $receiver = User::find($receiverId);
-        if ($receiver && $user->sede !== $receiver->sede) {
+        if (!$receiver || !$receiver->active || $receiver->deleted_at !== null) {
+            $this->json(['success' => false, 'message' => 'El destinatario no existe o no está activo.'], 404);
+        }
+        if (!$this->canCommunicate($user, $receiver)) {
             $this->json(['success' => false, 'message' => 'Violacion de seguridad 007: Inter-sede bloqueada.'], 403);
         }
 
-        Database::getInstance()->query(
+        $db = Database::getInstance();
+        $db->query(
             "INSERT INTO messages (sender_id, receiver_id, body, type, created_at) VALUES (:sid, :rid, :b, 'general', NOW())",
             ['sid' => $user->id, 'rid' => $receiverId, 'b' => $body]
         );
-        $this->json(['success' => true]);
+        $this->json(['success' => true, 'message_id' => $db->lastInsertId()]);
     }
 
     public function requestCall(): never
@@ -197,14 +236,21 @@ class ChatController extends BaseController
         $user = $this->user();
         $input = json_decode(file_get_contents('php://input'), true) ?? $_POST;
         $receiverId = (int)($input['receiver_id'] ?? 0);
-        $reason = trim((string)($input['reason'] ?? 'Reunion'));
+        $reason = trim((string)($input['reason'] ?? 'Reunión técnica'));
+
+        if ($receiverId <= 0) {
+            $this->json(['success' => false, 'message' => 'Selecciona a la persona que recibirá la invitación.'], 422);
+        }
 
         $receiver = User::find($receiverId);
-        if ($receiver && $user->sede !== $receiver->sede) {
+        if (!$receiver || !$receiver->active || $receiver->deleted_at !== null) {
+            $this->json(['success' => false, 'message' => 'El destinatario no existe o no está activo.'], 404);
+        }
+        if (!$this->canCommunicate($user, $receiver)) {
             $this->json(['success' => false, 'message' => 'Violacion de seguridad 007: Inter-sede bloqueada.'], 403);
         }
 
-        $roomUrl = "https://meet.jit.si/Devioz-Meet-" . md5(uniqid());
+        $roomUrl = 'https://meet.jit.si/Devioz-Meet-' . bin2hex(random_bytes(16));
         $body = "Solicitud de llamada urgente: {$reason}. Entrar aqui: {$roomUrl}";
         Database::getInstance()->query(
             "INSERT INTO messages (sender_id, receiver_id, body, type, priority, created_at) VALUES (:sid, :rid, :b, 'alert', 'urgent', NOW())",
@@ -239,6 +285,10 @@ class ChatController extends BaseController
                 ? (str_starts_with($row['sender_avatar'], 'http') ? $row['sender_avatar'] : '/'.$row['sender_avatar'])
                 : 'https://ui-avatars.com/api/?name='.urlencode($row['sender_name'] ?? 'Sys').'&background=00ACE3&color=fff';
 
+            $roomUrl = preg_match('~https://meet\.jit\.si/[A-Za-z0-9_-]+~', (string)$row['body'], $roomMatch)
+                ? $roomMatch[0]
+                : '';
+
             $notifications[] = [
                 'id' => $row['id'],
                 'contact_id' => $row['sender_id'],
@@ -247,7 +297,7 @@ class ChatController extends BaseController
                 'time' => $time,
                 'body' => $row['body'],
                 'is_urgent' => ($row['priority'] === 'urgent'),
-                'action_url' => '',
+                'action_url' => $roomUrl,
             ];
         }
 
