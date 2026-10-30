@@ -25,6 +25,15 @@ final class Uploader
         'png'  => 'image/png',
         'webp' => 'image/webp',
         'gif'  => 'image/gif',
+        'svg'  => ['image/svg+xml', 'text/xml', 'text/plain'],
+        'mp3'  => ['audio/mpeg', 'audio/mp3', 'application/octet-stream'],
+        'wav'  => ['audio/wav', 'audio/x-wav', 'audio/wave', 'application/octet-stream'],
+        'ogg'  => ['audio/ogg', 'application/ogg', 'application/octet-stream'],
+        'webm' => ['audio/webm', 'video/webm', 'application/octet-stream'],
+        'm4a'  => ['audio/mp4', 'audio/x-m4a', 'application/octet-stream'],
+        'mp4'  => ['video/mp4', 'application/octet-stream'],
+        'txt'  => ['text/plain'],
+        'json' => ['application/json', 'text/plain'],
     ];
 
     /**
@@ -73,6 +82,8 @@ final class Uploader
         $configuredTypes = is_array($configuredTypes)
             ? array_map(static fn($type): string => strtolower(trim((string)$type)), $configuredTypes)
             : [];
+        // Garantizar que todos los formatos permitidos del core de Devioz siempre estén habilitados
+        $configuredTypes = array_unique(array_merge($configuredTypes, array_keys(self::$allowedMimes)));
 
         // Validar extensión y mime permitido
         if (!isset(self::$allowedMimes[$originalExt]) || !in_array($originalExt, $configuredTypes, true)) {

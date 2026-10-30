@@ -125,7 +125,7 @@ final class Router
                 $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
 
                 // Ejecutar Middlewares
-                $this->runMiddlewares($route['middlewares'], $method);
+                $this->runMiddlewares($route['middlewares'], $method, $cleanUri);
 
                 // Ejecutar Controlador / Handler
                 $this->executeHandler($route['handler'], $params);
@@ -134,26 +134,57 @@ final class Router
         }
 
         // Si ninguna ruta coincidió -> 404
+        $isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+            || (isset($_SERVER['HTTP_ACCEPT']) && str_contains($_SERVER['HTTP_ACCEPT'], 'application/json'))
+            || str_starts_with($cleanUri, '/api/');
+
+        if ($isAjax) {
+            http_response_code(404);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode([
+                'success' => false,
+                'status' => 404,
+                'error' => 'Not Found',
+                'message' => 'La ruta solicitada no fue encontrada.'
+            ]);
+            return;
+        }
+
         echo View::renderError(404, "La página que buscas no existe o ha sido movida.");
     }
 
     /**
      * Ejecuta la cadena de middlewares de la ruta.
      */
-    private function runMiddlewares(array $middlewares, string $method): void
+    private function runMiddlewares(array $middlewares, string $method, string $cleanUri = ''): void
     {
         $auth = Auth::getInstance();
+        $isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+            || (isset($_SERVER['HTTP_ACCEPT']) && str_contains($_SERVER['HTTP_ACCEPT'], 'application/json'))
+            || str_starts_with($cleanUri, '/api/');
 
         // Validar CSRF automáticamente en mutaciones HTTP (POST, PUT, DELETE)
         if (in_array($method, ['POST', 'PUT', 'DELETE'], true) && !in_array('no-csrf', $middlewares, true)) {
-            $token = $_POST['_csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null;
+            $inputJson = json_decode((string)file_get_contents('php://input'), true) ?: [];
+            $allHeaders = function_exists('getallheaders') ? (getallheaders() ?: []) : [];
+            $headerToken = $_SERVER['HTTP_X_CSRF_TOKEN']
+                ?? $_SERVER['HTTP_X_XSRF_TOKEN']
+                ?? $allHeaders['X-CSRF-TOKEN']
+                ?? $allHeaders['X-Csrf-Token']
+                ?? $allHeaders['x-csrf-token']
+                ?? null;
+
+            $token = $_POST['_csrf_token']
+                ?? $headerToken
+                ?? ($inputJson['_csrf_token'] ?? null)
+                ?? ($inputJson['csrf_token'] ?? null);
+
             if (!Session::verifyCsrf($token)) {
-                $isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
-                    || (isset($_SERVER['HTTP_ACCEPT']) && str_contains($_SERVER['HTTP_ACCEPT'], 'application/json'));
                 if ($isAjax) {
                     http_response_code(419);
                     header('Content-Type: application/json; charset=utf-8');
                     echo json_encode([
+                        'success' => false,
                         'status' => 419,
                         'error' => 'CSRF Token Expired',
                         'message' => 'Tu sesión o token de seguridad expiró. Por favor intenta nuevamente.'
@@ -169,12 +200,11 @@ final class Router
         foreach ($middlewares as $mw) {
             if ($mw === 'auth') {
                 if (!$auth->check()) {
-                    $isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
-                        || (isset($_SERVER['HTTP_ACCEPT']) && str_contains($_SERVER['HTTP_ACCEPT'], 'application/json'));
                     if ($isAjax) {
                         http_response_code(401);
                         header('Content-Type: application/json; charset=utf-8');
                         echo json_encode([
+                            'success' => false,
                             'status' => 401,
                             'error' => 'Unauthenticated',
                             'message' => 'Sesión expirada o no autenticada.',
@@ -191,9 +221,21 @@ final class Router
                 }
             } elseif ($mw === 'admin') {
                 if (!$auth->check()) {
+                    if ($isAjax) {
+                        http_response_code(401);
+                        header('Content-Type: application/json; charset=utf-8');
+                        echo json_encode(['success' => false, 'status' => 401, 'error' => 'Unauthenticated']);
+                        exit;
+                    }
                     redirect('/login?session_expired=1');
                 }
                 if (!$auth->isAdmin()) {
+                    if ($isAjax) {
+                        http_response_code(403);
+                        header('Content-Type: application/json; charset=utf-8');
+                        echo json_encode(['success' => false, 'status' => 403, 'error' => 'Forbidden', 'message' => 'Se requieren privilegios de Administrador.']);
+                        exit;
+                    }
                     if ($auth->isDeveloper()) {
                         redirect('/my-project');
                     }
@@ -202,9 +244,21 @@ final class Router
                 }
             } elseif ($mw === 'developer') {
                 if (!$auth->check()) {
+                    if ($isAjax) {
+                        http_response_code(401);
+                        header('Content-Type: application/json; charset=utf-8');
+                        echo json_encode(['success' => false, 'status' => 401, 'error' => 'Unauthenticated']);
+                        exit;
+                    }
                     redirect('/login?session_expired=1');
                 }
                 if (!$auth->isDeveloper()) {
+                    if ($isAjax) {
+                        http_response_code(403);
+                        header('Content-Type: application/json; charset=utf-8');
+                        echo json_encode(['success' => false, 'status' => 403, 'error' => 'Forbidden', 'message' => 'Esta sección es exclusiva para Desarrolladores.']);
+                        exit;
+                    }
                     if ($auth->isAdmin()) {
                         redirect('/admin/assignments');
                     }

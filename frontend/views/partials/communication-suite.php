@@ -10,7 +10,8 @@ if (!$currentUser) return;
 <!-- DEVIOZ ENTERPRISE SUITE: DOCK FLOTANTE, CHAT DIRECTO Y VIDEOLLAMADA     -->
 <!-- ========================================================================= -->
 
-<!-- 1. DOCK LATERAL DERECHO FLOTANTE (ESTILO DEVIOZ CRM & COLLABORATION) -->
+<!-- 1. DOCK LATERAL DERECHO FLOTANTE (CANAL DIRECTO DEL DESARROLLADOR CON LA ADMINISTRACIÓN) -->
+<?php if ($currentUser->isDeveloper()): ?>
 <aside class="devioz-floating-dock" id="deviozFloatingDock" aria-label="Centro de Contacto Devioz">
     <!-- Botón 1: Chat Directo 1 a 1 -->
     <button type="button" class="devioz-dock-btn" id="deviozDockChatBtn" title="Chat Directo con la Administración" aria-label="Abrir chat directo">
@@ -31,6 +32,7 @@ if (!$currentUser) return;
         <span class="devioz-dock-tooltip">Videollamada en Vivo</span>
     </button>
 </aside>
+<?php endif; ?>
 
 <!-- 2. DRAWER LATERAL DESLIZABLE DE CHAT 1 A 1 (DEVIOZ CHAT DRAWER) -->
 <div class="devioz-chat-drawer-backdrop" id="deviozChatBackdrop"></div>

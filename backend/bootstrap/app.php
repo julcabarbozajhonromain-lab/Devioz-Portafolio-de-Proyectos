@@ -99,15 +99,20 @@ set_exception_handler(function (\Throwable $e) {
 
     http_response_code(500);
 
-    $isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    $isAjax = str_contains($uri, '/api/')
+        || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
         || (isset($_SERVER['HTTP_ACCEPT']) && str_contains($_SERVER['HTTP_ACCEPT'], 'application/json'));
 
     if ($isAjax) {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode([
+            'success' => false,
             'status' => 500,
             'error' => 'Internal Server Error',
-            'message' => 'Ocurrió un error inesperado al procesar la solicitud. El incidente ha sido registrado por el sistema.'
+            'message' => config('app.debug', false)
+                ? 'Error 500: ' . $e->getMessage() . ' en ' . basename($e->getFile()) . ':' . $e->getLine()
+                : 'Ocurrió un error inesperado al procesar la solicitud. El incidente ha sido registrado por el sistema.'
         ]);
         exit;
     }
@@ -197,9 +202,16 @@ $router->post('/admin/quality-audits/{deliveryId}', [\App\Controllers\AdminContr
 $router->get('/admin/quality-audits/{auditId}', [\App\Controllers\AdminController::class, 'qualityAuditReport'], ['auth', 'admin']);
 
 // -----------------------------------------------------------------------------
-// Equipo, Galería y Devioz Reels (Shorts)
+// Equipo, Talento y Gestión de Consultores / Programadores (CRUD Devioz)
 // -----------------------------------------------------------------------------
 $router->get('/team', [\App\Controllers\TeamController::class, 'index'], ['auth']);
+$router->post('/team', [\App\Controllers\TeamController::class, 'store'], ['auth', 'admin']);
+$router->post('/team/store', [\App\Controllers\TeamController::class, 'store'], ['auth', 'admin']);
+$router->get('/api/team/{id}', [\App\Controllers\TeamController::class, 'showJson'], ['auth', 'admin']);
+$router->post('/team/{id}/update', [\App\Controllers\TeamController::class, 'update'], ['auth', 'admin']);
+$router->post('/team/{id}/role', [\App\Controllers\TeamController::class, 'updateRole'], ['auth', 'admin']);
+$router->post('/team/{id}/delete', [\App\Controllers\TeamController::class, 'destroy'], ['auth', 'admin']);
+$router->post('/team/{id}/restore', [\App\Controllers\TeamController::class, 'restore'], ['auth', 'admin']);
 $router->get('/gallery', [\App\Controllers\GalleryController::class, 'index']);
 $router->get('/gallery/{slug}', [\App\Controllers\GalleryController::class, 'show']);
 $router->get('/reels', [\App\Controllers\HomeController::class, 'reels']);
@@ -231,11 +243,10 @@ $router->get('/api/bot/feedback/summary', [\App\Controllers\ApiController::class
 $router->get('/chat', [\App\Controllers\ChatController::class, 'index'], ['auth']);
 $router->get('/online', [\App\Controllers\ChatController::class, 'index'], ['auth']);
 $router->get('/api/chat/conversation', [\App\Controllers\ChatController::class, 'conversation'], ['auth']);
-$router->post('/api/chat/send', [\App\Controllers\ChatController::class, 'send'], ['auth']);
-$router->post('/api/chat/request-call', [\App\Controllers\ChatController::class, 'requestCall'], ['auth']);
+$router->post('/api/chat/send', [\App\Controllers\ChatController::class, 'send'], ['auth', 'no-csrf']);
+$router->post('/api/chat/request-call', [\App\Controllers\ChatController::class, 'requestCall'], ['auth', 'no-csrf']);
 $router->get('/api/chat/stream', [\App\Controllers\ChatController::class, 'stream'], ['auth']);
 $router->get('/api/notifications', [\App\Controllers\ChatController::class, 'notifications'], ['auth']);
-$router->post('/api/notifications/mark-read', [\App\Controllers\ChatController::class, 'markRead'], ['auth']);
+$router->post('/api/notifications/mark-read', [\App\Controllers\ChatController::class, 'markRead'], ['auth', 'no-csrf']);
 
-return $router;
-
+return $router; 

@@ -150,8 +150,8 @@ $isChatMode = str_contains($currentUri, '/chat') || str_contains($currentUri, '/
                 </div>
             </div>
 
-            <!-- Acceso Rápido al Chat con Administración (Devioz Chat) -->
-            <button type="button" class="btn topbar-icon-btn position-relative me-1" id="topbarChatBtn" title="Chat y Contacto con la Administración" aria-label="Abrir Chat con la Administración">
+            <!-- Acceso Rápido al Chat (Devioz Messenger / Chat con Administración) -->
+            <button type="button" class="btn topbar-icon-btn position-relative me-1" id="topbarChatBtn" title="<?= $currentUser->isAdmin() ? 'Messenger Corporativo' : 'Chat y Contacto con la Administración' ?>" aria-label="Abrir Chat" data-user-role="<?= e($currentUser->role ?? 'developer') ?>">
                 <i class="fa-solid fa-comment-dots fs-6"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info d-none" id="topbarChatBadge" style="font-size: 0.65rem; padding: 0.25em 0.5em;">0</span>
             </button>

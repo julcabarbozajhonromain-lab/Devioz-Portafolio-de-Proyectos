@@ -362,6 +362,7 @@ $directCount = count($contacts);
                                     </div>
                                     <div class="msg-footer text-end">
                                         <span class="msg-time"><?= date('H:i', strtotime($note['created_at'])) ?></span>
+                                        <span class="msg-status-check text-whatsapp-blue ms-1" title="Guardado en notas"><i class="fa-solid fa-check-double"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -450,6 +451,9 @@ $directCount = count($contacts);
                                     </div>
                                     <div class="msg-footer text-end">
                                         <span class="msg-time"><?= date('H:i', strtotime($gMsg['created_at'])) ?></span>
+                                        <?php if ($gMsg['sender_id'] == $currentUser->id): ?>
+                                            <span class="msg-status-check text-whatsapp-blue ms-1" title="Entregado al canal"><i class="fa-solid fa-check-double"></i></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -462,7 +466,7 @@ $directCount = count($contacts);
                     <div class="chat-date-divider">
                         <span id="directChatDateLabel">hoy</span>
                     </div>
-                    <div id="directMessagesContainer" class="d-flex flex-column gap-2">
+                    <div id="directMessagesContainer" class="d-flex flex-column gap-1">
                         <!-- Mensajes cargados dinámicamente vía AJAX desde /api/chat/conversation -->
                         <div class="text-center py-4 text-muted small" id="directLoadingIndicator">
                             <i class="fa-solid fa-spinner fa-spin me-2"></i> Cargando conversación segura...
@@ -475,10 +479,242 @@ $directCount = count($contacts);
             <!-- ================================================================= -->
             <!-- PIE FLOTANTE: COMPOSITOR DE MENSAJE Devioz                  -->
             <!-- ================================================================= -->
-            <footer class="devioz-chat-footer">
+            <footer class="devioz-chat-footer position-relative">
+                <!-- Input de archivo oculto para adjuntar cualquier archivo/imagen -->
+                <input type="file" id="deviozChatFileInput" class="d-none" accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.txt,.json">
+
+                <!-- 1. BANNER PREVISUALIZADOR DE ARCHIVO ADJUNTO (Estilo WhatsApp) -->
+                <div id="deviozAttachmentPreview" class="devioz-attachment-preview d-none mb-2">
+                    <div class="d-flex align-items-center gap-2 p-2 bg-light border rounded-3 position-relative">
+                        <div id="attachmentPreviewThumb" class="attachment-preview-thumb d-flex align-items-center justify-content-center bg-white border rounded">
+                            <i class="fa-solid fa-file text-primary"></i>
+                        </div>
+                        <div class="attachment-preview-meta min-w-0 flex-grow-1">
+                            <div id="attachmentPreviewName" class="fw-semibold small text-dark text-truncate">archivo.pdf</div>
+                            <div id="attachmentPreviewSize" class="text-secondary" style="font-size: 0.70rem;">0 KB</div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-ghost text-danger p-1 rounded-circle" id="deviozCancelAttachmentBtn" title="Quitar archivo adjunto">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. BARRA DE GRABACIÓN DE VOZ EN VIVO (Estilo WhatsApp / TikTok) -->
+                <div id="deviozVoiceRecordingBar" class="devioz-voice-recording-bar d-none">
+                    <div class="d-flex align-items-center gap-2 flex-grow-1 min-w-0">
+                        <div class="voice-pulse-dot"></div>
+                        <span class="voice-recording-text text-danger fw-semibold small">Grabando nota de voz</span>
+                        <span class="voice-timer badge bg-danger-subtle text-danger font-monospace px-2 py-1" id="voiceRecordingTimer">0:00</span>
+                        
+                        <!-- Ondas de audio animadas estilo TikTok / WhatsApp -->
+                        <div class="voice-wave-animation d-none d-sm-flex align-items-center gap-1 ms-2">
+                            <span class="voice-wave-bar"></span>
+                            <span class="voice-wave-bar"></span>
+                            <span class="voice-wave-bar"></span>
+                            <span class="voice-wave-bar"></span>
+                            <span class="voice-wave-bar"></span>
+                            <span class="voice-wave-bar"></span>
+                            <span class="voice-wave-bar"></span>
+                            <span class="voice-wave-bar"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                        <button type="button" class="btn-voice-cancel" id="btnCancelVoiceRecording" title="Cancelar y descartar grabación">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                        <button type="button" class="btn-voice-send" id="btnSendVoiceRecording" title="Finalizar y enviar nota de voz">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. POPOVER FLOTANTE DE EMOJIS Y STICKERS (Estilo WhatsApp / TikTok) -->
+                <div id="deviozEmojiStickerPopover" class="devioz-picker-popover shadow-lg border d-none">
+                    <div class="picker-popover-header d-flex align-items-center justify-content-between p-2 border-bottom bg-light">
+                        <ul class="nav nav-pills picker-nav-pills gap-1" id="pickerTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active py-1 px-3 small" id="tabEmojisBtn" data-picker-tab="emojis" type="button">
+                                    😀 Emojis
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link py-1 px-3 small" id="tabStickersBtn" data-picker-tab="stickers" type="button">
+                                    🎨 Stickers
+                                </button>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn-close btn-close-sm" id="closePickerBtn" aria-label="Cerrar"></button>
+                    </div>
+
+                    <div class="picker-popover-body p-2" style="max-height: 280px; overflow-y: auto;">
+                        <!-- Contenedor Emojis -->
+                        <div id="pickerTabEmojis" class="picker-tab-content">
+                            <div class="small fw-bold text-muted mb-1 px-1">Reacciones & Expresiones</div>
+                            <div class="emoji-grid mb-2">
+                                <button type="button" class="emoji-cell" data-emoji="😀">😀</button>
+                                <button type="button" class="emoji-cell" data-emoji="😃">😃</button>
+                                <button type="button" class="emoji-cell" data-emoji="😄">😄</button>
+                                <button type="button" class="emoji-cell" data-emoji="😁">😁</button>
+                                <button type="button" class="emoji-cell" data-emoji="😆">😆</button>
+                                <button type="button" class="emoji-cell" data-emoji="😅">😅</button>
+                                <button type="button" class="emoji-cell" data-emoji="😂">😂</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤣">🤣</button>
+                                <button type="button" class="emoji-cell" data-emoji="😊">😊</button>
+                                <button type="button" class="emoji-cell" data-emoji="😇">😇</button>
+                                <button type="button" class="emoji-cell" data-emoji="🙂">🙂</button>
+                                <button type="button" class="emoji-cell" data-emoji="🙃">🙃</button>
+                                <button type="button" class="emoji-cell" data-emoji="😉">😉</button>
+                                <button type="button" class="emoji-cell" data-emoji="😌">😌</button>
+                                <button type="button" class="emoji-cell" data-emoji="😍">😍</button>
+                                <button type="button" class="emoji-cell" data-emoji="🥰">🥰</button>
+                                <button type="button" class="emoji-cell" data-emoji="😘">😘</button>
+                                <button type="button" class="emoji-cell" data-emoji="😗">😗</button>
+                                <button type="button" class="emoji-cell" data-emoji="😋">😋</button>
+                                <button type="button" class="emoji-cell" data-emoji="😛">😛</button>
+                                <button type="button" class="emoji-cell" data-emoji="😜">😜</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤪">🤪</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤨">🤨</button>
+                                <button type="button" class="emoji-cell" data-emoji="🧐">🧐</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤓">🤓</button>
+                                <button type="button" class="emoji-cell" data-emoji="😎">😎</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤩">🤩</button>
+                                <button type="button" class="emoji-cell" data-emoji="🥳">🥳</button>
+                                <button type="button" class="emoji-cell" data-emoji="😏">😏</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤔">🤔</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤫">🤫</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤭">🤭</button>
+                            </div>
+
+                            <div class="small fw-bold text-muted mb-1 px-1">Gestos & Aprobación</div>
+                            <div class="emoji-grid mb-2">
+                                <button type="button" class="emoji-cell" data-emoji="👍">👍</button>
+                                <button type="button" class="emoji-cell" data-emoji="👏">👏</button>
+                                <button type="button" class="emoji-cell" data-emoji="🙌">🙌</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤝">🤝</button>
+                                <button type="button" class="emoji-cell" data-emoji="✌️">✌️</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤞">🤞</button>
+                                <button type="button" class="emoji-cell" data-emoji="👌">👌</button>
+                                <button type="button" class="emoji-cell" data-emoji="🤙">🤙</button>
+                                <button type="button" class="emoji-cell" data-emoji="💪">💪</button>
+                                <button type="button" class="emoji-cell" data-emoji="🫡">🫡</button>
+                                <button type="button" class="emoji-cell" data-emoji="🔥">🔥</button>
+                                <button type="button" class="emoji-cell" data-emoji="✨">✨</button>
+                                <button type="button" class="emoji-cell" data-emoji="💯">💯</button>
+                                <button type="button" class="emoji-cell" data-emoji="⭐">⭐</button>
+                                <button type="button" class="emoji-cell" data-emoji="❤️">❤️</button>
+                                <button type="button" class="emoji-cell" data-emoji="💖">💖</button>
+                            </div>
+
+                            <div class="small fw-bold text-muted mb-1 px-1">Ingeniería & Dev</div>
+                            <div class="emoji-grid">
+                                <button type="button" class="emoji-cell" data-emoji="💻">💻</button>
+                                <button type="button" class="emoji-cell" data-emoji="🚀">🚀</button>
+                                <button type="button" class="emoji-cell" data-emoji="⚡">⚡</button>
+                                <button type="button" class="emoji-cell" data-emoji="🎯">🎯</button>
+                                <button type="button" class="emoji-cell" data-emoji="🛠️">🛠️</button>
+                                <button type="button" class="emoji-cell" data-emoji="⚙️">⚙️</button>
+                                <button type="button" class="emoji-cell" data-emoji="🐛">🐛</button>
+                                <button type="button" class="emoji-cell" data-emoji="🔍">🔍</button>
+                                <button type="button" class="emoji-cell" data-emoji="📊">📊</button>
+                                <button type="button" class="emoji-cell" data-emoji="📝">📝</button>
+                                <button type="button" class="emoji-cell" data-emoji="☕">☕</button>
+                                <button type="button" class="emoji-cell" data-emoji="🍕">🍕</button>
+                                <button type="button" class="emoji-cell" data-emoji="🎧">🎧</button>
+                                <button type="button" class="emoji-cell" data-emoji="🔐">🔐</button>
+                                <button type="button" class="emoji-cell" data-emoji="🛡️">🛡️</button>
+                                <button type="button" class="emoji-cell" data-emoji="✅">✅</button>
+                            </div>
+                        </div>
+
+                        <!-- Contenedor Stickers Estilo TikTok / WhatsApp / Dev -->
+                        <div id="pickerTabStickers" class="picker-tab-content d-none">
+                            <div class="small text-muted mb-2 px-1">Haz clic en un sticker para enviarlo de inmediato:</div>
+                            <div class="stickers-grid">
+                                <div class="sticker-card" data-sticker="🚀 SHIP IT!" data-sticker-icon="🚀" data-sticker-color="#3B82F6">
+                                    <div class="sticker-emoji">🚀</div>
+                                    <div class="sticker-title">Ship It!</div>
+                                    <span class="sticker-tag">Release</span>
+                                </div>
+                                <div class="sticker-card" data-sticker="🔥 EN LLAMAS" data-sticker-icon="🔥" data-sticker-color="#EF4444">
+                                    <div class="sticker-emoji">🔥</div>
+                                    <div class="sticker-title">On Fire</div>
+                                    <span class="sticker-tag">Top Tier</span>
+                                </div>
+                                <div class="sticker-card" data-sticker="🐱‍💻 HACKER MODE" data-sticker-icon="🐱‍💻" data-sticker-color="#10B981">
+                                    <div class="sticker-emoji">🐱‍💻</div>
+                                    <div class="sticker-title">Dev Pro</div>
+                                    <span class="sticker-tag">Coding</span>
+                                </div>
+                                <div class="sticker-card" data-sticker="🐛 BUG CAUGHT" data-sticker-icon="🐛" data-sticker-color="#F59E0B">
+                                    <div class="sticker-emoji">🐛</div>
+                                    <div class="sticker-title">Bug Fix</div>
+                                    <span class="sticker-tag">QA Team</span>
+                                </div>
+                                <div class="sticker-card" data-sticker="☕ MÁS CAFÉ POR FAVOR" data-sticker-icon="☕" data-sticker-color="#8B5CF6">
+                                    <div class="sticker-emoji">☕</div>
+                                    <div class="sticker-title">Need Coffee</div>
+                                    <span class="sticker-tag">Sprint</span>
+                                </div>
+                                <div class="sticker-card" data-sticker="💯 QA 10/10 EXCELENTE" data-sticker-icon="💯" data-sticker-color="#10B981">
+                                    <div class="sticker-emoji">💯</div>
+                                    <div class="sticker-title">10/10 Score</div>
+                                    <span class="sticker-tag">Audit</span>
+                                </div>
+                                <div class="sticker-card" data-sticker="🎉 CELEBRACIÓN ÉXITO" data-sticker-icon="🎉" data-sticker-color="#EC4899">
+                                    <div class="sticker-emoji">🎉</div>
+                                    <div class="sticker-title">Party Dev</div>
+                                    <span class="sticker-tag">Sprint Done</span>
+                                </div>
+                                <div class="sticker-card" data-sticker="🤝 DE ACUERDO COMPAÑERO" data-sticker-icon="🤝" data-sticker-color="#06B6D4">
+                                    <div class="sticker-emoji">🤝</div>
+                                    <div class="sticker-title">Trato Hecho</div>
+                                    <span class="sticker-tag">Teamwork</span>
+                                </div>
+                                <div class="sticker-card" data-sticker="✨ MAGIA PURA" data-sticker-icon="✨" data-sticker-color="#F59E0B">
+                                    <div class="sticker-emoji">✨</div>
+                                    <div class="sticker-title">Pura Magia</div>
+                                    <span class="sticker-tag">CoPilot</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. POPOVER DE PLANTILLAS Y COMANDOS RÁPIDOS -->
+                <div id="deviozTemplatesPopover" class="devioz-templates-popover shadow-lg border d-none">
+                    <div class="templates-header p-2 border-bottom bg-light d-flex justify-content-between align-items-center">
+                        <span class="fw-bold small text-dark"><i class="fa-solid fa-table-cells-large text-primary me-1"></i> Plantillas Rápidas</span>
+                        <button type="button" class="btn-close btn-close-sm" id="closeTemplatesBtn" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="templates-body p-2 list-group list-group-flush" style="max-height: 260px; overflow-y: auto;">
+                        <button type="button" class="list-group-item list-group-item-action py-2 px-2 small quick-template-item" data-template="🚀 Hola, acabo de subir una nueva versión del hito. Por favor revisa y emite el dictamen de calidad.">
+                            <div class="fw-semibold text-dark">🚀 Entrega de Hito para QA</div>
+                            <div class="text-secondary" style="font-size: 0.70rem;">Notificar sobre entrega lista para revisión técnica</div>
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action py-2 px-2 small quick-template-item" data-template="✅ Confirmado, he corregido las observaciones de seguridad OWASP y deuda técnica en el código.">
+                            <div class="fw-semibold text-dark">✅ Corrección de Observaciones</div>
+                            <div class="text-secondary" style="font-size: 0.70rem;">Confirmar solución a deuda o hallazgos QA</div>
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action py-2 px-2 small quick-template-item" data-template="📞 Hola, ¿podemos coordinar una breve reunión técnica por Devioz Meet para despejar dudas?">
+                            <div class="fw-semibold text-dark">📞 Coordinar Reunión Meet</div>
+                            <div class="text-secondary" style="font-size: 0.70rem;">Solicitar sincronización 1 a 1 por videollamada</div>
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action py-2 px-2 small quick-template-item" data-template="⚠️ Tengo un bloqueo con el entorno de base de datos / servidor y necesito asistencia técnica.">
+                            <div class="fw-semibold text-dark">⚠️ Reporte de Bloqueo</div>
+                            <div class="text-secondary" style="font-size: 0.70rem;">Solicitar apoyo inmediato por bloqueo técnico</div>
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action py-2 px-2 small quick-template-item" data-template="👍 Entendido perfectamente. Procedo con la implementación según las pautas acordadas.">
+                            <div class="fw-semibold text-dark">👍 Confirmar Instrucciones</div>
+                            <div class="text-secondary" style="font-size: 0.70rem;">Respuesta rápida de conformidad y avance</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. COMPOSITOR PRINCIPAL Devioz -->
                 <form id="deviozComposerForm" class="devioz-composer-box">
-                    <!-- Botón Clip Adjuntos -->
-                    <button type="button" class="composer-icon-btn" id="composerAttachBtn" title="Adjuntar archivo o imagen">
+                    <!-- Botón Clip Adjuntos (Archivos, Fotos, Documentos) -->
+                    <button type="button" class="composer-icon-btn" id="composerAttachBtn" title="Adjuntar archivo, imagen o documento">
                         <i class="fa-solid fa-paperclip"></i>
                     </button>
 
@@ -486,19 +722,19 @@ $directCount = count($contacts);
                     <div class="composer-input-wrapper flex-grow-1">
                         <textarea id="deviozMessageInput"
                                   rows="1"
-                                  placeholder="Escriba @ o + para mencionar a una persona, un chat o una IA"
+                                  placeholder="Escriba un mensaje, nota o mención..."
                                   autocomplete="off"></textarea>
                     </div>
 
                     <!-- Botones de Acción Derecha: Grid, Emojis, Micrófono y Enviar -->
                     <div class="composer-actions-right d-flex align-items-center gap-1">
-                        <button type="button" class="composer-icon-btn d-none d-md-flex" title="Plantillas y Comandos" id="composerTemplatesBtn">
+                        <button type="button" class="composer-icon-btn d-none d-md-flex" title="Plantillas Rápidas y Comandos" id="composerTemplatesBtn">
                             <i class="fa-solid fa-table-cells-large"></i>
                         </button>
-                        <button type="button" class="composer-icon-btn" title="Insertar Emoticono" id="composerEmojiBtn">
+                        <button type="button" class="composer-icon-btn" title="Insertar Emojis y Stickers" id="composerEmojiBtn">
                             <i class="fa-regular fa-face-smile"></i>
                         </button>
-                        <button type="button" class="composer-icon-btn d-none d-sm-flex" title="Mensaje de voz (Presione para grabar)" id="composerMicBtn">
+                        <button type="button" class="composer-icon-btn d-flex" title="Grabar nota de voz (Estilo TikTok / WhatsApp)" id="composerMicBtn">
                             <i class="fa-solid fa-microphone"></i>
                         </button>
                         <button type="submit" class="composer-send-btn" id="composerSendBtn" title="Enviar mensaje (Enter)">

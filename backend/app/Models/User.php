@@ -30,6 +30,24 @@ class User extends Model
         return $this->role === 'lider';
     }
 
+    public function roleLabel(): string
+    {
+        return match ($this->role) {
+            'admin' => 'Administrador / Lead QA',
+            'lider' => 'Líder Técnico / PM',
+            default => 'Desarrollador / Consultor',
+        };
+    }
+
+    public function roleBadgeClass(): string
+    {
+        return match ($this->role) {
+            'admin' => 'bg-danger',
+            'lider' => 'bg-primary',
+            default => 'bg-emerald',
+        };
+    }
+
     public function projects(): array
     {
         return $this->hasMany(Project::class, 'developer_id');

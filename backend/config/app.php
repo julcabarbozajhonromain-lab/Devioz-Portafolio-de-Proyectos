@@ -16,7 +16,7 @@ return [
     // Configuración de subidas (Uploads)
     'upload' => [
         'max_size' => (int)(getenv('UPLOAD_MAX_SIZE') ?: 524288000), // 500 MB en bytes
-        'allowed_types' => explode(',', getenv('UPLOAD_ALLOWED_TYPES') ?: 'pdf,zip,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,webp,gif'),
+        'allowed_types' => explode(',', getenv('UPLOAD_ALLOWED_TYPES') ?: 'pdf,zip,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,webp,gif,svg,mp3,wav,ogg,webm,m4a,mp4,txt,json'),
         'path' => DEVIOZ_PUBLIC . '/uploads',
         'private_path' => getenv('UPLOAD_PRIVATE_PATH') ?: DEVIOZ_BACKEND . '/storage/private/uploads',
     ],

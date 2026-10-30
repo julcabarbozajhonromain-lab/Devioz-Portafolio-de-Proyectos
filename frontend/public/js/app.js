@@ -5,6 +5,29 @@
 
 // Helper para resolución de URLs base (compatible con carpetas raíz y subdirectorios de XAMPP/cPanel)
 const appBaseMeta = document.querySelector('meta[name="app-url"]')?.getAttribute('content') || '';
+function apiFetchHeaders(extra = {}) {
+    return {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        ...extra
+    };
+}
+
+async function readApiResponse(response) {
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.toLowerCase().includes('application/json')) {
+        if (response.redirected && response.url.toLowerCase().includes('/login')) {
+            throw new Error('Tu sesión expiró. Inicia sesión nuevamente; el mensaje no se envió.');
+        }
+        throw new Error(`El servidor respondió con formato inesperado (HTTP ${response.status}). Recarga la página y vuelve a intentarlo.`);
+    }
+    try {
+        return await response.json();
+    } catch (e) {
+        throw new Error('Respuesta inválida del servidor. No se pudo decodificar el formato JSON.');
+    }
+}
+
 function appUrl(path) {
     if (!path) return '';
     if (path.startsWith('http://') || path.startsWith('https://')) return path;
@@ -2132,8 +2155,10 @@ function initDeviozSuite() {
                 </div>`;
         }
 
-        fetch(`${baseUrl}/api/chat/conversation${queryString}`)
-            .then(res => res.json())
+        fetch(`${baseUrl}/api/chat/conversation${queryString}`, {
+            headers: apiFetchHeaders()
+        })
+            .then(readApiResponse)
             .then(data => {
                 if (!data.success) return;
 
@@ -2192,7 +2217,7 @@ function initDeviozSuite() {
                         ${escapeHtml(msg.body)}
                     </div>
                     <div class="devioz-chat-time">
-                        ${msg.date_label} ${msg.is_mine ? (msg.is_read ? '<span class="text-info">✓✓</span>' : '<span>✓</span>') : ''}
+                        ${msg.date_label} ${msg.is_mine ? (msg.is_read ? '<span class="text-whatsapp-blue ms-1" title="Leído"><i class="fa-solid fa-check-double"></i></span>' : '<span class="text-muted ms-1" title="Entregado"><i class="fa-solid fa-check-double"></i></span>') : ''}
                     </div>
                 </div>`;
         });
@@ -2214,10 +2239,10 @@ function initDeviozSuite() {
 
         fetch(`${baseUrl}/api/chat/send`, {
             method: 'POST',
-            headers: {
+            headers: apiFetchHeaders({
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-            },
+            }),
             body: JSON.stringify({
                 receiver_id: activeContactId,
                 project_id: activeProjectId,
@@ -2226,7 +2251,7 @@ function initDeviozSuite() {
                 priority: 'normal'
             })
         })
-        .then(res => res.json())
+        .then(readApiResponse)
         .then(data => {
             if (data.success) {
                 loadConversation(activeContactId, activeProjectId, false);
@@ -2237,7 +2262,16 @@ function initDeviozSuite() {
 
     // Eventos de apertura de chat
     if (dockChatBtn) dockChatBtn.addEventListener('click', () => openChat());
-    if (topbarChatBtn) topbarChatBtn.addEventListener('click', () => openChat());
+    if (topbarChatBtn) {
+        topbarChatBtn.addEventListener('click', () => {
+            const role = topbarChatBtn.getAttribute('data-user-role');
+            if (role === 'admin') {
+                window.location.href = appUrl('/chat');
+            } else {
+                openChat();
+            }
+        });
+    }
 
     if (chatBackdrop) chatBackdrop.addEventListener('click', closeChat);
     if (chatCloseBtn) chatCloseBtn.addEventListener('click', closeChat);
@@ -2381,10 +2415,10 @@ function initDeviozSuite() {
             }
             fetch(`${baseUrl}/api/chat/request-call`, {
                 method: 'POST',
-                headers: {
+                headers: apiFetchHeaders({
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-                },
+                }),
                 body: JSON.stringify({
                     receiver_id: activeContactId,
                     project_id: activeProjectId,
@@ -2392,7 +2426,7 @@ function initDeviozSuite() {
                 })
             })
             .then(async res => {
-                const data = await res.json();
+                const data = await readApiResponse(res);
                 if (!res.ok || !data.success || !data.room_url) {
                     throw new Error(data.message || data.error || 'No se pudo enviar la solicitud.');
                 }
@@ -2429,8 +2463,8 @@ function initDeviozSuite() {
     // --------------------------------------------------------------------------
 
     function fetchNotifications() {
-        fetch(`${baseUrl}/api/notifications`)
-            .then(res => res.json())
+        fetch(`${baseUrl}/api/notifications`, { headers: apiFetchHeaders() })
+            .then(readApiResponse)
             .then(data => {
                 if (!data.success) return;
 
@@ -2515,11 +2549,11 @@ function initDeviozSuite() {
             e.preventDefault();
             fetch(`${baseUrl}/api/notifications/mark-read`, {
                 method: 'POST',
-                headers: {
+                headers: apiFetchHeaders({
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-                }
+                })
             })
-                .then(res => res.json())
+            .then(readApiResponse)
                 .then(data => {
                     if (data.success) {
                         updateBadges(0);
@@ -2560,9 +2594,16 @@ function initDeviozSuite() {
             if (data.messages && data.messages.length > 0) {
                 lastMsgId = data.messages[data.messages.length - 1].id;
 
-                // Si el chat esta abierto, recargarlo
+                // Si el chat drawer lateral esta abierto, recargarlo
                 if (chatDrawer && chatDrawer.classList.contains('active')) {
                     loadConversation(activeContactId, activeProjectId, false);
+                }
+
+                // Si la vista Messenger (/chat) está abierta con ese contacto activo, sincronizar en vivo
+                if (window.DeviozMessengerActiveContactId && data.messages.some(m => m.sender_id == window.DeviozMessengerActiveContactId)) {
+                    if (typeof window.refreshDeviozDirectConversation === 'function') {
+                        window.refreshDeviozDirectConversation();
+                    }
                 }
 
                 // Actualizar notificaciones en la campana
@@ -3438,9 +3479,18 @@ function initDeviozMessenger() {
         actionStatus.className = `small px-3 pt-2 ${isError ? 'text-danger' : 'text-secondary'}`;
     }
 
+    function formatFileSize(bytes) {
+        if (!bytes || isNaN(bytes)) return '0 KB';
+        const num = parseInt(bytes, 10);
+        if (num < 1024) return num + ' B';
+        if (num < 1024 * 1024) return (num / 1024).toFixed(1) + ' KB';
+        return (num / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
     function switchChatView(type, contactId = null, title = '', subtitle = '', avatarUrl = '', isBot = false) {
         activeChannelType = type;
         activeContactId = contactId;
+        window.DeviozMessengerActiveContactId = contactId;
         setActionStatus('');
 
         if (mainEl) mainEl.classList.remove('is-empty');
@@ -3479,11 +3529,15 @@ function initDeviozMessenger() {
 
     function loadDirectConversation(contactId) {
         if (!contactId || !directMessagesContainer) return;
+        window.DeviozMessengerActiveContactId = contactId;
+        window.refreshDeviozDirectConversation = () => loadDirectConversation(contactId);
         if (directLoadingIndicator) directLoadingIndicator.classList.remove('d-none');
 
-        return fetch(appUrl(`/api/chat/conversation?contact_id=${encodeURIComponent(contactId)}`))
+        return fetch(appUrl(`/api/chat/conversation?contact_id=${encodeURIComponent(contactId)}`), {
+            headers: apiFetchHeaders()
+        })
             .then(async res => {
-                const data = await res.json();
+                const data = await readApiResponse(res);
                 if (!res.ok || !data.success) {
                     throw new Error(data.message || data.error || 'No se pudo cargar la conversación.');
                 }
@@ -3494,14 +3548,14 @@ function initDeviozMessenger() {
                 directMessagesContainer.innerHTML = '';
                 if (data.messages && data.messages.length > 0) {
                     data.messages.forEach(m => {
-                        appendDirectBubble(m.body, m.is_mine, m.date_label);
+                        appendDirectBubble(m);
                     });
                 } else {
                     directMessagesContainer.innerHTML = `
                         <div class="text-center py-5 text-muted small">
                             <i class="fa-regular fa-comment-dots fs-3 mb-2 d-block text-secondary"></i>
                             <div>No hay mensajes anteriores con este contacto.</div>
-                            <div class="text-secondary" style="font-size: 0.70rem;">Envía un mensaje para comenzar la conversación segura.</div>
+                            <div class="text-secondary" style="font-size: 0.70rem;">Envía un mensaje, audio, archivo o sticker para comenzar la conversación segura.</div>
                         </div>`;
                 }
                 const stream = document.getElementById('deviozChatStream');
@@ -3517,20 +3571,213 @@ function initDeviozMessenger() {
             });
     }
 
-    function appendDirectBubble(text, isMine, time) {
+    function appendDirectBubble(msgOrText, isMine = false, time = 'Ahora', attachment = null) {
         if (!directMessagesContainer) return;
+
+        let text = '';
+        let attUrl = null;
+        let attType = null;
+        let attName = null;
+        let attSize = null;
+        let isRead = false;
+
+        if (typeof msgOrText === 'object' && msgOrText !== null) {
+            text = msgOrText.body || '';
+            isMine = msgOrText.is_mine !== undefined ? !!msgOrText.is_mine : isMine;
+            isRead = !!msgOrText.is_read;
+            time = msgOrText.date_label || 'Ahora';
+            attUrl = msgOrText.attachment_url || null;
+            attType = msgOrText.attachment_type || null;
+            attName = msgOrText.attachment_name || null;
+            attSize = msgOrText.attachment_size || null;
+        } else {
+            text = msgOrText || '';
+            if (attachment) {
+                attUrl = attachment.url || null;
+                attType = attachment.type || null;
+                attName = attachment.name || null;
+                attSize = attachment.size || null;
+            }
+        }
+
         const bubble = document.createElement('div');
         bubble.className = `devioz-msg-bubble ${isMine ? 'outgoing' : 'incoming'}`;
+
+        // Indicador de estado de entrega y lectura estilo WhatsApp
+        const statusCheckHtml = isMine
+            ? (isRead
+                ? `<span class="msg-status-check text-whatsapp-blue ms-1" title="Leído"><i class="fa-solid fa-check-double"></i></span>`
+                : `<span class="msg-status-check text-muted ms-1" title="Entregado"><i class="fa-solid fa-check-double"></i></span>`)
+            : '';
+
+        let mediaHtml = '';
+        const isImageOnly = (attType === 'image' && attUrl && !text);
+
+        // 1. Nota de voz / Audio
+        if (attType === 'audio' && attUrl) {
+            mediaHtml += `
+                <div class="devioz-voice-player mb-1" data-audio-url="${escapeHtml(attUrl)}">
+                    <button type="button" class="voice-play-toggle-btn" title="Reproducir nota de voz">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <div class="voice-track-info">
+                        <div class="voice-track-bar">
+                            <div class="voice-track-progress"></div>
+                        </div>
+                        <div class="d-flex justify-content-between voice-time-label">
+                            <span class="voice-current-time">0:00</span>
+                            <span class="voice-duration">Nota de voz</span>
+                        </div>
+                    </div>
+                    <audio src="${escapeHtml(attUrl)}" preload="metadata" class="d-none"></audio>
+                </div>`;
+        }
+        // 2. Imagen
+        else if (attType === 'image' && attUrl) {
+            mediaHtml += `
+                <div class="devioz-chat-image-wrapper">
+                    <a href="${escapeHtml(attUrl)}" target="_blank" rel="noopener noreferrer">
+                        <img src="${escapeHtml(attUrl)}" alt="${escapeHtml(attName || 'Imagen adjunta')}" loading="lazy">
+                    </a>
+                    ${isImageOnly ? `
+                        <div class="devioz-chat-image-overlay-badge">
+                            <span>${time || 'Ahora'}</span>
+                            ${statusCheckHtml}
+                        </div>
+                    ` : ''}
+                </div>`;
+        }
+        // 3. Sticker
+        else if (attType === 'sticker') {
+            const stickerIcon = attUrl || '🚀';
+            const stickerCaption = attName || text || '';
+            mediaHtml += `
+                <div class="devioz-chat-sticker-bubble">
+                    <div class="sticker-big-icon">${escapeHtml(stickerIcon)}</div>
+                    <div class="sticker-badge-title">${escapeHtml(stickerCaption)}</div>
+                </div>`;
+            text = ''; // No duplicar texto en stickers
+        }
+        // 4. Archivo genérico (PDF, DOC, ZIP, XLS, etc.)
+        else if (attUrl) {
+            const isPdf = attName && attName.toLowerCase().endsWith('.pdf');
+            const isZip = attName && (attName.toLowerCase().endsWith('.zip') || attName.toLowerCase().endsWith('.rar'));
+            const isDoc = attName && (attName.toLowerCase().endsWith('.doc') || attName.toLowerCase().endsWith('.docx'));
+            const isXls = attName && (attName.toLowerCase().endsWith('.xls') || attName.toLowerCase().endsWith('.xlsx'));
+            let fileIcon = 'fa-file-lines text-secondary';
+            if (isPdf) fileIcon = 'fa-file-pdf text-danger';
+            else if (isZip) fileIcon = 'fa-file-zipper text-warning';
+            else if (isDoc) fileIcon = 'fa-file-word text-primary';
+            else if (isXls) fileIcon = 'fa-file-excel text-success';
+
+            mediaHtml += `
+                <a href="${escapeHtml(attUrl)}" target="_blank" download="${escapeHtml(attName || 'archivo')}" class="devioz-chat-file-card text-decoration-none" title="${escapeHtml(attName || 'Archivo adjunto')}">
+                    <div class="devioz-chat-file-icon">
+                        <i class="fa-solid ${fileIcon}"></i>
+                    </div>
+                    <div class="min-w-0 flex-grow-1 overflow-hidden">
+                        <div class="devioz-chat-file-name">${escapeHtml(attName || 'Archivo adjunto')}</div>
+                        <div class="devioz-chat-file-meta">${formatFileSize(attSize)} &bull; Descargar</div>
+                    </div>
+                </a>`;
+        }
+
+        const bodyHtml = text ? `<div class="msg-body">${escapeHtml(text).replace(/\n/g, '<br>')}</div>` : '';
+
+        // Si es solo imagen, el tiempo y checks ya van sobre la imagen en su badge flotante
+        const footerHtml = isImageOnly ? '' : `
+            <div class="msg-footer text-end">
+                <span class="msg-time">${time || 'Ahora'}</span>
+                ${statusCheckHtml}
+            </div>`;
+
         bubble.innerHTML = `
             <div class="msg-content">
-                <div class="msg-body">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
-                <div class="msg-footer text-end">
-                    <span class="msg-time">${time || 'Ahora'}</span>
-                </div>
+                ${mediaHtml}
+                ${bodyHtml}
+                ${footerHtml}
             </div>`;
+
+        // Inicializar reproductor de audio si existe en esta burbuja
+        const voicePlayerEl = bubble.querySelector('.devioz-voice-player');
+        if (voicePlayerEl) {
+            initSingleVoicePlayer(voicePlayerEl);
+        }
+
         directMessagesContainer.appendChild(bubble);
         const stream = document.getElementById('deviozChatStream');
         if (stream) stream.scrollTop = stream.scrollHeight;
+    }
+
+    function initSingleVoicePlayer(playerEl) {
+        const audio = playerEl.querySelector('audio');
+        const playBtn = playerEl.querySelector('.voice-play-toggle-btn');
+        const progressBar = playerEl.querySelector('.voice-track-progress');
+        const trackBar = playerEl.querySelector('.voice-track-bar');
+        const currentTimeEl = playerEl.querySelector('.voice-current-time');
+        const durationEl = playerEl.querySelector('.voice-duration');
+
+        if (!audio || !playBtn) return;
+
+        function formatAudioSecs(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if (durationEl && audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+                durationEl.textContent = formatAudioSecs(audio.duration);
+            }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                if (progressBar) progressBar.style.width = percent + '%';
+            }
+            if (currentTimeEl) currentTimeEl.textContent = formatAudioSecs(audio.currentTime);
+        });
+
+        audio.addEventListener('ended', () => {
+            playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            if (progressBar) progressBar.style.width = '0%';
+            if (currentTimeEl) currentTimeEl.textContent = '0:00';
+        });
+
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Pausar todos los demás audios
+            document.querySelectorAll('.devioz-voice-player audio').forEach(otherAudio => {
+                if (otherAudio !== audio && !otherAudio.paused) {
+                    otherAudio.pause();
+                    const otherBtn = otherAudio.closest('.devioz-voice-player')?.querySelector('.voice-play-toggle-btn');
+                    if (otherBtn) otherBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                }
+            });
+
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                }).catch(err => {
+                    console.warn('Audio play error:', err);
+                });
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            }
+        });
+
+        if (trackBar) {
+            trackBar.addEventListener('click', (e) => {
+                if (!audio.duration || isNaN(audio.duration)) return;
+                const rect = trackBar.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+                audio.currentTime = ratio * audio.duration;
+            });
+        }
     }
 
     function escapeHtml(text) {
@@ -3657,50 +3904,390 @@ function initDeviozMessenger() {
         });
     }
 
+    // Elementos Multimedia & Compositor Devioz (TikTok / WhatsApp Style)
+    const attachBtn = document.getElementById('composerAttachBtn');
+    const fileInput = document.getElementById('deviozChatFileInput');
+    const attachmentPreview = document.getElementById('deviozAttachmentPreview');
+    const attachmentThumb = document.getElementById('attachmentPreviewThumb');
+    const attachmentName = document.getElementById('attachmentPreviewName');
+    const attachmentSize = document.getElementById('attachmentPreviewSize');
+    const cancelAttachmentBtn = document.getElementById('deviozCancelAttachmentBtn');
+
+    const emojiBtn = document.getElementById('composerEmojiBtn');
+    const emojiStickerPopover = document.getElementById('deviozEmojiStickerPopover');
+    const closePickerBtn = document.getElementById('closePickerBtn');
+    const tabEmojisBtn = document.getElementById('tabEmojisBtn');
+    const tabStickersBtn = document.getElementById('tabStickersBtn');
+    const pickerTabEmojis = document.getElementById('pickerTabEmojis');
+    const pickerTabStickers = document.getElementById('pickerTabStickers');
+
+    const templatesBtn = document.getElementById('composerTemplatesBtn');
+    const templatesPopover = document.getElementById('deviozTemplatesPopover');
+    const closeTemplatesBtn = document.getElementById('closeTemplatesBtn');
+
+    const micBtn = document.getElementById('composerMicBtn');
+    const voiceRecordingBar = document.getElementById('deviozVoiceRecordingBar');
+    const voiceTimerEl = document.getElementById('voiceRecordingTimer');
+    const btnCancelVoice = document.getElementById('btnCancelVoiceRecording');
+    const btnSendVoice = document.getElementById('btnSendVoiceRecording');
+
+    let stagedFile = null;
+
+    // Grabación de voz con MediaRecorder
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let recordingTimerInterval = null;
+    let recordingSeconds = 0;
+    let mediaStream = null;
+
+    // Función universal para enviar mensajes con o sin adjunto
+    async function sendDirectMessageWithPayload(payload) {
+        if (!activeContactId) {
+            setActionStatus('Selecciona un contacto antes de enviar el mensaje.', true);
+            return;
+        }
+
+        const sendButton = composerForm ? composerForm.querySelector('[type="submit"]') : null;
+        if (sendButton) sendButton.disabled = true;
+        setActionStatus('Enviando...');
+
+        try {
+            let response;
+            if (payload.file) {
+                const formData = new FormData();
+                formData.append('receiver_id', activeContactId);
+                formData.append('body', payload.body || '');
+                formData.append('attachment', payload.file);
+                if (payload.attachment_type) {
+                    formData.append('attachment_type', payload.attachment_type);
+                }
+
+                response = await fetch(appUrl('/api/chat/send'), {
+                    method: 'POST',
+                    headers: apiFetchHeaders({
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                    }),
+                    body: formData
+                });
+            } else {
+                response = await fetch(appUrl('/api/chat/send'), {
+                    method: 'POST',
+                    headers: apiFetchHeaders({
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                    }),
+                    body: JSON.stringify({
+                        receiver_id: activeContactId,
+                        body: payload.body || '',
+                        attachment_url: payload.attachment_url || null,
+                        attachment_type: payload.attachment_type || null,
+                        attachment_name: payload.attachment_name || null,
+                        attachment_size: payload.attachment_size || null
+                    })
+                });
+            }
+
+            const data = await readApiResponse(response);
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || data.error || 'El servidor rechazó el mensaje.');
+            }
+
+            // Limpieza y reseteo
+            if (messageInput) messageInput.value = '';
+            stagedFile = null;
+            if (fileInput) fileInput.value = '';
+            if (attachmentPreview) attachmentPreview.classList.add('d-none');
+            setActionStatus('');
+
+            appendDirectBubble(data);
+
+        } catch (error) {
+            console.error('Error enviando mensaje:', error);
+            setActionStatus(error.message || 'No se pudo enviar el mensaje. Intenta nuevamente.', true);
+        } finally {
+            if (sendButton) sendButton.disabled = false;
+        }
+    }
+
+    // 1. Selector de archivos (Clip)
+    if (attachBtn && fileInput) {
+        attachBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (activeChannelType !== 'direct' || !activeContactId) {
+                setActionStatus('Abre una conversación directa con un usuario para adjuntar archivos.', true);
+                return;
+            }
+            fileInput.click();
+        });
+    }
+
+    if (fileInput) {
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files && fileInput.files.length > 0) {
+                stagedFile = fileInput.files[0];
+                if (attachmentPreview && attachmentName && attachmentSize) {
+                    attachmentName.textContent = stagedFile.name;
+                    attachmentSize.textContent = formatFileSize(stagedFile.size);
+
+                    if (stagedFile.type.startsWith('image/')) {
+                        const previewUrl = URL.createObjectURL(stagedFile);
+                        attachmentThumb.innerHTML = `<img src="${previewUrl}" alt="Preview">`;
+                    } else if (stagedFile.type.startsWith('audio/')) {
+                        attachmentThumb.innerHTML = `<i class="fa-solid fa-microphone text-danger fs-5"></i>`;
+                    } else if (stagedFile.name.toLowerCase().endsWith('.pdf')) {
+                        attachmentThumb.innerHTML = `<i class="fa-solid fa-file-pdf text-danger fs-5"></i>`;
+                    } else if (stagedFile.name.toLowerCase().endsWith('.zip') || stagedFile.name.toLowerCase().endsWith('.rar')) {
+                        attachmentThumb.innerHTML = `<i class="fa-solid fa-file-zipper text-warning fs-5"></i>`;
+                    } else {
+                        attachmentThumb.innerHTML = `<i class="fa-solid fa-file-lines text-primary fs-5"></i>`;
+                    }
+
+                    attachmentPreview.classList.remove('d-none');
+                }
+            }
+        });
+    }
+
+    if (cancelAttachmentBtn) {
+        cancelAttachmentBtn.addEventListener('click', () => {
+            stagedFile = null;
+            if (fileInput) fileInput.value = '';
+            if (attachmentPreview) attachmentPreview.classList.add('d-none');
+        });
+    }
+
+    // 2. Grabación de Notas de Voz (Estilo TikTok / WhatsApp)
+    if (micBtn) {
+        micBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (activeChannelType !== 'direct' || !activeContactId) {
+                setActionStatus('Abre una conversación directa con un contacto antes de grabar notas de voz.', true);
+                return;
+            }
+
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                setActionStatus('Tu navegador o conexión actual no permite acceso al micrófono.', true);
+                return;
+            }
+
+            try {
+                mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                audioChunks = [];
+                recordingSeconds = 0;
+                if (voiceTimerEl) voiceTimerEl.textContent = '0:00';
+
+                if (composerForm) composerForm.classList.add('d-none');
+                if (voiceRecordingBar) voiceRecordingBar.classList.remove('d-none');
+
+                let mimeType = 'audio/webm';
+                if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
+                    mimeType = 'audio/webm;codecs=opus';
+                } else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/ogg;codecs=opus')) {
+                    mimeType = 'audio/ogg;codecs=opus';
+                } else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/mp4')) {
+                    mimeType = 'audio/mp4';
+                }
+
+                mediaRecorder = new MediaRecorder(mediaStream, { mimeType });
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data && event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.start(200);
+
+                clearInterval(recordingTimerInterval);
+                recordingTimerInterval = setInterval(() => {
+                    recordingSeconds++;
+                    const m = Math.floor(recordingSeconds / 60);
+                    const s = recordingSeconds % 60;
+                    if (voiceTimerEl) voiceTimerEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+                }, 1000);
+
+            } catch (micErr) {
+                console.error('Error al acceder al micrófono:', micErr);
+                setActionStatus('Permite el permiso de micrófono en tu navegador para grabar notas de voz.', true);
+            }
+        });
+    }
+
+    if (btnCancelVoice) {
+        btnCancelVoice.addEventListener('click', () => {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(track => track.stop());
+                mediaStream = null;
+            }
+            clearInterval(recordingTimerInterval);
+            audioChunks = [];
+            if (voiceRecordingBar) voiceRecordingBar.classList.add('d-none');
+            if (composerForm) composerForm.classList.remove('d-none');
+            setActionStatus('Grabación de voz descartada.');
+            setTimeout(() => setActionStatus(''), 2500);
+        });
+    }
+
+    if (btnSendVoice) {
+        btnSendVoice.addEventListener('click', () => {
+            if (!mediaRecorder || mediaRecorder.state === 'inactive') return;
+            const durationTxt = voiceTimerEl ? voiceTimerEl.textContent : '0:00';
+
+            mediaRecorder.onstop = async () => {
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(track => track.stop());
+                    mediaStream = null;
+                }
+                clearInterval(recordingTimerInterval);
+                if (voiceRecordingBar) voiceRecordingBar.classList.add('d-none');
+                if (composerForm) composerForm.classList.remove('d-none');
+
+                if (audioChunks.length === 0) {
+                    setActionStatus('No se grabó ningún audio.', true);
+                    return;
+                }
+
+                const finalMime = mediaRecorder.mimeType || 'audio/webm';
+                const audioBlob = new Blob(audioChunks, { type: finalMime });
+                const ext = finalMime.includes('ogg') ? 'ogg' : (finalMime.includes('mp4') ? 'm4a' : 'webm');
+                const audioFile = new File([audioBlob], `nota_voz_${Date.now()}.${ext}`, { type: finalMime });
+
+                await sendDirectMessageWithPayload({
+                    file: audioFile,
+                    attachment_type: 'audio',
+                    body: `Nota de voz (${durationTxt})`
+                });
+            };
+
+            mediaRecorder.stop();
+        });
+    }
+
+    // 3. Panel Flotante de Emojis & Stickers
+    if (emojiBtn && emojiStickerPopover) {
+        emojiBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (templatesPopover) templatesPopover.classList.add('d-none');
+            emojiStickerPopover.classList.toggle('d-none');
+        });
+    }
+
+    if (closePickerBtn && emojiStickerPopover) {
+        closePickerBtn.addEventListener('click', () => {
+            emojiStickerPopover.classList.add('d-none');
+        });
+    }
+
+    if (tabEmojisBtn && tabStickersBtn && pickerTabEmojis && pickerTabStickers) {
+        tabEmojisBtn.addEventListener('click', () => {
+            tabEmojisBtn.classList.add('active');
+            tabStickersBtn.classList.remove('active');
+            pickerTabEmojis.classList.remove('d-none');
+            pickerTabStickers.classList.add('d-none');
+        });
+        tabStickersBtn.addEventListener('click', () => {
+            tabStickersBtn.classList.add('active');
+            tabEmojisBtn.classList.remove('active');
+            pickerTabStickers.classList.remove('d-none');
+            pickerTabEmojis.classList.add('d-none');
+        });
+    }
+
+    // Inserción de emoji en el cursor
+    document.querySelectorAll('.emoji-cell').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const emoji = btn.getAttribute('data-emoji');
+            if (!emoji || !messageInput) return;
+
+            const start = messageInput.selectionStart || 0;
+            const end = messageInput.selectionEnd || 0;
+            const val = messageInput.value;
+            messageInput.value = val.substring(0, start) + emoji + val.substring(end);
+            messageInput.selectionStart = messageInput.selectionEnd = start + emoji.length;
+            messageInput.focus();
+        });
+    });
+
+    // Envío inmediato de Sticker estilo TikTok / WhatsApp
+    document.querySelectorAll('.sticker-card').forEach(card => {
+        card.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const stickerTag = card.getAttribute('data-sticker') || 'Sticker';
+            const stickerIcon = card.getAttribute('data-sticker-icon') || '🚀';
+
+            if (activeChannelType !== 'direct' || !activeContactId) {
+                setActionStatus('Abre una conversación directa con un usuario antes de enviar stickers.', true);
+                return;
+            }
+
+            if (emojiStickerPopover) emojiStickerPopover.classList.add('d-none');
+
+            await sendDirectMessageWithPayload({
+                body: stickerTag,
+                attachment_url: stickerIcon,
+                attachment_type: 'sticker',
+                attachment_name: stickerTag
+            });
+        });
+    });
+
+    // 4. Panel de Plantillas Rápidas y Comandos
+    if (templatesBtn && templatesPopover) {
+        templatesBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (emojiStickerPopover) emojiStickerPopover.classList.add('d-none');
+            templatesPopover.classList.toggle('d-none');
+        });
+    }
+
+    if (closeTemplatesBtn && templatesPopover) {
+        closeTemplatesBtn.addEventListener('click', () => {
+            templatesPopover.classList.add('d-none');
+        });
+    }
+
+    document.querySelectorAll('.quick-template-item').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tmpl = btn.getAttribute('data-template');
+            if (tmpl && messageInput) {
+                messageInput.value = tmpl;
+                messageInput.focus();
+            }
+            if (templatesPopover) templatesPopover.classList.add('d-none');
+        });
+    });
+
+    // Cerrar popovers al hacer click fuera
+    document.addEventListener('click', (e) => {
+        if (emojiStickerPopover && !emojiStickerPopover.contains(e.target) && e.target !== emojiBtn && !emojiBtn.contains(e.target)) {
+            emojiStickerPopover.classList.add('d-none');
+        }
+        if (templatesPopover && !templatesPopover.contains(e.target) && e.target !== templatesBtn && !templatesBtn.contains(e.target)) {
+            templatesPopover.classList.add('d-none');
+        }
+    });
+
     // Formulario de envío
     if (composerForm && messageInput) {
         composerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const text = messageInput.value.trim();
-            if (!text) return;
 
             if (activeChannelType === 'direct') {
-                if (!activeContactId) {
-                    setActionStatus('Selecciona un contacto antes de enviar el mensaje.', true);
-                    return;
-                }
+                if (!text && !stagedFile) return;
 
-                const sendButton = composerForm.querySelector('[type="submit"]');
-                if (sendButton) sendButton.disabled = true;
-                setActionStatus('Enviando mensaje…');
-                try {
-                    const response = await fetch(appUrl('/api/chat/send'), {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-                        },
-                        body: JSON.stringify({
-                            receiver_id: activeContactId,
-                            body: text
-                        })
-                    });
-                    const data = await response.json();
-                    if (!response.ok || !data.success) {
-                        throw new Error(data.message || data.error || 'El servidor rechazó el mensaje.');
-                    }
-
-                    messageInput.value = '';
-                    setActionStatus('Mensaje enviado y guardado.');
-                    await loadDirectConversation(activeContactId);
-                } catch (error) {
-                    console.error('Error enviando mensaje directo:', error);
-                    setActionStatus(error.message || 'No se pudo enviar el mensaje. Intenta nuevamente.', true);
-                } finally {
-                    if (sendButton) sendButton.disabled = false;
-                }
+                await sendDirectMessageWithPayload({
+                    body: text,
+                    file: stagedFile
+                });
                 return;
             }
+
+            if (!text) return;
 
             messageInput.value = '';
             const now = new Date();
@@ -3832,16 +4419,16 @@ function initDeviozMessenger() {
             try {
                 const response = await fetch(appUrl('/api/chat/request-call'), {
                     method: 'POST',
-                    headers: {
+                    headers: apiFetchHeaders({
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-                    },
+                    }),
                     body: JSON.stringify({
                         receiver_id: activeContactId,
                         reason: 'Videollamada directa desde Messenger'
                     })
                 });
-                const data = await response.json();
+                const data = await readApiResponse(response);
                 if (!response.ok || !data.success || !data.room_url) {
                     throw new Error(data.message || data.error || 'No se pudo crear la sala de llamada.');
                 }

@@ -91,7 +91,12 @@ class ChatController extends BaseController
         $maxIterations = 50;
 
         for ($i = 0; $i < $maxIterations; $i++) {
-            $stmt = $db->getConnection()->prepare("SELECT id, sender_id, type, body, created_at, project_id FROM messages WHERE receiver_id = :uid AND read_at IS NULL AND id > :lastId ORDER BY id ASC LIMIT 5");
+            $stmt = $db->getConnection()->prepare(
+                "SELECT id, sender_id, type, body, attachment_url, attachment_type, attachment_name, attachment_size, created_at, project_id 
+                 FROM messages 
+                 WHERE receiver_id = :uid AND read_at IS NULL AND id > :lastId 
+                 ORDER BY id ASC LIMIT 5"
+            );
             $stmt->execute(['uid' => $user->id, 'lastId' => $lastCheckedId]);
             $newMessages = $stmt->fetchAll();
 
@@ -100,7 +105,13 @@ class ChatController extends BaseController
                 $countStmt = $db->getConnection()->prepare("SELECT COUNT(*) FROM messages WHERE receiver_id = :uid AND read_at IS NULL");
                 $countStmt->execute(['uid' => $user->id]);
                 $unreadCount = (int)$countStmt->fetchColumn();
-                $payload = json_encode(['messages' => $newMessages, 'unread_count' => $unreadCount]);
+
+                $formattedMessages = array_map(function($m) {
+                    $m['date_label'] = date('H:i', strtotime($m['created_at']));
+                    return $m;
+                }, $newMessages);
+
+                $payload = json_encode(['messages' => $formattedMessages, 'unread_count' => $unreadCount]);
                 echo "data: {$payload}\n\n";
                 if (ob_get_level() > 0) ob_flush();
                 flush();
@@ -139,7 +150,8 @@ class ChatController extends BaseController
             if ($project && $project->assignedBy()) {
                 $contact = $project->assignedBy();
             } else {
-                $contact = User::where('role', 'admin')->first();
+                $admins = User::where('role', 'admin');
+                $contact = !empty($admins) ? $admins[0] : null;
             }
         }
 
@@ -196,6 +208,10 @@ class ChatController extends BaseController
                     'id' => $m['id'],
                     'body' => $m['body'],
                     'type' => $m['type'] ?? 'general',
+                    'attachment_url' => $m['attachment_url'] ?? null,
+                    'attachment_type' => $m['attachment_type'] ?? null,
+                    'attachment_name' => $m['attachment_name'] ?? null,
+                    'attachment_size' => $m['attachment_size'] ?? null,
                     'is_mine' => (int)$m['sender_id'] === (int)$user->id,
                     'is_read' => !empty($m['read_at']),
                     'date_label' => date('H:i', strtotime($m['created_at']))
@@ -207,57 +223,132 @@ class ChatController extends BaseController
 
     public function send(): never
     {
-        $user = $this->user();
-        $input = json_decode(file_get_contents('php://input'), true) ?? $_POST;
-        $receiverId = (int)($input['receiver_id'] ?? 0);
-        $body = trim((string)($input['body'] ?? ''));
+        try {
+            $user = $this->user();
+            $rawInput = file_get_contents('php://input');
+            $input = json_decode($rawInput, true) ?: $_POST;
+            $receiverId = (int)($input['receiver_id'] ?? ($_POST['receiver_id'] ?? 0));
+            $body = trim((string)($input['body'] ?? ($_POST['body'] ?? '')));
+            $attachmentUrl = $input['attachment_url'] ?? ($_POST['attachment_url'] ?? null);
+            $attachmentType = $input['attachment_type'] ?? ($_POST['attachment_type'] ?? null);
+            $attachmentName = $input['attachment_name'] ?? ($_POST['attachment_name'] ?? null);
+            $attachmentSize = isset($input['attachment_size']) ? (int)$input['attachment_size'] : (isset($_POST['attachment_size']) ? (int)$_POST['attachment_size'] : null);
 
-        if ($receiverId <= 0 || $body === '') {
-            $this->json(['success' => false, 'message' => 'Faltan datos'], 422);
-        }
-        $receiver = User::find($receiverId);
-        if (!$receiver || !$receiver->active || $receiver->deleted_at !== null) {
-            $this->json(['success' => false, 'message' => 'El destinatario no existe o no está activo.'], 404);
-        }
-        if (!$this->canCommunicate($user, $receiver)) {
-            $this->json(['success' => false, 'message' => 'Violacion de seguridad 007: Inter-sede bloqueada.'], 403);
-        }
+            // Procesar archivo o audio adjunto vía multipart/form-data
+            $uploadedFile = $_FILES['attachment'] ?? ($_FILES['file'] ?? ($_FILES['audio'] ?? null));
+            if ($uploadedFile && !empty($uploadedFile['name']) && ($uploadedFile['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_OK) {
+                $origName = (string)$uploadedFile['name'];
+                $isVoice = ($attachmentType === 'audio' 
+                    || str_starts_with($uploadedFile['type'] ?? '', 'audio') 
+                    || preg_match('/\.(webm|ogg|wav|mp3|m4a)$/i', $origName));
 
-        $db = Database::getInstance();
-        $db->query(
-            "INSERT INTO messages (sender_id, receiver_id, body, type, created_at) VALUES (:sid, :rid, :b, 'general', NOW())",
-            ['sid' => $user->id, 'rid' => $receiverId, 'b' => $body]
-        );
-        $this->json(['success' => true, 'message_id' => $db->lastInsertId()]);
+                $subDir = $isVoice ? 'chat/audio' : 'chat';
+                $meta = \App\Core\Uploader::upload($uploadedFile, $subDir, 50 * 1024 * 1024);
+                $attachmentUrl = url($meta['path']);
+                $attachmentName = $meta['original_name'];
+                $attachmentSize = (int)$meta['size'];
+
+                if (!$attachmentType) {
+                    if ($isVoice) {
+                        $attachmentType = 'audio';
+                    } elseif (str_starts_with($meta['mime_type'], 'image/')) {
+                        $attachmentType = 'image';
+                    } elseif (str_starts_with($meta['mime_type'], 'video/')) {
+                        $attachmentType = 'video';
+                    } else {
+                        $attachmentType = 'file';
+                    }
+                }
+            }
+
+            if ($receiverId <= 0) {
+                $this->json(['success' => false, 'message' => 'Falta indicar el destinatario del mensaje.'], 422);
+            }
+            if ($body === '' && empty($attachmentUrl)) {
+                $this->json(['success' => false, 'message' => 'El mensaje debe contener texto o un archivo adjunto.'], 422);
+            }
+
+            $receiver = User::find($receiverId);
+            if (!$receiver || !$receiver->active || $receiver->deleted_at !== null) {
+                $this->json(['success' => false, 'message' => 'El destinatario no existe o no está activo.'], 404);
+            }
+            if (!$this->canCommunicate($user, $receiver)) {
+                $this->json(['success' => false, 'message' => 'Violación de seguridad: Comunicación inter-sede restringida.'], 403);
+            }
+
+            $db = Database::getInstance();
+            $db->query(
+                "INSERT INTO messages (sender_id, receiver_id, body, attachment_url, attachment_type, attachment_name, attachment_size, type, created_at)
+                 VALUES (:sid, :rid, :b, :att_url, :att_type, :att_name, :att_size, 'general', NOW())",
+                [
+                    'sid' => $user->id,
+                    'rid' => $receiverId,
+                    'b' => $body,
+                    'att_url' => $attachmentUrl,
+                    'att_type' => $attachmentType,
+                    'att_name' => $attachmentName,
+                    'att_size' => $attachmentSize,
+                ]
+            );
+            $msgId = (int)$db->lastInsertId();
+
+            $this->json([
+                'success' => true,
+                'message_id' => $msgId,
+                'sender_id' => $user->id,
+                'receiver_id' => $receiverId,
+                'body' => $body,
+                'attachment_url' => $attachmentUrl,
+                'attachment_type' => $attachmentType,
+                'attachment_name' => $attachmentName,
+                'attachment_size' => $attachmentSize,
+                'is_mine' => true,
+                'is_read' => false,
+                'date_label' => date('H:i')
+            ]);
+        } catch (\Throwable $e) {
+            $this->json([
+                'success' => false,
+                'message' => 'Error al guardar el mensaje: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     public function requestCall(): never
     {
-        $user = $this->user();
-        $input = json_decode(file_get_contents('php://input'), true) ?? $_POST;
-        $receiverId = (int)($input['receiver_id'] ?? 0);
-        $reason = trim((string)($input['reason'] ?? 'Reunión técnica'));
+        try {
+            $user = $this->user();
+            $rawInput = file_get_contents('php://input');
+            $input = json_decode($rawInput, true) ?: $_POST;
+            $receiverId = (int)($input['receiver_id'] ?? 0);
+            $reason = trim((string)($input['reason'] ?? 'Reunión técnica'));
 
-        if ($receiverId <= 0) {
-            $this->json(['success' => false, 'message' => 'Selecciona a la persona que recibirá la invitación.'], 422);
+            if ($receiverId <= 0) {
+                $this->json(['success' => false, 'message' => 'Selecciona a la persona que recibirá la invitación.'], 422);
+            }
+
+            $receiver = User::find($receiverId);
+            if (!$receiver || !$receiver->active || $receiver->deleted_at !== null) {
+                $this->json(['success' => false, 'message' => 'El destinatario no existe o no está activo.'], 404);
+            }
+            if (!$this->canCommunicate($user, $receiver)) {
+                $this->json(['success' => false, 'message' => 'Violación de seguridad: Comunicación inter-sede restringida.'], 403);
+            }
+
+            $roomUrl = 'https://meet.jit.si/Devioz-Meet-' . bin2hex(random_bytes(16));
+            $body = "Solicitud de llamada urgente: {$reason}. Entrar aquí: {$roomUrl}";
+            Database::getInstance()->query(
+                "INSERT INTO messages (sender_id, receiver_id, body, type, priority, created_at) VALUES (:sid, :rid, :b, 'alert', 'urgent', NOW())",
+                ['sid' => $user->id, 'rid' => $receiverId, 'b' => $body]
+            );
+
+            $this->json(['success' => true, 'room_url' => $roomUrl]);
+        } catch (\Throwable $e) {
+            $this->json([
+                'success' => false,
+                'message' => 'Error al crear la sala de videollamada: ' . $e->getMessage()
+            ], 500);
         }
-
-        $receiver = User::find($receiverId);
-        if (!$receiver || !$receiver->active || $receiver->deleted_at !== null) {
-            $this->json(['success' => false, 'message' => 'El destinatario no existe o no está activo.'], 404);
-        }
-        if (!$this->canCommunicate($user, $receiver)) {
-            $this->json(['success' => false, 'message' => 'Violacion de seguridad 007: Inter-sede bloqueada.'], 403);
-        }
-
-        $roomUrl = 'https://meet.jit.si/Devioz-Meet-' . bin2hex(random_bytes(16));
-        $body = "Solicitud de llamada urgente: {$reason}. Entrar aqui: {$roomUrl}";
-        Database::getInstance()->query(
-            "INSERT INTO messages (sender_id, receiver_id, body, type, priority, created_at) VALUES (:sid, :rid, :b, 'alert', 'urgent', NOW())",
-            ['sid' => $user->id, 'rid' => $receiverId, 'b' => $body]
-        );
-
-        $this->json(['success' => true, 'room_url' => $roomUrl]);
     }
 
     public function notifications(): never
