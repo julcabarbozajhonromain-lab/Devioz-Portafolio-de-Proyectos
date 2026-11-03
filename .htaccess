@@ -1,9 +1,46 @@
+# ==============================================================================
+# DEVIOZ 24 — CONFIGURACIÓN APACHE HOSTINGER (HTACCESS PRINCIPAL)
+# Compatible con: Subdirectorios (public_html/nombre_proyecto/) y Dominios Raíz
+# ==============================================================================
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Los assets mantienen la URL existente /public/... pero ahora viven en frontend/public.
-    RewriteRule ^public/(css|js|images|assets|uploads)/(.*)$ frontend/public/$1/$2 [END]
+    # 1. PERMITIR ACCESO DIRECTO AL INSTALADOR AUTOMÁTICO (Sin pasar por el MVC)
+    RewriteRule ^instalar\.php$ - [L]
 
-    # Punto de entrada compatible con SCRIPT_NAME y la URL /public existente.
-    RewriteRule ^(.*)$ public/index.php [END]
+    # 2. BLOQUEAR ACCESO A ARCHIVOS Y CARPETAS CONFIDENCIALES
+    RewriteRule ^(\.env|installed\.lock|\.git|\.gitignore|composer\.(json|lock)|package\.json|artisan|database/.*\.sql)$ - [F,L]
+    RewriteRule ^backend/(config|storage|app|bootstrap)/.*$ - [F,L]
+
+    # 3. MAPEO TRANSPARENTE DE ASSETS ESTÁTICOS A FRONTEND/PUBLIC
+    RewriteRule ^public/(css|js|images|assets|uploads)/(.*)$ frontend/public/$1/$2 [L]
+    RewriteRule ^(css|js|images|assets|uploads)/(.*)$ frontend/public/$1/$2 [L]
+
+    # 4. SI EL ARCHIVO O DIRECTORIO EXISTE FÍSICAMENTE, SERVIRLO DIRECTAMENTE
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # 5. ENRUTAMIENTO INDEPENDIENTE DE LA APLICACIÓN (Hacia public/index.php)
+    RewriteRule ^(.*)$ public/index.php [QSA,L]
 </IfModule>
+
+# ==============================================================================
+# PROTECCIÓN DE ARCHIVOS SENSIBLES (Doble capa de seguridad)
+# ==============================================================================
+<FilesMatch "^(\.env|installed\.lock|\.git|\.gitignore|artisan)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Deshabilitar listado de directorios
+Options -Indexes
+
+# Configuración de caracteres UTF-8
+AddDefaultCharset UTF-8

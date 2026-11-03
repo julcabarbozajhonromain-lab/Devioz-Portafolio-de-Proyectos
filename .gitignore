@@ -35,3 +35,7 @@ frontend/public/uploads/deliveries/*
 .DS_Store
 Thumbs.db
 .phpunit.cache
+
+# Deployment archives
+*.zip
+
